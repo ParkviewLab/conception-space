@@ -35,3 +35,10 @@ SPDX-License-Identifier = "AGPL-3.0-or-later"
 path = "src/renderer/public/examples/parkview_lab_color_horizontal_dark.svg"
 SPDX-FileCopyrightText = "2026 Gary Frattarola <garyf@parkviewlab.ai>"
 SPDX-License-Identifier = "LicenseRef-AllRightsReserved"
+
+# App icon — ParkviewLab brand mark (B&W placeholder), all rights reserved.
+# icon.svg is the regen source; icon.png (1024²) is what electron-builder uses.
+[[annotations]]
+path = ["build/icon.png", "build/icon.svg"]
+SPDX-FileCopyrightText = "2026 Gary Frattarola <garyf@parkviewlab.ai>"
+SPDX-License-Identifier = "LicenseRef-AllRightsReserved"
