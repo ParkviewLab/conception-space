@@ -1,3 +1,8 @@
+<!--
+SPDX-FileCopyrightText: 2026 Gary Frattarola <garyf@parkviewlab.ai>
+SPDX-License-Identifier: CC-BY-4.0
+-->
+
 # 1. Alternate Camera View
 Dring flight to a bookmark, show a camera view that constantly points the camera toward the orbit point of the choosen bookmark.
 
@@ -59,3 +64,20 @@ were explicitly punted at the time and remain on the shelf:
   Any line-based render is ruled out — see the `style=lines`
   revert in v0.7.3 (the lines were visually indistinguishable
   from `edge` tubes).
+
+# 5. Import from existing knowledge bases (Joplin / Obsidian)
+
+Most people don't start from a blank `.cns` — they already have a corpus.
+This is the on-ramp for northstar intent #3 (*the space as an interface to
+a living corpus*): **open a Joplin notebook (via
+[jonobones](https://github.com/ParkviewLab/jonobones)) or an Obsidian
+vault, instantiate its notes as nodes, then hand the author the spatial
+tools to regroup, rearrange, and reshape them** into a place they can think
+in. A menu-driven import filter (by notebook, tag, folder, date…) chooses
+what comes in.
+
+Reframes the audience: not only authors who build from scratch, but
+existing Obsidian/Joplin users who want a visual-cognition layer over
+knowledge they already have. Closely related to #3 (AI authoring — the
+bulk-import use case) and downstream of #2 (hand-authoring tools to reshape
+the imports). If it grows, it splits into its own `import_ideas.md`.

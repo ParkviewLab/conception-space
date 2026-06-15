@@ -1,1063 +1,645 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>conception-space · northstar</title>
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Northstar — conception-space</title>
   <style>
-    /* =========================================================
-       PALETTE
-         #0c1018  deep background    (space, calm)
-         #14182a  panel surface      (slightly raised cards)
-         #e8e6df  body off-white     (warm, paper-ish)
-         #e8b04a  accent gold        (the northstar, thesis, axiom titles)
-         #5c8a99  cool blue-grey     (rules, axiom numerals, structural)
-         #7d8090  subdued grey       (meta, footnotes, secondary text)
-       ========================================================= */
+    /*
+     * Palette — late-1950s Hard-Edge Painting / West Coast Abstract
+     * Classicism (after John McLaughlin, Karl Benjamin, Lorser Feitelson).
+     * Three accent colours, used consistently throughout:
+     *   --charcoal    #2a2c2b   body, armatures, rules
+     *   --mustard     #c69f3a   blocks, panels, structural
+     *   --persimmon   #dc5532   highlights, status, tension
+     * Neutrals (scaffolding, not counted as accent colours):
+     *   --cream       #f1ebda   page background — gallery wall
+     *   --white       #ffffff   inset panels
+     *
+     * Discipline: flat colour blocks only.  No gradients, no shadows,
+     * no textures, no rounded corners on structural elements, no
+     * decoration that isn't load-bearing.  Negative space is a
+     * compositional element, not the absence of one.
+     */
     :root {
-      --bg:       #0c1018;
-      --surface:  #14182a;
-      --ink:      #e8e6df;
-      --gold:     #e8b04a;
-      --cool:     #5c8a99;
-      --mute:     #7d8090;
-      --rule:     #2a3045;
-
-      --serif:    'Iowan Old Style', 'Apple Garamond', 'Hoefler Text', Garamond, Georgia, serif;
-      --sans:     -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, 'Helvetica Neue', Arial, sans-serif;
-      --mono:     'SF Mono', Menlo, Consolas, monospace;
+      --charcoal:  #2a2c2b;
+      --mustard:   #c69f3a;
+      --persimmon: #dc5532;
+      --cream:     #f1ebda;
+      --white:     #ffffff;
+      --rule:      rgba(42, 44, 43, 0.18);
     }
 
-    *, *::before, *::after { box-sizing: border-box; }
-
+    * { box-sizing: border-box; }
     html, body {
-      margin: 0;
-      padding: 0;
-      background: var(--bg);
-      color: var(--ink);
-      font-family: var(--sans);
-      font-size: 17px;
+      margin: 0; padding: 0;
+      background: var(--cream);
+      color: var(--charcoal);
+      font-family: "Helvetica Neue", "Helvetica", "Arial", system-ui, sans-serif;
+      font-size: 16px;
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
     }
+    .page { max-width: 1040px; margin: 0 auto; padding: 4vw 6vw 12vw; }
 
-    /* faint star texture behind everything — does not scroll, does not animate */
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      background-image:
-        radial-gradient(circle at 12% 22%, rgba(232,176,74,0.05) 0 1.2px, transparent 1.2px),
-        radial-gradient(circle at 78% 13%, rgba(255,255,255,0.04) 0 0.8px, transparent 0.8px),
-        radial-gradient(circle at 35% 78%, rgba(255,255,255,0.05) 0 1.0px, transparent 1.0px),
-        radial-gradient(circle at 88% 60%, rgba(232,176,74,0.04) 0 0.9px, transparent 0.9px),
-        radial-gradient(circle at 22% 92%, rgba(255,255,255,0.04) 0 0.7px, transparent 0.7px),
-        radial-gradient(circle at 62% 38%, rgba(255,255,255,0.05) 0 0.9px, transparent 0.9px),
-        radial-gradient(circle at 7%  60%, rgba(255,255,255,0.04) 0 0.8px, transparent 0.8px),
-        radial-gradient(circle at 92% 92%, rgba(232,176,74,0.04) 0 1.0px, transparent 1.0px);
-      pointer-events: none;
-      z-index: 0;
-    }
+    /* ─── Typography ───────────────────────────────────────────────── */
+    h1, h2, h3, h4, .label { font-weight: 700; letter-spacing: 0.01em; }
+    h1 { font-size: clamp(2.6rem, 6.5vw, 4.6rem); line-height: 0.95; margin: 0; letter-spacing: -0.02em; }
+    h2 { font-size: clamp(1.5rem, 2.8vw, 2.1rem); letter-spacing: 0.04em; text-transform: uppercase; margin: 0; line-height: 1.1; }
+    h3 { font-size: 1.05rem; letter-spacing: 0.10em; text-transform: uppercase; margin: 0; }
+    h4 { font-size: 0.92rem; letter-spacing: 0.16em; text-transform: uppercase; margin: 0 0 0.5rem; color: var(--persimmon); }
+    p { margin: 0 0 1rem; }
+    em { font-style: italic; }
+    strong { font-weight: 700; }
+    code { font-family: "SF Mono", "Menlo", "Consolas", "Monaco", monospace; font-size: 0.92em; background: var(--cream); border: 1px solid var(--rule); padding: 0 0.3em; }
+    a { color: var(--persimmon); text-decoration: none; border-bottom: 1px solid currentColor; }
+    a:hover { background: var(--mustard); color: var(--charcoal); border-bottom-color: var(--charcoal); }
 
-    main, header, footer { position: relative; z-index: 1; }
+    /* ─── Status banner — a single persimmon band ─────────────────── */
+    .status-banner {
+      background: var(--persimmon); color: var(--cream);
+      padding: 1rem 1.4rem; margin: 0 0 3rem;
+      display: grid; grid-template-columns: 56px 1fr; gap: 1.1rem; align-items: start;
+    }
+    .status-banner .marker {
+      width: 56px; height: 56px; background: var(--charcoal);
+      display: grid; place-items: center; color: var(--cream);
+      font-weight: 700; font-size: 0.8rem; letter-spacing: 0.06em; text-align: center;
+    }
+    .status-banner p { margin: 0; font-size: 0.95rem; line-height: 1.5; }
+    .status-banner strong { color: var(--white); }
 
-    .page {
-      max-width: 980px;
-      margin: 0 auto;
-      padding: 6rem 1.5rem 5rem;
-    }
+    /* ─── Hero ─────────────────────────────────────────────────────── */
+    .hero { display: grid; grid-template-columns: 1.05fr 1fr; gap: 3rem; align-items: stretch; margin: 1rem 0 4rem; }
+    .hero-text .eyebrow { font-size: 0.85rem; letter-spacing: 0.32em; text-transform: uppercase; color: var(--persimmon); margin: 0 0 1rem; font-weight: 700; }
+    .hero-rule { width: 7rem; height: 8px; background: var(--mustard); margin: 1.6rem 0 1.4rem; }
+    .tagline { font-size: clamp(1.15rem, 2.2vw, 1.5rem); font-weight: 700; line-height: 1.25; letter-spacing: -0.01em; max-width: 18em; margin: 0 0 1.2rem; }
+    .hero-text p { font-size: 1.05rem; max-width: 32em; }
+    .hero-composition { display: grid; grid-template-columns: 1.4fr 1fr; grid-template-rows: 1fr 1.3fr 0.7fr; gap: 6px; min-height: 340px; }
+    .hc-1 { grid-column: 1 / 2; grid-row: 1 / 3; background: var(--charcoal); }
+    .hc-2 { grid-column: 2 / 3; grid-row: 1 / 2; background: var(--mustard); }
+    .hc-3 { grid-column: 2 / 3; grid-row: 2 / 3; background: var(--cream); border: 6px solid var(--charcoal); }
+    .hc-4 { grid-column: 1 / 2; grid-row: 3 / 4; background: var(--persimmon); }
+    .hc-5 { grid-column: 2 / 3; grid-row: 3 / 4; background: var(--charcoal); }
 
-    /* ──────────────────────────────────────────────────────────
-       META HEADER — small, quiet; sits above the thesis
-       ────────────────────────────────────────────────────────── */
-    .meta {
-      max-width: 980px;
-      margin: 0 auto;
-      padding: 1.25rem 1.5rem 0;
-      color: var(--cool);
-      font-size: 0.78rem;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-    }
+    /* ─── How-to block ─────────────────────────────────────────────── */
+    .howto { background: var(--white); border: 4px solid var(--charcoal); padding: 1.6rem 1.8rem 1.2rem; margin: 0 0 1rem; }
+    .howto ul { margin: 0.6rem 0 0; padding-left: 1.1rem; }
+    .howto li { margin-bottom: 0.55rem; font-size: 0.97rem; line-height: 1.5; }
+    .howto li::marker { color: var(--persimmon); }
 
-    /* ──────────────────────────────────────────────────────────
-       INTRO BLOCK — "what this file is" + "use it like this"
-       ────────────────────────────────────────────────────────── */
-    .intro {
-      border-left: 2px solid var(--rule);
-      padding: 0.25rem 0 0.25rem 1.4rem;
-      margin: 2rem 0 4rem;
-      color: var(--mute);
-      font-size: 0.95rem;
-    }
-    .intro p { margin: 0 0 0.85rem 0; }
-    .intro p strong { color: var(--ink); }
-    .intro ul {
-      list-style: none;
-      padding: 0;
-      margin: 0.5rem 0 0;
-    }
-    .intro li {
-      padding-left: 1.2rem;
-      position: relative;
-      margin-bottom: 0.35rem;
-    }
-    .intro li::before {
-      content: "·";
-      position: absolute;
-      left: 0;
-      color: var(--gold);
-      font-weight: bold;
-      font-size: 1.1rem;
-      line-height: 1;
-    }
+    /* ─── Section heads ────────────────────────────────────────────── */
+    .section { margin: 5rem 0 0; padding: 4rem 0 0; border-top: 4px solid var(--charcoal); }
+    .section-head { display: grid; grid-template-columns: 96px 1fr; gap: 1.4rem; margin-bottom: 1.6rem; align-items: center; }
+    .section-marker { width: 96px; height: 56px; display: grid; place-items: center; font-weight: 700; font-size: 1.05rem; letter-spacing: 0.18em; color: var(--cream); background: var(--charcoal); }
+    .section-marker.mustard { background: var(--mustard); color: var(--charcoal); }
+    .section-marker.persimmon { background: var(--persimmon); color: var(--cream); }
+    .section-lede { max-width: 44em; font-size: 1.04rem; margin-bottom: 2rem; }
 
-    /* ──────────────────────────────────────────────────────────
-       HERO — the thesis statement
-       ────────────────────────────────────────────────────────── */
-    .thesis {
-      margin: 3.5rem 0 3rem;
-      text-align: center;
-    }
-    .thesis-pretitle {
-      font-family: var(--sans);
-      font-size: 0.78rem;
-      letter-spacing: 0.32em;
-      text-transform: uppercase;
-      color: var(--cool);
-      margin-bottom: 1.6rem;
-    }
-    .thesis-statement {
-      font-family: var(--serif);
-      font-size: clamp(1.85rem, 4.6vw, 3.1rem);
-      line-height: 1.18;
-      font-weight: 400;
-      letter-spacing: -0.005em;
-      color: var(--ink);
-      margin: 0 auto;
-      max-width: 24ch;
-    }
-    .thesis-statement em {
-      font-style: italic;
-      color: var(--gold);
-    }
+    /* ─── Intent grid (at a glance) ───────────────────────────────── */
+    .kw-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-bottom: 3rem; }
+    .kw-card { background: var(--white); border: 4px solid var(--charcoal); padding: 1.6rem 1.6rem 1.8rem; display: grid; grid-template-columns: 64px 1fr; gap: 1.2rem; align-items: start; }
+    .kw-card .kw-mark { width: 64px; height: 64px; }
+    .kw-card h4 { color: var(--persimmon); }
+    .kw-card h3 { font-size: 1.1rem; margin-bottom: 0.5rem; text-transform: none; letter-spacing: 0.01em; }
+    .kw-card p  { font-size: 0.95rem; line-height: 1.5; margin: 0; }
+    .kw-card.charcoal { background: var(--charcoal); color: var(--cream); border-color: var(--charcoal); }
+    .kw-card.charcoal h3 { color: var(--cream); } .kw-card.charcoal h4 { color: var(--mustard); }
+    .kw-card.mustard  { background: var(--mustard); color: var(--charcoal); border-color: var(--charcoal); }
+    .kw-card.mustard h4 { color: var(--charcoal); }
+    .kw-card.persimmon { background: var(--persimmon); color: var(--cream); border-color: var(--charcoal); }
+    .kw-card.persimmon h3 { color: var(--cream); } .kw-card.persimmon h4 { color: var(--cream); }
 
-    /* Umbrella paragraph — sits between the pretitle and the 2×2 grid
-       of intent cards in the multi-intent hero. */
-    .umbrella {
-      font-family: var(--serif);
-      font-size: clamp(1.1rem, 1.95vw, 1.4rem);
-      line-height: 1.55;
-      color: var(--ink);
-      max-width: 58ch;
-      margin: 0 auto 2.6rem;
-      font-style: italic;
-    }
+    /* ─── Deep blocks (per intent / per concept) ──────────────────── */
+    .deep { display: grid; grid-template-columns: 96px 1fr; gap: 1.4rem; margin-bottom: 3rem; }
+    .deep .rail { background: var(--charcoal); color: var(--cream); padding: 1rem 0.8rem; text-align: center; font-weight: 700; font-size: 2.2rem; line-height: 1; }
+    .deep .rail.mustard { background: var(--mustard); color: var(--charcoal); }
+    .deep .rail.persimmon { background: var(--persimmon); color: var(--cream); }
+    .deep h3 { font-size: 1.2rem; text-transform: none; letter-spacing: 0.01em; margin-bottom: 0.7rem; }
+    .deep .lead { font-weight: 700; }
 
-    /* 2×2 grid of intent cards in the multi-intent hero */
-    .intents-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1.4rem;
-      text-align: left;
-    }
-    .intent-card {
-      position: relative;
-      background: var(--surface);
-      border-radius: 6px;
-      padding: 1.6rem 1.8rem;
-      overflow: hidden;
-    }
-    .intent-numeral {
-      position: absolute;
-      top: 0.1rem;
-      right: 0.7rem;
-      font-family: var(--serif);
-      font-size: 4.5rem;
-      color: var(--cool);
-      opacity: 0.16;
-      line-height: 1;
-      pointer-events: none;
-    }
-    .intent-name {
-      font-family: var(--serif);
-      font-size: clamp(1.25rem, 2.1vw, 1.6rem);
-      font-weight: 400;
-      letter-spacing: -0.005em;
-      color: var(--gold);
-      margin: 0 0 0.55rem;
-      line-height: 1.18;
-      position: relative;
-      z-index: 1;
-    }
-    .intent-tagline {
-      margin: 0;
-      font-size: 0.95rem;
-      color: var(--ink);
-      position: relative;
-      z-index: 1;
-    }
+    /* ─── Triad (number / weight / congruence) ────────────────────── */
+    .threads { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin: 1.2rem 0 1.4rem; }
+    .thread { background: var(--mustard); color: var(--charcoal); padding: 1.2rem 1.2rem 1.3rem; }
+    .thread h3 { font-size: 0.95rem; margin-bottom: 0.55rem; letter-spacing: 0.10em; }
+    .thread p { font-size: 0.9rem; margin: 0; line-height: 1.5; }
+    .thread .eg { display: block; margin-top: 0.6rem; font-style: italic; color: var(--charcoal); opacity: 0.85; }
 
-    /* Each intent's deep-dive section below the hero */
-    .intent-section { margin: 3rem 0; }
-    .intent-section-h {
-      font-family: var(--serif);
-      font-size: clamp(1.4rem, 2.6vw, 1.9rem);
-      font-weight: 400;
-      color: var(--gold);
-      letter-spacing: -0.005em;
-      margin: 0 auto 1.6rem;
-      text-align: center;
-      max-width: 32ch;
-    }
+    /* ─── Axiom cards ─────────────────────────────────────────────── */
+    .axiom-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin: 1rem 0 0; }
+    .axiom-card { background: var(--white); border: 4px solid var(--charcoal); padding: 1.4rem 1.4rem 1.5rem; }
+    .axiom-card .ax-num { display: inline-block; background: var(--persimmon); color: var(--cream); padding: 0.15rem 0.55rem; font-weight: 700; letter-spacing: 0.06em; font-size: 0.78rem; margin-bottom: 0.7rem; }
+    .axiom-card h3 { font-size: 1.02rem; text-transform: none; letter-spacing: 0.01em; margin-bottom: 0.6rem; }
+    .axiom-card p { font-size: 0.93rem; line-height: 1.5; margin: 0; }
+    .axiom-card.span2 { grid-column: 1 / 3; }
 
-    /* ──────────────────────────────────────────────────────────
-       CONTRAST — linear vs. parallel, shown
-       ────────────────────────────────────────────────────────── */
-    .contrast {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1.5rem;
-      margin: 3.5rem 0 4rem;
-    }
-    .panel {
-      background: var(--surface);
-      border-radius: 6px;
-      padding: 1.5rem;
-      min-height: 280px;
-      display: flex;
-      flex-direction: column;
-    }
-    .panel-label {
-      font-family: var(--sans);
-      font-size: 0.72rem;
-      letter-spacing: 0.28em;
-      text-transform: uppercase;
-      color: var(--cool);
-      margin-bottom: 1rem;
-    }
-    .panel-caption {
-      font-family: var(--serif);
-      font-size: 1.15rem;
-      font-style: italic;
-      color: var(--ink);
-      margin-bottom: 1.2rem;
-      letter-spacing: -0.005em;
-    }
+    /* ─── Guiding questions ───────────────────────────────────────── */
+    .q-list { list-style: none; margin: 1rem 0 0; padding: 0; counter-reset: q; }
+    .q-list li { display: grid; grid-template-columns: 48px 1fr; gap: 1.1rem; align-items: start; padding: 1rem 0; border-bottom: 1px solid var(--rule); }
+    .q-list li::before { counter-increment: q; content: counter(q, decimal-leading-zero); background: var(--charcoal); color: var(--cream); font-weight: 700; font-size: 0.85rem; letter-spacing: 0.04em; padding: 0.35rem 0; text-align: center; }
+    .q-list p { margin: 0; font-size: 0.98rem; line-height: 1.5; }
+    .q-close { background: var(--charcoal); color: var(--cream); padding: 1.1rem 1.4rem; margin-top: 1.6rem; font-size: 0.97rem; }
+    .q-close strong { color: var(--mustard); }
 
-    /* linear panel: vertical list of "A → B" pairs with a time-axis hint */
-    .linear-list {
-      display: flex;
-      flex-direction: column;
-      gap: 0.4rem;
-      margin: 0;
-      padding: 0;
-      list-style: none;
-      font-family: var(--mono);
-      color: var(--ink);
-      flex-grow: 1;
-      position: relative;
-      padding-left: 1.6rem;
-    }
-    .linear-list::before {
-      content: "";
-      position: absolute;
-      left: 0.4rem;
-      top: 0.4rem;
-      bottom: 1.6rem;
-      width: 1px;
-      background: linear-gradient(to bottom, var(--cool), transparent);
-    }
-    .linear-list::after {
-      content: "↓ you read down";
-      position: absolute;
-      left: -0.1rem;
-      bottom: 0;
-      font-family: var(--sans);
-      font-size: 0.7rem;
-      color: var(--cool);
-      letter-spacing: 0.12em;
-    }
-    .linear-list li {
-      opacity: 0.9;
-    }
+    /* ─── Divider ─────────────────────────────────────────────────── */
+    .divider { display: flex; gap: 6px; margin: 4rem 0 0; }
+    .divider .bar { height: 14px; }
+    .divider .bar.mustard { background: var(--mustard); }
+    .divider .bar.persimmon { background: var(--persimmon); }
+    .divider .bar.charcoal { background: var(--charcoal); }
 
-    /* parallel panel: SVG node graph */
-    .parallel-svg {
-      width: 100%;
-      flex-grow: 1;
-      display: block;
-    }
-    .parallel-svg .edge {
-      stroke: var(--mute);
-      stroke-linecap: round;
-      opacity: 0.7;
-    }
-    .parallel-svg .edge.heavy {
-      stroke: var(--gold);
-      opacity: 0.85;
-    }
-    .parallel-svg .edge.medium {
-      stroke: var(--cool);
-      opacity: 0.75;
-    }
-    .parallel-svg .node {
-      fill: var(--ink);
-      stroke: var(--bg);
-      stroke-width: 1.5;
-    }
-    .parallel-svg .callout-line {
-      stroke: var(--gold);
-      stroke-width: 0.6;
-      stroke-dasharray: 2 2;
-      opacity: 0.7;
-    }
-    .parallel-svg .callout-label {
-      font-family: var(--sans);
-      font-size: 9px;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      fill: var(--gold);
-    }
+    /* ─── Footer ──────────────────────────────────────────────────── */
+    footer { margin-top: 6rem; padding-top: 1.4rem; border-top: 4px solid var(--charcoal); font-size: 0.86rem; color: var(--charcoal); display: grid; grid-template-columns: 1.4fr 1fr; gap: 2rem; align-items: start; }
+    footer p { margin: 0; }
 
-    /* ──────────────────────────────────────────────────────────
-       THESIS BODY — the long-form paragraphs
-       ────────────────────────────────────────────────────────── */
-    .thesis-body {
-      max-width: 64ch;
-      margin: 0 auto 3.5rem;
-    }
-    .thesis-body p {
-      margin: 0 0 1.1rem;
-      font-size: 1.05rem;
-      line-height: 1.65;
-    }
-    .thesis-body p em { font-style: italic; }
-    .thesis-body p strong { color: var(--ink); font-weight: 600; }
-    .thesis-body p.aside {
-      color: var(--mute);
-      font-size: 0.95rem;
-      border-left: 2px solid var(--rule);
-      padding-left: 1rem;
-      margin-top: 2rem;
-    }
-    .thesis-body p.aside em { color: var(--mute); }
-
-    /* ──────────────────────────────────────────────────────────
-       TRIAD — three cards side by side
-       ────────────────────────────────────────────────────────── */
-    .triad {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 1.2rem;
-      margin: 0 0 4rem;
-    }
-    .triad-card {
-      background: var(--surface);
-      border-radius: 6px;
-      padding: 1.6rem 1.4rem;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-    }
-    .triad-card h3 {
-      font-family: var(--serif);
-      font-size: 1.55rem;
-      font-weight: 400;
-      color: var(--gold);
-      margin: 0.8rem 0 0.6rem;
-      letter-spacing: -0.005em;
-    }
-    .triad-card .glyph {
-      width: 56px;
-      height: 56px;
-      display: block;
-    }
-    .triad-card .def {
-      font-size: 0.95rem;
-      color: var(--ink);
-      margin: 0 0 0.8rem;
-    }
-    .triad-card .quote {
-      font-family: var(--serif);
-      font-style: italic;
-      font-size: 0.95rem;
-      color: var(--mute);
-      margin: 0;
-      line-height: 1.45;
-    }
-    .triad-card .glyph .dot { fill: var(--ink); }
-    .triad-card .glyph .line { stroke: var(--ink); stroke-linecap: round; }
-    .triad-card .glyph .arrow {
-      stroke: var(--gold);
-      stroke-linecap: round;
-      stroke-width: 1;
-      opacity: 0.85;
-    }
-
-    /* ──────────────────────────────────────────────────────────
-       RULE — section divider
-       ────────────────────────────────────────────────────────── */
-    .rule {
-      border: 0;
-      height: 1px;
-      background: linear-gradient(
-        to right,
-        transparent,
-        var(--rule) 20%,
-        var(--rule) 80%,
-        transparent
-      );
-      margin: 4rem 0;
-    }
-
-    /* ──────────────────────────────────────────────────────────
-       SECTION HEADINGS
-       ────────────────────────────────────────────────────────── */
-    .section-title {
-      text-align: center;
-      font-family: var(--sans);
-      font-size: 0.78rem;
-      letter-spacing: 0.32em;
-      text-transform: uppercase;
-      color: var(--cool);
-      margin: 0 0 1rem;
-    }
-    .section-lede {
-      text-align: center;
-      max-width: 56ch;
-      margin: 0 auto 3rem;
-      color: var(--mute);
-      font-size: 0.95rem;
-    }
-
-    /* ──────────────────────────────────────────────────────────
-       AXIOMS — constellation grid
-       ────────────────────────────────────────────────────────── */
-    .axioms-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1.3rem;
-    }
-    .axiom {
-      position: relative;
-      background: var(--surface);
-      border-radius: 6px;
-      padding: 1.5rem 1.6rem 1.6rem;
-      overflow: hidden;
-    }
-    .axiom .numeral {
-      position: absolute;
-      top: 0.1rem;
-      right: 0.7rem;
-      font-family: var(--serif);
-      font-size: 5rem;
-      font-weight: 400;
-      color: var(--cool);
-      opacity: 0.18;
-      line-height: 1;
-      pointer-events: none;
-    }
-    .axiom h3 {
-      font-family: var(--serif);
-      font-size: 1.25rem;
-      font-weight: 400;
-      color: var(--gold);
-      margin: 0 0 0.7rem;
-      letter-spacing: -0.005em;
-      position: relative;
-      z-index: 1;
-    }
-    .axiom p {
-      margin: 0;
-      font-size: 0.95rem;
-      line-height: 1.6;
-      color: var(--ink);
-      position: relative;
-      z-index: 1;
-    }
-    .axiom p strong { color: var(--ink); font-weight: 600; }
-    .axiom p em { font-style: italic; color: var(--ink); }
-    .axiom code {
-      font-family: var(--mono);
-      font-size: 0.85em;
-      color: var(--cool);
-      background: rgba(92, 138, 153, 0.08);
-      padding: 0.05em 0.35em;
-      border-radius: 3px;
-    }
-
-    /* ──────────────────────────────────────────────────────────
-       GUIDING QUESTIONS — checklist
-       ────────────────────────────────────────────────────────── */
-    .checklist {
-      list-style: none;
-      padding: 0;
-      margin: 0 auto;
-      max-width: 64ch;
-      counter-reset: q;
-    }
-    .checklist li {
-      counter-increment: q;
-      position: relative;
-      padding: 0.85rem 0 0.85rem 3rem;
-      border-bottom: 1px solid var(--rule);
-      font-size: 1.02rem;
-      line-height: 1.55;
-      color: var(--ink);
-    }
-    .checklist li:last-child { border-bottom: none; }
-    .checklist li::before {
-      content: "";
-      position: absolute;
-      left: 0.4rem;
-      top: 1.1rem;
-      width: 14px;
-      height: 14px;
-      border: 1.5px solid var(--cool);
-      border-radius: 2px;
-      background: transparent;
-    }
-    .checklist li::after {
-      content: counter(q);
-      position: absolute;
-      left: 1.8rem;
-      top: 0.85rem;
-      font-family: var(--mono);
-      font-size: 0.85rem;
-      color: var(--cool);
-      letter-spacing: 0.06em;
-    }
-    .checklist li strong { color: var(--gold); font-weight: 600; }
-    .checklist .verdict {
-      list-style: none;
-      counter-increment: none;
-      padding: 1.4rem 0 0 0;
-      border-bottom: none;
-      color: var(--mute);
-      font-style: italic;
-      font-family: var(--serif);
-      font-size: 1rem;
-      text-align: center;
-    }
-    .checklist .verdict::before, .checklist .verdict::after { content: none; }
-
-    /* ──────────────────────────────────────────────────────────
-       FOOTER
-       ────────────────────────────────────────────────────────── */
-    footer {
-      max-width: 980px;
-      margin: 5rem auto 0;
-      padding: 2rem 1.5rem;
-      border-top: 1px solid var(--rule);
-      color: var(--mute);
-      font-size: 0.8rem;
-      letter-spacing: 0.06em;
-      text-align: center;
-    }
-    footer a, .intro a {
-      color: var(--cool);
-      text-decoration: none;
-      border-bottom: 1px dotted var(--cool);
-      transition: color 120ms ease, border-color 120ms ease;
-    }
-    footer a:hover, .intro a:hover {
-      color: var(--gold);
-      border-bottom-color: var(--gold);
-    }
-
-    /* ──────────────────────────────────────────────────────────
-       RESPONSIVE — collapse multi-column on narrow screens
-       ────────────────────────────────────────────────────────── */
+    /* ─── Responsive collapse ─────────────────────────────────────── */
     @media (max-width: 760px) {
-      .contrast      { grid-template-columns: 1fr; }
-      .triad         { grid-template-columns: 1fr; }
-      .axioms-grid   { grid-template-columns: 1fr; }
-      .intents-grid  { grid-template-columns: 1fr; }
-      .page          { padding: 3rem 1rem 3rem; }
-      .thesis        { margin: 2rem 0 2rem; }
-      .rule          { margin: 3rem 0; }
+      .hero { grid-template-columns: 1fr; }
+      .hero-composition { min-height: 260px; }
+      .kw-grid, .axiom-grid, .threads { grid-template-columns: 1fr; }
+      .axiom-card.span2 { grid-column: auto; }
+      .status-banner { grid-template-columns: 1fr; }
+      .status-banner .marker { width: 100%; height: 40px; }
+      .kw-card, .deep { grid-template-columns: 56px 1fr; }
+      .deep .rail { font-size: 1.6rem; padding: 0.5rem; }
+      footer { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
+<div class="page">
 
-  <header class="meta">Northstar &middot; conception-space</header>
+  <!-- STATUS BANNER — what this document is -->
+  <div class="status-banner">
+    <div class="marker">WHY</div>
+    <p>
+      The canonical statement of <strong>why</strong> conception-space exists —
+      the intent any feature, design decision, or refactor should serve.
+      Not a roadmap, not a feature list, not a how-to.
+      <strong><a href="northstar.md" style="color:var(--white);">northstar.md</a></strong>
+      is the source of truth; this is its hard-edge presentation.
+    </p>
+  </div>
 
-  <div class="page">
-
-    <!-- =====================================================
-         INTRO — what this file is, how to use it
-         ===================================================== -->
-    <div class="intro">
-      <p>
-        This file is the canonical statement of <strong>why</strong>
-        conception-space exists and <strong>what it is trying to do</strong>.
-        It is not a roadmap, not a feature list, and not a how-to.  It is the
-        <strong>intent</strong> — the underlying purpose that any specific
-        feature, design decision, or refactor should be in service of.
-      </p>
-      <p style="margin-bottom: 0.4rem;">Use it like this:</p>
-      <ul>
-        <li>When proposing a new feature, check whether it serves the intent below.  If it doesn't, it probably doesn't belong.</li>
-        <li>When choosing between two implementations, prefer the one that better preserves the intent.</li>
-        <li>When working becomes confused about "what is this even for," return here.</li>
-        <li>When the work surfaces a new design principle that follows from the intent, add it as an axiom below so future work inherits it.</li>
-      </ul>
-    </div>
-
-    <!-- =====================================================
-         BANNER — product name + tagline (mirrors northstar.md)
-         ===================================================== -->
-    <div style="text-align: center; margin: 3.25rem 0; padding: 2.25rem 1rem;
-                border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule);">
-      <div style="font-family: var(--serif); font-size: 2.4rem; font-weight: 600;
-                  color: var(--gold); line-height: 1.15;">Conception-Space</div>
-      <p style="margin: 1rem auto 0; max-width: 34rem; font-size: 1.1rem; line-height: 1.6;
-                color: var(--ink);">
+  <!-- HERO -->
+  <header class="hero">
+    <div class="hero-text">
+      <div class="eyebrow">conception-space · intent</div>
+      <h1>Northstar</h1>
+      <div class="hero-rule"></div>
+      <p class="tagline">
         Organize your knowledge in space.<br>
-        <span style="color: var(--mute);">Build navigable places. Shape visible relationships. Discover emergent patterns.</span>
-      </p>
-    </div>
-
-    <!-- =====================================================
-         HERO — four complementary intents
-         ===================================================== -->
-    <section class="thesis">
-      <div class="thesis-pretitle">The intents</div>
-      <p class="umbrella">
-        conception-space serves four complementary intents.  Different
-        facets of the same purpose, mutually reinforcing — the tensions
-        between them are themselves design-revealing.
-      </p>
-      <div class="intents-grid">
-        <article class="intent-card">
-          <span class="intent-numeral">1</span>
-          <h2 class="intent-name">Parallel perception of relationships</h2>
-          <p class="intent-tagline">The perceptual-channel argument.</p>
-        </article>
-        <article class="intent-card">
-          <span class="intent-numeral">2</span>
-          <h2 class="intent-name">Hand-authoring as sense-making</h2>
-          <p class="intent-tagline">Placement as the author's reasoning.</p>
-        </article>
-        <article class="intent-card">
-          <span class="intent-numeral">3</span>
-          <h2 class="intent-name">Sharing a mental model</h2>
-          <p class="intent-tagline">The file as a transmissible argument.</p>
-        </article>
-        <article class="intent-card">
-          <span class="intent-numeral">4</span>
-          <h2 class="intent-name">A persistent thinking artifact</h2>
-          <p class="intent-tagline">A long-lived companion to ongoing thought.</p>
-        </article>
-      </div>
-    </section>
-
-    <!-- =====================================================
-         INTENT 1 — parallel perception of relationships
-         (contrast panels + thesis body + triad)
-         ===================================================== -->
-    <section class="intent-section">
-      <h2 class="intent-section-h">1. Parallel perception of relationships</h2>
-
-    <div class="contrast">
-
-      <div class="panel">
-        <div class="panel-label">Linear</div>
-        <div class="panel-caption">read one at a time</div>
-        <ul class="linear-list">
-          <li>A&nbsp;&rarr;&nbsp;B</li>
-          <li>A&nbsp;&rarr;&nbsp;C</li>
-          <li>B&nbsp;&rarr;&nbsp;D</li>
-          <li>C&nbsp;&rarr;&nbsp;D</li>
-          <li>D&nbsp;&rarr;&nbsp;E</li>
-          <li>E&nbsp;&rarr;&nbsp;F</li>
-          <li>F&nbsp;&rarr;&nbsp;A</li>
-          <li>G&nbsp;&rarr;&nbsp;C</li>
-          <li>H&nbsp;&rarr;&nbsp;E</li>
-          <li>...&nbsp;&nbsp;</li>
-        </ul>
-      </div>
-
-      <div class="panel">
-        <div class="panel-label">Parallel</div>
-        <div class="panel-caption">seen at a glance</div>
-        <svg class="parallel-svg" viewBox="0 0 400 240" aria-hidden="true">
-          <!-- edges — drawn first so nodes sit on top -->
-          <line class="edge"          x1="60"  y1="80"  x2="110" y2="50"  stroke-width="1.2"/>
-          <line class="edge"          x1="60"  y1="80"  x2="140" y2="110" stroke-width="1.2"/>
-          <line class="edge"          x1="110" y1="50"  x2="140" y2="110" stroke-width="1.2"/>
-          <line class="edge medium"   x1="140" y1="110" x2="200" y2="170" stroke-width="1.4"/>
-          <line class="edge medium"   x1="200" y1="170" x2="280" y2="80"  stroke-width="1.4"/>
-          <line class="edge medium"   x1="200" y1="170" x2="320" y2="120" stroke-width="1.2"/>
-          <line class="edge"          x1="280" y1="80"  x2="320" y2="120" stroke-width="1.2"/>
-          <line class="edge"          x1="280" y1="80"  x2="340" y2="60"  stroke-width="1.2"/>
-          <line class="edge"          x1="320" y1="120" x2="340" y2="60"  stroke-width="1.2"/>
-          <line class="edge"          x1="360" y1="180" x2="320" y2="120" stroke-width="1.0"/>
-          <line class="edge"          x1="360" y1="180" x2="280" y2="80"  stroke-width="0.9"/>
-          <line class="edge"          x1="40"  y1="200" x2="60"  y2="80"  stroke-width="0.9"/>
-          <line class="edge heavy"    x1="140" y1="110" x2="280" y2="80"  stroke-width="2.6"/>
-          <line class="edge"          x1="200" y1="170" x2="360" y2="180" stroke-width="1.0"/>
-
-          <!-- nodes -->
-          <circle class="node" cx="60"  cy="80"  r="5"/>
-          <circle class="node" cx="110" cy="50"  r="5"/>
-          <circle class="node" cx="140" cy="110" r="5"/>
-          <circle class="node" cx="200" cy="170" r="6"/>
-          <circle class="node" cx="280" cy="80"  r="6"/>
-          <circle class="node" cx="320" cy="120" r="5"/>
-          <circle class="node" cx="340" cy="60"  r="5"/>
-          <circle class="node" cx="360" cy="180" r="4.5"/>
-          <circle class="node" cx="40"  cy="200" r="4"/>
-
-          <!-- callouts -->
-          <!-- Number — point at dense cluster B -->
-          <line class="callout-line" x1="310" y1="30"  x2="316" y2="76"/>
-          <text class="callout-label" x="288" y="22">number</text>
-
-          <!-- Weight — point at the heavy edge -->
-          <line class="callout-line" x1="210" y1="60"  x2="218" y2="84"/>
-          <text class="callout-label" x="146" y="55">weight</text>
-
-          <!-- Congruence — point at cluster A -->
-          <line class="callout-line" x1="70"  y1="160" x2="92"  y2="92"/>
-          <text class="callout-label" x="20"  y="174">congruence</text>
-        </svg>
-      </div>
-
-    </div>
-
-    <!-- =====================================================
-         THESIS BODY — the long-form paragraphs
-         ===================================================== -->
-    <div class="thesis-body">
-      <p>
-        A list, an index, or an appendix forces relationships through a
-        <em>linear</em> perceptual channel — you read item by item, holding
-        the previous in working memory while you read the next, building the
-        structure incrementally and forgetting most of it by the end.  Even
-        with a great index, "what is the <em>shape</em> of these 200
-        relationships?" is unanswerable from the index itself; you have to
-        construct that shape in your head, one relationship at a time.
+        Build navigable places. Shape visible relationships. Discover emergent patterns.
       </p>
       <p>
-        A <code style="font-family:var(--mono);font-size:0.9em;color:var(--cool);background:rgba(92,138,153,0.08);padding:0.05em 0.35em;border-radius:3px;">.cns</code>
-        space pushes the same information through a <em>parallel</em>
-        perceptual channel — your visual system, which is built exactly for
-        this.  The moment you look at the scene, three things become
-        available <strong>at once</strong>, without sequential effort:
+        It is the <strong>intent</strong> — the underlying purpose that any
+        specific feature, design decision, or refactor should be in service of.
       </p>
     </div>
-
-    <!-- =====================================================
-         TRIAD — number / weight / congruence
-         ===================================================== -->
-    <div class="triad">
-
-      <div class="triad-card">
-        <svg class="glyph" viewBox="0 0 56 56" aria-hidden="true">
-          <!-- number: lots of dots, denser on right -->
-          <circle class="dot" cx="8"  cy="10" r="1.4"/>
-          <circle class="dot" cx="14" cy="22" r="1.4"/>
-          <circle class="dot" cx="10" cy="36" r="1.4"/>
-          <circle class="dot" cx="20" cy="14" r="1.4"/>
-          <circle class="dot" cx="22" cy="30" r="1.4"/>
-          <circle class="dot" cx="18" cy="46" r="1.4"/>
-          <circle class="dot" cx="30" cy="8"  r="1.4"/>
-          <circle class="dot" cx="32" cy="20" r="1.4"/>
-          <circle class="dot" cx="30" cy="32" r="1.4"/>
-          <circle class="dot" cx="34" cy="44" r="1.4"/>
-          <circle class="dot" cx="40" cy="14" r="1.4"/>
-          <circle class="dot" cx="44" cy="26" r="1.4"/>
-          <circle class="dot" cx="42" cy="38" r="1.4"/>
-          <circle class="dot" cx="48" cy="20" r="1.4"/>
-          <circle class="dot" cx="50" cy="44" r="1.4"/>
-        </svg>
-        <h3>Number</h3>
-        <p class="def">How many relationships exist — read by edge density and node count at a glance.</p>
-        <p class="quote">"This region is busy; that one is sparse."</p>
-      </div>
-
-      <div class="triad-card">
-        <svg class="glyph" viewBox="0 0 56 56" aria-hidden="true">
-          <!-- weight: three lines of escalating thickness -->
-          <line class="line" x1="8" y1="14" x2="48" y2="14" stroke-width="1"/>
-          <line class="line" x1="8" y1="28" x2="48" y2="28" stroke-width="3"/>
-          <line class="line" x1="8" y1="44" x2="48" y2="44" stroke-width="6"/>
-        </svg>
-        <h3>Weight</h3>
-        <p class="def">The strength or importance of relationships — read by edge thickness, colour, label, shape.</p>
-        <p class="quote">"These connections are heavy; those are incidental."</p>
-      </div>
-
-      <div class="triad-card">
-        <svg class="glyph" viewBox="0 0 56 56" aria-hidden="true">
-          <!-- congruence: three outside points converging on centroid -->
-          <line class="arrow" x1="8"  y1="10" x2="26" y2="28"/>
-          <line class="arrow" x1="48" y1="10" x2="30" y2="28"/>
-          <line class="arrow" x1="28" y1="50" x2="28" y2="32"/>
-          <circle class="dot" cx="8"  cy="10" r="2.2"/>
-          <circle class="dot" cx="48" cy="10" r="2.2"/>
-          <circle class="dot" cx="28" cy="50" r="2.2"/>
-          <circle class="dot" cx="28" cy="30" r="2.4" fill="var(--gold)"/>
-        </svg>
-        <h3>Congruence</h3>
-        <p class="def">How relationships align, cluster, and point — read by spatial proximity and shared direction.</p>
-        <p class="quote">"These two clusters point at each other; this one is an outlier."</p>
-      </div>
-
+    <div class="hero-composition" aria-hidden="true">
+      <div class="hc-1"></div>
+      <div class="hc-2"></div>
+      <div class="hc-3"></div>
+      <div class="hc-4"></div>
+      <div class="hc-5"></div>
     </div>
+  </header>
 
-    <div class="thesis-body">
-      <p>
-        The user does not <em>recall</em> the structure — they <em>see</em> it.
-        Reasoning is not sequential reconstruction; it is pattern recognition
-        over a structure presented as a whole.  That is a fundamentally
-        higher-bandwidth way to grasp relational data than any linear medium
-        can be, and it is the reason this tool exists.
-      </p>
-      <p class="aside">
-        Spatial memorability (Method-of-Loci–style "I remember Mars because
-        it's over there") is a <em>secondary</em> effect that follows from
-        the placement being stable across sessions.  Useful, but not the
-        primary thing.
-      </p>
+  <!-- HOW TO USE -->
+  <div class="howto">
+    <h4>Use it like this</h4>
+    <ul>
+      <li>When proposing a new feature, check whether it serves the intent below. If it doesn't, it probably doesn't belong.</li>
+      <li>When choosing between two implementations, prefer the one that better preserves the intent.</li>
+      <li>When working becomes confused about "what is this even for," return here.</li>
+      <li>When the work surfaces a new design principle that follows from the intent, add it as an axiom below so future work inherits it.</li>
+    </ul>
+  </div>
+
+  <!-- ════════════════════════════════════════════════════════════════
+       SECTION 01 — The intents
+       ════════════════════════════════════════════════════════════════ -->
+  <section class="section">
+    <div class="section-head">
+      <div class="section-marker">01</div>
+      <h2>The intents</h2>
     </div>
-
-    </section> <!-- /intent-section #1 -->
-
-    <!-- =====================================================
-         INTENT 2 — hand-authoring as sense-making
-         ===================================================== -->
-    <section class="intent-section">
-      <h2 class="intent-section-h">2. Hand-authoring as sense-making</h2>
-      <div class="thesis-body">
-        <p>
-          The act of placing a node <em>is</em> an act of reasoning.  The
-          author decides where it goes — and that decision is informed by
-          their understanding of how it relates to the others.  As more
-          nodes are placed, the understanding sharpens; as the
-          understanding sharpens, nodes move.  The file is the residue of
-          that thinking.
-        </p>
-        <p>
-          This is why hand-placement is non-negotiable (Axiom 1): if a
-          layout algorithm overwrites the positions, it overwrites the
-          reasoning.  The author is not just <em>describing</em> a graph;
-          they are <em>thinking about it in 3D space</em>.  A blank
-          <code style="font-family:var(--mono);font-size:0.9em;color:var(--cool);background:rgba(92,138,153,0.08);padding:0.05em 0.35em;border-radius:3px;">.cns</code>
-          file is an invitation to think.  A finished one is the shape of
-          a thought.
-        </p>
-      </div>
-    </section>
-
-    <!-- =====================================================
-         INTENT 3 — sharing a mental model
-         ===================================================== -->
-    <section class="intent-section">
-      <h2 class="intent-section-h">3. Sharing a mental model</h2>
-      <div class="thesis-body">
-        <p>
-          Once a <code style="font-family:var(--mono);font-size:0.9em;color:var(--cool);background:rgba(92,138,153,0.08);padding:0.05em 0.35em;border-radius:3px;">.cns</code>
-          file exists, anyone with the viewer can <em>see</em> the author's
-          argument directly.  The spatial layout is the author's
-          understanding made transmissible.  Reading someone else's
-          <code style="font-family:var(--mono);font-size:0.9em;color:var(--cool);background:rgba(92,138,153,0.08);padding:0.05em 0.35em;border-radius:3px;">.cns</code>
-          is not reading their summary of the concepts; it is perceiving
-          the structure they perceived.
-        </p>
-        <p>
-          Two consequences.  The file is legible across people with no
-          narrator — the shape stands by itself.  And an author can use
-          the file to <em>teach</em> — laying out the topology of an idea
-          and walking a viewer through it, knowing the viewer is taking in
-          the structure simultaneously, not sequentially.  This is the
-          social complement to perception: parallel perception of
-          <em>someone else's</em> relational argument.
-        </p>
-      </div>
-    </section>
-
-    <!-- =====================================================
-         INTENT 4 — a persistent thinking artifact
-         ===================================================== -->
-    <section class="intent-section">
-      <h2 class="intent-section-h">4. A persistent thinking artifact</h2>
-      <div class="thesis-body">
-        <p>
-          A <code style="font-family:var(--mono);font-size:0.9em;color:var(--cool);background:rgba(92,138,153,0.08);padding:0.05em 0.35em;border-radius:3px;">.cns</code>
-          file lives across sessions.  The author can leave it and come
-          back.  They can evolve it as their understanding evolves.  They
-          can revisit a layout from last year and ask "what was I thinking
-          when I put that there?" — and often the placement itself encodes
-          the answer.
-        </p>
-        <p>
-          The viewer's bookmarks (Axiom 4) operate on the short
-          time-scale — saved viewpoints into a file for a particular act
-          of perception.  The file itself is the longer time-scale: a
-          thinking-vehicle that outlasts any single sitting.  A
-          <code style="font-family:var(--mono);font-size:0.9em;color:var(--cool);background:rgba(92,138,153,0.08);padding:0.05em 0.35em;border-radius:3px;">.cns</code>
-          is not a chart that captures a moment; it is a workshop the
-          author keeps returning to.
-        </p>
-      </div>
-    </section>
-
-    <!-- =====================================================
-         HOW THE FOUR REINFORCE EACH OTHER
-         ===================================================== -->
-    <section class="intent-section">
-      <h2 class="intent-section-h">How the four reinforce each other</h2>
-      <div class="thesis-body">
-        <p>
-          Each intent strengthens the others.  Sense-making depends on
-          perception: the author can only reason about the layout if they
-          can see it parallel-channel as they build it.  Perception
-          depends on sense-making: the layout has its high-bandwidth
-          structure only because the author placed it deliberately.
-          Sharing depends on both: the file is transmissible only because
-          the author's argument is encoded in the layout <em>and</em>
-          readable in parallel by the viewer.  Persistence is the
-          time-axis that lets all three accumulate value: a one-off
-          arrangement is a sketch; a returned-to arrangement is a body of
-          work.
-        </p>
-        <p class="aside">
-          Tensions between them are design-revealing.  For example: a
-          feature that improves <em>perception</em> by auto-rounding edge
-          paths for visual cleanliness would damage <em>sense-making</em>
-          if it overrides what the author drew.  Both intents are real;
-          the tension forces the design to be specific about what it
-          favours and why.
-        </p>
-      </div>
-    </section>
-
-    <hr class="rule"/>
-
-    <!-- =====================================================
-         AXIOMS
-         ===================================================== -->
-    <h2 class="section-title">Axioms</h2>
     <p class="section-lede">
-      Six design constraints that follow from the intents above.
-      Load-bearing in past decisions; load-bearing for future ones.
+      Four complementary facets of the project's purpose. The <em>why</em>,
+      in broad strokes.
     </p>
 
-    <div class="axioms-grid">
+    <div class="kw-grid">
 
-      <article class="axiom">
-        <span class="numeral">1</span>
+      <article class="kw-card charcoal">
+        <svg class="kw-mark" viewBox="0 0 64 64" aria-hidden="true">
+          <rect x="2" y="2" width="60" height="60" fill="#2a2c2b"/>
+          <rect x="10" y="10" width="16" height="16" fill="#c69f3a"/>
+          <rect x="38" y="14" width="14" height="14" fill="#dc5532"/>
+          <rect x="14" y="38" width="14" height="14" fill="#f1ebda"/>
+          <rect x="40" y="40" width="12" height="12" fill="#c69f3a"/>
+        </svg>
+        <div>
+          <h4>Intent 1</h4>
+          <h3>Organize your knowledge in space</h3>
+          <p>Gives knowledge spatial structure the mind can remember.</p>
+        </div>
+      </article>
+
+      <article class="kw-card mustard">
+        <svg class="kw-mark" viewBox="0 0 64 64" aria-hidden="true">
+          <rect x="2" y="2" width="60" height="60" fill="#c69f3a"/>
+          <polyline points="10,52 26,20 40,40 54,12" fill="none" stroke="#2a2c2b" stroke-width="4"/>
+          <circle cx="10" cy="52" r="5" fill="#2a2c2b"/>
+          <circle cx="40" cy="40" r="5" fill="#2a2c2b"/>
+          <circle cx="54" cy="12" r="5" fill="#dc5532"/>
+        </svg>
+        <div>
+          <h4>Intent 2</h4>
+          <h3>Build navigable places</h3>
+          <p>Spatial navigation helps knowledge become easier to revisit.</p>
+        </div>
+      </article>
+
+      <article class="kw-card persimmon">
+        <svg class="kw-mark" viewBox="0 0 64 64" aria-hidden="true">
+          <rect x="2" y="2" width="60" height="60" fill="#dc5532"/>
+          <line x1="16" y1="18" x2="48" y2="30" stroke="#f1ebda" stroke-width="3"/>
+          <line x1="48" y1="30" x2="22" y2="48" stroke="#f1ebda" stroke-width="3"/>
+          <circle cx="16" cy="18" r="6" fill="#2a2c2b"/>
+          <circle cx="48" cy="30" r="6" fill="#f1ebda"/>
+          <circle cx="22" cy="48" r="6" fill="#c69f3a"/>
+        </svg>
+        <div>
+          <h4>Intent 3</h4>
+          <h3>Shape visible relationships</h3>
+          <p>Parallel perception of relationships makes abstract connections perceivable.</p>
+        </div>
+      </article>
+
+      <article class="kw-card">
+        <svg class="kw-mark" viewBox="0 0 64 64" aria-hidden="true">
+          <rect x="2" y="2" width="60" height="60" fill="none" stroke="#2a2c2b" stroke-width="2"/>
+          <circle cx="16" cy="16" r="4" fill="#c69f3a"/>
+          <circle cx="30" cy="20" r="4" fill="#c69f3a"/>
+          <circle cx="22" cy="32" r="4" fill="#c69f3a"/>
+          <polygon points="44,30 54,36 50,48 38,48 34,36" fill="#dc5532"/>
+        </svg>
+        <div>
+          <h4>Intent 4</h4>
+          <h3>Discover emergent patterns</h3>
+          <p>Recurring visual attributes help the mind detect emergent structures.</p>
+        </div>
+      </article>
+
+    </div>
+
+    <!-- 1 -->
+    <div class="deep">
+      <div class="rail">1</div>
+      <div>
+        <h3>Organize your knowledge in space</h3>
+        <p>
+          Human memory and perception are strongly spatial. A place gives
+          knowledge landmarks, regions, paths, distances, and orientations,
+          which help the mind recognize relationships instead of having to
+          recall everything abstractly. We remember locations, regions,
+          landmarks, and relationships well, and we use spatial structure to
+          reduce mental load. When knowledge is organized in space, we can
+          recognize patterns, revisit familiar areas, compare nearby ideas,
+          notice gaps, and build a cognitive map of what we know.
+        </p>
+      </div>
+    </div>
+
+    <!-- 2 -->
+    <div class="deep">
+      <div class="rail mustard">2</div>
+      <div>
+        <h3>Build navigable places</h3>
+        <p>
+          Navigable places have cognitive value because humans are especially
+          good at remembering and reasoning with spatial structure. Navigation
+          turns understanding into an active process: we can move through ideas,
+          return to familiar areas, compare nearby concepts, and gradually form
+          a cognitive map. In this sense, the space becomes an external memory
+          aid that reduces cognitive load and makes complex relationships easier
+          to perceive, revisit, and develop.
+        </p>
+      </div>
+    </div>
+
+    <!-- 3 -->
+    <div class="deep">
+      <div class="rail persimmon">3</div>
+      <div>
+        <h3>Shape visible relationships</h3>
+        <p>
+          Visible relationships are valuable because cognition depends heavily
+          on perceiving relations, not just isolated things. When relationships
+          are made visible through distance, grouping, alignment, connection,
+          containment, motion, color, or scale, we can recognize patterns
+          directly instead of reconstructing them from text or memory. Shaping
+          those relationships also turns understanding into an active process:
+          we can adjust a representation, test whether it "fits", notice
+          inconsistencies, and refine the structure. This supports perception,
+          memory, attention, and reasoning by making abstract relations
+          external, manipulable, and easier to compare.
+        </p>
+      </div>
+    </div>
+
+    <!-- 4 -->
+    <div class="deep">
+      <div class="rail">4</div>
+      <div>
+        <h3>Discover emergent patterns</h3>
+        <p>
+          When many ideas and relationships are arranged visibly, emergent
+          structures are revealed that were not obvious item by item: clusters,
+          gaps, bridges, symmetries, outliers, repeated forms and motions, and
+          unexpected analogies.
+        </p>
+        <p>
+          This matters because our perception is good at detecting patterns
+          across space. By externalizing knowledge into a visible arrangement,
+          our perceptual system participates in thinking: the eye can notice
+          structure before the mind has to verbalize it. That supports memory,
+          attention, and reasoning because we can recognize higher-order
+          organization, see what is missing or overconnected, and form a
+          stronger cognitive map of the knowledge.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════════════════════════
+       SECTION 02 — Concepts
+       ════════════════════════════════════════════════════════════════ -->
+  <section class="section">
+    <div class="section-head">
+      <div class="section-marker mustard">02</div>
+      <h2>Concepts</h2>
+    </div>
+    <p class="section-lede">
+      The intents say <em>why</em> in broad strokes. These concepts are their
+      underlying mechanisms and the source of the axioms below.
+    </p>
+
+    <!-- Concept 1 -->
+    <div class="deep">
+      <div class="rail">1</div>
+      <div>
+        <h3>Parallel perception of relationships</h3>
+        <p class="lead">conception-space is for parallel perception of relationships.</p>
+        <p>
+          A list, an index, or an appendix forces relationships through a
+          <em>linear</em> perceptual channel — one reads item by item, holding
+          the previous in working memory while one reads the next, building the
+          structure incrementally and forgetting most of it by the end. Even
+          with a great index, "what is the <em>shape</em> of these 200
+          relationships?" is unanswerable from the index itself; one has to
+          construct that shape in one's head, one relationship at a time.
+        </p>
+        <p>
+          A visual space pushes the same information through a <em>parallel</em>
+          perceptual channel — one's visual system, which is built exactly for
+          this. The moment one looks at the scene, three things become available
+          <strong>at once</strong>, without sequential effort:
+        </p>
+      </div>
+    </div>
+
+    <div class="threads">
+      <div class="thread">
+        <h3>Number</h3>
+        <p>How many relationships exist, read by edge density and node count at a glance.<span class="eg">"This region is busy; that one is sparse."</span></p>
+      </div>
+      <div class="thread">
+        <h3>Weight</h3>
+        <p>The strength or importance of relationships, read by edge thickness, colour, label, shape.<span class="eg">"These connections are heavy; those are incidental."</span></p>
+      </div>
+      <div class="thread">
+        <h3>Congruence</h3>
+        <p>How relationships align, cluster, and point, read by spatial proximity, group shells, and shared direction.<span class="eg">"These belong together; those two clusters point at each other."</span></p>
+      </div>
+    </div>
+
+    <div class="deep">
+      <div class="rail" style="background:transparent;"></div>
+      <div>
+        <p>
+          One does not <em>recall</em> the structure — one <em>sees</em> it.
+          Reasoning is not sequential reconstruction; it is pattern recognition
+          over a structure presented as a whole. That is a fundamentally
+          higher-bandwidth way to grasp relational data than any linear medium
+          can be, and it is the reason this tool exists.
+        </p>
+        <p>
+          Spatial memorability (Method-of-Loci–style "I remember the red book
+          because it's over there") is a <em>secondary</em> effect that follows
+          from the placement being stable across sessions. Useful, but not the
+          primary thing.
+        </p>
+      </div>
+    </div>
+
+    <!-- Concept 2 -->
+    <div class="deep">
+      <div class="rail mustard">2</div>
+      <div>
+        <h3>Hand-authoring as sense-making</h3>
+        <p>
+          The act of placing a node <em>is</em> an act of reasoning. The author
+          decides where it goes — and that decision is informed by their
+          understanding of how it relates to the others. As more nodes are
+          placed, the understanding sharpens; as the understanding sharpens,
+          nodes move. The file is the residue of that thinking.
+        </p>
+        <p>
+          This is why hand-placement is non-negotiable (Axiom 1): if a layout
+          algorithm overwrites the positions, it overwrites the reasoning. The
+          author is not just <em>describing</em> a graph; they are <em>thinking
+          about it in 3D space</em>. A blank <code>.cns</code> file is an
+          invitation to think. A finished one is the shape of a thought.
+        </p>
+      </div>
+    </div>
+
+    <!-- Concept 3 -->
+    <div class="deep">
+      <div class="rail persimmon">3</div>
+      <div>
+        <h3>A persistent thinking artifact</h3>
+        <p>
+          A visual space lives across sessions. One can leave it and come back.
+          One can evolve it as one's understanding evolves. One can revisit a
+          layout from last year and ask "what was I thinking when I put that
+          there?" — and often the placement itself encodes the answer.
+        </p>
+        <p>
+          "Bookmarks" (Axiom 4) operate on the short time-scale — saved
+          viewpoints into a space for a particular act of perception. The space
+          itself is the longer time-scale: a thinking-vehicle that outlasts any
+          single sitting. A space is not a chart that captures a moment; it is a
+          workshop the author keeps returning to.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════════════════════════
+       SECTION 03 — Axioms
+       ════════════════════════════════════════════════════════════════ -->
+  <section class="section">
+    <div class="section-head">
+      <div class="section-marker persimmon">03</div>
+      <h2>Axioms</h2>
+    </div>
+    <p class="section-lede">
+      Treat these as design constraints on future work.
+    </p>
+
+    <div class="axiom-grid">
+
+      <article class="axiom-card">
+        <div class="ax-num">AXIOM 1</div>
         <h3>Placement is argument.</h3>
         <p>
           When the author places node A near node B and far from C, that
-          placement <strong>is</strong> the claim "A and B are related;
-          C is not."  The space is the author's understanding of the
-          relationships made directly perceptible.  Anything that
-          overwrites placement (auto-layout, repositioning on resize,
-          etc.) erases the author's argument.  Hand-placement is
-          non-negotiable.
+          placement <strong>is</strong> the claim "A and B are related; C is
+          not." The space is the author's understanding of the relationships
+          made directly perceptible. Anything that overwrites placement
+          (auto-layout, repositioning on resize) erases the author's argument.
+          Hand-placement is non-negotiable.
         </p>
       </article>
 
-      <article class="axiom">
-        <span class="numeral">2</span>
+      <article class="axiom-card">
+        <div class="ax-num">AXIOM 2</div>
         <h3>Hierarchical grouping carries meta-relationships.</h3>
         <p>
-          A <code>cluster</code> says "these N things are one
-          <em>thing</em> at the next scale up."  The cluster's own
-          position then encodes how that aggregate relates to other
-          aggregates.  A <code>.cns</code> file is a multi-scale
-          relational argument: each level reveals a different layer of
-          structure.  Treat cluster-level visuals (shell, tube frame,
-          label) as carrying real reasoning content, not decoration.
+          A <code>cluster</code> says "these N things are one <em>thing</em> at
+          the next scale up." The cluster's own position then encodes how that
+          aggregate relates to other aggregates. A <code>.cns</code> file is a
+          multi-scale relational argument: each level reveals a different layer
+          of structure. Treat cluster-level visuals (shell, tube frame, label)
+          as carrying real reasoning content, not decoration.
         </p>
       </article>
 
-      <article class="axiom">
-        <span class="numeral">3</span>
+      <article class="axiom-card">
+        <div class="ax-num">AXIOM 3</div>
         <h3>Smooth motion is load-bearing, not polish.</h3>
         <p>
-          A snap, spin, or teleport breaks the perceptual channel mid-act.
-          The user stops perceiving relationships and starts re-orienting
-          from scratch.  Smooth flight lets the user <strong>sweep</strong>
-          across many relationships in a single continuous perceptual act,
-          picking up patterns the static view can't show ("the edges from
-          this cluster all bend toward that region").  Camera transitions
-          are part of the medium, not decoration on top of it.
+          A snap, spin, or teleport breaks the perceptual channel mid-act. One
+          stops perceiving relationships and starts re-orienting from scratch.
+          Smooth flight allows one to <strong>sweep</strong> across many
+          relationships in a single continuous perceptual act, picking up
+          patterns the static view can't show. Camera transitions are part of
+          the medium, not decoration on top of it.
         </p>
       </article>
 
-      <article class="axiom">
-        <span class="numeral">4</span>
+      <article class="axiom-card">
+        <div class="ax-num">AXIOM 4</div>
         <h3>Bookmarks are saved arguments.</h3>
         <p>
           A bookmark is a curated viewpoint that frames a specific
-          relationship-pattern for a specific perceptual act.  The viewpoint
-          <strong>is</strong> the argument.  Bookmarks deserve first-class
-          treatment (naming, organisation, easy travel) because each one
-          is a piece of authored sense-making.
+          relationship-pattern for a specific perceptual act. The viewpoint
+          <strong>is</strong> the argument. Bookmarks deserve first-class
+          treatment (naming, organisation, easy travel) because each one is a
+          piece of authored sense-making.
         </p>
       </article>
 
-      <article class="axiom">
-        <span class="numeral">5</span>
+      <article class="axiom-card">
+        <div class="ax-num">AXIOM 5</div>
         <h3>Edges carry as much reasoning as nodes.</h3>
         <p>
           Edge thickness, colour, label, dash, arrowhead — these are the
-          <em>weight</em> and <em>congruence</em> channels.  The reasoning
+          <em>weight</em> and <em>congruence</em> channels. The reasoning
           content of the graph lives as much in the edges as in the nodes.
-          Invest in edge visual quality with the same seriousness as node
-          visual quality.
+          Invest in edge visual quality with the same seriousness as node visual
+          quality.
         </p>
       </article>
 
-      <article class="axiom">
-        <span class="numeral">6</span>
-        <h3>The viewer is a perception instrument, not a navigator.</h3>
+      <article class="axiom-card">
+        <div class="ax-num">AXIOM 6</div>
+        <h3>The app is a perception instrument, not a navigator.</h3>
         <p>
-          Its job is to be transparent enough that the user forgets they
-          are using it.  Anything that draws attention to the viewer itself
-          (lag, UI clutter, animation glitches, modal interruptions) competes
-          with the perceptual act the user came to perform.  Default toward
-          calm, get-out-of-the-way design.
+          Its job is to be transparent enough that one forgets one is using it.
+          Anything that draws attention to the app itself (lag, UI clutter,
+          animation glitches, modal interruptions) competes with the perceptual
+          act one is trying to perform. Default toward calm, get-out-of-the-way
+          design.
+        </p>
+      </article>
+
+      <article class="axiom-card span2">
+        <div class="ax-num">AXIOM 7</div>
+        <h3>A node is a handle onto content.</h3>
+        <p>
+          A node's first-class job is to stand for — and open — a real file
+          (usually markdown, sometimes a PDF). Its visuals (shape, colour, size)
+          are secondary to that binding. Decoupling a node from the content it
+          points at removes its reason to exist: the space is an interface to a
+          corpus, not a diagram floating free of it.
         </p>
       </article>
 
     </div>
+  </section>
 
-    <hr class="rule"/>
+  <!-- ════════════════════════════════════════════════════════════════
+       SECTION 04 — Guiding questions
+       ════════════════════════════════════════════════════════════════ -->
+  <section class="section">
+    <div class="section-head">
+      <div class="section-marker mustard">04</div>
+      <h2>Guiding questions for future work</h2>
+    </div>
+    <p class="section-lede">When proposing a change, ask:</p>
 
-    <!-- =====================================================
-         GUIDING QUESTIONS
-         ===================================================== -->
-    <h2 class="section-title">Guiding questions for future work</h2>
-    <p class="section-lede">
-      When proposing a change, ask:
-    </p>
-
-    <ol class="checklist">
-      <li>Does this serve <strong>simultaneous perception</strong> of relationships, or does it force the user into a sequential read?</li>
-      <li>Does this preserve the <strong>perceptual channel during motion</strong>, or does it interrupt it?</li>
-      <li>Does this respect the <strong>author's placement</strong> as argument, or does it overwrite it?</li>
-      <li>Does this strengthen one of the three perceptual signals (<strong>number, weight, congruence</strong>), or does it add unrelated noise?</li>
-      <li>Does this make the viewer <strong>more transparent</strong>, or more demanding of the user's attention?</li>
-      <li>Does this <strong>preserve the author's argument</strong> when the file is seen by another viewer? Does it make the file easier or harder to share?</li>
-      <li>Does this stay useful <strong>across sessions and over time</strong>, or is it tied to a transient state?</li>
-      <li class="verdict">If a change scores well on these, it probably belongs.  If it scores poorly, it is probably the wrong design.</li>
+    <ol class="q-list">
+      <li><p>Does this serve <strong>simultaneous perception</strong> of relationships, or does it force the user into a sequential read?</p></li>
+      <li><p>Does this preserve the <strong>perceptual channel during motion</strong>, or does it interrupt it?</p></li>
+      <li><p>Does this respect the <strong>author's placement</strong> as argument, or does it overwrite it?</p></li>
+      <li><p>Does this strengthen one of the three perceptual signals (<strong>number, weight, congruence</strong>), or does it add unrelated noise?</p></li>
+      <li><p>Does this make the viewer <strong>more transparent</strong>, or more demanding of the user's attention?</p></li>
+      <li><p>Does this keep the space <strong>bound to its corpus</strong> — the real files its nodes stand for — or does it drift toward a diagram detached from the content?</p></li>
+      <li><p>Does this stay useful <strong>across sessions and over time</strong>, or is it tied to a transient state?</p></li>
     </ol>
 
+    <div class="q-close">
+      If a change scores well on these questions, it probably belongs.
+      If it scores poorly, it is probably the <strong>wrong design</strong>.
+    </div>
+  </section>
+
+  <div class="divider">
+    <div class="bar mustard"   style="flex: 2;"></div>
+    <div class="bar persimmon" style="flex: 1;"></div>
+    <div class="bar charcoal"  style="flex: 4;"></div>
   </div>
 
   <footer>
-    Source: <a href="northstar.md">northstar.md</a> &nbsp;·&nbsp;
-    Markdown is canonical.  This HTML is a presentation of it.
+    <p>
+      Source of truth: <a href="northstar.md">northstar.md</a>. Markdown is
+      canonical; this HTML is its presentation. When the substance changes, edit
+      the Markdown first, then regenerate this sibling from it.
+    </p>
+    <p>
+      Visual language: mid-century modern hard-edge minimalism (after
+      McLaughlin, Benjamin, Feitelson). Three accent colours — charcoal,
+      mustard, persimmon — chosen once and used consistently throughout.
+    </p>
+    <p style="grid-column: 1 / -1; margin-top: 1.2rem; padding-top: 1rem; border-top: 1px solid var(--rule); font-size: 0.8rem;">
+      © 2026 Gary Frattarola · Licensed under CC-BY-4.0 · part of conception-space
+    </p>
   </footer>
 
+</div>
 </body>
 </html>
