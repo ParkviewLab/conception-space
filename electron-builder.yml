@@ -1,0 +1,39 @@
+# electron-builder — packages the electron-vite build (out/) into platform
+# installers: .dmg (macOS), NSIS .exe (Windows), .AppImage + .deb (Linux).
+# Run after `npm run build`. Unsigned for now — see README + electron-tooling.md.
+appId: ai.parkviewlab.conception-space
+productName: Conception Space
+artifactName: ${name}-${version}-${arch}.${ext}
+directories:
+  output: dist
+  buildResources: build
+files:
+  - '!src/**'
+  - '!docs/**'
+  - '!scripts/**'
+  - '!.github/**'
+  - '!LICENSES/**'
+  - '!{electron.vite.config.js,eslint.config.mjs,electron-builder.yml,cliff.toml,REUSE.toml,LICENSING.md,CHANGELOG.md,README.md,AGENTS.md,CLAUDE.md,.gitignore}'
+mac:
+  category: public.app-category.productivity
+  target: dmg
+  # Unsigned for now; the release workflow sets CSC_IDENTITY_AUTO_DISCOVERY=false.
+  notarize: false
+win:
+  target: nsis
+nsis:
+  artifactName: ${name}-${version}-setup.${ext}
+  oneClick: false
+  allowToChangeInstallationDirectory: true
+  shortcutName: ${productName}
+linux:
+  target:
+    - AppImage
+    - deb
+  category: Utility
+  maintainer: Gary Frattarola <garyf@parkviewlab.ai>
+npmRebuild: false
+publish:
+  provider: github
+  owner: ParkviewLab
+  repo: conception-space
