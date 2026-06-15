@@ -1,0 +1,20 @@
+# Solar system — conception-space v0 example
+# node <id> <shape> <x> <y> <z> "<label>"
+# edge <from> -> <to> "<label>"
+
+node sun     sphere   0    0    0   "Sun"
+node mercury sphere   3    0    0   "Mercury"
+node venus   sphere   4.5  0.5  0   "Venus"
+node earth   sphere   6    0    0   "Earth"
+node moon    sphere   7    0.8  0   "Moon"
+node mars    sphere   8.5 -0.5  0   "Mars"
+node jupiter sphere  13    1    0   "Jupiter"
+node saturn  cylinder 18   0    0   "Saturn"
+
+edge sun -> mercury "orbits"
+edge sun -> venus   "orbits"
+edge sun -> earth   "orbits"
+edge sun -> mars    "orbits"
+edge sun -> jupiter "orbits"
+edge sun -> saturn  "orbits"
+edge earth -> moon  "orbits"

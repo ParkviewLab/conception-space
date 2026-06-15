@@ -1,0 +1,72 @@
+// conception-space view bookmarks
+// Sidecar for the matching .cns file. Safe to hand-edit and commit to git.
+//
+// Each bookmark captures a named viewpoint plus the HUD/atmosphere state
+// that was in effect when it was saved. "Go to bookmark" snaps the HUD
+// state instantly and then glides the camera over ~2 s.
+
+{
+  version: 1,
+  bookmarks: [
+    {
+      name: "Earth",
+      // Camera position + orbit target (world coordinates)
+      camera: { px: 6.74, py: 9.4156, pz: -12.5552, tx: 10.2431, ty: 3.1856, tz: -4.2163 },
+      // Atmosphere / HUD
+      fogDensity:       0,
+      gridBrightness:   1,
+      ambientIntensity: 0.5,
+      labelsVisible:    false,
+      // Group IDs currently rendered as solid spheres
+      solidGroups: [],
+    },
+    {
+      name: "Mars",
+      // Camera position + orbit target (world coordinates)
+      camera: { px: 19.0267, py: -17.5496, pz: 12.5559, tx: 16, ty: -13, tz: 6 },
+      // Atmosphere / HUD
+      fogDensity:       0,
+      gridBrightness:   1,
+      ambientIntensity: 0.5,
+      labelsVisible:    false,
+      // Group IDs currently rendered as solid spheres
+      solidGroups: [],
+    },
+    {
+      name: "M2",
+      // Camera position + orbit target (world coordinates)
+      camera: { px: 22.4097, py: -18.0808, pz: 8.4372, tx: 16, ty: -13, tz: 6 },
+      // Atmosphere / HUD
+      fogDensity:       0,
+      gridBrightness:   1,
+      ambientIntensity: 0.5,
+      labelsVisible:    false,
+      // Group IDs currently rendered as solid spheres
+      solidGroups: [],
+    },
+    {
+      name: "E2",
+      // Camera position + orbit target (world coordinates)
+      camera: { px: 17.648, py: 3.9208, pz: -8.7657, tx: 10, ty: 2, tz: -5 },
+      // Atmosphere / HUD
+      fogDensity:       0,
+      gridBrightness:   1,
+      ambientIntensity: 0.5,
+      labelsVisible:    false,
+      // Group IDs currently rendered as solid spheres
+      solidGroups: [],
+    },
+    {
+      name: "Jup",
+      // Camera position + orbit target (world coordinates)
+      camera: { px: 25.3661, py: 2.6544, pz: -6.2101, tx: 20, ty: 4, tz: -8 },
+      // Atmosphere / HUD
+      fogDensity:       0,
+      gridBrightness:   1,
+      ambientIntensity: 0.5,
+      labelsVisible:    false,
+      // Group IDs currently rendered as solid spheres
+      solidGroups: [],
+    },
+  ],
+}

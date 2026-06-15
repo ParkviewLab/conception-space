@@ -1,0 +1,67 @@
+# Solar system — conception-space v0 example
+# Node locus values are relative to their parent cluster's locus.
+
+cluster solar_system ( label="Solar System" N=6 color=#CCCC33 brightness=2 stube_color=#CCCC33 tube_thickness=3 ) {
+
+    node sun     ( shape=sphere      locus=[0,0,0]       label="Sun"     color=#ffdd00 size=5.0 )
+    node mercury ( shape=tetrahedron locus=[4,2,-2]      label="Mercury" color=#b5a090 )
+    node venus   ( shape=cube        locus=[7,-1,4]      label="Venus"   color=#e8c060 )
+
+    # Jupiter system — group origin at Jupiter; moons given relative offsets
+    cluster jupiter_system ( label="Jupiter System" locus=[20,4,-8] N=5 color=#1a3a6a brightness=3.5 stube_color=#44FFFF tube_thickness=3 ) {
+        node jupiter  ( shape=sphere       locus=[0,0,0]    label="Jupiter"  color=#c8944a )
+        node io       ( shape=sphere       locus=[-2,2,2]   label="Io"       color=#ffee44  size=0.5 )
+        node europa   ( shape=octahedron   locus=[2,2,2]    label="Europa"   color=#c0d8f0  size=0.5 )
+        node ganymede ( shape=dodecahedron locus=[-2,-2,-2] label="Ganymede" color=#9098a0  size=0.5 )
+        node callisto ( shape=icosahedron  locus=[2,-2,-2]  label="Callisto" color=#606870  size=0.5 )
+        }
+
+    # Saturn system — group origin at Saturn; moons relative
+    cluster saturn_system ( label="Saturn System" locus=[27,-2,10] N=3 color=#2a2a5a brightness=3.5 ) {
+        node saturn    ( shape=cylinder    locus=[0,0,0]   label="Saturn"    color=#e8d080 )
+        node titan     ( shape=cylinder    locus=[-2,2,2]  label="Titan"     color=#d08840  size=0.5 )
+        node enceladus ( shape=tetrahedron locus=[2,2,-2]  label="Enceladus" color=#ddeeff  size=0.5 )
+        }
+
+    # Earth system — group origin at Earth; Moon relative
+    cluster earth_system ( label="Earth System" locus=[10,2,-5] N=2 color=#223355 tube_thickness=2 brightness=30.5 ) {
+        node earth ( shape=octahedron  locus=[0,0,0]  label="Earth" color=#4488ee file="sample.md" )
+        node moon  ( shape=icosahedron locus=[1,3,2]  label="Moon"  color=#aaaaaa  size=0.5 file="parkview_lab_color_horizontal_dark.svg")
+        }
+
+    # Mars system — group origin at Mars; moons relative
+    cluster mars_system ( label="Mars System" locus=[16,-13,6] N=3 color=#550000 brightness=3.5 tube_thickness=3.5 ) {
+        node mars   ( shape=dodecahedron locus=[0,0,0]    label="Mars"   color=#cc4422 file="conception-space · northstar.pdf" )
+        node phobos ( shape=tetrahedron  locus=[-2,2,1.5] label="Phobos" color=#887060  size=0.5 )
+        node deimos ( shape=cube         locus=[2,-2,-1.5] label="Deimos" color=#998878  size=0.5 )
+        }
+
+    }
+
+edge sun -> mercury  ( "orbits"  color=#aeb014  thickness=0.08 )
+edge sun -> venus    ( "orbits"  color=#aeb014  thickness=0.08 )
+edge sun -> earth    ( "orbits"  color=#aeb014  thickness=0.08 )
+edge sun -> mars     ( "orbits"  color=#aeb014  thickness=0.08 )
+edge sun -> jupiter  ( "orbits"  color=#aeb014  thickness=0.08 )
+edge sun -> saturn   ( "orbits"  color=#aeb014  thickness=0.08 )
+
+edge earth   -> moon      ( "orbits"  color=#336655  thickness=0.08 )
+edge mars    -> phobos    ( "orbits"  color=#663322 )
+edge mars    -> deimos    ( "orbits"  color=#663322 )
+edge jupiter -> io        ( "orbits"  color=#665533 )
+edge jupiter -> europa    ( "orbits"  color=#665533 )
+edge jupiter -> ganymede  ( "orbits"  color=#665533 )
+edge jupiter -> callisto  ( "orbits"  color=#665533 )
+edge saturn  -> titan     ( "orbits"  color=#666633 )
+edge saturn  -> enceladus ( "orbits"  color=#666633 )
+
+# Commonalities — flat, file-scope, multi-membership.  Earth belongs to
+# both `inhabited` and `rocky_planets` — its halo will carry two
+# satellites, one per commonality.
+commonality inhabited     ( label="Inhabited"     color=#ff8844 ) { earth }
+commonality rocky_planets ( label="Rocky planets" color=#a08070 ) { mercury, venus, earth, mars }
+commonality ice_moons     ( label="Ice moons"     color=#88ccff ) { europa, enceladus, callisto }
+commonality small         ( label="small"     color=#88ccff ) { io }
+commonality cute          ( label="cute"      color=#cc88ff shape=dodecahedron) { io }
+commonality fun           ( label="fun"       color=#88ffcc ) { io }
+commonality hot           ( label="Hot"       color=#ff4444 shape=dodecahedron) { sun }

@@ -1,0 +1,156 @@
+// conception-space view bookmarks
+// Sidecar for the matching .cns file. Safe to hand-edit and commit to git.
+//
+// Each bookmark captures a named viewpoint plus the HUD/atmosphere state
+// that was in effect when it was saved. "Go to bookmark" snaps the HUD
+// state instantly and then glides the camera over ~2 s.
+
+{
+  version: 1,
+  bookmarks: [
+    {
+      name: "f1",
+      // Camera position + orbit target (world coordinates)
+      camera: { px: -160.2179, py: -106.4831, pz: 145.4862, tx: -122.11, ty: -104.42, tz: 145.45 },
+      // Atmosphere / HUD
+      fogDensity:       0,
+      gridBrightness:   1,
+      ambientIntensity: 0.5,
+      labelsVisible:    false,
+      // Group IDs currently rendered as solid spheres
+      solidGroups: ["binding_pocket","active_site","beta_sheet"],
+    },
+    {
+      name: "F2",
+      // Camera position + orbit target (world coordinates)
+      camera: { px: 51.984, py: -154.0917, pz: 23.7104, tx: 30, ty: -180, tz: 15 },
+      // Atmosphere / HUD
+      fogDensity:       0,
+      gridBrightness:   1,
+      ambientIntensity: 0.5,
+      labelsVisible:    false,
+      // Group IDs currently rendered as solid spheres
+      solidGroups: ["binding_pocket","active_site","beta_sheet"],
+    },
+    {
+      name: "helix",
+      // Camera position + orbit target (world coordinates)
+      camera: { px: -33.2843, py: 72.4106, pz: -29.489, tx: -28.8, ty: -2.55, tz: 0 },
+      // Atmosphere / HUD
+      fogDensity:       0,
+      gridBrightness:   1,
+      ambientIntensity: 0.5,
+      labelsVisible:    false,
+      // Group IDs currently rendered as solid spheres
+      solidGroups: ["binding_pocket","active_site","beta_sheet","alpha_helix"],
+    },
+    {
+      name: "sol 2",
+      // Camera position + orbit target (world coordinates)
+      camera: { px: 220.8306, py: 5.3241, pz: -5.6411, tx: 210, ty: 0, tz: 0 },
+      // Atmosphere / HUD
+      fogDensity:       0,
+      gridBrightness:   1,
+      ambientIntensity: 0.5,
+      labelsVisible:    false,
+      // Group IDs currently rendered as solid spheres
+      solidGroups: ["binding_pocket","active_site"],
+    },
+    {
+      name: "goo",
+      // Camera position + orbit target (world coordinates)
+      camera: { px: -45.9441, py: -160.8178, pz: 1.7976, tx: -45, ty: -180, tz: -15 },
+      // Atmosphere / HUD
+      fogDensity:       0,
+      gridBrightness:   1,
+      ambientIntensity: 0.5,
+      labelsVisible:    false,
+      // Group IDs currently rendered as solid spheres
+      solidGroups: ["binding_pocket","active_site","beta_sheet"],
+    },
+    {
+      name: "A",
+      // Camera position + orbit target (world coordinates)
+      camera: { px: -80.2746, py: 41.6658, pz: 1.5371, tx: 24.9, ty: 0, tz: -1.65 },
+      // Atmosphere / HUD
+      fogDensity:       0,
+      gridBrightness:   1,
+      ambientIntensity: 0.5,
+      labelsVisible:    false,
+      // Group IDs currently rendered as solid spheres
+      solidGroups: ["binding_pocket","active_site"],
+    },
+    {
+      name: "B",
+      // Camera position + orbit target (world coordinates)
+      camera: { px: 136.3905, py: 18.9695, pz: -5.8831, tx: 24.9, ty: 0, tz: -1.65 },
+      // Atmosphere / HUD
+      fogDensity:       0,
+      gridBrightness:   1,
+      ambientIntensity: 0.5,
+      labelsVisible:    false,
+      // Group IDs currently rendered as solid spheres
+      solidGroups: ["binding_pocket","active_site"],
+    },
+    {
+      name: "x",
+      // Camera position + orbit target (world coordinates)
+      camera: { px: -240.4622, py: 145.5774, pz: -34.4601, tx: -151.26, ty: 115.04, tz: -16.19 },
+      // Atmosphere / HUD
+      fogDensity:       0,
+      gridBrightness:   1,
+      ambientIntensity: 0.5,
+      labelsVisible:    false,
+      // Group IDs currently rendered as solid spheres
+      solidGroups: ["binding_pocket","active_site","beta_sheet"],
+    },
+    {
+      name: "v1",
+      // Camera position + orbit target (world coordinates)
+      camera: { px: -19.6155, py: 14.2634, pz: -32.5771, tx: -1.66, ty: 5.43, tz: -12.8 },
+      // Atmosphere / HUD
+      fogDensity:       0,
+      gridBrightness:   1,
+      ambientIntensity: 0.5,
+      labelsVisible:    false,
+      // Group IDs currently rendered as solid spheres
+      solidGroups: ["binding_pocket","active_site","beta_sheet"],
+    },
+    {
+      name: "v2",
+      // Camera position + orbit target (world coordinates)
+      camera: { px: -100.0821, py: -134.598, pz: 154.9113, tx: -116.17, ty: -87.69, tz: 142.55 },
+      // Atmosphere / HUD
+      fogDensity:       0,
+      gridBrightness:   1,
+      ambientIntensity: 0.5,
+      labelsVisible:    false,
+      // Group IDs currently rendered as solid spheres
+      solidGroups: ["binding_pocket","active_site","beta_sheet"],
+    },
+    {
+      name: "v3",
+      // Camera position + orbit target (world coordinates)
+      camera: { px: -17.3303, py: -151.1605, pz: 38.6481, tx: -5.95, ty: -177.68, tz: 10.16 },
+      // Atmosphere / HUD
+      fogDensity:       0,
+      gridBrightness:   1,
+      ambientIntensity: 0.5,
+      labelsVisible:    false,
+      // Group IDs currently rendered as solid spheres
+      solidGroups: ["binding_pocket","active_site","beta_sheet"],
+    },
+    {
+      name: "collapsed",
+      // Camera position + orbit target (world coordinates)
+      camera: { px: -23.0492, py: -288.9797, pz: -360.4082, tx: 21.9016, ty: -164, tz: 16.8974 },
+      // Atmosphere / HUD
+      fogDensity:       0,
+      gridBrightness:   1,
+      ambientIntensity: 0.5,
+      labelsVisible:    true,
+      // Group IDs currently rendered as solid spheres
+      solidGroups: ["binding_pocket","beta_sheet","active_site","stellar_neighborhood","alpha_helix","protein_complex","nebula_cloud","halo_region","core_region","globular_cluster","ionic_bridge","unit_cell_f","unit_cell_e","unit_cell_a","unit_cell_b","unit_cell_c","unit_cell_d","crystal_lattice"],
+    },
+  ],
+}

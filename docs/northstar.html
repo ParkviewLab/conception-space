@@ -1,0 +1,1063 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>conception-space · northstar</title>
+
+  <style>
+    /* =========================================================
+       PALETTE
+         #0c1018  deep background    (space, calm)
+         #14182a  panel surface      (slightly raised cards)
+         #e8e6df  body off-white     (warm, paper-ish)
+         #e8b04a  accent gold        (the northstar, thesis, axiom titles)
+         #5c8a99  cool blue-grey     (rules, axiom numerals, structural)
+         #7d8090  subdued grey       (meta, footnotes, secondary text)
+       ========================================================= */
+    :root {
+      --bg:       #0c1018;
+      --surface:  #14182a;
+      --ink:      #e8e6df;
+      --gold:     #e8b04a;
+      --cool:     #5c8a99;
+      --mute:     #7d8090;
+      --rule:     #2a3045;
+
+      --serif:    'Iowan Old Style', 'Apple Garamond', 'Hoefler Text', Garamond, Georgia, serif;
+      --sans:     -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, 'Helvetica Neue', Arial, sans-serif;
+      --mono:     'SF Mono', Menlo, Consolas, monospace;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-size: 17px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* faint star texture behind everything — does not scroll, does not animate */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image:
+        radial-gradient(circle at 12% 22%, rgba(232,176,74,0.05) 0 1.2px, transparent 1.2px),
+        radial-gradient(circle at 78% 13%, rgba(255,255,255,0.04) 0 0.8px, transparent 0.8px),
+        radial-gradient(circle at 35% 78%, rgba(255,255,255,0.05) 0 1.0px, transparent 1.0px),
+        radial-gradient(circle at 88% 60%, rgba(232,176,74,0.04) 0 0.9px, transparent 0.9px),
+        radial-gradient(circle at 22% 92%, rgba(255,255,255,0.04) 0 0.7px, transparent 0.7px),
+        radial-gradient(circle at 62% 38%, rgba(255,255,255,0.05) 0 0.9px, transparent 0.9px),
+        radial-gradient(circle at 7%  60%, rgba(255,255,255,0.04) 0 0.8px, transparent 0.8px),
+        radial-gradient(circle at 92% 92%, rgba(232,176,74,0.04) 0 1.0px, transparent 1.0px);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    main, header, footer { position: relative; z-index: 1; }
+
+    .page {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 6rem 1.5rem 5rem;
+    }
+
+    /* ──────────────────────────────────────────────────────────
+       META HEADER — small, quiet; sits above the thesis
+       ────────────────────────────────────────────────────────── */
+    .meta {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 1.25rem 1.5rem 0;
+      color: var(--cool);
+      font-size: 0.78rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+    }
+
+    /* ──────────────────────────────────────────────────────────
+       INTRO BLOCK — "what this file is" + "use it like this"
+       ────────────────────────────────────────────────────────── */
+    .intro {
+      border-left: 2px solid var(--rule);
+      padding: 0.25rem 0 0.25rem 1.4rem;
+      margin: 2rem 0 4rem;
+      color: var(--mute);
+      font-size: 0.95rem;
+    }
+    .intro p { margin: 0 0 0.85rem 0; }
+    .intro p strong { color: var(--ink); }
+    .intro ul {
+      list-style: none;
+      padding: 0;
+      margin: 0.5rem 0 0;
+    }
+    .intro li {
+      padding-left: 1.2rem;
+      position: relative;
+      margin-bottom: 0.35rem;
+    }
+    .intro li::before {
+      content: "·";
+      position: absolute;
+      left: 0;
+      color: var(--gold);
+      font-weight: bold;
+      font-size: 1.1rem;
+      line-height: 1;
+    }
+
+    /* ──────────────────────────────────────────────────────────
+       HERO — the thesis statement
+       ────────────────────────────────────────────────────────── */
+    .thesis {
+      margin: 3.5rem 0 3rem;
+      text-align: center;
+    }
+    .thesis-pretitle {
+      font-family: var(--sans);
+      font-size: 0.78rem;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: var(--cool);
+      margin-bottom: 1.6rem;
+    }
+    .thesis-statement {
+      font-family: var(--serif);
+      font-size: clamp(1.85rem, 4.6vw, 3.1rem);
+      line-height: 1.18;
+      font-weight: 400;
+      letter-spacing: -0.005em;
+      color: var(--ink);
+      margin: 0 auto;
+      max-width: 24ch;
+    }
+    .thesis-statement em {
+      font-style: italic;
+      color: var(--gold);
+    }
+
+    /* Umbrella paragraph — sits between the pretitle and the 2×2 grid
+       of intent cards in the multi-intent hero. */
+    .umbrella {
+      font-family: var(--serif);
+      font-size: clamp(1.1rem, 1.95vw, 1.4rem);
+      line-height: 1.55;
+      color: var(--ink);
+      max-width: 58ch;
+      margin: 0 auto 2.6rem;
+      font-style: italic;
+    }
+
+    /* 2×2 grid of intent cards in the multi-intent hero */
+    .intents-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.4rem;
+      text-align: left;
+    }
+    .intent-card {
+      position: relative;
+      background: var(--surface);
+      border-radius: 6px;
+      padding: 1.6rem 1.8rem;
+      overflow: hidden;
+    }
+    .intent-numeral {
+      position: absolute;
+      top: 0.1rem;
+      right: 0.7rem;
+      font-family: var(--serif);
+      font-size: 4.5rem;
+      color: var(--cool);
+      opacity: 0.16;
+      line-height: 1;
+      pointer-events: none;
+    }
+    .intent-name {
+      font-family: var(--serif);
+      font-size: clamp(1.25rem, 2.1vw, 1.6rem);
+      font-weight: 400;
+      letter-spacing: -0.005em;
+      color: var(--gold);
+      margin: 0 0 0.55rem;
+      line-height: 1.18;
+      position: relative;
+      z-index: 1;
+    }
+    .intent-tagline {
+      margin: 0;
+      font-size: 0.95rem;
+      color: var(--ink);
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Each intent's deep-dive section below the hero */
+    .intent-section { margin: 3rem 0; }
+    .intent-section-h {
+      font-family: var(--serif);
+      font-size: clamp(1.4rem, 2.6vw, 1.9rem);
+      font-weight: 400;
+      color: var(--gold);
+      letter-spacing: -0.005em;
+      margin: 0 auto 1.6rem;
+      text-align: center;
+      max-width: 32ch;
+    }
+
+    /* ──────────────────────────────────────────────────────────
+       CONTRAST — linear vs. parallel, shown
+       ────────────────────────────────────────────────────────── */
+    .contrast {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin: 3.5rem 0 4rem;
+    }
+    .panel {
+      background: var(--surface);
+      border-radius: 6px;
+      padding: 1.5rem;
+      min-height: 280px;
+      display: flex;
+      flex-direction: column;
+    }
+    .panel-label {
+      font-family: var(--sans);
+      font-size: 0.72rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--cool);
+      margin-bottom: 1rem;
+    }
+    .panel-caption {
+      font-family: var(--serif);
+      font-size: 1.15rem;
+      font-style: italic;
+      color: var(--ink);
+      margin-bottom: 1.2rem;
+      letter-spacing: -0.005em;
+    }
+
+    /* linear panel: vertical list of "A → B" pairs with a time-axis hint */
+    .linear-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      font-family: var(--mono);
+      color: var(--ink);
+      flex-grow: 1;
+      position: relative;
+      padding-left: 1.6rem;
+    }
+    .linear-list::before {
+      content: "";
+      position: absolute;
+      left: 0.4rem;
+      top: 0.4rem;
+      bottom: 1.6rem;
+      width: 1px;
+      background: linear-gradient(to bottom, var(--cool), transparent);
+    }
+    .linear-list::after {
+      content: "↓ you read down";
+      position: absolute;
+      left: -0.1rem;
+      bottom: 0;
+      font-family: var(--sans);
+      font-size: 0.7rem;
+      color: var(--cool);
+      letter-spacing: 0.12em;
+    }
+    .linear-list li {
+      opacity: 0.9;
+    }
+
+    /* parallel panel: SVG node graph */
+    .parallel-svg {
+      width: 100%;
+      flex-grow: 1;
+      display: block;
+    }
+    .parallel-svg .edge {
+      stroke: var(--mute);
+      stroke-linecap: round;
+      opacity: 0.7;
+    }
+    .parallel-svg .edge.heavy {
+      stroke: var(--gold);
+      opacity: 0.85;
+    }
+    .parallel-svg .edge.medium {
+      stroke: var(--cool);
+      opacity: 0.75;
+    }
+    .parallel-svg .node {
+      fill: var(--ink);
+      stroke: var(--bg);
+      stroke-width: 1.5;
+    }
+    .parallel-svg .callout-line {
+      stroke: var(--gold);
+      stroke-width: 0.6;
+      stroke-dasharray: 2 2;
+      opacity: 0.7;
+    }
+    .parallel-svg .callout-label {
+      font-family: var(--sans);
+      font-size: 9px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      fill: var(--gold);
+    }
+
+    /* ──────────────────────────────────────────────────────────
+       THESIS BODY — the long-form paragraphs
+       ────────────────────────────────────────────────────────── */
+    .thesis-body {
+      max-width: 64ch;
+      margin: 0 auto 3.5rem;
+    }
+    .thesis-body p {
+      margin: 0 0 1.1rem;
+      font-size: 1.05rem;
+      line-height: 1.65;
+    }
+    .thesis-body p em { font-style: italic; }
+    .thesis-body p strong { color: var(--ink); font-weight: 600; }
+    .thesis-body p.aside {
+      color: var(--mute);
+      font-size: 0.95rem;
+      border-left: 2px solid var(--rule);
+      padding-left: 1rem;
+      margin-top: 2rem;
+    }
+    .thesis-body p.aside em { color: var(--mute); }
+
+    /* ──────────────────────────────────────────────────────────
+       TRIAD — three cards side by side
+       ────────────────────────────────────────────────────────── */
+    .triad {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 1.2rem;
+      margin: 0 0 4rem;
+    }
+    .triad-card {
+      background: var(--surface);
+      border-radius: 6px;
+      padding: 1.6rem 1.4rem;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    .triad-card h3 {
+      font-family: var(--serif);
+      font-size: 1.55rem;
+      font-weight: 400;
+      color: var(--gold);
+      margin: 0.8rem 0 0.6rem;
+      letter-spacing: -0.005em;
+    }
+    .triad-card .glyph {
+      width: 56px;
+      height: 56px;
+      display: block;
+    }
+    .triad-card .def {
+      font-size: 0.95rem;
+      color: var(--ink);
+      margin: 0 0 0.8rem;
+    }
+    .triad-card .quote {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 0.95rem;
+      color: var(--mute);
+      margin: 0;
+      line-height: 1.45;
+    }
+    .triad-card .glyph .dot { fill: var(--ink); }
+    .triad-card .glyph .line { stroke: var(--ink); stroke-linecap: round; }
+    .triad-card .glyph .arrow {
+      stroke: var(--gold);
+      stroke-linecap: round;
+      stroke-width: 1;
+      opacity: 0.85;
+    }
+
+    /* ──────────────────────────────────────────────────────────
+       RULE — section divider
+       ────────────────────────────────────────────────────────── */
+    .rule {
+      border: 0;
+      height: 1px;
+      background: linear-gradient(
+        to right,
+        transparent,
+        var(--rule) 20%,
+        var(--rule) 80%,
+        transparent
+      );
+      margin: 4rem 0;
+    }
+
+    /* ──────────────────────────────────────────────────────────
+       SECTION HEADINGS
+       ────────────────────────────────────────────────────────── */
+    .section-title {
+      text-align: center;
+      font-family: var(--sans);
+      font-size: 0.78rem;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: var(--cool);
+      margin: 0 0 1rem;
+    }
+    .section-lede {
+      text-align: center;
+      max-width: 56ch;
+      margin: 0 auto 3rem;
+      color: var(--mute);
+      font-size: 0.95rem;
+    }
+
+    /* ──────────────────────────────────────────────────────────
+       AXIOMS — constellation grid
+       ────────────────────────────────────────────────────────── */
+    .axioms-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.3rem;
+    }
+    .axiom {
+      position: relative;
+      background: var(--surface);
+      border-radius: 6px;
+      padding: 1.5rem 1.6rem 1.6rem;
+      overflow: hidden;
+    }
+    .axiom .numeral {
+      position: absolute;
+      top: 0.1rem;
+      right: 0.7rem;
+      font-family: var(--serif);
+      font-size: 5rem;
+      font-weight: 400;
+      color: var(--cool);
+      opacity: 0.18;
+      line-height: 1;
+      pointer-events: none;
+    }
+    .axiom h3 {
+      font-family: var(--serif);
+      font-size: 1.25rem;
+      font-weight: 400;
+      color: var(--gold);
+      margin: 0 0 0.7rem;
+      letter-spacing: -0.005em;
+      position: relative;
+      z-index: 1;
+    }
+    .axiom p {
+      margin: 0;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: var(--ink);
+      position: relative;
+      z-index: 1;
+    }
+    .axiom p strong { color: var(--ink); font-weight: 600; }
+    .axiom p em { font-style: italic; color: var(--ink); }
+    .axiom code {
+      font-family: var(--mono);
+      font-size: 0.85em;
+      color: var(--cool);
+      background: rgba(92, 138, 153, 0.08);
+      padding: 0.05em 0.35em;
+      border-radius: 3px;
+    }
+
+    /* ──────────────────────────────────────────────────────────
+       GUIDING QUESTIONS — checklist
+       ────────────────────────────────────────────────────────── */
+    .checklist {
+      list-style: none;
+      padding: 0;
+      margin: 0 auto;
+      max-width: 64ch;
+      counter-reset: q;
+    }
+    .checklist li {
+      counter-increment: q;
+      position: relative;
+      padding: 0.85rem 0 0.85rem 3rem;
+      border-bottom: 1px solid var(--rule);
+      font-size: 1.02rem;
+      line-height: 1.55;
+      color: var(--ink);
+    }
+    .checklist li:last-child { border-bottom: none; }
+    .checklist li::before {
+      content: "";
+      position: absolute;
+      left: 0.4rem;
+      top: 1.1rem;
+      width: 14px;
+      height: 14px;
+      border: 1.5px solid var(--cool);
+      border-radius: 2px;
+      background: transparent;
+    }
+    .checklist li::after {
+      content: counter(q);
+      position: absolute;
+      left: 1.8rem;
+      top: 0.85rem;
+      font-family: var(--mono);
+      font-size: 0.85rem;
+      color: var(--cool);
+      letter-spacing: 0.06em;
+    }
+    .checklist li strong { color: var(--gold); font-weight: 600; }
+    .checklist .verdict {
+      list-style: none;
+      counter-increment: none;
+      padding: 1.4rem 0 0 0;
+      border-bottom: none;
+      color: var(--mute);
+      font-style: italic;
+      font-family: var(--serif);
+      font-size: 1rem;
+      text-align: center;
+    }
+    .checklist .verdict::before, .checklist .verdict::after { content: none; }
+
+    /* ──────────────────────────────────────────────────────────
+       FOOTER
+       ────────────────────────────────────────────────────────── */
+    footer {
+      max-width: 980px;
+      margin: 5rem auto 0;
+      padding: 2rem 1.5rem;
+      border-top: 1px solid var(--rule);
+      color: var(--mute);
+      font-size: 0.8rem;
+      letter-spacing: 0.06em;
+      text-align: center;
+    }
+    footer a, .intro a {
+      color: var(--cool);
+      text-decoration: none;
+      border-bottom: 1px dotted var(--cool);
+      transition: color 120ms ease, border-color 120ms ease;
+    }
+    footer a:hover, .intro a:hover {
+      color: var(--gold);
+      border-bottom-color: var(--gold);
+    }
+
+    /* ──────────────────────────────────────────────────────────
+       RESPONSIVE — collapse multi-column on narrow screens
+       ────────────────────────────────────────────────────────── */
+    @media (max-width: 760px) {
+      .contrast      { grid-template-columns: 1fr; }
+      .triad         { grid-template-columns: 1fr; }
+      .axioms-grid   { grid-template-columns: 1fr; }
+      .intents-grid  { grid-template-columns: 1fr; }
+      .page          { padding: 3rem 1rem 3rem; }
+      .thesis        { margin: 2rem 0 2rem; }
+      .rule          { margin: 3rem 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="meta">Northstar &middot; conception-space</header>
+
+  <div class="page">
+
+    <!-- =====================================================
+         INTRO — what this file is, how to use it
+         ===================================================== -->
+    <div class="intro">
+      <p>
+        This file is the canonical statement of <strong>why</strong>
+        conception-space exists and <strong>what it is trying to do</strong>.
+        It is not a roadmap, not a feature list, and not a how-to.  It is the
+        <strong>intent</strong> — the underlying purpose that any specific
+        feature, design decision, or refactor should be in service of.
+      </p>
+      <p style="margin-bottom: 0.4rem;">Use it like this:</p>
+      <ul>
+        <li>When proposing a new feature, check whether it serves the intent below.  If it doesn't, it probably doesn't belong.</li>
+        <li>When choosing between two implementations, prefer the one that better preserves the intent.</li>
+        <li>When working becomes confused about "what is this even for," return here.</li>
+        <li>When the work surfaces a new design principle that follows from the intent, add it as an axiom below so future work inherits it.</li>
+      </ul>
+    </div>
+
+    <!-- =====================================================
+         BANNER — product name + tagline (mirrors northstar.md)
+         ===================================================== -->
+    <div style="text-align: center; margin: 3.25rem 0; padding: 2.25rem 1rem;
+                border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule);">
+      <div style="font-family: var(--serif); font-size: 2.4rem; font-weight: 600;
+                  color: var(--gold); line-height: 1.15;">Conception-Space</div>
+      <p style="margin: 1rem auto 0; max-width: 34rem; font-size: 1.1rem; line-height: 1.6;
+                color: var(--ink);">
+        Organize your knowledge in space.<br>
+        <span style="color: var(--mute);">Build navigable places. Shape visible relationships. Discover emergent patterns.</span>
+      </p>
+    </div>
+
+    <!-- =====================================================
+         HERO — four complementary intents
+         ===================================================== -->
+    <section class="thesis">
+      <div class="thesis-pretitle">The intents</div>
+      <p class="umbrella">
+        conception-space serves four complementary intents.  Different
+        facets of the same purpose, mutually reinforcing — the tensions
+        between them are themselves design-revealing.
+      </p>
+      <div class="intents-grid">
+        <article class="intent-card">
+          <span class="intent-numeral">1</span>
+          <h2 class="intent-name">Parallel perception of relationships</h2>
+          <p class="intent-tagline">The perceptual-channel argument.</p>
+        </article>
+        <article class="intent-card">
+          <span class="intent-numeral">2</span>
+          <h2 class="intent-name">Hand-authoring as sense-making</h2>
+          <p class="intent-tagline">Placement as the author's reasoning.</p>
+        </article>
+        <article class="intent-card">
+          <span class="intent-numeral">3</span>
+          <h2 class="intent-name">Sharing a mental model</h2>
+          <p class="intent-tagline">The file as a transmissible argument.</p>
+        </article>
+        <article class="intent-card">
+          <span class="intent-numeral">4</span>
+          <h2 class="intent-name">A persistent thinking artifact</h2>
+          <p class="intent-tagline">A long-lived companion to ongoing thought.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- =====================================================
+         INTENT 1 — parallel perception of relationships
+         (contrast panels + thesis body + triad)
+         ===================================================== -->
+    <section class="intent-section">
+      <h2 class="intent-section-h">1. Parallel perception of relationships</h2>
+
+    <div class="contrast">
+
+      <div class="panel">
+        <div class="panel-label">Linear</div>
+        <div class="panel-caption">read one at a time</div>
+        <ul class="linear-list">
+          <li>A&nbsp;&rarr;&nbsp;B</li>
+          <li>A&nbsp;&rarr;&nbsp;C</li>
+          <li>B&nbsp;&rarr;&nbsp;D</li>
+          <li>C&nbsp;&rarr;&nbsp;D</li>
+          <li>D&nbsp;&rarr;&nbsp;E</li>
+          <li>E&nbsp;&rarr;&nbsp;F</li>
+          <li>F&nbsp;&rarr;&nbsp;A</li>
+          <li>G&nbsp;&rarr;&nbsp;C</li>
+          <li>H&nbsp;&rarr;&nbsp;E</li>
+          <li>...&nbsp;&nbsp;</li>
+        </ul>
+      </div>
+
+      <div class="panel">
+        <div class="panel-label">Parallel</div>
+        <div class="panel-caption">seen at a glance</div>
+        <svg class="parallel-svg" viewBox="0 0 400 240" aria-hidden="true">
+          <!-- edges — drawn first so nodes sit on top -->
+          <line class="edge"          x1="60"  y1="80"  x2="110" y2="50"  stroke-width="1.2"/>
+          <line class="edge"          x1="60"  y1="80"  x2="140" y2="110" stroke-width="1.2"/>
+          <line class="edge"          x1="110" y1="50"  x2="140" y2="110" stroke-width="1.2"/>
+          <line class="edge medium"   x1="140" y1="110" x2="200" y2="170" stroke-width="1.4"/>
+          <line class="edge medium"   x1="200" y1="170" x2="280" y2="80"  stroke-width="1.4"/>
+          <line class="edge medium"   x1="200" y1="170" x2="320" y2="120" stroke-width="1.2"/>
+          <line class="edge"          x1="280" y1="80"  x2="320" y2="120" stroke-width="1.2"/>
+          <line class="edge"          x1="280" y1="80"  x2="340" y2="60"  stroke-width="1.2"/>
+          <line class="edge"          x1="320" y1="120" x2="340" y2="60"  stroke-width="1.2"/>
+          <line class="edge"          x1="360" y1="180" x2="320" y2="120" stroke-width="1.0"/>
+          <line class="edge"          x1="360" y1="180" x2="280" y2="80"  stroke-width="0.9"/>
+          <line class="edge"          x1="40"  y1="200" x2="60"  y2="80"  stroke-width="0.9"/>
+          <line class="edge heavy"    x1="140" y1="110" x2="280" y2="80"  stroke-width="2.6"/>
+          <line class="edge"          x1="200" y1="170" x2="360" y2="180" stroke-width="1.0"/>
+
+          <!-- nodes -->
+          <circle class="node" cx="60"  cy="80"  r="5"/>
+          <circle class="node" cx="110" cy="50"  r="5"/>
+          <circle class="node" cx="140" cy="110" r="5"/>
+          <circle class="node" cx="200" cy="170" r="6"/>
+          <circle class="node" cx="280" cy="80"  r="6"/>
+          <circle class="node" cx="320" cy="120" r="5"/>
+          <circle class="node" cx="340" cy="60"  r="5"/>
+          <circle class="node" cx="360" cy="180" r="4.5"/>
+          <circle class="node" cx="40"  cy="200" r="4"/>
+
+          <!-- callouts -->
+          <!-- Number — point at dense cluster B -->
+          <line class="callout-line" x1="310" y1="30"  x2="316" y2="76"/>
+          <text class="callout-label" x="288" y="22">number</text>
+
+          <!-- Weight — point at the heavy edge -->
+          <line class="callout-line" x1="210" y1="60"  x2="218" y2="84"/>
+          <text class="callout-label" x="146" y="55">weight</text>
+
+          <!-- Congruence — point at cluster A -->
+          <line class="callout-line" x1="70"  y1="160" x2="92"  y2="92"/>
+          <text class="callout-label" x="20"  y="174">congruence</text>
+        </svg>
+      </div>
+
+    </div>
+
+    <!-- =====================================================
+         THESIS BODY — the long-form paragraphs
+         ===================================================== -->
+    <div class="thesis-body">
+      <p>
+        A list, an index, or an appendix forces relationships through a
+        <em>linear</em> perceptual channel — you read item by item, holding
+        the previous in working memory while you read the next, building the
+        structure incrementally and forgetting most of it by the end.  Even
+        with a great index, "what is the <em>shape</em> of these 200
+        relationships?" is unanswerable from the index itself; you have to
+        construct that shape in your head, one relationship at a time.
+      </p>
+      <p>
+        A <code style="font-family:var(--mono);font-size:0.9em;color:var(--cool);background:rgba(92,138,153,0.08);padding:0.05em 0.35em;border-radius:3px;">.cns</code>
+        space pushes the same information through a <em>parallel</em>
+        perceptual channel — your visual system, which is built exactly for
+        this.  The moment you look at the scene, three things become
+        available <strong>at once</strong>, without sequential effort:
+      </p>
+    </div>
+
+    <!-- =====================================================
+         TRIAD — number / weight / congruence
+         ===================================================== -->
+    <div class="triad">
+
+      <div class="triad-card">
+        <svg class="glyph" viewBox="0 0 56 56" aria-hidden="true">
+          <!-- number: lots of dots, denser on right -->
+          <circle class="dot" cx="8"  cy="10" r="1.4"/>
+          <circle class="dot" cx="14" cy="22" r="1.4"/>
+          <circle class="dot" cx="10" cy="36" r="1.4"/>
+          <circle class="dot" cx="20" cy="14" r="1.4"/>
+          <circle class="dot" cx="22" cy="30" r="1.4"/>
+          <circle class="dot" cx="18" cy="46" r="1.4"/>
+          <circle class="dot" cx="30" cy="8"  r="1.4"/>
+          <circle class="dot" cx="32" cy="20" r="1.4"/>
+          <circle class="dot" cx="30" cy="32" r="1.4"/>
+          <circle class="dot" cx="34" cy="44" r="1.4"/>
+          <circle class="dot" cx="40" cy="14" r="1.4"/>
+          <circle class="dot" cx="44" cy="26" r="1.4"/>
+          <circle class="dot" cx="42" cy="38" r="1.4"/>
+          <circle class="dot" cx="48" cy="20" r="1.4"/>
+          <circle class="dot" cx="50" cy="44" r="1.4"/>
+        </svg>
+        <h3>Number</h3>
+        <p class="def">How many relationships exist — read by edge density and node count at a glance.</p>
+        <p class="quote">"This region is busy; that one is sparse."</p>
+      </div>
+
+      <div class="triad-card">
+        <svg class="glyph" viewBox="0 0 56 56" aria-hidden="true">
+          <!-- weight: three lines of escalating thickness -->
+          <line class="line" x1="8" y1="14" x2="48" y2="14" stroke-width="1"/>
+          <line class="line" x1="8" y1="28" x2="48" y2="28" stroke-width="3"/>
+          <line class="line" x1="8" y1="44" x2="48" y2="44" stroke-width="6"/>
+        </svg>
+        <h3>Weight</h3>
+        <p class="def">The strength or importance of relationships — read by edge thickness, colour, label, shape.</p>
+        <p class="quote">"These connections are heavy; those are incidental."</p>
+      </div>
+
+      <div class="triad-card">
+        <svg class="glyph" viewBox="0 0 56 56" aria-hidden="true">
+          <!-- congruence: three outside points converging on centroid -->
+          <line class="arrow" x1="8"  y1="10" x2="26" y2="28"/>
+          <line class="arrow" x1="48" y1="10" x2="30" y2="28"/>
+          <line class="arrow" x1="28" y1="50" x2="28" y2="32"/>
+          <circle class="dot" cx="8"  cy="10" r="2.2"/>
+          <circle class="dot" cx="48" cy="10" r="2.2"/>
+          <circle class="dot" cx="28" cy="50" r="2.2"/>
+          <circle class="dot" cx="28" cy="30" r="2.4" fill="var(--gold)"/>
+        </svg>
+        <h3>Congruence</h3>
+        <p class="def">How relationships align, cluster, and point — read by spatial proximity and shared direction.</p>
+        <p class="quote">"These two clusters point at each other; this one is an outlier."</p>
+      </div>
+
+    </div>
+
+    <div class="thesis-body">
+      <p>
+        The user does not <em>recall</em> the structure — they <em>see</em> it.
+        Reasoning is not sequential reconstruction; it is pattern recognition
+        over a structure presented as a whole.  That is a fundamentally
+        higher-bandwidth way to grasp relational data than any linear medium
+        can be, and it is the reason this tool exists.
+      </p>
+      <p class="aside">
+        Spatial memorability (Method-of-Loci–style "I remember Mars because
+        it's over there") is a <em>secondary</em> effect that follows from
+        the placement being stable across sessions.  Useful, but not the
+        primary thing.
+      </p>
+    </div>
+
+    </section> <!-- /intent-section #1 -->
+
+    <!-- =====================================================
+         INTENT 2 — hand-authoring as sense-making
+         ===================================================== -->
+    <section class="intent-section">
+      <h2 class="intent-section-h">2. Hand-authoring as sense-making</h2>
+      <div class="thesis-body">
+        <p>
+          The act of placing a node <em>is</em> an act of reasoning.  The
+          author decides where it goes — and that decision is informed by
+          their understanding of how it relates to the others.  As more
+          nodes are placed, the understanding sharpens; as the
+          understanding sharpens, nodes move.  The file is the residue of
+          that thinking.
+        </p>
+        <p>
+          This is why hand-placement is non-negotiable (Axiom 1): if a
+          layout algorithm overwrites the positions, it overwrites the
+          reasoning.  The author is not just <em>describing</em> a graph;
+          they are <em>thinking about it in 3D space</em>.  A blank
+          <code style="font-family:var(--mono);font-size:0.9em;color:var(--cool);background:rgba(92,138,153,0.08);padding:0.05em 0.35em;border-radius:3px;">.cns</code>
+          file is an invitation to think.  A finished one is the shape of
+          a thought.
+        </p>
+      </div>
+    </section>
+
+    <!-- =====================================================
+         INTENT 3 — sharing a mental model
+         ===================================================== -->
+    <section class="intent-section">
+      <h2 class="intent-section-h">3. Sharing a mental model</h2>
+      <div class="thesis-body">
+        <p>
+          Once a <code style="font-family:var(--mono);font-size:0.9em;color:var(--cool);background:rgba(92,138,153,0.08);padding:0.05em 0.35em;border-radius:3px;">.cns</code>
+          file exists, anyone with the viewer can <em>see</em> the author's
+          argument directly.  The spatial layout is the author's
+          understanding made transmissible.  Reading someone else's
+          <code style="font-family:var(--mono);font-size:0.9em;color:var(--cool);background:rgba(92,138,153,0.08);padding:0.05em 0.35em;border-radius:3px;">.cns</code>
+          is not reading their summary of the concepts; it is perceiving
+          the structure they perceived.
+        </p>
+        <p>
+          Two consequences.  The file is legible across people with no
+          narrator — the shape stands by itself.  And an author can use
+          the file to <em>teach</em> — laying out the topology of an idea
+          and walking a viewer through it, knowing the viewer is taking in
+          the structure simultaneously, not sequentially.  This is the
+          social complement to perception: parallel perception of
+          <em>someone else's</em> relational argument.
+        </p>
+      </div>
+    </section>
+
+    <!-- =====================================================
+         INTENT 4 — a persistent thinking artifact
+         ===================================================== -->
+    <section class="intent-section">
+      <h2 class="intent-section-h">4. A persistent thinking artifact</h2>
+      <div class="thesis-body">
+        <p>
+          A <code style="font-family:var(--mono);font-size:0.9em;color:var(--cool);background:rgba(92,138,153,0.08);padding:0.05em 0.35em;border-radius:3px;">.cns</code>
+          file lives across sessions.  The author can leave it and come
+          back.  They can evolve it as their understanding evolves.  They
+          can revisit a layout from last year and ask "what was I thinking
+          when I put that there?" — and often the placement itself encodes
+          the answer.
+        </p>
+        <p>
+          The viewer's bookmarks (Axiom 4) operate on the short
+          time-scale — saved viewpoints into a file for a particular act
+          of perception.  The file itself is the longer time-scale: a
+          thinking-vehicle that outlasts any single sitting.  A
+          <code style="font-family:var(--mono);font-size:0.9em;color:var(--cool);background:rgba(92,138,153,0.08);padding:0.05em 0.35em;border-radius:3px;">.cns</code>
+          is not a chart that captures a moment; it is a workshop the
+          author keeps returning to.
+        </p>
+      </div>
+    </section>
+
+    <!-- =====================================================
+         HOW THE FOUR REINFORCE EACH OTHER
+         ===================================================== -->
+    <section class="intent-section">
+      <h2 class="intent-section-h">How the four reinforce each other</h2>
+      <div class="thesis-body">
+        <p>
+          Each intent strengthens the others.  Sense-making depends on
+          perception: the author can only reason about the layout if they
+          can see it parallel-channel as they build it.  Perception
+          depends on sense-making: the layout has its high-bandwidth
+          structure only because the author placed it deliberately.
+          Sharing depends on both: the file is transmissible only because
+          the author's argument is encoded in the layout <em>and</em>
+          readable in parallel by the viewer.  Persistence is the
+          time-axis that lets all three accumulate value: a one-off
+          arrangement is a sketch; a returned-to arrangement is a body of
+          work.
+        </p>
+        <p class="aside">
+          Tensions between them are design-revealing.  For example: a
+          feature that improves <em>perception</em> by auto-rounding edge
+          paths for visual cleanliness would damage <em>sense-making</em>
+          if it overrides what the author drew.  Both intents are real;
+          the tension forces the design to be specific about what it
+          favours and why.
+        </p>
+      </div>
+    </section>
+
+    <hr class="rule"/>
+
+    <!-- =====================================================
+         AXIOMS
+         ===================================================== -->
+    <h2 class="section-title">Axioms</h2>
+    <p class="section-lede">
+      Six design constraints that follow from the intents above.
+      Load-bearing in past decisions; load-bearing for future ones.
+    </p>
+
+    <div class="axioms-grid">
+
+      <article class="axiom">
+        <span class="numeral">1</span>
+        <h3>Placement is argument.</h3>
+        <p>
+          When the author places node A near node B and far from C, that
+          placement <strong>is</strong> the claim "A and B are related;
+          C is not."  The space is the author's understanding of the
+          relationships made directly perceptible.  Anything that
+          overwrites placement (auto-layout, repositioning on resize,
+          etc.) erases the author's argument.  Hand-placement is
+          non-negotiable.
+        </p>
+      </article>
+
+      <article class="axiom">
+        <span class="numeral">2</span>
+        <h3>Hierarchical grouping carries meta-relationships.</h3>
+        <p>
+          A <code>cluster</code> says "these N things are one
+          <em>thing</em> at the next scale up."  The cluster's own
+          position then encodes how that aggregate relates to other
+          aggregates.  A <code>.cns</code> file is a multi-scale
+          relational argument: each level reveals a different layer of
+          structure.  Treat cluster-level visuals (shell, tube frame,
+          label) as carrying real reasoning content, not decoration.
+        </p>
+      </article>
+
+      <article class="axiom">
+        <span class="numeral">3</span>
+        <h3>Smooth motion is load-bearing, not polish.</h3>
+        <p>
+          A snap, spin, or teleport breaks the perceptual channel mid-act.
+          The user stops perceiving relationships and starts re-orienting
+          from scratch.  Smooth flight lets the user <strong>sweep</strong>
+          across many relationships in a single continuous perceptual act,
+          picking up patterns the static view can't show ("the edges from
+          this cluster all bend toward that region").  Camera transitions
+          are part of the medium, not decoration on top of it.
+        </p>
+      </article>
+
+      <article class="axiom">
+        <span class="numeral">4</span>
+        <h3>Bookmarks are saved arguments.</h3>
+        <p>
+          A bookmark is a curated viewpoint that frames a specific
+          relationship-pattern for a specific perceptual act.  The viewpoint
+          <strong>is</strong> the argument.  Bookmarks deserve first-class
+          treatment (naming, organisation, easy travel) because each one
+          is a piece of authored sense-making.
+        </p>
+      </article>
+
+      <article class="axiom">
+        <span class="numeral">5</span>
+        <h3>Edges carry as much reasoning as nodes.</h3>
+        <p>
+          Edge thickness, colour, label, dash, arrowhead — these are the
+          <em>weight</em> and <em>congruence</em> channels.  The reasoning
+          content of the graph lives as much in the edges as in the nodes.
+          Invest in edge visual quality with the same seriousness as node
+          visual quality.
+        </p>
+      </article>
+
+      <article class="axiom">
+        <span class="numeral">6</span>
+        <h3>The viewer is a perception instrument, not a navigator.</h3>
+        <p>
+          Its job is to be transparent enough that the user forgets they
+          are using it.  Anything that draws attention to the viewer itself
+          (lag, UI clutter, animation glitches, modal interruptions) competes
+          with the perceptual act the user came to perform.  Default toward
+          calm, get-out-of-the-way design.
+        </p>
+      </article>
+
+    </div>
+
+    <hr class="rule"/>
+
+    <!-- =====================================================
+         GUIDING QUESTIONS
+         ===================================================== -->
+    <h2 class="section-title">Guiding questions for future work</h2>
+    <p class="section-lede">
+      When proposing a change, ask:
+    </p>
+
+    <ol class="checklist">
+      <li>Does this serve <strong>simultaneous perception</strong> of relationships, or does it force the user into a sequential read?</li>
+      <li>Does this preserve the <strong>perceptual channel during motion</strong>, or does it interrupt it?</li>
+      <li>Does this respect the <strong>author's placement</strong> as argument, or does it overwrite it?</li>
+      <li>Does this strengthen one of the three perceptual signals (<strong>number, weight, congruence</strong>), or does it add unrelated noise?</li>
+      <li>Does this make the viewer <strong>more transparent</strong>, or more demanding of the user's attention?</li>
+      <li>Does this <strong>preserve the author's argument</strong> when the file is seen by another viewer? Does it make the file easier or harder to share?</li>
+      <li>Does this stay useful <strong>across sessions and over time</strong>, or is it tied to a transient state?</li>
+      <li class="verdict">If a change scores well on these, it probably belongs.  If it scores poorly, it is probably the wrong design.</li>
+    </ol>
+
+  </div>
+
+  <footer>
+    Source: <a href="northstar.md">northstar.md</a> &nbsp;·&nbsp;
+    Markdown is canonical.  This HTML is a presentation of it.
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<!-- SPDX-License-Identifier: AGPL-3.0-or-later -->
+<!-- SPDX-FileCopyrightText: 2026 Gary Frattarola <garyf@parkviewlab.ai> -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>conception-space</title>
+  <link rel="stylesheet" href="./src/style.css">
+</head>
+<body>
+  <div id="viewport"></div>
+
+  <div id="hud">
+    <div id="hud-top">
+      <span id="file-name">conception-space</span>
+      <button id="btn-open">Open…</button>
+    </div>
+    <div id="hud-bottom">
+      <span id="mode-label">NAVIGATE</span>
+      <span id="key-hints">click a node to select it</span>
+      <button id="group-toggle" class="hidden"></button>
+      <button id="labels-toggle" class="active">labels</button>
+      <button id="commonalities-toggle" class="active">commonalities</button>
+      <label id="grid-brightness-wrap">grid <input type="range" id="grid-brightness" min="0" max="5" step="0.05" value="1"></label>
+      <label id="fog-density-wrap">fog <input type="range" id="fog-density" min="0" max="0.025" step="0.0005" value="0.010"></label>
+    </div>
+  </div>
+
+  <div id="empty-state">
+    <p>Open a .cns file to begin</p>
+    <kbd>⌘O</kbd>
+  </div>
+
+  <div id="file-panel" class="hidden">
+    <div id="file-panel-backdrop"></div>
+    <div id="file-panel-card">
+      <div id="file-panel-header">
+        <span id="file-panel-title"></span>
+        <div id="file-panel-header-actions">
+          <button id="file-panel-edit-toggle" class="hidden">Edit</button>
+          <button id="file-panel-close">✕</button>
+        </div>
+      </div>
+      <div id="file-panel-content">
+        <div id="file-panel-editor-pane"></div>
+        <div id="file-panel-splitter" class="hidden"></div>
+        <div id="file-panel-body"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bookmark: name-input overlay -->
+  <div id="bookmark-save" class="overlay hidden">
+    <div class="overlay-backdrop"></div>
+    <div class="overlay-card">
+      <h3 class="overlay-title">Save bookmark</h3>
+      <input id="bookmark-save-input" type="text" placeholder="Name this view…" autocomplete="off">
+      <div class="overlay-actions">
+        <button id="bookmark-save-cancel" class="overlay-btn">Cancel</button>
+        <button id="bookmark-save-ok" class="overlay-btn primary">Save</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bookmark: picker overlay -->
+  <div id="bookmark-picker" class="overlay hidden">
+    <div class="overlay-backdrop"></div>
+    <div class="overlay-card">
+      <h3 class="overlay-title">Go to bookmark</h3>
+      <ul id="bookmark-picker-list"></ul>
+      <p id="bookmark-picker-empty" class="overlay-empty hidden">No bookmarks saved yet. Press <kbd>⌘B</kbd> to save the current view.</p>
+      <div class="overlay-actions">
+        <button id="bookmark-picker-close" class="overlay-btn">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="./src/main.js"></script>
+</body>
+</html>

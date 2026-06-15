@@ -1,0 +1,48 @@
+// conception-space view bookmarks
+// Sidecar for the matching .cns file. Safe to hand-edit and commit to git.
+//
+// Each bookmark captures a named viewpoint plus the HUD/atmosphere state
+// that was in effect when it was saved. "Go to bookmark" snaps the HUD
+// state instantly and then glides the camera over ~2 s.
+
+{
+  version: 1,
+  bookmarks: [
+    {
+      name: "thing 1",
+      // Camera position + orbit target (world coordinates)
+      camera: { px: -9.732, py: 21.2743, pz: -8.7894, tx: 2.79, ty: 8.58, tz: 2.35 },
+      // Atmosphere / HUD
+      fogDensity:       0,
+      gridBrightness:   1,
+      ambientIntensity: 0.5,
+      labelsVisible:    false,
+      // Group IDs currently rendered as solid spheres
+      solidGroups: [],
+    },
+    {
+      name: "sol",
+      // Camera position + orbit target (world coordinates)
+      camera: { px: 144.4062, py: 86.7748, pz: -0.9142, tx: 150, ty: 0, tz: 0 },
+      // Atmosphere / HUD
+      fogDensity:       0,
+      gridBrightness:   1,
+      ambientIntensity: 0.5,
+      labelsVisible:    false,
+      // Group IDs currently rendered as solid spheres
+      solidGroups: [],
+    },
+    {
+      name: "cells",
+      // Camera position + orbit target (world coordinates)
+      camera: { px: -0.0509, py: -73.1141, pz: 1.4884, tx: 0, ty: -118, tz: 0 },
+      // Atmosphere / HUD
+      fogDensity:       0,
+      gridBrightness:   1,
+      ambientIntensity: 0.5,
+      labelsVisible:    false,
+      // Group IDs currently rendered as solid spheres
+      solidGroups: ["unit_cell_b","unit_cell_a","unit_cell_d"],
+    },
+  ],
+}
