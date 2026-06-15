@@ -7,13 +7,14 @@ Not many are “DSLs for cognitive science” in the narrow programming-language
 
 The best ones to study:
 
-Candidate	Why it matters for Conception-Space
-Gärdenfors’ Conceptual Spaces	Core inspiration: concepts as regions in multidimensional quality spaces; similarity becomes distance. This is probably the closest theoretical neighbor.  ￼
-Qualitative Spatial Reasoning / RCC8	Defines relationships like disconnected, overlapping, containment, tangential contact. Good lesson: name spatial relations symbolically, not just numerically.  ￼
-CogSketch / nuSketch	Combines sketch geometry, qualitative spatial relations, conceptual knowledge, and analogical reasoning. Very relevant if Conception-Space has diagrams or spatial canvases.  ￼
-Structure-Mapping / analogy systems	Not a placement DSL, but crucial for “relationship-preserving” comparison between conceptual arrangements. CogSketch explicitly uses this lineage.  ￼
-OWL/RDF/SWRL spatial ontologies	Useful lesson: separate entities, relations, inference rules, and visual/layout projection. RCC8 has been represented this way.  ￼
-SpatialGrammar-style scene DSLs	Newer 3D layout DSL work, less cognitive-science-rooted, but useful for syntax design: declarative objects, constraints, placement, containment, adjacency.  ￼
+| Candidate | Why it matters for Conception-Space |
+|---|---|
+| Gärdenfors’ Conceptual Spaces | Core inspiration: concepts as regions in multidimensional quality spaces; similarity becomes distance. This is probably the closest theoretical neighbor. |
+| Qualitative Spatial Reasoning / RCC8 | Defines relationships like disconnected, overlapping, containment, tangential contact. Good lesson: name spatial relations symbolically, not just numerically. |
+| CogSketch / nuSketch | Combines sketch geometry, qualitative spatial relations, conceptual knowledge, and analogical reasoning. Very relevant if Conception-Space has diagrams or spatial canvases. |
+| Structure-Mapping / analogy systems | Not a placement DSL, but crucial for “relationship-preserving” comparison between conceptual arrangements. CogSketch explicitly uses this lineage. |
+| OWL/RDF/SWRL spatial ontologies | Useful lesson: separate entities, relations, inference rules, and visual/layout projection. RCC8 has been represented this way. |
+| SpatialGrammar-style scene DSLs | Newer 3D layout DSL work, less cognitive-science-rooted, but useful for syntax design: declarative objects, constraints, placement, containment, adjacency. |
 
 Main design lessons I’d steal:
 
@@ -227,13 +228,14 @@ The edge is often the actual meaning.
 
 The best systems separate:
 
-Layer	Example
-Ontology	“dog isa mammal”
-Spatial relation	“dog near wolf”
-Epistemic status	“hypothesized”
-Causal relation	“A causes B”
-Confidence	“0.72”
-Provenance	“from paper X”
+| Layer | Example |
+|---|---|
+| Ontology | “dog isa mammal” |
+| Spatial relation | “dog near wolf” |
+| Epistemic status | “hypothesized” |
+| Causal relation | “A causes B” |
+| Confidence | “0.72” |
+| Provenance | “from paper X” |
 
 A syntax lesson:
 
@@ -414,14 +416,15 @@ My strongest syntax recommendation
 
 Conception-Space probably wants a hybrid of:
 
-Influence	Borrow
-Conceptual Spaces	regions, dimensions, similarity
-RCC8/QSR	qualitative spatial relations
-Graph DSLs	typed edges
-YAML/TOML	readability
-Markdown	authorability
-Ontologies	identity + typing
-Scene DSLs	containment + constraints
+| Influence | Borrow |
+|---|---|
+| Conceptual Spaces | regions, dimensions, similarity |
+| RCC8/QSR | qualitative spatial relations |
+| Graph DSLs | typed edges |
+| YAML/TOML | readability |
+| Markdown | authorability |
+| Ontologies | identity + typing |
+| Scene DSLs | containment + constraints |
 
 Something like:
 
