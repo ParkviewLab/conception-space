@@ -282,7 +282,6 @@ export function parseCS(source) {
   if (pending) {
     errors.push(`line ${pending.lineno}: commonality "${pending.id}" missing closing }`)
     finalizeCommonality(pending, commonalities)
-    pending = null
   }
 
   // Validate commonality members against the parsed node set.  Unknown
