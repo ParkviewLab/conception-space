@@ -5,6 +5,12 @@ SPDX-License-Identifier: CC-BY-4.0
 
 # Cognition Cache — architecture & vocabulary (settled foundation)
 
+> **Status: forward-looking design, not shipping.** This document describes a *future*
+> major evolution of conception-space. None of it is implemented in the current app; the
+> language that ships today is the `.cns` text format documented in
+> [`The_CNS_Language.md`](The_CNS_Language.md). "Settled" below means agreed as the
+> direction for the next planning session, not present in the product.
+
 This document captures the architecture direction and the settled
 vocabulary for the next major evolution of conception-space: moving
 the canonical file format to JSON5, externalizing it to a

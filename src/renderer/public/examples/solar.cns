@@ -1,14 +1,14 @@
 # Solar system — conception-space v0 example
 # Node locus values are relative to their parent cluster's locus.
 
-cluster solar_system ( label="Solar System" N=6 color=#CCCC33 brightness=2 stube_color=#CCCC33 tube_thickness=3 ) {
+cluster solar_system ( label="Solar System" N=6 color=#CCCC33 brightness=2 tube_color=#CCCC33 tube_thickness=3 ) {
 
     node sun     ( shape=sphere      locus=[0,0,0]       label="Sun"     color=#ffdd00 size=5.0 )
     node mercury ( shape=tetrahedron locus=[4,2,-2]      label="Mercury" color=#b5a090 )
     node venus   ( shape=cube        locus=[7,-1,4]      label="Venus"   color=#e8c060 )
 
     # Jupiter system — group origin at Jupiter; moons given relative offsets
-    cluster jupiter_system ( label="Jupiter System" locus=[20,4,-8] N=5 color=#1a3a6a brightness=3.5 stube_color=#44FFFF tube_thickness=3 ) {
+    cluster jupiter_system ( label="Jupiter System" locus=[20,4,-8] N=5 color=#1a3a6a brightness=3.5 tube_color=#44FFFF tube_thickness=3 ) {
         node jupiter  ( shape=sphere       locus=[0,0,0]    label="Jupiter"  color=#c8944a )
         node io       ( shape=sphere       locus=[-2,2,2]   label="Io"       color=#ffee44  size=0.5 )
         node europa   ( shape=octahedron   locus=[2,2,2]    label="Europa"   color=#c0d8f0  size=0.5 )

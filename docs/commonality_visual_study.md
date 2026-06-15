@@ -105,7 +105,7 @@ These were considered during design and ruled out:
 
 ## Implementation constants
 
-From [`scene.js`](../app/src/renderer/src/scene.js):
+From [`scene.js`](../src/renderer/src/scene.js):
 
 ```js
 const COMMONALITY_RING_GAP        = 0.20  // absolute — gap between host surface and satellite surface

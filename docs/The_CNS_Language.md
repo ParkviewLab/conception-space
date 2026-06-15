@@ -170,13 +170,13 @@ reference frame for its children.
 | `color`           | hex     | grey         | Default colour for child nodes that don't override.                             |
 | `brightness`      | float   | inherited    | Ambient brightness inside this cluster's region.                                |
 | `N`               | int     | none         | Number of subdivisions for the cluster's optional Goldberg-sphere tube frame.   |
-| `stube_color`     | hex     | none         | Tube frame edge colour (if `N` is set).                                         |
+| `tube_color`     | hex     | none         | Tube frame edge colour (if `N` is set).                                         |
 | `tube_thickness`  | float   | none         | Tube frame edge thickness.                                                      |
 
 ### Example
 
 ```
-cluster jupiter_system ( locus=[20,4,-8] color=#1a3a6a N=5 stube_color=#44FFFF tube_thickness=3 ) {
+cluster jupiter_system ( locus=[20,4,-8] color=#1a3a6a N=5 tube_color=#44FFFF tube_thickness=3 ) {
     node jupiter  ( locus=[0,0,0]    shape=sphere     color=#c8944a label="Jupiter" )
     node io       ( locus=[-2,2,2]   shape=sphere     color=#ffee44 label="Io"      size=0.5 )
     node europa   ( locus=[2,2,2]    shape=octahedron color=#c0d8f0 label="Europa"  size=0.5 )
@@ -398,13 +398,13 @@ construct shown here is supported as of v0.7.4.
 # Solar system — conception-space example.
 # Node locus values are relative to their parent cluster's locus.
 
-cluster solar_system ( label="Solar System" N=6 color=#CCCC33 brightness=2 stube_color=#CCCC33 tube_thickness=3 ) {
+cluster solar_system ( label="Solar System" N=6 color=#CCCC33 brightness=2 tube_color=#CCCC33 tube_thickness=3 ) {
 
     node sun     ( shape=sphere      locus=[0,0,0]   label="Sun"     color=#ffdd00 size=5.0 )
     node mercury ( shape=tetrahedron locus=[4,2,-2]  label="Mercury" color=#b5a090 )
     node venus   ( shape=cube        locus=[7,-1,4]  label="Venus"   color=#e8c060 )
 
-    cluster jupiter_system ( label="Jupiter System" locus=[20,4,-8] N=5 color=#1a3a6a brightness=3.5 stube_color=#44FFFF tube_thickness=3 ) {
+    cluster jupiter_system ( label="Jupiter System" locus=[20,4,-8] N=5 color=#1a3a6a brightness=3.5 tube_color=#44FFFF tube_thickness=3 ) {
         node jupiter  ( shape=sphere       locus=[0,0,0]    label="Jupiter"  color=#c8944a )
         node io       ( shape=sphere       locus=[-2,2,2]   label="Io"       color=#ffee44  size=0.5 )
         node europa   ( shape=octahedron   locus=[2,2,2]    label="Europa"   color=#c0d8f0  size=0.5 )

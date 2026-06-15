@@ -8,6 +8,8 @@ SPDX-License-Identifier: CC-BY-4.0
 Organize your knowledge in space.<BR>
 Build navigable places. Shape visible relationships. Discover emergent patterns.
 
+![Conception Space showing the bundled solar.cns example: the Sun, planets, and moons as labeled 3D nodes, grouped into "Rocky planets" and "Ice moons" commonality shells and connected by labeled "orbits" edges.](docs/images/hero.jpg)
+
 ---
 
 A desktop app for organizing knowledge in 3D space. You place nodes by hand at explicit coordinates —
@@ -27,13 +29,14 @@ Download the installer for your platform from the
 
 | Platform | File |
 |---|---|
-| macOS | `.dmg` |
-| Windows | `.exe` (installer) or portable `.exe` |
+| macOS (Apple Silicon) | `.dmg` |
+| Windows | `.exe` (installer) |
 | Linux | `.AppImage` or `.deb` |
 
 > The app is **not yet code-signed**, so your OS may warn on first launch:
-> - **macOS:** right-click the app → **Open** (or run `xattr -dr com.apple.quarantine "/Applications/Conception Space.app"`).
+> - **macOS:** right-click the app → **Open**. If that is blocked on newer macOS, go to **System Settings → Privacy & Security → Open Anyway**, or run `xattr -dr com.apple.quarantine "/Applications/Conception Space.app"`.
 > - **Windows:** SmartScreen → **More info** → **Run anyway**.
+> - **Linux:** make the AppImage executable first (`chmod +x Conception-Space-*.AppImage`), then run it. The `.deb` installs normally (`sudo dpkg -i`).
 
 ## Run from source
 
@@ -43,41 +46,6 @@ npm run dev      # electron-vite dev server with HMR
 npm run build    # bundle to out/
 npm start        # preview the built app
 ```
-
-## The .cns language
-
-A graph description language where nodes are 3D objects at explicit coordinates.
-
-```
-# comment
-node <id> <shape> <x> <y> <z> "<label>"
-edge <from> -> <to>
-edge <from> -> <to> "<label>"
-```
-
-**Shapes:** `sphere` · `cube` · `cylinder` · `tetrahedron` · `octahedron` · `dodecahedron` · `icosahedron`<BR>
-**Coordinates:** any float, right-hand coordinate system; the grid plane is y = 0.
-
-### Example
-
-```
-node sun   sphere  0 0 0   "Sun"
-node earth sphere  6 0 0   "Earth"
-node moon  sphere  7 0.8 0 "Moon"
-
-edge sun -> earth "orbits"
-edge earth -> moon "orbits"
-```
-
-See [`docs/The_CNS_Language.md`](docs/The_CNS_Language.md) for the full language reference.
-
-### Camera controls
-
-| Action | Control |
-|--------|---------|
-| Orbit  | Left drag |
-| Zoom   | Scroll wheel |
-| Pan    | Right drag |
 
 ## License
 

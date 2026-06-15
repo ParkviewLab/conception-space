@@ -871,12 +871,12 @@
           <tr><td>color</td>          <td>hex</td>   <td>grey</td>        <td>Default colour for child nodes that don't override.</td></tr>
           <tr><td>brightness</td>     <td>float</td> <td>inherited</td>   <td>Ambient brightness inside this cluster's region.</td></tr>
           <tr><td>N</td>              <td>int</td>   <td>none</td>        <td>Goldberg-sphere subdivision count for the optional tube frame.</td></tr>
-          <tr><td>stube_color</td>    <td>hex</td>   <td>none</td>        <td>Tube-frame edge colour (if N is set).</td></tr>
+          <tr><td>tube_color</td>    <td>hex</td>   <td>none</td>        <td>Tube-frame edge colour (if N is set).</td></tr>
           <tr><td>tube_thickness</td> <td>float</td> <td>none</td>        <td>Tube-frame edge thickness.</td></tr>
         </tbody>
       </table>
 
-      <pre class="code code-block"><span class="kw">cluster</span> <span class="attr">jupiter_system</span> ( <span class="attr">locus</span>=<span class="num">[20,4,-8]</span>  <span class="attr">color</span>=<span class="num">#1a3a6a</span>  <span class="attr">N</span>=<span class="num">5</span>  <span class="attr">stube_color</span>=<span class="num">#44FFFF</span> ) {
+      <pre class="code code-block"><span class="kw">cluster</span> <span class="attr">jupiter_system</span> ( <span class="attr">locus</span>=<span class="num">[20,4,-8]</span>  <span class="attr">color</span>=<span class="num">#1a3a6a</span>  <span class="attr">N</span>=<span class="num">5</span>  <span class="attr">tube_color</span>=<span class="num">#44FFFF</span> ) {
     <span class="kw">node</span> <span class="attr">jupiter</span> ( <span class="attr">locus</span>=<span class="num">[0,0,0]</span>    <span class="attr">color</span>=<span class="num">#c8944a</span>  <span class="attr">label</span>=<span class="str">"Jupiter"</span> )
     <span class="kw">node</span> <span class="attr">io</span>      ( <span class="attr">locus</span>=<span class="num">[-2,2,2]</span>   <span class="attr">color</span>=<span class="num">#ffee44</span>  <span class="attr">size</span>=<span class="num">0.5</span> )
     <span class="kw">node</span> <span class="attr">europa</span>  ( <span class="attr">locus</span>=<span class="num">[2,2,2]</span>    <span class="attr">shape</span>=<span class="num">octahedron</span>  <span class="attr">size</span>=<span class="num">0.5</span> )
@@ -1006,7 +1006,7 @@
     <pre class="code code-block"><span class="com"># Solar system — conception-space example.
 # Node locus values are relative to their parent cluster's locus.</span>
 
-<span class="kw">cluster</span> <span class="attr">solar_system</span> ( <span class="attr">label</span>=<span class="str">"Solar System"</span>  <span class="attr">N</span>=<span class="num">6</span>  <span class="attr">color</span>=<span class="num">#CCCC33</span>  <span class="attr">stube_color</span>=<span class="num">#CCCC33</span> ) {
+<span class="kw">cluster</span> <span class="attr">solar_system</span> ( <span class="attr">label</span>=<span class="str">"Solar System"</span>  <span class="attr">N</span>=<span class="num">6</span>  <span class="attr">color</span>=<span class="num">#CCCC33</span>  <span class="attr">tube_color</span>=<span class="num">#CCCC33</span> ) {
 
     <span class="kw">node</span> <span class="attr">sun</span>     ( <span class="attr">shape</span>=<span class="num">sphere</span>      <span class="attr">locus</span>=<span class="num">[0,0,0]</span>   <span class="attr">color</span>=<span class="num">#ffdd00</span>  <span class="attr">size</span>=<span class="num">5.0</span> )
     <span class="kw">node</span> <span class="attr">mercury</span> ( <span class="attr">shape</span>=<span class="num">tetrahedron</span> <span class="attr">locus</span>=<span class="num">[4,2,-2]</span>  <span class="attr">color</span>=<span class="num">#b5a090</span> )
