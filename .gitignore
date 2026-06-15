@@ -1,9 +1,6 @@
-__pycache__/
-*.py[cod]
-.venv/
+node_modules/
+out/
 dist/
-*.egg-info/
-examples/*.html
 
 # macOS
 .DS_Store
