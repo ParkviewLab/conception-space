@@ -7,30 +7,26 @@ SPDX-FileCopyrightText = "2026 Gary Frattarola <garyf@parkviewlab.ai>"
 SPDX-License-Identifier = "CC-BY-4.0"
 
 # Project config, manifests, and generated lockfiles — AGPL-3.0-or-later.
-# (JSON files cannot carry comment headers; lockfiles are generated.)
+# (JSON/dotfiles cannot carry comment headers; lockfiles are generated.)
 [[annotations]]
 path = [
   ".gitignore",
   ".claude/launch.json",
-  "app/.gitignore",
-  "app/.claude/launch.json",
-  "app/package.json",
-  "app/package-lock.json",
-  "pyproject.toml",
-  "uv.lock",
+  "package.json",
+  "package-lock.json",
 ]
 SPDX-FileCopyrightText = "2026 Gary Frattarola <garyf@parkviewlab.ai>"
 SPDX-License-Identifier = "AGPL-3.0-or-later"
 
-# Example scenes and their attachments — AGPL-3.0-or-later.
+# Bundled example scenes and their attachments — AGPL-3.0-or-later.
 [[annotations]]
-path = ["examples/**", "app/src/renderer/public/examples/**"]
+path = ["src/renderer/public/examples/**"]
 SPDX-FileCopyrightText = "2026 Gary Frattarola <garyf@parkviewlab.ai>"
 SPDX-License-Identifier = "AGPL-3.0-or-later"
 
 # ParkviewLab logo / brand asset — all rights reserved.
 # (Listed last so it overrides the examples glob above for this file.)
 [[annotations]]
-path = "app/src/renderer/public/examples/parkview_lab_color_horizontal_dark.svg"
+path = "src/renderer/public/examples/parkview_lab_color_horizontal_dark.svg"
 SPDX-FileCopyrightText = "2026 Gary Frattarola <garyf@parkviewlab.ai>"
 SPDX-License-Identifier = "LicenseRef-AllRightsReserved"
