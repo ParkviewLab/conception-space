@@ -1,3 +1,8 @@
+<!--
+SPDX-FileCopyrightText: 2026 Gary Frattarola <garyf@parkviewlab.ai>
+SPDX-License-Identifier: CC-BY-4.0
+-->
+
 
 # Importing Nodes with Tools to Help the User Build cluster structure based on target models (sphere, planar, toroid, etc)
 

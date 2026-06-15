@@ -1,3 +1,8 @@
+<!--
+SPDX-FileCopyrightText: 2026 Gary Frattarola <garyf@parkviewlab.ai>
+SPDX-License-Identifier: CC-BY-4.0
+-->
+
 # AI-authoring ideas
 
 A focused brainstorm of how AI assistance can support an author who is

@@ -1,3 +1,8 @@
+<!--
+SPDX-FileCopyrightText: 2026 Gary Frattarola <garyf@parkviewlab.ai>
+SPDX-License-Identifier: CC-BY-4.0
+-->
+
 # Cognition Cache — architecture & vocabulary (settled foundation)
 
 This document captures the architecture direction and the settled

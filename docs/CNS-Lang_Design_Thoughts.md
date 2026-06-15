@@ -1,3 +1,8 @@
+<!--
+SPDX-FileCopyrightText: 2026 Gary Frattarola <garyf@parkviewlab.ai>
+SPDX-License-Identifier: CC-BY-4.0
+-->
+
 Not many are “DSLs for cognitive science” in the narrow programming-language sense, but several families are directly relevant.
 
 The best ones to study:
