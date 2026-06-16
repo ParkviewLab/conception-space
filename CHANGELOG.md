@@ -9,6 +9,25 @@ All notable changes to this project are recorded here.
 
 ## [Unreleased]
 
+## [v0.8.2] - 2026-06-16
+
+### Highlights
+
+The app now ships third-party license notices as a packaged legal bundle and exposes them through a new Help → Open Source Licenses window, which lists the bundled packages and links to the full notice files. The About dialog gains a GitHub source-code link, and the Help menu is now available on Windows and Linux rather than macOS only. The remaining changes fix CI packaging failures so the notices are reliably present in release builds.
+
+### Bug fixes
+
+- Ensure Electron's prebuilt is present for its notices in CI (#11) (ad6975c)
+- Pin yauzl to fix partial electron dist extraction on CI (#12) (1681b10)
+
+### Docs
+
+- V0.8.1 [skip ci] (3911fb9)
+
+### Features
+
+- In-app Open Source Licenses viewer + packaged legal/ notice bundle (#10) (2a851e0)
+
 ## [v0.8.1] - 2026-06-15
 
 ### Highlights
