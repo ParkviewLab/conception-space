@@ -1,6 +1,6 @@
 {
   "name": "conception-space",
-  "version": "0.8.1",
+  "version": "0.8.2-dev0",
   "description": "3D concept graph visualiser",
   "author": "Gary Frattarola <garyf@parkviewlab.ai>",
   "license": "AGPL-3.0-or-later",
