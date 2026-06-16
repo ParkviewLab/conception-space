@@ -5,9 +5,10 @@ name: Dev release
 # `--ref develop`). Builds installers on a macOS / Windows / Linux matrix and
 # uploads them as workflow ARTIFACTS (7-day retention). It creates NO `v*` tag and
 # no GitHub Release, so release-electron.yml's gate is untouched. Unlike the
-# Python TestPyPI dev-release it publishes to no registry, so it does NOT require
-# a distinct X.Y.Z-dev.N version — whatever develop carries is fine. See the
-# handbook's electron-tooling.md / releases.md ("Development versioning").
+# Python TestPyPI dev-release it publishes to no registry, so it needs no unique
+# X.Y.Z-devN counter — but develop MUST carry a `-dev` version so the build is
+# distinguishable from a real release (the gate enforces this; open a cycle with
+# `git dev-release --open`). See the handbook's electron-tooling.md / releases.md.
 
 on:
   workflow_dispatch:
@@ -25,6 +26,13 @@ jobs:
           if [ "$GITHUB_REF" != "refs/heads/develop" ]; then
             echo "dev-release runs from develop only (got $GITHUB_REF)"; exit 1
           fi
+      - name: Verify develop carries a dev-cycle version
+        run: |
+          V=$(jq -r .version package.json)
+          case "$V" in
+            *-dev*) echo "dev-cycle version: $V" ;;
+            *) echo "::error::package.json version '$V' has no -dev marker; the build would be indistinguishable from a release. Open a dev cycle first: git dev-release --open"; exit 1 ;;
+          esac
 
   build:
     needs: gate
