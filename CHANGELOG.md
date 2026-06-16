@@ -9,6 +9,20 @@ All notable changes to this project are recorded here.
 
 ## [Unreleased]
 
+## [v0.8.1] - 2026-06-15
+
+### Highlights
+
+This is a maintenance release with no user-facing changes to the visualiser itself. It fixes the release CI so installer artifacts are correctly attached to GitHub releases (v0.8.0's installers had to be uploaded by hand), and tightens the dev-build pipeline to refuse producing dev builds that would be indistinguishable from a real release.
+
+### Bug fixes
+
+- Release attaches files only; dev-release requires a dev-cycle version (#8) (4717363)
+
+### Docs
+
+- V0.8.0 [skip ci] (6f55bf5)
+
 ## [v0.8.0] - 2026-06-15
 
 ### Highlights
