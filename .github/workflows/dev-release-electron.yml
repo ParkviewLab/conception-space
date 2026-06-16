@@ -48,6 +48,7 @@ jobs:
           node-version: 24.x
           cache: npm
       - run: npm ci
+      - run: npm run legal      # generate legal/ before electron-builder copies extraResources
       - run: npm run build
       - name: Package installers (unsigned)
         run: npx electron-builder --publish never
