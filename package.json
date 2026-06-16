@@ -44,5 +44,8 @@
     "marked": "^18.0.4",
     "marked-katex-extension": "^5.1.9",
     "three": "^0.170.0"
+  },
+  "overrides": {
+    "yauzl": "^3.3.1"
   }
 }
