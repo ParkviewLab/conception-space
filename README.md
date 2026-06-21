@@ -33,8 +33,8 @@ Download the installer for your platform from the
 | Windows | `.exe` (installer) |
 | Linux | `.AppImage` or `.deb` |
 
-> The app is **not yet code-signed**, so your OS may warn on first launch:
-> - **macOS:** right-click the app → **Open**. If that is blocked on newer macOS, go to **System Settings → Privacy & Security → Open Anyway**, or run `xattr -dr com.apple.quarantine "/Applications/Conception Space.app"`.
+> The **macOS** build is **signed and notarized** (Apple Developer ID), so it installs without warnings.
+> The **Windows** and **Linux** builds are not yet code-signed:
 > - **Windows:** SmartScreen → **More info** → **Run anyway**.
 > - **Linux:** make the AppImage executable first (`chmod +x Conception-Space-*.AppImage`), then run it. The `.deb` installs normally (`sudo dpkg -i`).
 
