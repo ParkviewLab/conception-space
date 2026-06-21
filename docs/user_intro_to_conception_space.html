@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<!--
+SPDX-FileCopyrightText: 2026 Gary Frattarola <garyf@parkviewlab.ai>
+SPDX-License-Identifier: CC-BY-4.0
+
+Presentation sibling of user_intro_to_conception_space.md. Styled to mirror the
+app's own UI (the in-app Open Source Licenses dialog): dark #090916 ground,
+#0d0d1f thin-bordered panels, cyan #4fc3f7 accent, system fonts. Self-contained,
+no scripts, no external fonts. If this drifts from the .md, the .md wins.
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>conception-space — think with the notes you already have</title>
+<style>
+  :root{
+    --bg:#090916; --panel:#0d0d1f; --panel-2:#070710; --line:rgba(255,255,255,.12);
+    --accent:#4fc3f7;
+    --t1:rgba(255,255,255,.92); --t2:rgba(255,255,255,.64);
+    --t3:rgba(255,255,255,.46); --t4:rgba(255,255,255,.34);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:var(--bg);color:var(--t2);
+    font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+    line-height:1.62;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+  .wrap{max-width:900px;margin:0 auto;padding:7vh 24px 16vh}
+  a{color:var(--accent);text-decoration:none}
+  a:hover{text-decoration:underline}
+  strong{color:var(--t1);font-weight:600}
+  em{font-style:italic;color:var(--t1)}
+
+  .eyebrow{font-size:11px;font-weight:600;letter-spacing:.26em;text-transform:uppercase;color:var(--accent)}
+  h1{font-size:clamp(2.1rem,6vw,3.5rem);line-height:1.04;color:var(--t1);font-weight:700;
+     letter-spacing:-.022em;margin:18px 0 0;max-width:16ch}
+  .lede{font-size:clamp(1.06rem,2.3vw,1.32rem);color:var(--t1);font-weight:500;margin:22px 0 0;max-width:30em}
+  .sub{font-size:1.02rem;color:var(--t2);margin:16px 0 0;max-width:36em}
+  .cta{display:inline-block;margin-top:30px;background:rgba(255,255,255,.08);
+       border:1px solid rgba(255,255,255,.18);color:var(--t1);padding:11px 22px;border-radius:6px;
+       font-size:.96rem;font-weight:600;letter-spacing:.01em}
+  .cta:hover{background:var(--accent);color:#06121a;border-color:var(--accent);text-decoration:none}
+  .cta.lg{padding:13px 26px;font-size:1rem}
+
+  /* hero art — a hand-placed concept space, in the app's own palette */
+  .art{margin:42px 0 4px;border:1px solid var(--line);border-radius:8px;background:var(--panel-2);overflow:hidden;display:block;width:100%}
+
+  .st{font-size:10px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--t4);
+      margin:74px 0 20px;display:flex;align-items:center;gap:14px}
+  .st::after{content:"";flex:1;height:1px;background:var(--line)}
+
+  .grid{display:grid;gap:12px}
+  @media(min-width:660px){.grid.two{grid-template-columns:1fr 1fr}}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:22px 24px}
+  .card .n{font-size:11px;font-weight:700;letter-spacing:.1em;color:var(--accent)}
+  .card h2{font-size:1.16rem;color:var(--t1);font-weight:600;letter-spacing:-.01em;margin:9px 0 8px}
+  .card p{color:var(--t2);font-size:.97rem}
+  .card.wide{grid-column:1 / -1}
+
+  table{width:100%;border-collapse:collapse;margin-top:4px;font-size:.95rem;
+        border:1px solid var(--line);border-radius:8px;overflow:hidden}
+  caption{caption-side:bottom;color:var(--t3);font-size:.86rem;text-align:left;padding:12px 2px 0}
+  th,td{text-align:left;padding:12px 16px;border-bottom:1px solid var(--line);vertical-align:top}
+  thead th{background:rgba(255,255,255,.05);color:var(--t3);font-size:.78rem;font-weight:600;
+           letter-spacing:.05em;text-transform:uppercase}
+  thead th.cs{color:var(--accent)}
+  tbody th{color:var(--t1);font-weight:600;width:26%}
+  td{color:var(--t2)}
+  td.cs{color:var(--t1)}
+  tr:last-child th,tr:last-child td{border-bottom:0}
+
+  ul.specs{list-style:none}
+  ul.specs li{padding:14px 0;border-bottom:1px solid var(--line);color:var(--t2)}
+  ul.specs li:first-child{padding-top:2px}
+  ul.specs li:last-child{border-bottom:0}
+
+  .closer{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:28px 26px;margin-top:8px}
+  .closer p{color:var(--t2);max-width:42em}
+
+  footer{margin-top:84px;padding-top:22px;border-top:1px solid var(--line);font-size:.8rem;color:var(--t4)}
+  footer a{color:var(--t3)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <p class="eyebrow">conception-space</p>
+  <h1>A place to think with the notes you already have.</h1>
+  <p class="lede">You don't need another notes app. You need somewhere to <em>think</em> with the notes you've got.</p>
+  <p class="sub">If you use Obsidian, Joplin, Notion, or just a folder of Markdown, you already have the hard
+     part: a corpus of your own ideas. What you don't have is a way to <em>see its shape</em>. conception-space
+     turns your knowledge into a <strong>place</strong>: a 3D space you build by hand, where every point is one
+     of your real notes, and <strong>where you put it is what it means</strong>.</p>
+  <a class="cta lg" href="https://github.com/ParkviewLab/conception-space/releases">Download for macOS · Windows · Linux</a>
+
+  <svg class="art" viewBox="0 0 900 320" role="img"
+       aria-label="An abstract concept-space: hand-placed nodes joined by relationships and gathered into clusters.">
+    <!-- two cluster shells -->
+    <ellipse cx="270" cy="150" rx="180" ry="120" fill="none" stroke="#4fc3f7" stroke-opacity=".16"/>
+    <ellipse cx="650" cy="185" rx="135" ry="95" fill="none" stroke="#ffffff" stroke-opacity=".09"/>
+    <!-- relationships -->
+    <g stroke-linecap="round" fill="none">
+      <path d="M210 110 L300 160" stroke="#4fc3f7" stroke-opacity=".5" stroke-width="1.4"/>
+      <path d="M300 160 L250 220" stroke="#ffffff" stroke-opacity=".16" stroke-width="1.2"/>
+      <path d="M300 160 L380 120" stroke="#ffffff" stroke-opacity=".18" stroke-width="1.2"/>
+      <path d="M210 110 L150 175" stroke="#ffffff" stroke-opacity=".14" stroke-width="1.1"/>
+      <path d="M380 120 L470 150" stroke="#4fc3f7" stroke-opacity=".42" stroke-width="1.4"/>
+      <path d="M470 150 L590 140" stroke="#ffffff" stroke-opacity=".16" stroke-width="1.2"/>
+      <path d="M590 140 L660 200" stroke="#4fc3f7" stroke-opacity=".4" stroke-width="1.3"/>
+      <path d="M660 200 L730 165" stroke="#ffffff" stroke-opacity=".15" stroke-width="1.1"/>
+      <path d="M590 140 L700 110" stroke="#ffffff" stroke-opacity=".15" stroke-width="1.1"/>
+      <path d="M250 220 L160 175" stroke="#ffffff" stroke-opacity=".12" stroke-width="1.1"/>
+    </g>
+    <!-- nodes -->
+    <g>
+      <circle cx="210" cy="110" r="7" fill="#4fc3f7"/>
+      <circle cx="300" cy="160" r="9" fill="#4fc3f7"/><circle cx="300" cy="160" r="15" fill="none" stroke="#4fc3f7" stroke-opacity=".35"/>
+      <circle cx="380" cy="120" r="5.5" fill="#ffffff" fill-opacity=".82"/>
+      <circle cx="250" cy="220" r="5" fill="#ffffff" fill-opacity=".7"/>
+      <circle cx="150" cy="175" r="4.5" fill="#ffffff" fill-opacity=".6"/>
+      <circle cx="470" cy="150" r="6.5" fill="#4fc3f7"/>
+      <circle cx="590" cy="140" r="8" fill="#ffffff" fill-opacity=".85"/>
+      <circle cx="660" cy="200" r="6.5" fill="#4fc3f7"/>
+      <circle cx="730" cy="165" r="5" fill="#ffffff" fill-opacity=".68"/>
+      <circle cx="700" cy="110" r="4.5" fill="#ffffff" fill-opacity=".6"/>
+    </g>
+  </svg>
+
+  <p class="st">What it does</p>
+  <div class="grid two">
+    <div class="card wide">
+      <div class="n">01</div>
+      <h2>Made of real notes, not a new format.</h2>
+      <p>Every node is a <strong>handle onto a real file</strong> — a Markdown note or a PDF. Open one and
+         you're reading and editing the actual note, in the plain, open formats you already write in. Its
+         points <em>are</em> your notes, arranged so you can fly through them and think.</p>
+    </div>
+    <div class="card wide">
+      <div class="n">02</div>
+      <h2>You place it by hand — and the placing is the thinking.</h2>
+      <p>This is the opposite of an auto-generated graph. No layout algorithm decides where things go; <em>you</em>
+         do. Putting this note near that one and far from those is a claim: <em>these belong together; that one
+         doesn't.</em> By the time the space looks right, you've thought the relationships through. The arrangement
+         isn't a picture of your understanding — it <strong>is</strong> your understanding, made of where things sit.</p>
+    </div>
+    <div class="card">
+      <div class="n">03</div>
+      <h2>See the structure. Don't reconstruct it.</h2>
+      <p>A list makes you read relationships one at a time and rebuild the whole shape in your head. A space hands
+         the whole shape to your eyes at once: how dense a region is, which connections are heavy, what clusters
+         and what stands alone. A far higher-bandwidth way to grasp how a hundred ideas relate.</p>
+    </div>
+    <div class="card">
+      <div class="n">04</div>
+      <h2>A place you can come back to.</h2>
+      <p>Because <em>you</em> placed everything, it's spatially memorable, and it lasts across sessions. Leave it,
+         return months later, and the placement itself reminds you what you were thinking when you put that there.
+         A workshop you keep, not a chart you screenshot.</p>
+    </div>
+    <div class="card wide">
+      <div class="n">05</div>
+      <h2>Discover what you didn't know was there.</h2>
+      <p>Arrange enough, and structure you never typed begins to show: clusters you didn't plan, gaps where a
+         connection is missing, bridges between fields you thought were separate. The eye catches the pattern
+         before you can put it into words — and that noticing is often the insight you were missing.</p>
+    </div>
+  </div>
+
+  <p class="st">How it differs from the tools you already use</p>
+  <table>
+    <thead>
+      <tr><th></th><th>Obsidian / Joplin / Notion</th><th class="cs">conception-space</th></tr>
+    </thead>
+    <tbody>
+      <tr><th>Core job</th><td>store, link, and search your notes</td><td class="cs">give you a <em>place to think</em> with them</td></tr>
+      <tr><th>The graph</th><td>auto-laid-out, decorative, glanced at</td><td class="cs">hand-built, meaningful, inhabited</td></tr>
+      <tr><th>Where meaning lives</th><td>in the text and the links</td><td class="cs"><em>also</em> in where things sit</td></tr>
+      <tr><th>The material</th><td>text notes and links</td><td class="cs">real Markdown &amp; PDF notes, placed in 3D space</td></tr>
+    </tbody>
+    <caption>Not a replacement for your note app — the spatial place to think those tools don't give you.</caption>
+  </table>
+
+  <p class="st">The honest specifics</p>
+  <ul class="specs">
+    <li><strong>Free and open source</strong> (AGPL-3.0). Your knowledge, your tool.</li>
+    <li><strong>macOS, Windows, and Linux.</strong> The macOS build is Apple-signed and notarized, so it opens without a fight.</li>
+    <li><strong>Plain, open formats</strong> — your notes are Markdown and PDF, the same kinds you already write.</li>
+    <li><strong>A real-time 3D space</strong> (built on Three.js), not a static diagram: fly through it, save viewpoints, return to them.</li>
+    <li><strong>Early, and moving quickly.</strong> The spatial-thinking core is here today. Richer point-and-place authoring,
+        and a room-scale version you can walk <em>through</em> on Apple Vision Pro, are on the way. And exactly how it meets the
+        notes you already keep — its own library, an Obsidian vault, a Joplin server — is an open design question we're working
+        through now.</li>
+  </ul>
+
+  <p class="st">Try it</p>
+  <div class="closer">
+    <p>Download conception-space and open the bundled example space to feel what a thought-place is like. Then start
+       shaping one around the notes that actually matter to you. Bring the ideas you already have — and begin to
+       <em>see</em> them.</p>
+    <a class="cta" href="https://github.com/ParkviewLab/conception-space/releases">Get the latest release</a>
+  </div>
+
+  <footer>© 2026 Gary Frattarola · Licensed under CC-BY-4.0 · part of
+    <a href="https://github.com/ParkviewLab/conception-space">conception-space</a></footer>
+
+</div>
+</body>
+</html>
