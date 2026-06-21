@@ -71,26 +71,28 @@ pinch + hand-tracking, with latency, occlusion, and fatigue budgets the movie ig
 
 ---
 
-## Spatial projections — you never edit the whole space in VR
+## The overview is home base; projections are for task-work
 
-The desktop edits a **Notation** (a reduced text projection of one domain). The
-spatial analog is the load-bearing idea here:
+The whole point is that the headset shows **all of the Cognition Cache at once**.
+That full spatial overview is **not** overwhelming — it is the one representation
+human visual cognition is built to take in whole, and it is where you start.
 
-> Render the canonical **Cognition Cache** in the room, then pull a **Filter-scoped
-> domain** into reach, manipulate *that* projection spatially, and **internalize**
-> the change back into the Cache.
+From the overview you **drill down** into a domain to actually work, applying a
+**Filter** (or moving to an alternate **Spatialization**) that purposefully shapes
+and minimises the view *for that task* — chosen and designed by you, for the work at
+hand. Reshape it, work it, and the results **raise back up** into the overview (the
+visual ↔ symbolic loop — see [northstar](northstar.md) Concept 5), where they may
+surface as new Commonalities and reveal relationships that weren't visible before.
 
-You never expose the entire Cache for editing in VR — that is the trap that makes
-spatial editing overwhelming. You work a *distilled, purposeful projection* of it,
-exactly as the cog-sci framing intends (Gärdenfors-style conceptual domains scoped
-by a Filter). So: desktop gives **symbolic** projections (Notation), Vision Pro
-gives **enactive** projections (a Filter/Spatialization you reach into and reshape),
-and both round-trip through the one Cognition Cache.
+So a projection here is **task-tuning, not overwhelm-avoidance**: the whole is
+manageable — that is the bet — and a projection optimises the view for a specific
+piece of work. Two first-class visual jobs: comprehend the whole, and work a domain.
 
-The headset has **no Notation at all** — it is purely iconic/enactive — which makes it
-the purest test of the northstar bet (Concept 4) that good visual projections *retire*
-the text lens rather than supplement it. If reaching into a Filter-scoped Spatialization
-is good enough here, text was simply never needed in this mode.
+The headset is the **iconic / enactive** end of that loop. The symbolic descent
+(working something out exactly, "ink on paper") is real and complementary, *not*
+retired — which leaves a genuine open question: does the headset host a symbolic
+surface of its own, or hand the descent off to the desktop and round-trip the result
+back through the Cache? (See Open tensions below.)
 
 ---
 
@@ -152,6 +154,10 @@ replicate.
   In the headset, what is "open the node" — a floating document panel? Read-only?
 - **The enactive-edit round-trip.** What is the minimal spatial gesture set that edits a
   Filter-scoped projection and internalizes cleanly (move, regroup, relate, hide)?
+- **Where does the symbolic descent live?** The discovery loop (northstar Concept 5) needs
+  an "ink on paper" step for exact logic, but the headset is the iconic/enactive end. Does
+  the Vision Pro app host a symbolic surface of its own, or hand the descent off to the
+  desktop and round-trip the result back through the Cache?
 - **Performance ceiling** for the largest real spaces under passthrough.
 - **Godot reconsideration** if/when its unbounded passthrough matures (open-source fit).
 

@@ -171,12 +171,54 @@ once.  A flat screen is this thesis at working strength; an embodied,
 stereoscopic, room-scale space is the thesis at *full* strength — the deep
 reason a spatial form is not a port of the tool but its fullest expression.
 
-The modes are **not co-equal**.  The symbolic **Notation** is the *fallback* —
-a concession to the capacity limit, reached for when the visual modes can't
-get at a particular datum.  The bet is that if the iconic and enactive
-projections are made *well enough* (the right alternate **Spatializations**
-and **Filters**), the user has little to no need to drop to text at all.  Good
-visual projections don't supplement the Notation; they **retire** it.
+The modes are **complementary, not ranked**.  The full **iconic** overview is
+not a hazard to reduce away but the home base the eye is built for — you take in
+the whole space at once, then drill into a domain to work.  And the symbolic
+**Notation** is not a fallback for when the visual fails: it does *different
+work* (exact logic and measurement, which you cannot do with floating objects),
+and its results feed *back* into the visual.  That interplay is the engine — the
+next concept.
+
+---
+
+### 5. The discovery loop — visual ↔ symbolic
+
+The visual and symbolic modes are not just two views; together they form a loop,
+and the loop is where the tool earns its keep.
+
+* **Visual** is for **interpretation, inference, insight** — seeing what is
+  related, what is missing, what to work on next.
+* **Symbolic** is for **exact logic and measurement** — actually working it out.
+  Symbols exist precisely because you cannot do the laws of motion, or the
+  calculus, with floating 3D objects.
+
+You **drill down** from the visual to the symbolic to solve a problem exactly.
+Then comes the move that is easy to miss and is the generative one: you **raise
+back up**, carrying the solution's *categorized residue*.  The methods and
+attributes of what you just worked out become **Commonalities** (concept
+formation) on the node — and those reveal relationships that were not there
+before.
+
+> A robotic wheel-control task, solved on paper, turns out to be a physics
+> problem, then a calculus one.  Its Commonalities gain *physics* and *calculus*;
+> the overview now shows this task related to calculus, and to your other
+> calculus problems, in a way invisible before the symbolic solution.
+
+So the symbolic descent pays out twice: the answer, **plus new visible
+structure**.  The space therefore **compounds** — it grows new perceivable
+relationships as a by-product of real work done in it, and is worth more the
+more you genuinely think in it.  This is intents #3 and #4 made *dynamic*:
+relationships and emergent patterns are not only arranged, they are *produced* by
+the loop.  **Build, solve, discover, reveal.**
+
+The step that closes the loop — turning a solved node into the Commonalities that
+ride back up — is **human and AI together**, not either alone.  The author may
+attach them deliberately as a post-mortem; an AI (see AI-authoring,
+[`in-flight_ideas.md`](in-flight_ideas.md) #3) may analyse the solved node and
+propose them.  The AI's suggestions are best understood as **seeds**: they often
+spark a *better* attachment in the author than any option offered.  Whatever the
+author ratifies or improves is the authorship (Axiom 1) — the two sharing
+thoughts reach a result neither would alone.
 
 ---
 
@@ -277,6 +319,9 @@ When proposing a change, ask:
 8. Does this treat the **canonical space as the single source of truth**,
    with this view as a projection that round-trips into it — or does it
    create a second place where truth can live?
+9. Does this support the **discovery loop** — drilling down from the visual to
+   the symbolic to work something out, and raising the result back up as
+   Commonalities that reveal new relationships — or is it a one-way street?
 
 If a change scores well on these questions, it probably belongs.  If it
 scores poorly, it is probably the wrong design.
