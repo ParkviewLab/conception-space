@@ -9,6 +9,25 @@ All notable changes to this project are recorded here.
 
 ## [Unreleased]
 
+## [v0.8.3] - 2026-06-21
+
+### Highlights
+
+The macOS arm64 .dmg is now signed with an Apple Developer ID and notarized, so Apple-Silicon users can install it without Gatekeeper warnings; Windows and Linux builds remain unsigned. The rest of the release fixes CI breakages in the legal-notices step that had blocked the v0.8.2 build, ensuring Electron's Chromium and Node notices are packaged completely.
+
+### Bug fixes
+
+- Ensure Electron's prebuilt is present for its notices in CI (#11) (2710666)
+- Pin yauzl to fix partial electron dist extraction on CI (#12) (e3f7a7d)
+
+### Docs
+
+- V0.8.2 [skip ci] (ac4291d)
+
+### Features
+
+- Sign and notarize the macOS build (Apple Developer ID) (#14) (1bbb8ec)
+
 ## [v0.8.2] - 2026-06-16
 
 ### Highlights
