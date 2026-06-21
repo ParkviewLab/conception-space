@@ -139,6 +139,40 @@ a workshop the author keeps returning to.
 
 ---
 
+### 4. One space, many modes of representation
+
+The space the author builds is a single canonical model — the **Cognition
+Cache** (see [`space_architecture_ideas.md`](space_architecture_ideas.md)).
+It is deliberately *richer than any single read*: the whole point of intent
+#4 is that structure emerges only when *many* relationships are present at
+once, which is exactly what overwhelms a linear medium.
+
+So the author never confronts the whole Cache through one channel.  They
+engage it through **projections** — purposeful lenses onto the one canonical
+model, each serving a particular task or domain.  Following Bruner's three
+modes of representation:
+
+* **symbolic** — a **Notation** (the text rendering).  It must *reduce* to a
+  domain subset, because symbolic cognition is capacity-bound: too much text
+  is too much to hold in the mind.
+* **iconic** — the visual space and its **Filters**.  It need not reduce *for
+  capacity* — the eye takes the whole at once — so a Filter's job is to
+  *shape for purpose*: emphasise, de-emphasise, scope to a domain.  A
+  different motive entirely from the Notation's: shape-for-the-task, not
+  shrink-to-fit-the-mind.
+* **enactive** — an embodied, room-scale form (see
+  [`visionos_ideas.md`](visionos_ideas.md)).  The body joins the perceptual
+  act.
+
+These are not three apps; they are three bandwidths onto one Cache.  And the
+**bandwidth scales with the medium**: the wider and more embodied the visual
+channel, the more of the canonical space becomes directly perceivable at
+once.  A flat screen is this thesis at working strength; an embodied,
+stereoscopic, room-scale space is the thesis at *full* strength — the deep
+reason a spatial form is not a port of the tool but its fullest expression.
+
+---
+
 ## Axioms
 
 Treat these as design constraints on future work.
@@ -202,6 +236,16 @@ secondary to that binding.  Decoupling a node from the content it points at
 removes its reason to exist: the space is an interface to a corpus, not a
 diagram floating free of it.
 
+### Axiom 8 — The canonical space is the single source of truth; views are projections of it.
+
+There is one truth: the canonical space (the **Cognition Cache**).  Every
+view of it — a text **Notation**, a **Filtered** visual, a spatial scene — is
+a *projection* serving a task, never a second place where truth lives.  A
+projection may be edited, but the edit must **internalize** back into the
+Cache; a view that forks the truth (becomes independently authoritative)
+breaks the model.  Reduce or reshape within a projection freely — but keep
+the Cache the single thing every projection is *of*.
+
 ---
 
 ## Guiding questions for future work
@@ -223,6 +267,9 @@ When proposing a change, ask:
    content?
 7. Does this stay useful **across sessions and over time**, or is it
    tied to a transient state?
+8. Does this treat the **canonical space as the single source of truth**,
+   with this view as a projection that round-trips into it — or does it
+   create a second place where truth can live?
 
 If a change scores well on these questions, it probably belongs.  If it
 scores poorly, it is probably the wrong design.
