@@ -171,6 +171,13 @@ once.  A flat screen is this thesis at working strength; an embodied,
 stereoscopic, room-scale space is the thesis at *full* strength — the deep
 reason a spatial form is not a port of the tool but its fullest expression.
 
+The modes are **not co-equal**.  The symbolic **Notation** is the *fallback* —
+a concession to the capacity limit, reached for when the visual modes can't
+get at a particular datum.  The bet is that if the iconic and enactive
+projections are made *well enough* (the right alternate **Spatializations**
+and **Filters**), the user has little to no need to drop to text at all.  Good
+visual projections don't supplement the Notation; they **retire** it.
+
 ---
 
 ## Axioms
@@ -273,3 +280,20 @@ When proposing a change, ask:
 
 If a change scores well on these questions, it probably belongs.  If it
 scores poorly, it is probably the wrong design.
+
+---
+
+## A note on feel
+
+A northstar can also hold a **feel-and-intent reference**: a concrete exemplar
+of the *experience* we want — even a fictional one (the *Iron Man 2* holotable
+for the enactive mode; see [`visionos_ideas.md`](visionos_ideas.md)).  It is a
+target for the **feel**, not a spec for the build.
+
+For something new, different, and hard to build, the way to honour such a
+reference is to **build the feel first and fake the underneath**: a prototype
+that nails the desired experience over stubbed internals, tuned until you
+*love* it, and only then built for real beneath.  The loved prototype becomes
+the guide for the real work.  Get the experience right before committing to
+the machinery under it.  (Fittingly, the holotable itself was a *faked* UX,
+built for a film, that went on to guide real spatial interfaces.)

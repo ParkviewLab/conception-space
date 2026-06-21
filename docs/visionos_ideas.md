@@ -87,6 +87,11 @@ by a Filter). So: desktop gives **symbolic** projections (Notation), Vision Pro
 gives **enactive** projections (a Filter/Spatialization you reach into and reshape),
 and both round-trip through the one Cognition Cache.
 
+The headset has **no Notation at all** — it is purely iconic/enactive — which makes it
+the purest test of the northstar bet (Concept 4) that good visual projections *retire*
+the text lens rather than supplement it. If reaching into a Filter-scoped Spatialization
+is good enough here, text was simply never needed in this mode.
+
 ---
 
 ## The technical reality (researched, June 2026 / visionOS 27)
@@ -150,12 +155,26 @@ replicate.
 - **Performance ceiling** for the largest real spaces under passthrough.
 - **Godot reconsideration** if/when its unbounded passthrough matures (open-source fit).
 
-## Suggested first slice
-A read-only **viewer**: Swift reader for the Cognition Cache JSON5 + a RealityKit
-`ImmersiveSpace(.mixed)` that renders nodes (instanced) + relationships (LowLevelMesh) +
-labels at room scale, anchored via ARKit, navigated by walking around it. No editing, no
-content-opening. That alone tests the apex claim — does the space *feel* more legible
-embodied than on a screen — before any authoring is built.
+## How to build it — feel first, fake the underneath
+
+This is new, different, and hard, so follow the northstar's "note on feel": **build a
+prototype that nails the experience over stubbed internals, tune it until it's loved,
+then build it for real beneath.** The holotable is the feel target; the prototype is how
+you find out whether the apex claim is true *before* committing to the machinery.
+
+So the first slice is a **faked-UX feel prototype**, not a finished viewer:
+- a single canned space (hardcode `solar` / a `test*` scene; skip the real Cognition
+  Cache reader for now);
+- rendered room-scale in `ImmersiveSpace(.mixed)`, ARKit-anchored, navigated by walking;
+- nodes instanced, a few relationships via `LowLevelMesh`, a handful of labels — only
+  enough to feel real;
+- one or two **faked** gestures (pinch a node to pull a Filter-scoped domain into reach;
+  flick to dismiss), wired to canned responses, not a real round-trip.
+
+The only question it must answer: *does the space feel more legible and more thinkable
+embodied than on a screen?* If yes, build the real parts underneath (the Cognition Cache
+reader, real Filters/Spatializations, the internalize round-trip). If no, you learned it
+cheaply.
 
 ## Sources
 [visionOS 27 / Safari WebXR (no immersive-ar)](https://www.vrwiki.cs.brown.edu/hardware/vr-hardware/apple-vision-pro/development-approaches-for-visionos/webxr-on-visionos) ·
