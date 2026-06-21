@@ -3,6 +3,10 @@ SPDX-FileCopyrightText: 2026 Gary Frattarola <garyf@parkviewlab.ai>
 SPDX-License-Identifier: CC-BY-4.0
 -->
 
+# First Draft from A.I. - Not Even Close - Needs Complete Revision
+
+---
+
 # conception-space — a place to think *with* the notes you already have
 
 **You don't need another notes app. You need somewhere to think with the notes you've got.**

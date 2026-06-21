@@ -30,6 +30,16 @@ no scripts, no external fonts. If this drifts from the .md, the .md wins.
   strong{color:var(--t1);font-weight:600}
   em{font-style:italic;color:var(--t1)}
 
+  /* ── DRAFT WARNING (this is a throwaway A.I. first draft) ───────────── */
+  body{padding-left:40px}
+  .draft-stripe{position:fixed;top:0;left:0;width:36px;height:100vh;background:#6e000f;z-index:9999;
+    overflow:hidden;border-right:1px solid rgba(0,0,0,.5)}
+  .draft-stripe span{position:absolute;top:50%;left:50%;
+    transform:translate(-50%,-50%) rotate(-90deg);white-space:nowrap;
+    color:rgba(255,255,255,.82);font:700 12px/1 ui-monospace,Menlo,Consolas,monospace;letter-spacing:.3em}
+  .draft-warn{color:#ff3b30;font-weight:800;font-size:clamp(1.35rem,3.7vw,2.15rem);line-height:1.18;
+    letter-spacing:.005em;border:2px solid #ff3b30;border-radius:6px;padding:14px 18px;margin:0 0 30px}
+
   .eyebrow{font-size:11px;font-weight:600;letter-spacing:.26em;text-transform:uppercase;color:var(--accent)}
   h1{font-size:clamp(2.1rem,6vw,3.5rem);line-height:1.04;color:var(--t1);font-weight:700;
      letter-spacing:-.022em;margin:18px 0 0;max-width:16ch}
@@ -81,7 +91,10 @@ no scripts, no external fonts. If this drifts from the .md, the .md wins.
 </style>
 </head>
 <body>
+<div class="draft-stripe" aria-hidden="true"><span>A.I. 1st Draft · A.I. 1st Draft · A.I. 1st Draft · A.I. 1st Draft · A.I. 1st Draft · A.I. 1st Draft · A.I. 1st Draft · A.I. 1st Draft · A.I. 1st Draft · A.I. 1st Draft · A.I. 1st Draft · A.I. 1st Draft · A.I. 1st Draft · A.I. 1st Draft · A.I. 1st Draft · A.I. 1st Draft · A.I. 1st Draft · A.I. 1st Draft · A.I. 1st Draft · A.I. 1st Draft</span></div>
 <div class="wrap">
+
+  <div class="draft-warn">First Draft from A.I. - Not Even Close - Needs Complete Revision</div>
 
   <p class="eyebrow">conception-space</p>
   <h1>A place to think with the notes you already have.</h1>
