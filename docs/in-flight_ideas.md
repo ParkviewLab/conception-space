@@ -81,3 +81,23 @@ existing Obsidian/Joplin users who want a visual-cognition layer over
 knowledge they already have. Closely related to #3 (AI authoring — the
 bulk-import use case) and downstream of #2 (hand-authoring tools to reshape
 the imports). If it grows, it splits into its own `import_ideas.md`.
+
+# 6. Vision Pro — the enactive mode (spatial passthrough)
+
+A spatial, **passthrough** (`immersive-ar`) version of conception-space on Apple
+Vision Pro: the canonical **Cognition Cache** rendered room-scale in your real
+space, reached into and reshaped with your hands. Framed against the
+[northstar](northstar.md) (Concept 4) as the **enactive** mode of the
+visual-cognition thesis — the bet at full strength, not a port.
+
+Hard requirement (Gary): it MUST be passthrough, which forces a native renderer.
+Decided engine: **native SwiftUI + RealityKit + ARKit** (Unity ruled out as a
+proprietary engine; Godot watched as the open-source option). A **separate repo**,
+sharing the Cognition Cache JSON5 schema + test corpus as the cross-repo source of
+truth.
+
+This idea has its own deeper notebook: see
+[`visionos_ideas.md`](visionos_ideas.md) — the apex argument, the Iron Man 2
+interaction reference (and its caveat), spatial projections, the engine comparison
++ decision, the RealityKit rendering R&D, repo strategy, the file-access tension,
+open questions, and a suggested first slice.
