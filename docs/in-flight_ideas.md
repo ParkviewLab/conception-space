@@ -81,3 +81,50 @@ existing Obsidian/Joplin users who want a visual-cognition layer over
 knowledge they already have. Closely related to #3 (AI authoring — the
 bulk-import use case) and downstream of #2 (hand-authoring tools to reshape
 the imports). If it grows, it splits into its own `import_ideas.md`.
+
+# 6. Alternate projections of a space (auto-generated views)
+
+A space is authored once, but it could be *read* through many lenses.
+This idea adds a **menu of alternate projections** of a given space —
+plus **tools to auto-generate** some of them from the data the nodes
+already carry.
+
+This lands almost exactly on the **Spatialization** concept already
+settled in [`space_architecture_ideas.md`](space_architecture_ideas.md)
+(§1, §5): "a 3D arrangement of a cluster's children," where one cluster
+may hold several (`causal`, `temporal`, `physical`). The new move here is
+**generation** — rather than only hand-placing each spatialization, offer
+a tool that *derives* one from node attributes, and a menu to switch
+between them.
+
+**First projection — a chronological space (a 3D timeline / spatial
+calendar).** Pull in only the nodes that carry a date attribute (in their
+`meta`), optionally **future-dated only**, optionally narrowed further to
+one other attribute (e.g. `meeting`), and lay them out along a time axis.
+The result is a quick 3D calendar of dated nodes — a glanceable timeline
+the author never had to place by hand. Note the two halves map onto
+constructs already in the design but still deferred: the "which nodes come
+in" half *is* a **Filter** (select by attribute), and the "where they sit"
+half is a generated Spatialization with an advisory **named dimension**
+(`x: time`). So the chronological view is a concrete, motivating use case
+that stitches Filters, multi-Spatialization, and named dimensions into one
+user-facing action.
+
+**Tension to resolve (not decided).** Auto-generated placement collides
+head-on with **Axiom 1 — placement is argument** ("nothing auto-lays-out";
+the "geometry emerges from relations" advice is explicitly *rejected* in
+[`space_architecture_ideas.md`](space_architecture_ideas.md) §3). Likely
+reconciliation: a projection is **derived, non-destructive, and clearly
+marked as such** — a generated lens that sits *alongside* the hand-authored
+spatializations and never overwrites them, much as a Filter is view state
+rather than authored geometry. The author's argument stays the authored
+spatialization; a projection is a different way of *looking*, not a claim
+about relationships. Open question: should a generated projection be
+discard-only, or **promotable** into an editable, hand-owned spatialization
+once the author starts tweaking it (at which point Axiom 1 reclaims it)?
+
+Downstream of the JSON5 / Spatialization / Filter work in
+[`space_architecture_ideas.md`](space_architecture_ideas.md); the date and
+type data ride in each node's `meta`. Related to #5 (an import filter is
+the same select-by-attribute machinery). If it grows, it splits into its
+own `projections_ideas.md`.
