@@ -101,3 +101,50 @@ This idea has its own deeper notebook: see
 interaction reference (and its caveat), spatial projections, the engine comparison
 + decision, the RealityKit rendering R&D, repo strategy, the file-access tension,
 open questions, and a suggested first slice.
+
+# 7. A projections menu + auto-generated projections (the chronological space)
+
+The northstar now names this terrain: **Concept 4 ("one space, many modes of
+representation")** and **Axiom 8 ("views are projections of it")** establish
+that the Author engages the canonical Cache through **projections** —
+purposeful lenses, each serving a task, that round-trip back into the one
+truth. This idea proposes two concrete things on top of that principle:
+
+1. **A projections menu** — first-class UI to switch between a space's
+   projections (the iconic **Filtered** views, named **Spatializations**, the
+   symbolic **Notations**), the way you'd switch tabs.
+2. **Tools to auto-generate projections** from the data the nodes already
+   carry — rather than only hand-building each one.
+
+**First auto-generated projection — a chronological space (a 3D timeline /
+spatial calendar).** Pull in only the nodes that carry a date attribute (in
+their `meta`), optionally **future-dated only**, optionally narrowed to one
+other attribute (e.g. `meeting`), and lay them out along a time axis → a
+glanceable 3D calendar of dated nodes the author never had to place by hand.
+The "which nodes come in" half *is* a **Filter** (the iconic mode's
+shape-for-purpose control, per Concept 4); the "where they sit" half is a
+generated **Spatialization** with an advisory **named dimension** (`x: time`)
+— see [`space_architecture_ideas.md`](space_architecture_ideas.md). So the
+chronological view is a concrete, motivating use case that stitches Filters,
+multi-Spatialization, and named dimensions into one user-facing projection.
+
+**The sharp tension (not decided): auto-*generated placement* vs. Axiom 1.**
+Concept 4 / Axiom 8 bless *projections* — but **Axiom 1 ("placement is
+argument; nothing auto-lays-out")** still forbids an algorithm from writing the
+Author's poses. The reconciliation Axiom 8 points to: a generated projection is
+a **derived, task-serving view, not a second source of truth** — it reads date
+`meta` off the Cache and arranges a *transient* timeline, never overwriting a
+hand-authored Spatialization. The open question is the round-trip (guiding
+question 8): is an auto-generated projection **discard-only** (a pure lens,
+like a Filtered view), or can the Author tweak it and **internalize** the
+result into a real hand-owned Spatialization — at which point Axiom 1 reclaims
+it as authored?
+
+Sibling to **#6**: [`visionos_ideas.md`](visionos_ideas.md) already floats
+spatial projections and an *"AI projection designer"* for the enactive mode;
+auto-generation here is the same move in the core app. Related to **#5** (an
+import filter is the same select-by-attribute machinery). Downstream of the
+JSON5 / Spatialization / Filter work in
+[`space_architecture_ideas.md`](space_architecture_ideas.md); the date and type
+data ride in each node's `meta`. If it grows, it splits into its own
+`projections_ideas.md`.
