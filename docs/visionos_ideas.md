@@ -3,7 +3,13 @@ SPDX-FileCopyrightText: 2026 Gary Frattarola <garyf@parkviewlab.ai>
 SPDX-License-Identifier: CC-BY-4.0
 -->
 
-# Vision Pro — the enactive mode
+# Conception-Space on Vision Pro
+
+Conception-Space on visionOS is an immersive AR perception instrument. Its reference is not a floating desktop or a decorative 3D graph, but a hand-manipulable knowledge structure in the real workspace. The data itself is the interface: the user grabs, rotates, scales, separates, peels, and discards projections directly. Filtering becomes physical lensing. It's a way to minimize for relevance, reveal hidden structure, and reshape the visible form of the Cognition Cache without destroying the underlying knowledge.
+
+---
+
+## Vision Pro — the enactive mode
 
 A focused notebook for a spatial, **passthrough** version of conception-space on
 Apple Vision Pro. Indexed from [`in-flight_ideas.md`](in-flight_ideas.md). Reads
