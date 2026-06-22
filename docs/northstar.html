@@ -125,6 +125,9 @@
     .thread p { font-size: 0.9rem; margin: 0; line-height: 1.5; }
     .thread .eg { display: block; margin-top: 0.6rem; font-style: italic; color: var(--charcoal); opacity: 0.85; }
 
+    /* ─── Worked-example callout ──────────────────────────────────── */
+    .example { background: var(--white); border-left: 8px solid var(--persimmon); padding: 1rem 1.3rem; margin: 0 0 1rem; font-style: italic; font-size: 0.96rem; line-height: 1.55; }
+
     /* ─── Axiom cards ─────────────────────────────────────────────── */
     .axiom-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin: 1rem 0 0; }
     .axiom-card { background: var(--white); border: 4px solid var(--charcoal); padding: 1.4rem 1.4rem 1.5rem; }
@@ -188,8 +191,9 @@
       <h1>Northstar</h1>
       <div class="hero-rule"></div>
       <p class="tagline">
-        Organize your knowledge in space.<br>
-        Build navigable places. Shape visible relationships. Discover emergent patterns.
+        Build and navigate 3D spaces for thinking.<br>
+        Hand-place and sculpt ideas.<br>
+        See unplanned connections.
       </p>
       <p>
         It is the <strong>intent</strong> — the underlying purpose that any
@@ -287,8 +291,8 @@
         </svg>
         <div>
           <h4>Intent 4</h4>
-          <h3>Discover emergent patterns</h3>
-          <p>Recurring visual attributes help the mind detect emergent structures.</p>
+          <h3>Discover hidden patterns</h3>
+          <p>Recurring visual attributes help the mind detect otherwise hidden structures.</p>
         </div>
       </article>
 
@@ -353,9 +357,9 @@
     <div class="deep">
       <div class="rail">4</div>
       <div>
-        <h3>Discover emergent patterns</h3>
+        <h3>Discover hidden patterns</h3>
         <p>
-          When many ideas and relationships are arranged visibly, emergent
+          When many ideas and relationships are arranged visibly, hidden
           structures are revealed that were not obvious item by item: clusters,
           gaps, bridges, symmetries, outliers, repeated forms and motions, and
           unexpected analogies.
@@ -450,18 +454,25 @@
       <div>
         <h3>Hand-authoring as sense-making</h3>
         <p>
-          The act of placing a node <em>is</em> an act of reasoning. The author
+          The act of placing a node <em>is</em> an act of reasoning. The Author
           decides where it goes — and that decision is informed by their
           understanding of how it relates to the others. As more nodes are
           placed, the understanding sharpens; as the understanding sharpens,
-          nodes move. The file is the residue of that thinking.
+          nodes move. The file is the embodiment of that thinking.
         </p>
         <p>
           This is why hand-placement is non-negotiable (Axiom 1): if a layout
           algorithm overwrites the positions, it overwrites the reasoning. The
-          author is not just <em>describing</em> a graph; they are <em>thinking
-          about it in 3D space</em>. A blank <code>.cns</code> file is an
-          invitation to think. A finished one is the shape of a thought.
+          Author is not just <em>describing</em> a graph; they are <em>thinking
+          about it in 3D space</em>. An empty space is an invitation to think.
+          A filled space is the shape of thoughts.
+        </p>
+        <p>
+          The use of layout algorithms is limited to the mass importation of
+          notes into a space, or the creation of new spatial views of
+          pre-existing spaces. But even then, the Author chooses from several
+          layout algorithms, choosing the one that best matches the Author's
+          vision.
         </p>
       </div>
     </div>
@@ -482,7 +493,125 @@
           viewpoints into a space for a particular act of perception. The space
           itself is the longer time-scale: a thinking-vehicle that outlasts any
           single sitting. A space is not a chart that captures a moment; it is a
-          workshop the author keeps returning to.
+          workshop the Author keeps returning to.
+        </p>
+      </div>
+    </div>
+
+    <!-- Concept 4 -->
+    <div class="deep">
+      <div class="rail">4</div>
+      <div>
+        <h3>One space, many modes of representation</h3>
+        <p class="lead">
+          The space the Author builds is a single canonical model — the
+          <strong>Cognition Cache</strong>
+          (see <a href="space_architecture_ideas.md">space_architecture_ideas.md</a>).
+        </p>
+        <p>
+          It is deliberately <em>richer than any single read</em>: the whole point
+          of intent #4 is that structure emerges only when <em>many</em>
+          relationships are present at once, which is exactly what overwhelms a
+          linear medium. So the Author never confronts the whole Cache through one
+          channel. They engage it through <strong>projections</strong> — purposeful
+          lenses onto the one canonical model, each serving a particular task or
+          domain. Following Bruner's three modes of representation:
+        </p>
+      </div>
+    </div>
+
+    <div class="threads">
+      <div class="thread">
+        <h3>Symbolic</h3>
+        <p>A <strong>Notation</strong> — the text rendering. It must <em>reduce</em> to a domain subset, because symbolic cognition is capacity-bound: too much text is too much to hold in the mind.</p>
+      </div>
+      <div class="thread">
+        <h3>Iconic</h3>
+        <p>The visual space and its <strong>Filters</strong>. It need not reduce <em>for capacity</em> — the eye takes the whole at once — so a Filter's job is to <em>shape for purpose</em>: emphasise, de-emphasise, scope to a domain.</p>
+      </div>
+      <div class="thread">
+        <h3>Enactive</h3>
+        <p>An embodied, room-scale form (see <a href="visionos_ideas.md">visionos_ideas.md</a>). The body joins the perceptual act.</p>
+      </div>
+    </div>
+
+    <div class="deep">
+      <div class="rail" style="background:transparent;"></div>
+      <div>
+        <p>
+          These are not three apps; they are three bandwidths onto one Cache. And
+          the <strong>bandwidth scales with the medium</strong>: the wider and more
+          embodied the visual channel, the more of the canonical space becomes
+          directly perceivable at once. A flat screen is this thesis at working
+          strength; an embodied, stereoscopic, room-scale space is the thesis at
+          <em>full</em> strength — the deep reason a spatial form is not a port of
+          the tool but its fullest expression.
+        </p>
+        <p>
+          The modes are <strong>complementary, not ranked</strong>. The full
+          <em>iconic</em> overview is not a hazard to reduce away but the home base
+          the eye is built for — you take in the whole space at once, then drill
+          into a domain to work. And the symbolic <strong>Notation</strong> is not
+          a fallback for when the visual fails: it does <em>different work</em>
+          (exact logic and measurement, which you cannot do with floating objects),
+          and its results feed <em>back</em> into the visual. That interplay is the
+          engine — the next concept.
+        </p>
+      </div>
+    </div>
+
+    <!-- Concept 5 -->
+    <div class="deep">
+      <div class="rail mustard">5</div>
+      <div>
+        <h3>The discovery loop — visual ↔ symbolic</h3>
+        <p class="lead">
+          The visual and symbolic modes are not just two views; together they form
+          a loop, and the loop is where the tool earns its keep.
+        </p>
+        <p>
+          <strong>Visual</strong> is for <em>interpretation, inference, insight</em>
+          — seeing what is related, what is missing, what to work on next.
+          <strong>Symbolic</strong> is for <em>exact logic and measurement</em> —
+          actually working it out. Symbols exist precisely because you cannot do
+          the laws of motion, or the calculus, with floating 3D objects.
+        </p>
+        <p>
+          You <strong>drill down</strong> from the visual to the symbolic to solve
+          a problem exactly. Then comes the move that is easy to miss and is the
+          generative one: you <strong>raise back up</strong>, carrying the
+          solution's <em>categorized residue</em>. The methods and attributes of
+          what you just worked out become <strong>Commonalities</strong> (concept
+          formation) on the node — and those reveal relationships that were not
+          there before.
+        </p>
+        <div class="example">
+          A robotic wheel-control task, solved on paper, turns out to be a physics
+          problem, then a calculus one. Its Commonalities gain <em>physics</em> and
+          <em>calculus</em>; the overview now shows this task related to calculus,
+          and to your other calculus problems, in a way invisible before the
+          symbolic solution.
+        </div>
+        <p>
+          So the symbolic descent pays out twice: the answer, <strong>plus new
+          visible structure</strong>. The space therefore
+          <strong>compounds</strong> — it grows new perceivable relationships as a
+          by-product of real work done in it, and is worth more the more you
+          genuinely think in it. This is intents #3 and #4 made <em>dynamic</em>:
+          relationships and emergent patterns are not only arranged, they are
+          <em>produced</em> by the loop. <strong>Build, solve, discover, reveal.</strong>
+        </p>
+        <p>
+          The step that closes the loop — turning a solved node into the
+          Commonalities that ride back up — is <strong>human and AI together</strong>,
+          not either alone. The Author may attach them deliberately as a
+          post-mortem; an AI (see AI-authoring,
+          <a href="in-flight_ideas.md">in-flight_ideas.md</a> #3) may analyse the
+          solved node and propose them. The AI's suggestions are best understood as
+          <strong>seeds</strong>: they often spark a <em>better</em> attachment in
+          the Author than any option offered. Whatever the Author ratifies or
+          improves is the authorship (Axiom 1) — the two sharing thoughts reach a
+          result neither would alone.
         </p>
       </div>
     </div>
@@ -506,12 +635,14 @@
         <div class="ax-num">AXIOM 1</div>
         <h3>Placement is argument.</h3>
         <p>
-          When the author places node A near node B and far from C, that
+          When the Author places node A near node B and far from C, that
           placement <strong>is</strong> the claim "A and B are related; C is
-          not." The space is the author's understanding of the relationships
+          not." The space is the Author's understanding of the relationships
           made directly perceptible. Anything that overwrites placement
-          (auto-layout, repositioning on resize) erases the author's argument.
-          Hand-placement is non-negotiable.
+          (auto-layout, repositioning on resize) erases the Author's argument.
+          Hand-placement is non-negotiable. <em>(An algorithm may seed an
+          import or generate a derived view, but never overwrites the Author's
+          placement — see Concept 2.)</em>
         </p>
       </article>
 
@@ -521,9 +652,9 @@
         <p>
           A <code>cluster</code> says "these N things are one <em>thing</em> at
           the next scale up." The cluster's own position then encodes how that
-          aggregate relates to other aggregates. A <code>.cns</code> file is a
-          multi-scale relational argument: each level reveals a different layer
-          of structure. Treat cluster-level visuals (shell, tube frame, label)
+          aggregate relates to other aggregates. A space is a multi-scale
+          relational argument: each level reveals a different layer of
+          structure. Treat cluster-level visuals (shell, tube frame, label)
           as carrying real reasoning content, not decoration.
         </p>
       </article>
@@ -589,6 +720,22 @@
         </p>
       </article>
 
+      <article class="axiom-card span2">
+        <div class="ax-num">AXIOM 8</div>
+        <h3>The canonical space is the single source of truth; views are projections of it.</h3>
+        <p>
+          There is one truth: the canonical space (the <strong>Cognition
+          Cache</strong>). Every view of it — a text <strong>Notation</strong>, a
+          <strong>Filtered</strong> visual, a spatial scene — is a
+          <em>projection</em> serving a task, never a second place where truth
+          lives. A projection may be edited, but the edit must
+          <strong>internalize</strong> back into the Cache; a view that forks the
+          truth (becomes independently authoritative) breaks the model. Reduce or
+          reshape within a projection freely — but keep the Cache the single thing
+          every projection is <em>of</em>.
+        </p>
+      </article>
+
     </div>
   </section>
 
@@ -605,16 +752,53 @@
     <ol class="q-list">
       <li><p>Does this serve <strong>simultaneous perception</strong> of relationships, or does it force the user into a sequential read?</p></li>
       <li><p>Does this preserve the <strong>perceptual channel during motion</strong>, or does it interrupt it?</p></li>
-      <li><p>Does this respect the <strong>author's placement</strong> as argument, or does it overwrite it?</p></li>
+      <li><p>Does this respect the <strong>Author's placement</strong> as argument, or does it overwrite it?</p></li>
       <li><p>Does this strengthen one of the three perceptual signals (<strong>number, weight, congruence</strong>), or does it add unrelated noise?</p></li>
       <li><p>Does this make the viewer <strong>more transparent</strong>, or more demanding of the user's attention?</p></li>
       <li><p>Does this keep the space <strong>bound to its corpus</strong> — the real files its nodes stand for — or does it drift toward a diagram detached from the content?</p></li>
       <li><p>Does this stay useful <strong>across sessions and over time</strong>, or is it tied to a transient state?</p></li>
+      <li><p>Does this treat the <strong>canonical space as the single source of truth</strong>, with this view as a projection that round-trips into it — or does it create a second place where truth can live?</p></li>
+      <li><p>Does this support the <strong>discovery loop</strong> — drilling down from the visual to the symbolic to work something out, and raising the result back up as Commonalities that reveal new relationships — or is it a one-way street?</p></li>
     </ol>
 
     <div class="q-close">
       If a change scores well on these questions, it probably belongs.
       If it scores poorly, it is probably the <strong>wrong design</strong>.
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════════════════════════
+       SECTION 05 — A note on feel
+       ════════════════════════════════════════════════════════════════ -->
+  <section class="section">
+    <div class="section-head">
+      <div class="section-marker persimmon">05</div>
+      <h2>A note on feel</h2>
+    </div>
+    <p class="section-lede">
+      A northstar can also hold a <strong>feel-and-intent reference</strong>: a
+      concrete exemplar of the <em>experience</em> we want — even a fictional one
+      (the <em>Iron Man 2</em> holotable for the enactive mode; see
+      <a href="visionos_ideas.md">visionos_ideas.md</a>). It is a target for the
+      <strong>feel</strong>, not a spec for the build.
+    </p>
+    <div class="deep">
+      <div class="rail persimmon"></div>
+      <div>
+        <p>
+          For something new, different, and hard to build, the way to honour such
+          a reference is to <strong>build the feel first and fake the
+          underneath</strong>: a prototype that nails the desired experience over
+          stubbed internals, tuned until you <em>love</em> it, and only then built
+          for real beneath. The loved prototype becomes the guide for the real
+          work. Get the experience right before committing to the machinery under
+          it.
+        </p>
+        <p>
+          (Fittingly, the holotable itself was a <em>faked</em> UX, built for a
+          film, that went on to guide real spatial interfaces.)
+        </p>
+      </div>
     </div>
   </section>
 

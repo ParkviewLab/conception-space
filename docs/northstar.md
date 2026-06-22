@@ -25,8 +25,9 @@ Use it like this:
 
 <span style="font-size:1.5em;">Conception-Space</span>
 
-**Organize your knowledge in space.**<BR>
-**Build navigable places. Shape visible relationships. Discover emergent patterns.**
+**Build and navigate 3D spaces for thinking.**<BR>
+**Hand-place and sculpt ideas.**<BR>
+**See unplanned connections.**
 
 ---
 
@@ -35,7 +36,7 @@ Use it like this:
 1. **Organize your knowledge in space** - gives knowledge spatial structure the mind can remember
 2. **Build navigable places** - spatial navigation helps knowledge become easier to revisit
 3. **Shape visible relationships** - parallel perception of relationships makes abstract connections perceivable
-4. **Discover emergent patterns** - recurring visual attributes help the mind detect emergent structures
+4. **Discover hidden patterns** - recurring visual attributes help the mind detect otherwise hidden structures
 
 ---
 
@@ -57,9 +58,9 @@ Visible relationships are valuable because cognition depends heavily on perceivi
 
 ---
 
-### 4. Discover emergent patterns
+### 4. Discover hidden patterns
 
-When many ideas and relationships are arranged visibly, emergent structures are revealed that were not obvious item by item: clusters, gaps, bridges, symmetries, outliers, repeated forms and motions, and unexpected analogies.
+When many ideas and relationships are arranged visibly, hidden structures are revealed that were not obvious item by item: clusters, gaps, bridges, symmetries, outliers, repeated forms and motions, and unexpected analogies.
 
 This matters because our perception is good at detecting patterns across space. By externalizing knowledge into a visible arrangement, our perceptual system participates in thinking: the eye can notice structure before the mind has to verbalize it. That supports memory, attention, and reasoning because we can recognize higher-order organization, see what is missing or overconnected, and form a stronger cognitive map of the knowledge.
 
@@ -110,17 +111,23 @@ being stable across sessions.  Useful, but not the primary thing.
 
 ### 2. Hand-authoring as sense-making
 
-The act of placing a node *is* an act of reasoning.  The author decides
+The act of placing a node *is* an act of reasoning.  The Author decides
 where it goes — and that decision is informed by their understanding of
 how it relates to the others.  As more nodes are placed, the
 understanding sharpens; as the understanding sharpens, nodes move.  The
-file is the residue of that thinking.
+file is the embodiment of that thinking.
 
 This is why hand-placement is non-negotiable (Axiom 1): if a layout
 algorithm overwrites the positions, it overwrites the reasoning.  The
-author is not just *describing* a graph; they are *thinking about it in
-3D space*.  A blank `.cns` file is an invitation to think.  A finished
-one is the shape of a thought.
+Author is not just *describing* a graph; they are *thinking about it in
+3D space*.  An empty space is an invitation to think.  A filled space
+is the shape of thoughts.
+
+The use of layout algorithms is limited to the mass importation of
+notes into a space or the creation of new spatial views of
+pre-existing spaces. But even then, the Author chooses from several
+layout algorithms, choosing that which best matches the Author's vision.
+
 
 ---
 
@@ -135,19 +142,19 @@ that there?" — and often the placement itself encodes the answer.
 viewpoints into a space for a particular act of perception.  The space
 itself is the longer time-scale: a thinking-vehicle that outlasts any
 single sitting.  A space is not a chart that captures a moment; it is
-a workshop the author keeps returning to.
+a workshop the Author keeps returning to.
 
 ---
 
 ### 4. One space, many modes of representation
 
-The space the author builds is a single canonical model — the **Cognition
+The space the Author builds is a single canonical model — the **Cognition
 Cache** (see [`space_architecture_ideas.md`](space_architecture_ideas.md)).
 It is deliberately *richer than any single read*: the whole point of intent
 #4 is that structure emerges only when *many* relationships are present at
 once, which is exactly what overwhelms a linear medium.
 
-So the author never confronts the whole Cache through one channel.  They
+So the Author never confronts the whole Cache through one channel.  They
 engage it through **projections** — purposeful lenses onto the one canonical
 model, each serving a particular task or domain.  Following Bruner's three
 modes of representation:
@@ -212,12 +219,12 @@ relationships and emergent patterns are not only arranged, they are *produced* b
 the loop.  **Build, solve, discover, reveal.**
 
 The step that closes the loop — turning a solved node into the Commonalities that
-ride back up — is **human and AI together**, not either alone.  The author may
+ride back up — is **human and AI together**, not either alone.  The Author may
 attach them deliberately as a post-mortem; an AI (see AI-authoring,
 [`in-flight_ideas.md`](in-flight_ideas.md) #3) may analyse the solved node and
 propose them.  The AI's suggestions are best understood as **seeds**: they often
-spark a *better* attachment in the author than any option offered.  Whatever the
-author ratifies or improves is the authorship (Axiom 1) — the two sharing
+spark a *better* attachment in the Author than any option offered.  Whatever the
+Author ratifies or improves is the authorship (Axiom 1) — the two sharing
 thoughts reach a result neither would alone.
 
 ---
@@ -228,18 +235,20 @@ Treat these as design constraints on future work.
 
 ### Axiom 1 — Placement is argument.
 
-When the author places node A near node B and far from C, that placement
+When the Author places node A near node B and far from C, that placement
 **is** the claim "A and B are related; C is not."  The space is the
-author's understanding of the relationships made directly perceptible.
+Author's understanding of the relationships made directly perceptible.
 Anything that overwrites placement (auto-layout, repositioning on
-resize, etc.) erases the author's argument.  Hand-placement is
-non-negotiable.
+resize, etc.) erases the Author's argument.  Hand-placement is
+non-negotiable.  (An algorithm may *seed* an import or generate a
+*derived view*, but never overwrites the Author's placement — see
+Concept 2.)
 
 ### Axiom 2 — Hierarchical grouping carries meta-relationships.
 
 A `cluster` says "these N things are one *thing* at the next scale
 up."  The cluster's own position then encodes how that aggregate
-relates to other aggregates.  A `.cns` file is a multi-scale relational
+relates to other aggregates.  A space is a multi-scale relational
 argument: each level reveals a different layer of structure.  Treat
 cluster-level visuals (shell, tube frame, label) as carrying real
 reasoning content, not decoration.
@@ -305,7 +314,7 @@ When proposing a change, ask:
    does it force the user into a sequential read?
 2. Does this preserve the **perceptual channel during motion**, or does
    it interrupt it?
-3. Does this respect the **author's placement** as argument, or does it
+3. Does this respect the **Author's placement** as argument, or does it
    overwrite it?
 4. Does this strengthen one of the three perceptual signals (**number,
    weight, congruence**), or does it add unrelated noise?
