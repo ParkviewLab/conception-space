@@ -9,6 +9,20 @@ All notable changes to this project are recorded here.
 
 ## [Unreleased]
 
+## [v0.8.4] - 2026-06-25
+
+### Highlights
+
+This release is documentation and CI maintenance only, with no user-visible changes to the application. The README gains a new tagline ("Build and navigate 3D spaces for thinking / Hand-place and sculpt ideas / See unplanned connections"), and the docs tree picks up a draft user intro aimed at PKM users, a visionOS/Vision Pro ideas notebook, and substantial revisions to the northstar (new concepts on modes of representation and the visual↔symbolic discovery loop, plus Axiom 8 establishing the canonical space as the single source of truth).
+
+### Docs
+
+- V0.8.3 [skip ci] (08713af)
+- Add visionos_ideas notebook + northstar projection/modes concept (#15) (c57f699)
+- Add user intro for PKM users (MD + app-styled HTML) (#16) (01f6040)
+- Add in-flight idea — a projections menu + auto-generated projections (#17) (dc7ab31)
+- Add opening abstract to visionos_ideas notebook (#18) (19b6f6c)
+
 ## [v0.8.3] - 2026-06-21
 
 ### Highlights
