@@ -5,8 +5,9 @@ SPDX-License-Identifier: CC-BY-4.0
 
 # conception-space
 
-Organize your knowledge in space.<BR>
-Build navigable places. Shape visible relationships. Discover emergent patterns.
+Build and navigate 3D spaces for thinking.<BR>
+Hand-place and sculpt ideas.<BR>
+See unplanned connections.
 
 ![Conception Space showing the bundled solar.cns example: the Sun, planets, and moons as labeled 3D nodes, grouped into "Rocky planets" and "Ice moons" commonality shells and connected by labeled "orbits" edges.](docs/images/hero.jpg)
 
