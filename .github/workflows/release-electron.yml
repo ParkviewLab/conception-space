@@ -71,7 +71,7 @@ jobs:
           APPLE_API_KEY_ID: ${{ runner.os == 'macOS' && secrets.APPLE_API_KEY_ID || '' }}
           APPLE_API_ISSUER: ${{ runner.os == 'macOS' && secrets.APPLE_API_ISSUER || '' }}
           # APPLE_API_KEY (path to the .p8) is exported by the prep step above, macOS only.
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v6
         with:
           name: installers-${{ matrix.os }}
           if-no-files-found: error
@@ -95,7 +95,7 @@ jobs:
         with:
           fetch-depth: 0
       - name: Download all built installers
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v7
         with:
           path: artifacts
       - name: Install uv
