@@ -9,6 +9,17 @@ All notable changes to this project are recorded here.
 
 ## [Unreleased]
 
+## [v0.8.6] - 2026-07-20
+
+### Highlights
+
+This is a maintenance release with no user-visible changes: the workflow and script comments describing macOS signing status and the electron 43 extraction mechanism have been corrected, and an inert yauzl dependency override was removed without affecting lockfile resolution.
+
+### Docs
+
+- V0.8.5 [skip ci] (68fe52b)
+- Correct stale "unsigned" comment headers (macOS is signed + notarized) (#25) (2fb74c3)
+
 ## [v0.8.5] - 2026-07-20
 
 ### Highlights
