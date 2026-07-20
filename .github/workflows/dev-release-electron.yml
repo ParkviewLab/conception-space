@@ -48,9 +48,10 @@ jobs:
           node-version: 24.x
           cache: npm
       - run: npm ci
-      # electron's prebuilt can extract only partially after npm ci on CI's Node
-      # (extract-zip/yauzl regression, electron/electron#51619) — re-run its installer
-      # so dist/ is complete before `npm run legal` validates the Chromium notices.
+      # electron 43 ships no install script, so `npm ci` does not extract its prebuilt.
+      # dist/ is otherwise filled lazily on first require, which `npm run legal` never
+      # triggers (it reads dist/ from disk). Extract it now so dist/ and its Chromium
+      # notices exist before `npm run legal`.
       - run: node node_modules/electron/install.js
       - run: npm run legal      # generate legal/ before electron-builder copies extraResources
       - run: npm run build
