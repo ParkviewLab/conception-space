@@ -9,6 +9,20 @@ All notable changes to this project are recorded here.
 
 ## [Unreleased]
 
+## [v0.8.5] - 2026-07-20
+
+### Highlights
+
+A maintenance release with no user-visible feature changes: Electron is upgraded from 34 to 43 to pick up current Chromium and Node security fixes, the build toolchain is refreshed to electron-vite 5 and vite 7, and residual npm advisories in undici and @babel/core are cleared. A CI fix ensures Electron 43's prebuilt is fully extracted before the legal step, unblocking packaged builds on all three platforms.
+
+### Bug fixes
+
+- Upgrade Electron 34 → 43 (security) (#20) (bfc57f1)
+
+### Docs
+
+- V0.8.4 [skip ci] (4c3e675)
+
 ## [v0.8.4] - 2026-06-25
 
 ### Highlights
