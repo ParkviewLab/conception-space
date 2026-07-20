@@ -1,6 +1,6 @@
 # electron-builder — packages the electron-vite build (out/) into platform
 # installers: .dmg (macOS), NSIS .exe (Windows), .AppImage + .deb (Linux).
-# Run after `npm run build`. Unsigned for now — see README + electron-tooling.md.
+# Run after `npm run build`. The macOS build is signed + notarized — see README + electron-tooling.md.
 appId: ai.parkviewlab.conception-space
 productName: Conception Space
 artifactName: ${name}-${version}-${arch}.${ext}
