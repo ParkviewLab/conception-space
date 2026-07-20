@@ -52,6 +52,10 @@ jobs:
           node-version: 24.x
           cache: npm
       - run: npm ci
+      # electron's prebuilt can extract only partially after npm ci on CI's Node
+      # (extract-zip/yauzl regression, electron/electron#51619) — re-run its installer
+      # so dist/ is complete before `npm run legal` validates the Chromium notices.
+      - run: node node_modules/electron/install.js
       - run: npm run legal      # generate legal/ before electron-builder copies extraResources
       - run: npm run build
       - name: Prepare Apple API key (macOS)
