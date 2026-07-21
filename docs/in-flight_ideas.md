@@ -148,3 +148,34 @@ JSON5 / Spatialization / Filter work in
 [`space_architecture_ideas.md`](space_architecture_ideas.md); the date and type
 data ride in each node's `meta`. If it grows, it splits into its own
 `projections_ideas.md`.
+
+# 8. Under study: a Rust port (off Electron) — [`rust_port_ideas.md`](rust_port_ideas.md)
+
+Should conception-space leave Electron? The deeper notebook is
+[`rust_port_ideas.md`](rust_port_ideas.md); in brief, two designs plus a survey:
+
+- **Design A (Tauri hybrid):** keep the three.js renderer and note editor in the OS
+  webview, rewrite the small file-I/O main process in Rust. The backend port is
+  trivial, but a 3D app stakes everything on WebGL2 in the system webviews, and on
+  Linux (WebKitGTK) a WebGL2 context can silently fall to *software* rendering that
+  the app cannot even detect. That directly threatens **axiom 3** (smooth motion is
+  part of the medium) and **axiom 6** (a transparent, lag-free instrument), and it
+  breaks the iframe **PDF** handle (axiom 7) on macOS/Linux. Defensible on
+  macOS/Windows, uncomfortable on Linux; an interim at best.
+- **Design B (100% Rust) — the recommended end state:** replace three.js with a Rust
+  renderer (**three-d** recommended for its near-1:1 match to `scene.js`; **Bevy** the
+  alternative that wins the authoring gizmo and a wgpu-native future), labels and
+  chrome in an **egui** overlay, the `camera_path.js` math ported verbatim as glam
+  vectors. A native renderer *serves* axioms 3/6 rather than fighting them (no browser
+  compositor between the loop and the display). ~85% of the three.js surface maps
+  directly (see the feature table).
+- **The real cost is the note editor**, engine-independent: CodeMirror 6 + KaTeX have
+  no drop-in egui equal. Math is answered by **RaTeX** (per the PensaGrex study); the
+  pragmatic fork is a **scoped editor webview** (keep CodeMirror/PDF in a small webview,
+  everything else native) as the interim vs a fully native editor as the clean end.
+- Others surveyed (Fyrox, Godot, rend3 [archived], renderling, kiss3d, Flutter,
+  Dioxus/Blitz) — none beats three-d/Bevy; the DOM text/editor cost recurs everywhere.
+  The visionOS enactive mode (#6) is a separate RealityKit app and does not bear on
+  this. Licensing is clean (all MIT/Apache into CS's AGPL).
+
+A question under study, not a plan or a commitment.
