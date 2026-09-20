@@ -3,9 +3,5 @@ out/
 dist/
 legal/
 
-# Python (the release workflow's changelog step)
-__pycache__/
-*.py[cod]
-
 # macOS
 .DS_Store
