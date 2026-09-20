@@ -3,9 +3,5 @@ out/
 dist/
 legal/
 
-# Python (changelog tooling: scripts/generate_changelog.py)
-__pycache__/
-*.py[cod]
-
 # macOS
 .DS_Store
