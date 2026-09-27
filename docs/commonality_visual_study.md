@@ -6,7 +6,8 @@ SPDX-License-Identifier: CC-BY-4.0
 # Commonality satellites halo
 
 Describes the satellites-halo render for `commonality` declarations
-as it actually ships (v0.7.1).  See
+as it actually ships: since v0.7.4, satellites also take the
+commonality's `shape=` attribute.  See
 [`The_CNS_Language.md`](The_CNS_Language.md) for the language-level
 context.
 
