@@ -3,7 +3,7 @@
 //
 // Each bookmark captures a named viewpoint plus the HUD/atmosphere state
 // that was in effect when it was saved. "Go to bookmark" snaps the HUD
-// state instantly and then glides the camera over ~2 s.
+// state instantly and then glides the camera over ~5 s (1.5 s pre-aim, 3.5 s travel).
 
 {
   version: 1,
