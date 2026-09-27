@@ -9,7 +9,7 @@ Build and navigate 3D spaces for thinking.<BR>
 Hand-place and sculpt ideas.<BR>
 See unplanned connections.
 
-![Conception Space showing the bundled solar.cns example: the Sun, planets, and moons as labeled 3D nodes, grouped into "Rocky planets" and "Ice moons" commonality shells and connected by labeled "orbits" edges.](docs/images/hero.jpg)
+![Conception Space showing the bundled solar.cns example: the Sun, planets, and moons as labeled 3D nodes, grouped into "Rocky planets" and "Ice moons" labeled orbiting-satellite commonalities inside cluster wireframe shells, and connected by labeled "orbits" edges.](docs/images/hero.jpg)
 
 ---
 
@@ -35,9 +35,9 @@ Download the installer for your platform from the
 | Linux | `.AppImage` or `.deb` |
 
 > The **macOS** build is **signed and notarized** (Apple Developer ID), so it installs without warnings.
-> The **Windows** and **Linux** builds are not yet code-signed:
+> The **Windows** and **Linux** builds are not code-signed:
 > - **Windows:** SmartScreen → **More info** → **Run anyway**.
-> - **Linux:** make the AppImage executable first (`chmod +x Conception-Space-*.AppImage`), then run it. The `.deb` installs normally (`sudo dpkg -i`).
+> - **Linux:** make the AppImage executable first (`chmod +x conception-space-*.AppImage`), then run it. The `.deb` installs normally (`sudo dpkg -i`).
 
 ## Run from source
 

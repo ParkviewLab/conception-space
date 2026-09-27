@@ -46,7 +46,7 @@ Cognition Cache that can be made legible *at once*. So a passthrough
 conception-space is the project's central bet **at full strength**, not a feature
 bolted onto the side. That is the case for it being worth a separate, native effort.
 
-**Hard requirement (Gary):** it MUST be `immersive-ar` / passthrough — the graph
+**Decided 2026-06-21 (commit c57f699):** it MUST be `immersive-ar` / passthrough — the graph
 living in your real room, not a sealed VR void.
 
 ---
@@ -114,7 +114,7 @@ for passthrough. Three engines can feed RealityKit:
 | Unity 6.3 + PolySpatial | C# | ✅ unbounded | Ruled out — proprietary engine; against the open ethos |
 | Godot 4.5+ + Apple's RealityKit plugin | GDScript/C# | ⚠️ bounded volumes confirmed; unbounded unproven | Open-source; watch, not yet |
 
-**Decision (Gary): native SwiftUI + RealityKit + ARKit.** It is the only first-party,
+**Decided 2026-06-21 (commit c57f699): native SwiftUI + RealityKit + ARKit.** It is the only first-party,
 proven, unbounded-passthrough path; the toolchain is free with no third-party engine
 license (matches the org's minimal-dependency pattern); a Vision Pro app is Apple-only
 anyway; and the Apple Developer account + Team `2CKMPN3Y7C` already exists. Cost: a

@@ -31,7 +31,7 @@ coherent, cog-sci-grounded vocabulary.  Every term below is locked.
 
 | Concept | Term | Cog-sci grounding |
 |---|---|---|
-| The canonical file / top-level container | **Cognition Cache** (UI name); a root **Cluster** (in the schema) | Zettelkasten lineage; "residue of cognition" (northstar Intent 4) |
+| The canonical file / top-level container | **Cognition Cache** (UI name); a root **Cluster** (in the schema) | Zettelkasten lineage; "residue of cognition" (northstar's Intent 4, "Discover hidden patterns") |
 | Structural unit, nestable | **Cluster** | hierarchical grouping |
 | Individual 3D object | **Node** | — |
 | Typed relationship (replaces `edge`) | **Relationship** (holds *instances*) | typed edges; Cypher relationship-types |

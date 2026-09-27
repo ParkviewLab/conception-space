@@ -8,7 +8,7 @@ SPDX-License-Identifier: CC-BY-4.0
 A focused brainstorm of editing tools that would let the author
 **reason in 3D directly**, instead of transducing through a text
 editor.  This file is a deeper notebook on one of the ideas
-referenced by `in-flight_ideas.md` — and it serves intent #2 of the
+referenced by `in-flight_ideas.md` — and it serves Concept 2 of the
 [northstar](northstar.md): *hand-authoring as sense-making*.
 
 Status: brainstorm only.  Nothing here has been promoted to a plan.
@@ -27,7 +27,7 @@ retypes.  The reasoning happens in the *viewer* and the *editing*
 happens in the *text* — the author transduces between them mentally
 on every step.
 
-This violates the spirit of intent #2 in a way that is almost
+This violates the spirit of Concept 2 in a way that is almost
 ironic.  The whole point is that placement is reasoning, and we
 currently force the author to do their reasoning in a medium that
 doesn't support spatial perception at all.
@@ -84,7 +84,7 @@ while editing.
 - **Live measurement.**  Hover a node, see its position in the corner.
   Select two nodes, see distance.  Select three, see angle.  Numbers
   there when wanted, never displayed by default.
-- **Group-relative editing.**  Inside a `node_neighborhood`, the
+- **Group-relative editing.**  Inside a `cluster`, the
   coordinates shown and edited are relative to the group origin.
   Moving the group moves everything inside it as a unit.  This is
   already true of the data model — the editor should *show* it.
@@ -124,8 +124,8 @@ should feel continuous with the visual editing, not modal.
 
 ## D. Authoring history as artifact
 
-This is where the work gets most interesting — it ties intent #2
-directly to intent #4 (persistent thinking artifact).
+This is where the work gets most interesting — it ties Concept 2
+directly to Concept 3 (persistent thinking artifact).
 
 - **★ Annotated moves.**  When the author moves a node by more than
   a small threshold, the editor optionally pops a "why?" prompt.

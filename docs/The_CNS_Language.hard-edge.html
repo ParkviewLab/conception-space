@@ -561,7 +561,7 @@
     </p>
     <ul>
       <li><strong><code>locus=[x,y,z]</code></strong> — every <code>node</code> and every <code>cluster</code> has a locus, the defined position it occupies (relative to its parent cluster if it has one, or to the world origin if not).</li>
-      <li><strong><code>label="..."</code></strong> — almost every declaration has a human-readable label.</li>
+      <li><strong><code>label="..."</code></strong> — every declaration but <code>edge</code> has a human-readable label as a <code>label=</code> attribute; an <code>edge</code>'s label is a bare quoted string instead (see <code>edge</code> below).</li>
     </ul>
     <p>
       The rest of the attributes (colour, shape, size, brightness, file
@@ -590,21 +590,21 @@
       <p>
         The <code>&lt;id&gt;</code> is a unique identifier (used by
         <code>edge</code> and <code>commonality</code> to reference the
-        node).  Attributes are <code>key=value</code> pairs inside
-        parentheses; order doesn't matter.
+        node).  Attributes are whitespace-separated <code>key=value</code>
+        pairs inside parentheses; order doesn't matter — see
+        <em>Attribute syntax in general</em> below for the comma pitfall.
       </p>
 
       <h3 class="sub-h">Attributes</h3>
       <table class="attr-table">
         <thead><tr><th>Attribute</th><th>Type</th><th>Default</th><th>Meaning</th></tr></thead>
         <tbody>
-          <tr><td><code>locus</code></td>      <td>[x,y,z]</td> <td>required</td>       <td>Position in 3D space (relative to parent cluster, or world if none).</td></tr>
+          <tr><td><code>locus</code></td>      <td>[x,y,z]</td> <td><code>[0,0,0]</code></td> <td>Position in 3D space (relative to parent cluster, or world if none).</td></tr>
           <tr><td><code>label</code></td>      <td>string</td>  <td>id</td>             <td>Human-readable label drawn near the node.</td></tr>
           <tr><td><code>shape</code></td>      <td>enum</td>    <td><code>sphere</code></td> <td><code>sphere</code>, <code>cube</code>, <code>tetrahedron</code>, <code>octahedron</code>, <code>dodecahedron</code>, <code>icosahedron</code>, <code>cylinder</code>.</td></tr>
-          <tr><td><code>color</code></td>      <td>hex</td>     <td>parent's color</td> <td><code>#rrggbb</code> fill colour for the mesh.</td></tr>
+          <tr><td><code>color</code></td>      <td>hex</td>     <td><code>#BFBFBF</code></td> <td>Fill colour for the mesh; see <em>Attribute syntax in general</em> for the accepted forms.</td></tr>
           <tr><td><code>size</code></td>       <td>float</td>   <td>1.0</td>            <td>Scale factor.</td></tr>
-          <tr><td><code>brightness</code></td> <td>float</td>   <td>inherited</td>      <td>Light emitted by the node (affects ambient feel).</td></tr>
-          <tr><td><code>file</code></td>       <td>string</td>  <td>none</td>           <td>Path to an attached file (<code>.md</code>, <code>.pdf</code>, etc.); shown in a side panel when the node is opened.</td></tr>
+          <tr><td><code>file</code></td>       <td>string</td>  <td>none</td>           <td>Path to an attached file (<code>.md</code>, <code>.pdf</code>, etc.); shown in a modal card when the node is opened.</td></tr>
         </tbody>
       </table>
 
@@ -642,25 +642,25 @@
       <h2><span class="keyword">edge</span> — a relationship between two nodes</h2>
 
       <h3 class="sub-h">Syntax</h3>
-      <pre>edge &lt;from-id&gt; -&gt; &lt;to-id&gt; ( &lt;attributes&gt; )</pre>
+      <pre>edge &lt;from-id&gt; -&gt; &lt;to-id&gt; ( "&lt;label&gt;" &lt;attributes&gt; )</pre>
       <p>
-        The <code>-&gt;</code> is the syntactic separator.  Currently
-        all edges are directed (from → to); a future direction-less
-        form may be added.
+        The <code>-&gt;</code> is the syntactic separator.  Every edge
+        is drawn as a plain tube with no arrowhead, whichever way the
+        declaration reads.
       </p>
 
       <h3 class="sub-h">Attributes</h3>
       <table class="attr-table">
         <thead><tr><th>Attribute</th><th>Type</th><th>Default</th><th>Meaning</th></tr></thead>
         <tbody>
-          <tr><td><code>label</code></td>     <td>string</td> <td>none</td> <td>Drawn near the edge midpoint.</td></tr>
-          <tr><td><code>color</code></td>     <td>hex</td>    <td>grey</td> <td><code>#rrggbb</code> colour for the line.</td></tr>
-          <tr><td><code>thickness</code></td> <td>float</td>  <td>0.05</td> <td>Tube radius for the edge geometry.</td></tr>
+          <tr><td><em>(bare string)</em></td> <td>string</td> <td>none</td> <td>A double-quoted label, not a <code>label=</code> attribute; may appear anywhere inside the parentheses and is drawn near the edge midpoint.</td></tr>
+          <tr><td><code>color</code></td>     <td>hex</td>    <td><code>#BFBFBF</code></td> <td>Colour for the line; see <em>Attribute syntax in general</em> for the accepted forms.</td></tr>
+          <tr><td><code>thickness</code></td> <td>float</td>  <td>0.04</td> <td>Tube radius for the edge geometry.</td></tr>
         </tbody>
       </table>
 
       <h3 class="sub-h">Example</h3>
-      <pre>edge sun -&gt; earth ( label="orbits" color=#aeb014 thickness=0.08 )</pre>
+      <pre>edge sun -&gt; earth ( "orbits" color=#aeb014 thickness=0.08 )</pre>
 
       <div class="rationale">
         <h4>Rationale</h4>
@@ -710,13 +710,13 @@
       <table class="attr-table">
         <thead><tr><th>Attribute</th><th>Type</th><th>Default</th><th>Meaning</th></tr></thead>
         <tbody>
-          <tr><td><code>locus</code></td>           <td>[x,y,z]</td> <td>required</td>  <td>The cluster's origin in its parent frame (or world if top-level).</td></tr>
-          <tr><td><code>label</code></td>           <td>string</td>  <td>id</td>        <td>Cluster label drawn near its origin.</td></tr>
-          <tr><td><code>color</code></td>           <td>hex</td>     <td>grey</td>      <td>Default colour for child nodes that don't override.</td></tr>
-          <tr><td><code>brightness</code></td>      <td>float</td>   <td>inherited</td> <td>Ambient brightness inside this cluster's region.</td></tr>
-          <tr><td><code>N</code></td>               <td>int</td>     <td>none</td>      <td>Number of subdivisions for the cluster's optional Goldberg-sphere tube frame.</td></tr>
-          <tr><td><code>tube_color</code></td>     <td>hex</td>     <td>none</td>      <td>Tube frame edge colour (if <code>N</code> is set).</td></tr>
-          <tr><td><code>tube_thickness</code></td>  <td>float</td>   <td>none</td>      <td>Tube frame edge thickness.</td></tr>
+          <tr><td><code>locus</code></td>           <td>[x,y,z]</td> <td><code>[0,0,0]</code></td>  <td>The cluster's origin in its parent frame (or world if top-level).</td></tr>
+          <tr><td><code>label</code></td>           <td>string</td>  <td>id</td>        <td>Cluster label; drawn only at the shell's centre once the cluster is toggled solid.</td></tr>
+          <tr><td><code>color</code></td>           <td>hex</td>     <td><code>#BFBFBF</code></td>      <td>Colour of the cluster's own shell; child nodes do not inherit it.</td></tr>
+          <tr><td><code>brightness</code></td>      <td>float</td>   <td>1</td> <td>Multiplies the shell's colour.</td></tr>
+          <tr><td><code>N</code></td>               <td>int</td>     <td>2</td>      <td>Wireframe detail for the shell; the solid frame follows the same mesh's triangle edges (geodesic).</td></tr>
+          <tr><td><code>tube_color</code></td>     <td>hex</td>     <td>the complement of <code>color</code></td>      <td>Tube frame edge colour.</td></tr>
+          <tr><td><code>tube_thickness</code></td>  <td>float</td>   <td>1.0</td>      <td>Tube frame edge thickness, relative.</td></tr>
         </tbody>
       </table>
 
@@ -865,10 +865,10 @@ commonality rocky_planets   ( color=#a08070 )  { mercury, venus, earth, mars }</
           <li>It has zero overload with programming concepts (no OO baggage like <code>class</code>; no key-value overload like <code>attribute</code> or <code>property</code>; no data-structure overload like <code>set</code>).</li>
         </ul>
         <p>
-          The cost is length — 11 characters, 5 syllables — but
-          <code>.cns</code> files are expected to be <em>read more
-          than typed</em> (AI authoring is the primary write path;
-          humans read), so verbosity is acceptable.
+          The cost is length — 11 characters, 5 syllables — but a
+          <code>.cns</code> file is read far more often than it is
+          typed, so verbosity is acceptable for a construct declared
+          this rarely.
         </p>
       </div>
 
@@ -939,14 +939,14 @@ commonality rocky_planets   ( color=#a08070 )  { mercury, venus, earth, mars }</
     </p>
     <pre>&lt;keyword&gt; &lt;id&gt; ( key=value  key=value  key=value )</pre>
     <ul>
-      <li>Whitespace between attributes is the separator; commas are also accepted and sometimes improve readability.</li>
+      <li>Whitespace between attributes is the separator.  A comma is not: written right after an unquoted value (<code>shape=cube,</code>) it becomes part of that value, so <code>cube,</code> is not a recognised shape.  A comma after a quoted string or a bracketed array is harmless, since the closing quote or bracket already ends the value.</li>
       <li><code>key</code> is a bare identifier.</li>
       <li><code>value</code> types:
         <ul>
           <li><strong>number</strong>: <code>1</code>, <code>0.5</code>, <code>-3.7</code></li>
           <li><strong>integer</strong>: <code>5</code>, <code>12</code> (used for things like <code>N=5</code>).</li>
           <li><strong>string</strong>: <code>"Mars"</code>, <code>"orbits"</code> (always double-quoted).</li>
-          <li><strong>hex color</strong>: <code>#ff8844</code>, <code>#cccc33</code>.</li>
+          <li><strong>color</strong>: <code>#RGB</code>, <code>#RGBA</code>, <code>#RRGGBB</code>, or <code>#RRGGBBAA</code> hex, or the function forms <code>rgb[r,g,b]</code> / <code>rgba[r,g,b,a]</code> (r/g/b/a as 0.0–1.0 floats).  An alpha channel sets a node's material opacity; edges, clusters, and commonalities accept alpha but ignore it, taking only the hex.</li>
           <li><strong>array</strong> (3-vector for <code>locus=</code>): <code>[16, -13, 6]</code>.</li>
           <li><strong>enum</strong>: bare identifier matching one of the allowed values (e.g. <code>shape=sphere</code>).</li>
         </ul>
@@ -969,11 +969,11 @@ cluster inner_planets ( locus=[0,0,0] ) {
       <h2>A worked example</h2>
     </div>
     <p class="section-lede">
-      <code>solar.cns</code> in the shipping syntax — every construct
-      shown here is supported as of v0.7.4.  Earth lives in
-      <code>earth_system</code> (its spatial home — a cluster) but also
-      belongs to <code>inhabited</code> AND <code>rocky_planets</code>
-      (two commonalities).  No conflict.
+      Close to the bundled <code>examples/solar.cns</code> but trimmed
+      for exposition — every construct shown here is supported as of
+      v0.7.4.  Earth lives in <code>earth_system</code> (its spatial
+      home — a cluster) but also belongs to <code>inhabited</code> AND
+      <code>rocky_planets</code> (two commonalities).  No conflict.
     </p>
     <pre># Solar system — conception-space example.
 # Node locus values are relative to their parent cluster's locus.
@@ -992,6 +992,11 @@ cluster solar_system ( label="Solar System" N=6 color=#CCCC33 brightness=2 tube_
         node callisto ( shape=icosahedron  locus=[2,-2,-2]  label="Callisto" color=#606870  size=0.5 )
     }
 
+    cluster saturn_system ( label="Saturn System" locus=[27,-2,10] N=3 color=#2a2a5a ) {
+        node saturn    ( shape=cylinder    locus=[0,0,0]  label="Saturn"    color=#e8d080 )
+        node enceladus ( shape=tetrahedron locus=[2,2,-2] label="Enceladus" color=#ddeeff size=0.5 )
+    }
+
     cluster earth_system ( label="Earth System" locus=[10,2,-5] N=2 color=#223355 ) {
         node earth ( shape=octahedron  locus=[0,0,0]  label="Earth" color=#4488ee file="earth_notes.md" )
         node moon  ( shape=icosahedron locus=[1,3,2]  label="Moon"  color=#aaaaaa size=0.5 )
@@ -1005,19 +1010,21 @@ cluster solar_system ( label="Solar System" N=6 color=#CCCC33 brightness=2 tube_
 }
 
 # Edges — orbital relationships.
-edge sun -&gt; mercury  ( label="orbits" color=#aeb014 thickness=0.08 )
-edge sun -&gt; venus    ( label="orbits" color=#aeb014 thickness=0.08 )
-edge sun -&gt; earth    ( label="orbits" color=#aeb014 thickness=0.08 )
-edge sun -&gt; mars     ( label="orbits" color=#aeb014 thickness=0.08 )
-edge sun -&gt; jupiter  ( label="orbits" color=#aeb014 thickness=0.08 )
+edge sun -&gt; mercury  ( "orbits" color=#aeb014 thickness=0.08 )
+edge sun -&gt; venus    ( "orbits" color=#aeb014 thickness=0.08 )
+edge sun -&gt; earth    ( "orbits" color=#aeb014 thickness=0.08 )
+edge sun -&gt; mars     ( "orbits" color=#aeb014 thickness=0.08 )
+edge sun -&gt; jupiter  ( "orbits" color=#aeb014 thickness=0.08 )
+edge sun -&gt; saturn   ( "orbits" color=#aeb014 thickness=0.08 )
 
-edge earth   -&gt; moon      ( label="orbits" color=#336655 )
-edge mars    -&gt; phobos    ( label="orbits" color=#663322 )
-edge mars    -&gt; deimos    ( label="orbits" color=#663322 )
-edge jupiter -&gt; io        ( label="orbits" color=#665533 )
-edge jupiter -&gt; europa    ( label="orbits" color=#665533 )
-edge jupiter -&gt; ganymede  ( label="orbits" color=#665533 )
-edge jupiter -&gt; callisto  ( label="orbits" color=#665533 )
+edge earth   -&gt; moon      ( "orbits" color=#336655 )
+edge mars    -&gt; phobos    ( "orbits" color=#663322 )
+edge mars    -&gt; deimos    ( "orbits" color=#663322 )
+edge jupiter -&gt; io        ( "orbits" color=#665533 )
+edge jupiter -&gt; europa    ( "orbits" color=#665533 )
+edge jupiter -&gt; ganymede  ( "orbits" color=#665533 )
+edge jupiter -&gt; callisto  ( "orbits" color=#665533 )
+edge saturn  -&gt; enceladus ( "orbits" color=#666633 )
 
 # Commonalities — non-spatial groupings by shared property.
 commonality inhabited      ( color=#ff8844 )               { earth }
@@ -1026,7 +1033,7 @@ commonality ice_moons      ( color=#88ccff )               { europa, ganymede, c
     <ul>
       <li><code>earth</code> lives in <code>earth_system</code> (its spatial home — a cluster) but also belongs to <code>inhabited</code> AND <code>rocky_planets</code> (two commonalities — non-spatial groupings).  No conflict.</li>
       <li><code>mars</code> lives in <code>mars_system</code> but also belongs to <code>rocky_planets</code> alongside the others.</li>
-      <li><code>ice_moons</code> includes <code>enceladus</code> which lives in <code>saturn_system</code> (if declared), demonstrating that commonality membership crosses cluster boundaries freely.</li>
+      <li><code>ice_moons</code> includes <code>enceladus</code>, which lives in <code>saturn_system</code> — demonstrating that commonality membership crosses cluster boundaries freely.</li>
     </ul>
   </section>
 
@@ -1194,7 +1201,7 @@ commonality ice_moons      ( color=#88ccff )               { europa, ganymede, c
         <tr><td><strong>Macros / generation</strong></td>        <td>The whole point is hand-authoring as sense-making.  Programmatic generation removes the reasoning.</td></tr>
         <tr><td><strong>Auto-snap on coordinates</strong></td>   <td>If the author types <code>locus=[10.0327, ...]</code>, that exact value is what they meant.  No silent rounding.</td></tr>
         <tr><td><strong>Default styling</strong></td>            <td>Beyond very safe minimums (grey edges, default sphere shape), every visual choice is the author's.</td></tr>
-        <tr><td><strong>A separate "edit mode" syntax</strong></td><td>Editing happens in the viewer; the <code>.cns</code> file is the canonical representation but not the editing surface.</td></tr>
+        <tr><td><strong>A separate "edit mode" syntax</strong></td><td>The viewer's transform gizmo moves a mesh only until the next reload and writes nothing back; editing the space means editing the <code>.cns</code> text, which is both the canonical representation and the editing surface.</td></tr>
       </tbody>
     </table>
   </section>

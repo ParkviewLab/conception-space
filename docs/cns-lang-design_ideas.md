@@ -3,6 +3,10 @@ SPDX-FileCopyrightText: 2026 Gary Frattarola <garyf@parkviewlab.ai>
 SPDX-License-Identifier: CC-BY-4.0
 -->
 
+# CNS language design ideas
+
+A research survey of cognitive-science DSLs and the syntax lessons they offer, gathered while thinking about what a future `.cns` language could borrow from them. Not a plan or a commitment — see [`in-flight_ideas.md`](in-flight_ideas.md).
+
 Not many are “DSLs for cognitive science” in the narrow programming-language sense, but several families are directly relevant.
 
 The best ones to study:

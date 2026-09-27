@@ -1,6 +1,6 @@
 {
   "name": "conception-space",
-  "version": "0.8.6",
+  "version": "0.8.7-dev0",
   "description": "3D concept graph visualiser",
   "author": "Gary Frattarola <garyf@parkviewlab.ai>",
   "license": "AGPL-3.0-or-later",
@@ -27,7 +27,7 @@
   "devDependencies": {
     "@eslint/js": "^10.0.1",
     "electron": "^43.1.1",
-    "electron-builder": "^26.15.3",
+    "electron-builder": "^26.16.1",
     "electron-vite": "^5.0.0",
     "eslint": "^10.5.0",
     "generate-license-file": "^4.2.1",
