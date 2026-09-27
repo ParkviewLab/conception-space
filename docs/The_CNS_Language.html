@@ -788,13 +788,12 @@
       <table class="attr-table">
         <thead><tr><th>Attribute</th><th>Type</th><th>Default</th><th>Meaning</th></tr></thead>
         <tbody>
-          <tr><td>locus</td>      <td>[x,y,z]</td><td>required</td>     <td>Position in 3D space (relative to parent cluster, or world if none).</td></tr>
+          <tr><td>locus</td>      <td>[x,y,z]</td><td>[0,0,0]</td>      <td>Position in 3D space (relative to parent cluster, or world if none).</td></tr>
           <tr><td>label</td>      <td>string</td> <td>id</td>           <td>Human-readable label drawn near the node.</td></tr>
           <tr><td>shape</td>      <td>enum</td>   <td>sphere</td>       <td>sphere, cube, tetrahedron, octahedron, dodecahedron, icosahedron, cylinder.</td></tr>
-          <tr><td>color</td>      <td>hex</td>    <td>parent's</td>     <td>#rrggbb fill colour for the mesh.</td></tr>
+          <tr><td>color</td>      <td>hex</td>    <td>#BFBFBF</td>      <td>Fill colour for the mesh (see general syntax for accepted forms).</td></tr>
           <tr><td>size</td>       <td>float</td>  <td>1.0</td>          <td>Scale factor.</td></tr>
-          <tr><td>brightness</td> <td>float</td>  <td>inherited</td>    <td>Light emitted by the node.</td></tr>
-          <tr><td>file</td>       <td>string</td> <td>none</td>         <td>Path to an attached file (.md, .pdf, etc.).</td></tr>
+          <tr><td>file</td>       <td>string</td> <td>none</td>         <td>Path to an attached file (.md, .pdf, etc.); shown in a modal card.</td></tr>
         </tbody>
       </table>
 
@@ -823,18 +822,18 @@
       </div>
       <p class="kw-whatis">A directed relationship between two nodes.</p>
 
-      <pre class="code code-block"><span class="kw">edge</span> <span class="attr">&lt;from-id&gt;</span> -&gt; <span class="attr">&lt;to-id&gt;</span> ( <span class="attr">key</span>=<span class="num">value</span>  ... )</pre>
+      <pre class="code code-block"><span class="kw">edge</span> <span class="attr">&lt;from-id&gt;</span> -&gt; <span class="attr">&lt;to-id&gt;</span> ( <span class="str">"&lt;label&gt;"</span> <span class="attr">key</span>=<span class="num">value</span>  ... )</pre>
 
       <table class="attr-table">
         <thead><tr><th>Attribute</th><th>Type</th><th>Default</th><th>Meaning</th></tr></thead>
         <tbody>
-          <tr><td>label</td>     <td>string</td><td>none</td>  <td>Drawn near the edge midpoint.</td></tr>
-          <tr><td>color</td>     <td>hex</td>   <td>grey</td>  <td>#rrggbb colour for the line.</td></tr>
-          <tr><td>thickness</td> <td>float</td> <td>0.05</td>  <td>Tube radius for the edge geometry.</td></tr>
+          <tr><td>(bare string)</td> <td>string</td><td>none</td>  <td>A double-quoted label, not a <code>label=</code> attribute; drawn near the edge midpoint.</td></tr>
+          <tr><td>color</td>     <td>hex</td>   <td>#BFBFBF</td>  <td>Colour for the line (see general syntax for accepted forms).</td></tr>
+          <tr><td>thickness</td> <td>float</td> <td>0.04</td>  <td>Tube radius for the edge geometry.</td></tr>
         </tbody>
       </table>
 
-      <pre class="code code-block"><span class="kw">edge</span> <span class="attr">sun</span> -&gt; <span class="attr">earth</span> ( <span class="attr">label</span>=<span class="str">"orbits"</span>  <span class="attr">color</span>=<span class="num">#aeb014</span>  <span class="attr">thickness</span>=<span class="num">0.08</span> )</pre>
+      <pre class="code code-block"><span class="kw">edge</span> <span class="attr">sun</span> -&gt; <span class="attr">earth</span> ( <span class="str">"orbits"</span>  <span class="attr">color</span>=<span class="num">#aeb014</span>  <span class="attr">thickness</span>=<span class="num">0.08</span> )</pre>
 
       <p class="rationale">
         <span class="label">Why edges carry as much reasoning as nodes</span>
@@ -866,13 +865,13 @@
       <table class="attr-table">
         <thead><tr><th>Attribute</th><th>Type</th><th>Default</th><th>Meaning</th></tr></thead>
         <tbody>
-          <tr><td>locus</td>          <td>[x,y,z]</td><td>required</td>  <td>The cluster's origin in its parent frame.</td></tr>
-          <tr><td>label</td>          <td>string</td><td>id</td>          <td>Drawn near the cluster's origin.</td></tr>
-          <tr><td>color</td>          <td>hex</td>   <td>grey</td>        <td>Default colour for child nodes that don't override.</td></tr>
-          <tr><td>brightness</td>     <td>float</td> <td>inherited</td>   <td>Ambient brightness inside this cluster's region.</td></tr>
-          <tr><td>N</td>              <td>int</td>   <td>none</td>        <td>Goldberg-sphere subdivision count for the optional tube frame.</td></tr>
-          <tr><td>tube_color</td>    <td>hex</td>   <td>none</td>        <td>Tube-frame edge colour (if N is set).</td></tr>
-          <tr><td>tube_thickness</td> <td>float</td> <td>none</td>        <td>Tube-frame edge thickness.</td></tr>
+          <tr><td>locus</td>          <td>[x,y,z]</td><td>[0,0,0]</td>  <td>The cluster's origin in its parent frame.</td></tr>
+          <tr><td>label</td>          <td>string</td><td>id</td>          <td>Drawn only at the shell's centre once the cluster is toggled solid.</td></tr>
+          <tr><td>color</td>          <td>hex</td>   <td>#BFBFBF</td>        <td>Colour of the cluster's own shell; child nodes do not inherit it.</td></tr>
+          <tr><td>brightness</td>     <td>float</td> <td>1</td>   <td>Multiplies the shell's colour.</td></tr>
+          <tr><td>N</td>              <td>int</td>   <td>2</td>        <td>Wireframe detail; the solid frame follows the same mesh's triangle edges (geodesic).</td></tr>
+          <tr><td>tube_color</td>    <td>hex</td>   <td>complement of color</td>        <td>Tube-frame edge colour.</td></tr>
+          <tr><td>tube_thickness</td> <td>float</td> <td>1.0</td>        <td>Tube-frame edge thickness, relative.</td></tr>
         </tbody>
       </table>
 
@@ -996,8 +995,8 @@
          =========================================================== -->
     <h2 class="section-title">A worked example</h2>
     <p class="section-lede">
-      <code>solar.cns</code> in the shipping syntax (every construct
-      below ships as of v0.7.4).  Earth lives in
+      Close to the bundled <code>examples/solar.cns</code> but trimmed
+      for exposition (every construct below ships as of v0.7.4).  Earth lives in
       <code>earth_system</code> (spatial) but also belongs to
       <code>inhabited</code> and <code>rocky_planets</code>
       (commonalities) — no conflict.
@@ -1033,10 +1032,10 @@
 }
 
 <span class="com"># Edges — orbital relationships.</span>
-<span class="kw">edge</span> <span class="attr">sun</span> -&gt; <span class="attr">mercury</span>  ( <span class="attr">label</span>=<span class="str">"orbits"</span>  <span class="attr">color</span>=<span class="num">#aeb014</span> )
-<span class="kw">edge</span> <span class="attr">sun</span> -&gt; <span class="attr">venus</span>    ( <span class="attr">label</span>=<span class="str">"orbits"</span>  <span class="attr">color</span>=<span class="num">#aeb014</span> )
-<span class="kw">edge</span> <span class="attr">sun</span> -&gt; <span class="attr">earth</span>    ( <span class="attr">label</span>=<span class="str">"orbits"</span>  <span class="attr">color</span>=<span class="num">#aeb014</span> )
-<span class="kw">edge</span> <span class="attr">earth</span> -&gt; <span class="attr">moon</span>   ( <span class="attr">label</span>=<span class="str">"orbits"</span>  <span class="attr">color</span>=<span class="num">#336655</span> )
+<span class="kw">edge</span> <span class="attr">sun</span> -&gt; <span class="attr">mercury</span>  ( <span class="str">"orbits"</span>  <span class="attr">color</span>=<span class="num">#aeb014</span> )
+<span class="kw">edge</span> <span class="attr">sun</span> -&gt; <span class="attr">venus</span>    ( <span class="str">"orbits"</span>  <span class="attr">color</span>=<span class="num">#aeb014</span> )
+<span class="kw">edge</span> <span class="attr">sun</span> -&gt; <span class="attr">earth</span>    ( <span class="str">"orbits"</span>  <span class="attr">color</span>=<span class="num">#aeb014</span> )
+<span class="kw">edge</span> <span class="attr">earth</span> -&gt; <span class="attr">moon</span>   ( <span class="str">"orbits"</span>  <span class="attr">color</span>=<span class="num">#336655</span> )
 
 <span class="com"># Commonalities — non-spatial groupings by shared property.</span>
 <span class="kw">commonality</span> <span class="attr">inhabited</span>     ( <span class="attr">color</span>=<span class="num">#ff8844</span> )  { <span class="attr">earth</span> }
@@ -1245,7 +1244,7 @@
         </li>
         <li>
           <span class="missing">A separate "edit mode" syntax</span>
-          <span class="why">Editing happens in the viewer; the <code>.cns</code> file is the canonical representation but not the editing surface.</span>
+          <span class="why">The viewer's transform gizmo moves a mesh only until the next reload and writes nothing back; editing the space means editing the <code>.cns</code> text, which is both the canonical representation and the editing surface.</span>
         </li>
       </ul>
     </div>

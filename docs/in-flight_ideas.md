@@ -10,7 +10,7 @@ Dring flight to a bookmark, show a camera view that constantly points the camera
 
 The project has no tools for editing the 3D space. Every edit today
 is hand-typed coordinates in a text editor, then a save and a switch
-to the viewer — a sharp mismatch with intent #2 of the
+to the viewer — a sharp mismatch with Concept 2 of the
 [northstar](northstar.md) (*hand-authoring as sense-making*).
 
 This idea has its own deeper notebook: see
@@ -68,8 +68,8 @@ were explicitly punted at the time and remain on the shelf:
 # 5. Import from existing knowledge bases (Joplin / Obsidian)
 
 Most people don't start from a blank `.cns` — they already have a corpus.
-This is the on-ramp for northstar intent #3 (*the space as an interface to
-a living corpus*): **open a Joplin notebook (via
+This is the on-ramp for the northstar's Axiom 7 (*a node is a handle onto
+content*: the space as an interface to a living corpus): **open a Joplin notebook (via
 [jonobones](https://github.com/ParkviewLab/jonobones)) or an Obsidian
 vault, instantiate its notes as nodes, then hand the author the spatial
 tools to regroup, rearrange, and reshape them** into a place they can think
@@ -90,7 +90,7 @@ space, reached into and reshaped with your hands. Framed against the
 [northstar](northstar.md) (Concept 4) as the **enactive** mode of the
 visual-cognition thesis — the bet at full strength, not a port.
 
-Hard requirement (Gary): it MUST be passthrough, which forces a native renderer.
+Decided 2026-06-21 (commit c57f699): it MUST be passthrough, which forces a native renderer.
 Decided engine: **native SwiftUI + RealityKit + ARKit** (Unity ruled out as a
 proprietary engine; Godot watched as the open-source option). A **separate repo**,
 sharing the Cognition Cache JSON5 schema + test corpus as the cross-repo source of
@@ -179,3 +179,56 @@ Should conception-space leave Electron? The deeper notebook is
   this. Licensing is clean (all MIT/Apache into CS's AGPL).
 
 A question under study, not a plan or a commitment.
+
+# 9. Cognitive-science DSL survey — [`cns-lang-design_ideas.md`](cns-lang-design_ideas.md)
+
+A research survey of cognitive-science DSLs (Conceptual Spaces, RCC8/QSR,
+CogSketch, ontology languages, scene DSLs) and the syntax lessons they
+offer — declarative relations, typed edges, containment, constraints over
+coordinates, optional verbosity — gathered while thinking about directions
+the `.cns` language could take. Not a plan or a commitment; see the
+notebook for the full survey.
+
+# 10. Import and auto-arrange nodes into a target cluster model
+
+If each node stands for a markdown note, a bulk-import tool could take a
+best guess at arranging the imported nodes in space — spherical, planar,
+galaxy-like, toroid, and so on, each with its own controls — and offer
+tools to adjust the automatic placement afterward, possibly grouping
+further by frontmatter. Downstream of, and in tension with, hand-authoring
+(Concept 2) and Axiom 1 (placement is argument): any such tool is a
+starting proposal for the author to rework, never a final placement.
+
+# 11. A table of discovery
+
+A view that shows the beginnings of threads to follow, to learn a subject
+by walking outward from one node.
+
+# 12. A rectangular containing shape for clusters
+
+Alongside the wireframe shell, offer a 3D rectangular bound sized to fit
+the cluster's contents in each dimension — a more custom visual
+representation than a sphere, showing the extent along each axis as a
+separate reference.
+
+# 13. Remaining visual-editing ideas
+
+Carried over from an older, unheaded notes file:
+
+- Node size tied to its attached file's content size.
+- Drag-select a rectangular region of nodes to turn the selection into a
+  cluster.
+- Toggle a node translucent to reveal a panel inside it holding an
+  AI-generated (human-editable) title and summary for its content — text
+  summary for a note, visual summary for an image.
+- An AI overlay distinct from the author's own placements and
+  connections, showing what an AI added, placed, or connected.
+
+# 14. A direction-less edge form
+
+Every `edge` today is declared and drawn as directed, `from -> to`, with
+no arrowhead in the render (see [`The_CNS_Language.md`](The_CNS_Language.md)).
+A direction-less form might read more naturally for a relationship with no
+inherent direction (`related_to`, `analogous_to`). Not decided; the
+current directed syntax already covers a direction-less relationship by
+convention, so the value of a second form is unclear.
