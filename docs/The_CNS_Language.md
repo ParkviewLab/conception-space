@@ -46,8 +46,9 @@ Two attributes deserve early mention because they appear everywhere:
 - **`locus=[x,y,z]`** — every `node` and every `cluster` has a
   locus, the defined position it occupies (relative to its parent
   cluster if it has one, or to the world origin if not).
-- **`label="..."`** — almost every declaration has a human-readable
-  label.
+- **`label="..."`** — every declaration but `edge` has a human-readable
+  label as a `label=` attribute; an `edge`'s label is a bare quoted
+  string instead (see `edge` below).
 
 The rest of the attributes (colour, shape, size, brightness, file
 pointer, edge thickness, ...) are construct-specific and covered
@@ -66,20 +67,20 @@ node <id> ( <attributes> )
 ```
 
 The `<id>` is a unique identifier (used by `edge` and `commonality`
-to reference the node).  Attributes are comma-separated `key=value`
-pairs inside parentheses; order doesn't matter.
+to reference the node).  Attributes are whitespace-separated
+`key=value` pairs inside parentheses; order doesn't matter — see
+*Attribute syntax in general* below for the comma pitfall.
 
 ### Attributes
 
 | Attribute    | Type    | Default        | Meaning                                          |
 | ------------ | ------- | -------------- | ------------------------------------------------ |
-| `locus`      | [x,y,z] | required       | Position in 3D space (relative to parent cluster, or world if none). |
+| `locus`      | [x,y,z] | `[0,0,0]`      | Position in 3D space (relative to parent cluster, or world if none). |
 | `label`      | string  | id             | Human-readable label drawn near the node.        |
 | `shape`      | enum    | `sphere`       | `sphere`, `cube`, `tetrahedron`, `octahedron`, `dodecahedron`, `icosahedron`, `cylinder`. |
-| `color`      | hex     | parent's color | `#rrggbb` fill colour for the mesh.              |
+| `color`      | hex     | `#BFBFBF`      | Fill colour for the mesh; see *Attribute syntax in general* for the accepted forms. |
 | `size`       | float   | 1.0            | Scale factor.                                    |
-| `brightness` | float   | inherited      | Light emitted by the node (affects ambient feel). |
-| `file`       | string  | none           | Path to an attached file (`.md`, `.pdf`, etc.); shown in a side panel when the node is opened. |
+| `file`       | string  | none           | Path to an attached file (`.md`, `.pdf`, etc.); shown in a modal card when the node is opened. |
 
 ### Example
 
@@ -108,24 +109,24 @@ The language refuses to provide one.
 ### Syntax
 
 ```
-edge <from-id> -> <to-id> ( <attributes> )
+edge <from-id> -> <to-id> ( "<label>" <attributes> )
 ```
 
-The `->` is the syntactic separator.  Currently all edges are
-directed (from → to); a future direction-less form may be added.
+The `->` is the syntactic separator.  Every edge is drawn as a plain
+tube with no arrowhead, whichever way the declaration reads.
 
 ### Attributes
 
-| Attribute    | Type    | Default | Meaning                                                                            |
-| ------------ | ------- | ------- | ---------------------------------------------------------------------------------- |
-| `label`      | string  | none    | Drawn near the edge midpoint.                                                       |
-| `color`      | hex     | grey    | `#rrggbb` colour for the line.                                                      |
-| `thickness`  | float   | 0.05    | Tube radius for the edge geometry.                                                  |
+| Attribute       | Type    | Default   | Meaning                                                                            |
+| --------------- | ------- | --------- | ------------------------------------------------------------------------------------ |
+| *(bare string)* | string  | none      | A double-quoted label, not a `label=` attribute; may appear anywhere inside the parentheses and is drawn near the edge midpoint. |
+| `color`         | hex     | `#BFBFBF` | Colour for the line; see *Attribute syntax in general* for the accepted forms.       |
+| `thickness`     | float   | 0.04      | Tube radius for the edge geometry.                                                   |
 
 ### Example
 
 ```
-edge sun -> earth ( label="orbits" color=#aeb014 thickness=0.08 )
+edge sun -> earth ( "orbits" color=#aeb014 thickness=0.08 )
 ```
 
 ### Rationale
@@ -163,15 +164,15 @@ reference frame for its children.
 
 ### Attributes
 
-| Attribute         | Type    | Default      | Meaning                                                                        |
-| ----------------- | ------- | ------------ | ------------------------------------------------------------------------------ |
-| `locus`           | [x,y,z] | required     | The cluster's origin in its parent frame (or world if top-level).               |
-| `label`           | string  | id           | Cluster label drawn near its origin.                                            |
-| `color`           | hex     | grey         | Default colour for child nodes that don't override.                             |
-| `brightness`      | float   | inherited    | Ambient brightness inside this cluster's region.                                |
-| `N`               | int     | none         | Number of subdivisions for the cluster's optional Goldberg-sphere tube frame.   |
-| `tube_color`     | hex     | none         | Tube frame edge colour (if `N` is set).                                         |
-| `tube_thickness`  | float   | none         | Tube frame edge thickness.                                                      |
+| Attribute         | Type    | Default                   | Meaning                                                                        |
+| ----------------- | ------- | -------------------------- | ------------------------------------------------------------------------------ |
+| `locus`           | [x,y,z] | `[0,0,0]`                   | The cluster's origin in its parent frame (or world if top-level).               |
+| `label`           | string  | id                          | Cluster label; drawn only at the shell's centre once the cluster is toggled solid. |
+| `color`           | hex     | `#BFBFBF`                   | Colour of the cluster's own shell; child nodes do not inherit it.                |
+| `brightness`      | float   | 1                           | Multiplies the shell's colour.                                                  |
+| `N`               | int     | 2                           | Wireframe detail for the shell; the solid frame follows the same mesh's triangle edges (geodesic). |
+| `tube_color`      | hex     | the complement of `color`  | Tube frame edge colour.                                                         |
+| `tube_thickness`  | float   | 1.0                         | Tube frame edge thickness, relative.                                            |
 
 ### Example
 
@@ -308,9 +309,9 @@ full story.  The short version:
   like `class`; no key-value overload like `attribute` or
   `property`; no data-structure overload like `set` in JavaScript).
 
-The cost is length — 11 characters, 5 syllables — but `.cns` files
-are expected to be **read more than typed** (AI authoring is the
-primary write path; humans read), so verbosity is acceptable.
+The cost is length — 11 characters, 5 syllables — but a `.cns` file
+is read far more often than it is typed, so verbosity is acceptable
+for a construct declared this rarely.
 
 > *Status:* shipping today (v0.7.1) with the satellites halo
 > render.  An earlier `style=lines` constellation render shipped
@@ -363,15 +364,21 @@ All declarations use the same attribute pattern:
 <keyword> <id> ( key=value  key=value  key=value )
 ```
 
-- Whitespace between attributes is the separator; commas are also
-  accepted and sometimes improve readability.
+- Whitespace between attributes is the separator.  A comma is not: written
+  right after an unquoted value (`shape=cube,`) it becomes part of that
+  value, so `cube,` is not a recognised shape.  A comma after a quoted
+  string or a bracketed array is harmless, since the closing quote or
+  bracket already ends the value.
 - `key` is a bare identifier.
 - `value` types:
   - **number**: `1`, `0.5`, `-3.7`
   - **integer**: `5`, `12` (used for things like `N=5`).
   - **string**: `"Mars"`, `"orbits"` (always double-quoted).
-  - **hex color**: `#ff8844`, `#cccc33` (six hex digits, no
-    alpha currently).
+  - **color**: `#RGB`, `#RGBA`, `#RRGGBB`, or `#RRGGBBAA` hex, or the
+    function forms `rgb[r,g,b]` / `rgba[r,g,b,a]` (r/g/b/a as 0.0–1.0
+    floats).  An alpha channel sets a node's material opacity; edges,
+    clusters, and commonalities accept alpha but ignore it, taking only
+    the hex.
   - **array** (3-vector for `locus=`): `[16, -13, 6]`.
   - **enum**: bare identifier matching one of the allowed values
     (e.g. `shape=sphere`).
@@ -391,8 +398,10 @@ cluster inner_planets ( locus=[0,0,0] ) {
 
 ## A worked example
 
-This is `solar.cns` written in the shipping syntax — every
-construct shown here is supported as of v0.7.4.
+A worked example in the shipping syntax, close to the bundled
+[`examples/solar.cns`](../src/renderer/public/examples/solar.cns) but
+trimmed for exposition — every construct shown here is supported as
+of v0.7.4.
 
 ```
 # Solar system — conception-space example.
@@ -412,6 +421,11 @@ cluster solar_system ( label="Solar System" N=6 color=#CCCC33 brightness=2 tube_
         node callisto ( shape=icosahedron  locus=[2,-2,-2]  label="Callisto" color=#606870  size=0.5 )
     }
 
+    cluster saturn_system ( label="Saturn System" locus=[27,-2,10] N=3 color=#2a2a5a ) {
+        node saturn    ( shape=cylinder    locus=[0,0,0]  label="Saturn"    color=#e8d080 )
+        node enceladus ( shape=tetrahedron locus=[2,2,-2] label="Enceladus" color=#ddeeff size=0.5 )
+    }
+
     cluster earth_system ( label="Earth System" locus=[10,2,-5] N=2 color=#223355 ) {
         node earth ( shape=octahedron  locus=[0,0,0]  label="Earth" color=#4488ee file="earth_notes.md" )
         node moon  ( shape=icosahedron locus=[1,3,2]  label="Moon"  color=#aaaaaa size=0.5 )
@@ -425,19 +439,21 @@ cluster solar_system ( label="Solar System" N=6 color=#CCCC33 brightness=2 tube_
 }
 
 # Edges — orbital relationships.
-edge sun -> mercury  ( label="orbits" color=#aeb014 thickness=0.08 )
-edge sun -> venus    ( label="orbits" color=#aeb014 thickness=0.08 )
-edge sun -> earth    ( label="orbits" color=#aeb014 thickness=0.08 )
-edge sun -> mars     ( label="orbits" color=#aeb014 thickness=0.08 )
-edge sun -> jupiter  ( label="orbits" color=#aeb014 thickness=0.08 )
+edge sun -> mercury  ( "orbits" color=#aeb014 thickness=0.08 )
+edge sun -> venus    ( "orbits" color=#aeb014 thickness=0.08 )
+edge sun -> earth    ( "orbits" color=#aeb014 thickness=0.08 )
+edge sun -> mars     ( "orbits" color=#aeb014 thickness=0.08 )
+edge sun -> jupiter  ( "orbits" color=#aeb014 thickness=0.08 )
+edge sun -> saturn   ( "orbits" color=#aeb014 thickness=0.08 )
 
-edge earth   -> moon      ( label="orbits" color=#336655 )
-edge mars    -> phobos    ( label="orbits" color=#663322 )
-edge mars    -> deimos    ( label="orbits" color=#663322 )
-edge jupiter -> io        ( label="orbits" color=#665533 )
-edge jupiter -> europa    ( label="orbits" color=#665533 )
-edge jupiter -> ganymede  ( label="orbits" color=#665533 )
-edge jupiter -> callisto  ( label="orbits" color=#665533 )
+edge earth   -> moon      ( "orbits" color=#336655 )
+edge mars    -> phobos    ( "orbits" color=#663322 )
+edge mars    -> deimos    ( "orbits" color=#663322 )
+edge jupiter -> io        ( "orbits" color=#665533 )
+edge jupiter -> europa    ( "orbits" color=#665533 )
+edge jupiter -> ganymede  ( "orbits" color=#665533 )
+edge jupiter -> callisto  ( "orbits" color=#665533 )
+edge saturn  -> enceladus ( "orbits" color=#666633 )
 
 # Commonalities — non-spatial groupings by shared property.
 commonality inhabited      ( color=#ff8844 )               { earth }
@@ -452,9 +468,9 @@ Notice:
   commonalities — non-spatial groupings).  No conflict.
 - `mars` lives in `mars_system` but also belongs to `rocky_planets`
   alongside the others.
-- `ice_moons` includes `enceladus` which lives in `saturn_system`
-  (if declared), demonstrating that commonality membership crosses
-  cluster boundaries freely.
+- `ice_moons` includes `enceladus`, which lives in `saturn_system` —
+  demonstrating that commonality membership crosses cluster
+  boundaries freely.
 
 ---
 
@@ -529,8 +545,8 @@ The flat construct names sets of nodes that share some property —
   concept formation and category theory in cog-sci (Rosch's
   prototype theory; Wittgenstein's family resemblance; Gentner's
   structure-mapping).  Long (11 chars, 5 syllables) but the
-  language is expected to be AI-written more than human-typed —
-  verbosity is acceptable for low-frequency declarations.
+  construct is declared rarely in a file — verbosity is acceptable
+  for a low-frequency declaration.
 
 `commonality` won on the strength of being *semantically the right
 word*: it names exactly what the construct does (groups things by
@@ -601,7 +617,7 @@ These are anti-features.  Their absence is *part of the design*.
 | **Macros / generation**      | The whole point is hand-authoring as sense-making.  Programmatic generation removes the reasoning.    |
 | **Auto-snap on coordinates** | If the author types `locus=[10.0327, ...]`, that exact value is what they meant.  No silent rounding.  |
 | **Default styling**          | Beyond very safe minimums (grey edges, default sphere shape), every visual choice is the author's.    |
-| **A separate "edit mode" syntax** | Editing happens in the viewer (see `hand-authoring_ideas.md`); the `.cns` file is the canonical representation but not the editing surface. |
+| **A separate "edit mode" syntax** | The viewer's transform gizmo moves a mesh only until the next reload and writes nothing back (see `hand-authoring_ideas.md` for tooling ideas); editing the space means editing the `.cns` text, which is both the canonical representation and the editing surface. |
 
 Each missing feature is a deliberate choice not to do something
 that would weaken the author's argument-making.
