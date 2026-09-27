@@ -9,6 +9,16 @@ All notable changes to this project are recorded here.
 
 ## [Unreleased]
 
+## [v0.8.8] - 2026-09-27
+
+### Highlights
+
+This release contains no user-facing changes: it switches the project's own merge and release process from squash merges and a direct back-merge to merge commits and a back-merge pull request, updates the version-guard and changelog workflows to pinned dev-tools v1.5.1, re-assembles the dev-release workflow, and re-syncs the agent instruction files. Contributor documentation has been updated to describe the merge-commit workflow and the back-merge pull request that closes a release.
+
+### Maintenance
+
+- Merge commits and the checked back-merge pull request (#32)
+
 ## [v0.8.7] - 2026-09-27
 
 ### Highlights
