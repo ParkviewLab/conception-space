@@ -4,7 +4,6 @@ import { app, BrowserWindow, ipcMain, dialog, Menu, protocol, net, shell } from 
 import { join, dirname, resolve, extname } from 'path'
 import { readFileSync, writeFileSync, existsSync } from 'fs'
 import { pathToFileURL, fileURLToPath } from 'node:url'
-import pkg from '../../package.json'
 
 const isDev = !app.isPackaged
 const GITHUB_URL = 'https://github.com/ParkviewLab/conception-space'
@@ -60,7 +59,7 @@ function openAboutWindow() {
 </style>
 <div class="wrap">
   <h1>conception-space</h1>
-  <div class="ver">Version ${pkg.version}</div>
+  <div class="ver">Version ${app.getVersion()}</div>
   <p>Organize your knowledge in space.</p>
   <p>Build navigable places. Shape visible relationships. Discover emergent patterns.</p>
   <div class="copy">© 2026 Gary Frattarola — AGPL-3.0-or-later, or commercial</div>
