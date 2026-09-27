@@ -11,7 +11,7 @@ where existing notes from elsewhere (Obsidian vaults, folders of PDFs,
 piles of `.docx`) are coming in.
 
 This file is a deeper notebook on one of the ideas referenced by
-`in-flight_ideas.md`.  It sits in tension with intent #2 of the
+`in-flight_ideas.md`.  It sits in tension with Concept 2 of the
 [northstar](northstar.md) — *hand-authoring as sense-making* — and
 that tension is the central design problem, not an afterthought.
 
@@ -126,8 +126,8 @@ Examples of where multi-proposal applies:
 **Single-node placement.**
 > Where should this node go?
 > (A) Near Mars and Earth — rocky-planet vocabulary
-> (B) Inside the `astronomy_concepts` neighborhood — abstract astronomy
-> (C) New neighborhood `space_exploration` — themes of exploration
+> (B) Inside the `astronomy_concepts` cluster — abstract astronomy
+> (C) New cluster `space_exploration` — themes of exploration
 > (Other — I'll place it manually)
 
 **Cluster definition (bulk import).**
@@ -153,7 +153,7 @@ Examples of where multi-proposal applies:
 
 Multi-proposal is a **UX motif**, not a single feature.  It applies
 across placement, clustering, shape, edges, group memberships,
-neighborhood inclusion.  Same shape, different content.
+cluster inclusion.  Same shape, different content.
 
 ### Draft until touched
 
@@ -218,7 +218,7 @@ haven't been touched yet sit here visibly waiting.
 Every AI proposal is recoverable.  Months later: "what alternatives
 did the AI propose for this node?"  "Which option did I choose,
 and why was it presented?"  The history of *how* the space came to
-be is itself part of intent #4 (persistent thinking artifact).
+be is itself part of Concept 3 (persistent thinking artifact).
 
 ### What AI never does
 
@@ -267,7 +267,7 @@ Drop a folder onto the viewer.  A modal opens:
 > (Other — describe your own criterion / cluster them yourself)
 
 Author picks a clustering scheme.  Once chosen, the AI proposes per-
-cluster layouts.  Each cluster surfaces as a draft `node_neighborhood`
+cluster layouts.  Each cluster surfaces as a draft `cluster`
 with the proposed members.  Author walks through, refining at the
 cluster level first (rename, merge, split), then drills into
 individual node placements (each via multi-proposal again).
@@ -353,7 +353,7 @@ ones below it:
 
 5. **Ongoing "ask AI" affordance** on existing nodes.
 
-6. **Provenance + history viewing.**  Pairs with intent #4.
+6. **Provenance + history viewing.**  Pairs with Concept 3.
    Lower urgency than the import flows themselves.
 
 ---
@@ -384,4 +384,11 @@ ones below it:
   groupings — see [`The_CNS_Language.md`](The_CNS_Language.md)),
   AI proposes both kinds of membership.  Flat commonalities are
   easier to get right (no placement implication); start there
-  before tackling full neighborhood placement?
+  before tackling full cluster placement?
+- **The `commonality` keyword's length.**  [`The_CNS_Language.md`](The_CNS_Language.md)
+  accepted `commonality`'s 11 characters on the assumption that
+  `.cns` files would end up AI-written more than human-typed, making
+  verbosity in a low-frequency declaration cheap.  That authoring
+  path doesn't exist yet (see the architectural framing above); worth
+  revisiting if the keyword's length proves a friction point for
+  hand-authors before AI-authoring lands.
