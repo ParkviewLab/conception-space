@@ -12,6 +12,7 @@ files:
   - '!docs/**'
   - '!scripts/**'
   - '!.github/**'
+  - '!.claude/**'
   - '!LICENSES/**'
   - '!{electron.vite.config.js,eslint.config.mjs,electron-builder.yml,REUSE.toml,LICENSING.md,CHANGELOG.md,README.md,AGENTS.md,CLAUDE.md,.gitignore}'
 mac:
