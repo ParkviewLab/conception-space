@@ -10,7 +10,7 @@ Dring flight to a bookmark, show a camera view that constantly points the camera
 
 The project has no tools for editing the 3D space. Every edit today
 is hand-typed coordinates in a text editor, then a save and a switch
-to the viewer — a sharp mismatch with intent #2 of the
+to the viewer — a sharp mismatch with Concept 2 of the
 [northstar](northstar.md) (*hand-authoring as sense-making*).
 
 This idea has its own deeper notebook: see
@@ -68,8 +68,8 @@ were explicitly punted at the time and remain on the shelf:
 # 5. Import from existing knowledge bases (Joplin / Obsidian)
 
 Most people don't start from a blank `.cns` — they already have a corpus.
-This is the on-ramp for northstar intent #3 (*the space as an interface to
-a living corpus*): **open a Joplin notebook (via
+This is the on-ramp for the northstar's Axiom 7 (*a node is a handle onto
+content*: the space as an interface to a living corpus): **open a Joplin notebook (via
 [jonobones](https://github.com/ParkviewLab/jonobones)) or an Obsidian
 vault, instantiate its notes as nodes, then hand the author the spatial
 tools to regroup, rearrange, and reshape them** into a place they can think
@@ -90,7 +90,7 @@ space, reached into and reshaped with your hands. Framed against the
 [northstar](northstar.md) (Concept 4) as the **enactive** mode of the
 visual-cognition thesis — the bet at full strength, not a port.
 
-Hard requirement (Gary): it MUST be passthrough, which forces a native renderer.
+Decided 2026-06-21 (commit c57f699): it MUST be passthrough, which forces a native renderer.
 Decided engine: **native SwiftUI + RealityKit + ARKit** (Unity ruled out as a
 proprietary engine; Godot watched as the open-source option). A **separate repo**,
 sharing the Cognition Cache JSON5 schema + test corpus as the cross-repo source of
