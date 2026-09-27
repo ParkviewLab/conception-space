@@ -9,6 +9,27 @@ All notable changes to this project are recorded here.
 
 ## [Unreleased]
 
+## [v0.8.7] - 2026-09-27
+
+### Highlights
+
+The About box now reads the application version at runtime rather than from a value inlined at build time, and the packaged app no longer bundles the `.claude/` directory. Documentation has been corrected against the shipped code: the README and CONTRIBUTING notes on the AppImage name, signing and release steps, and the CNS language reference and its HTML copies, where a non-existent node attribute was removed, attribute defaults, colour forms, edge labels and whitespace separation were fixed, and the worked example now parses cleanly; bookmark glide notes also state the real 5-second flight. The remainder is build and CI work, including an electron-builder pin that keeps macOS signing working, plus a new notebook studying a possible port off Electron to Rust.
+
+### Bug fixes
+
+- Electron-builder 26.16.1, so macOS signing keeps working (#27)
+- Read the version at runtime, and correct the documents before the release (#31)
+
+### Docs
+
+- Add rust_port_ideas notebook (off-Electron study; three.js → Rust) (#26)
+
+### Maintenance
+
+- Drop the shallow re-fetch from the version guard (#28)
+- Assemble the release workflows from the handbook's parts (#29)
+- Generate the changelog with dev-tools' shared script (#30)
+
 ## [v0.8.6] - 2026-07-20
 
 ### Highlights
