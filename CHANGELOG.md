@@ -9,6 +9,20 @@ All notable changes to this project are recorded here.
 
 ## [Unreleased]
 
+## [v0.8.9] - 2026-09-30
+
+### Highlights
+
+This release contains no code changes; it brings the documentation in line with the shipped behaviour. The README, user introduction and language reference no longer claim that every node has a file, and the language reference corrects where edges may be declared along with its notes on the file card, one-member commonalities, colour-function spacing and auto-layout; the user introduction now links the `solar.cns` example space and names File → Open…, since the installed app cannot open its bundled copy. The commonality study states the ring radius the code actually computes, CONTRIBUTING documents the changelog bookkeeping rule and develop's required checks, and the agent pointer files were aligned with handbook v2.1.0.
+
+### Docs
+
+- Bring the documents current with the code before 0.8.9 (#35)
+
+### Maintenance
+
+- Align with handbook v2.1.0 (#34)
+
 ## [v0.8.8] - 2026-09-27
 
 ### Highlights
