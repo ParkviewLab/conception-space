@@ -89,7 +89,7 @@ node mars ( locus=[16,-13,6] shape=dodecahedron color=#cc4422 label="Mars" file=
 ```
 
 A red dodecahedron at position `[16,-13,6]`, with a markdown file
-attached that opens in the panel when the user double-clicks.
+attached that opens in a modal card when the user double-clicks.
 
 ### Rationale
 
@@ -157,7 +157,8 @@ cluster <id> ( <attributes> ) {
 ```
 
 Cluster declarations are hierarchical: a cluster can contain
-`node`s, `edge`s (whose endpoints are inside the cluster), and
+`node`s, `edge`s (an edge may appear in any block and join any
+two declared nodes), and
 other `cluster`s.  Every node inside a cluster is positioned
 **relative to the cluster's `locus`** — the cluster sets the
 reference frame for its children.
@@ -296,9 +297,9 @@ full story.  The short version:
   characteristic) rather than the *thing* (a set / group /
   collection).  Other words name the container; this one names
   what makes the container cohere.
-- It *intrinsically* requires multi-membership — a commonality of
-  one is nonsensical.  Single-membership wouldn't be a
-  commonality at all.
+- As a word it implies multi-membership: a shared characteristic
+  needs more than one sharer.  The language nonetheless accepts a
+  commonality with one member.
 - It lands cleanly in **concept formation and category theory**
   in cognitive science (Rosch, Wittgenstein, Gentner).  The
   cognitive operation the construct enables — *abstracting across
@@ -376,7 +377,7 @@ All declarations use the same attribute pattern:
   - **string**: `"Mars"`, `"orbits"` (always double-quoted).
   - **color**: `#RGB`, `#RGBA`, `#RRGGBB`, or `#RRGGBBAA` hex, or the
     function forms `rgb[r,g,b]` / `rgba[r,g,b,a]` (r/g/b/a as 0.0–1.0
-    floats).  An alpha channel sets a node's material opacity; edges,
+    floats, written without spaces inside the brackets).  An alpha channel sets a node's material opacity; edges,
     clusters, and commonalities accept alpha but ignore it, taking only
     the hex.
   - **array** (3-vector for `locus=`): `[16, -13, 6]`.
@@ -540,8 +541,8 @@ The flat construct names sets of nodes that share some property —
   individual).  Also lives in personality psychology more than
   concept-formation in cog-sci.
 - **`commonality`** — names the *reason for grouping* (a shared
-  characteristic), not the *thing*.  Intrinsically requires multi
-  ("commonality of one" is nonsensical).  Lands squarely in
+  characteristic), not the *thing*.  As a word it implies multi
+  (the language still accepts one member).  Lands squarely in
   concept formation and category theory in cog-sci (Rosch's
   prototype theory; Wittgenstein's family resemblance; Gentner's
   structure-mapping).  Long (11 chars, 5 syllables) but the
@@ -611,7 +612,7 @@ These are anti-features.  Their absence is *part of the design*.
 
 | Missing thing                | Why                                                                                                    |
 | ---------------------------- | ------------------------------------------------------------------------------------------------------ |
-| **Auto-layout** of any kind  | Violates northstar Axiom 1 (*placement is argument*).  An algorithm placing nodes erases the author's claim. |
+| **Auto-layout** of any kind  | The language places nothing itself; under northstar Axiom 1 (*placement is argument*) an algorithm may seed an import or generate a derived view, but never overwrites the author's placement. |
 | **Auto-edge-inference**      | Violates Axiom 5 (*edges carry as much reasoning as nodes*).  The author decides which relationships exist. |
 | **Inheritance / classes**    | Wrong vocabulary for the domain.  A `.cns` file isn't an object hierarchy; it's a spatial argument.   |
 | **Macros / generation**      | The whole point is hand-authoring as sense-making.  Programmatic generation removes the reasoning.    |
@@ -655,8 +656,7 @@ satellites halo render.  Design decisions in
 
 As of v0.7.3 the `style=lines` opt-in shipped in v0.7.2 (Phase 3)
 is **removed**.  The lines were visually indistinguishable from
-`edge` tubes — see the rejected-alternatives section of
-[`commonality_visual_study.md`](commonality_visual_study.md).
+`edge` tubes.
 `commonality` now has only the satellites render and no `style=`
 attribute at all.
 
