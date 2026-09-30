@@ -30,7 +30,7 @@ over an API; conception-space's job is the **interaction layer** —
 receiving suggestions, presenting them to the author, and rendering
 the "draft until touched" lifecycle.
 
-Central design move (user-ratified): every AI suggestion arrives as
+Central design move (decided on or before 2026-06-15): every AI suggestion arrives as
 **N alternatives, never one default**.  The author *must* choose
 between them — the choice itself is the authorship.  There is no
 rubber-stamp path.

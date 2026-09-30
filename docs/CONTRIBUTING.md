@@ -37,7 +37,7 @@ Commit](https://www.conventionalcommits.org/) type:
 | any other title | Other changes | the whole title |
 | a commit with no pull request | Direct commits | its subject and short hash |
 
-A title without a recognised type is not dropped: it is listed whole under Other changes. So prefix your PR titles, and correct a title before the merge, since retitling afterwards does not change the commit. The groups appear in the order above, and an empty group is left out. Bookkeeping never appears in the list: a commit that changes only the version or only `CHANGELOG.md`, a clean merge (one whose tree equals the automatic merge of its parents), and an empty commit are all left out.
+A title without a recognised type is not dropped: it is listed whole under Other changes. So prefix your PR titles, and correct a title before the merge, since retitling afterwards does not change the commit. The groups appear in the order above, and an empty group is left out. Bookkeeping never appears in the list: a commit that changes only the version or only `CHANGELOG.md`, a merge that belongs to no listed pull request and whose tree equals the automatic merge of its two parents, and an empty commit are all left out.
 
 ## Local checks before opening a PR
 
@@ -51,9 +51,10 @@ uvx --from "reuse[charset-normalizer]" reuse lint
 ```
 
 conception-space is plain JavaScript (no TypeScript or test suite), so
-CI runs ESLint + the electron-vite build. A PR **can't be merged until the
-required checks pass** (the build check, REUSE, and the version guard — see the
-handbook's `ci.md`).
+CI runs ESLint + the electron-vite build. A PR **can't be merged until its branch
+is up to date with develop and the required checks have passed on its head**
+(`checks`: lint and build; `reuse`; the version guard's `no-version-change`;
+administrators are bound by the same rule; see the handbook's `ci.md`).
 
 ## Versioning
 

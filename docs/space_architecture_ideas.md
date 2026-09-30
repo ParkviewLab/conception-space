@@ -562,10 +562,10 @@ research links — all as `status: proposed` until the user accepts.
    away) keeps the window small.
 4. **File extension.**  `.cns` (treated as JSON5)?  `.cns.json5`?
    a new one?  Affects editor integration + grep.
-5. **Migration of existing `.cns` files.**  ~5 examples + 3 test
-   generators emit the old DSL.  Parallel format with a one-shot
-   converter, or hard cut?  No shipped users → a hard cut is
-   feasible if timed right.
+5. **Migration of existing `.cns` files.**  Four example files
+   are in the `.cns` text format, and installers have shipped since
+   v0.8.0 (2026-06-16), so users may hold files of their own.
+   Parallel format with a one-shot converter, or hard cut?
 6. **Per-instance metadata syntax in *Notations*.**  When we build
    the editable text surface, what does per-instance metadata look
    like in the DSL?  (Inherits whatever `node` uses for attributes,
@@ -594,7 +594,7 @@ Notation can be "pretty-printed JSON5 with focus filtering."
 ## 9. Suggested phasing (for the next implementation plan)
 
 1. **JSON5 storage format** — define the canonical schema (resolve
-   §7.1, §7.4, §7.5), port the example files + generators, teach the
+   §7.1, §7.4, §7.5), port the example files, teach the
    parser/loader to read JSON5.  Decide migration.
 2. **New Cache… + Import File…** — dialogs + filesystem + JSON5
    object mutation.  Front-matter timestamps land here.

@@ -16,9 +16,9 @@ This file is a deeper notebook on one of the ideas referenced by
 that tension is the central design problem, not an afterthought.
 
 Status: brainstorm only.  Nothing here has been promoted to a plan.
-Items marked with **★** are my (Claude's) current favourites; the
-user has ratified one of them (the multi-proposal rule), but the
-ordering and the rest are still open.
+Items marked with **★** are the current favourites; one of them,
+the multi-proposal rule, was decided on or before 2026-06-15, and
+the ordering and the rest are still open.
 
 ---
 
@@ -41,7 +41,7 @@ those suggestions** — not about how the AI itself is built.
 Practical consequences:
 
 - conception-space stays small and focused on the perceptual /
-  interaction job (intents #1 and #2).
+  interaction job (Concepts 1 and 2).
 - The choice of AI model (local vs. external, GPT-class vs. local
   llama, etc.) lives in the larger system, not here.
 - Privacy and consent decisions also live in the larger system;
@@ -109,7 +109,7 @@ These two cases need different UX.
 
 Apply across both use cases; *most strict* in the bulk-import case.
 
-### ★ The multi-proposal rule  (user-ratified)
+### ★ The multi-proposal rule  (decided on or before 2026-06-15)
 
 Every AI suggestion arrives as **N alternatives, never one
 default.**  The author *must* choose between them — there is no
@@ -178,8 +178,8 @@ visibly show their unreviewed state.
 Walk into your own space a year later — you can see at a glance
 which nodes you actually placed and which are AI drafts you haven't
 engaged with.  Sharing a `.cns` is honest about what is authored
-versus what is still pending.  (Intent #3: shared mental models —
-AI drafts are not yet anyone's argument.)
+versus what is still pending: AI drafts are not yet anyone's
+argument.
 
 ### AI explains its reasoning
 

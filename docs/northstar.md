@@ -100,12 +100,11 @@ this.  The moment one looks at the scene, three things become available
 One does not *recall* the structure — one *sees* it.  Reasoning is
 not sequential reconstruction; it is pattern recognition over a structure
 presented as a whole.  That is a fundamentally higher-bandwidth way to
-grasp relational data than any linear medium can be, and it is the
-reason this tool exists.
+grasp relational data than any linear medium can be.
 
 Spatial memorability (Method-of-Loci–style "I remember the red book because it's
-over there") is a *secondary* effect that follows from the placement
-being stable across sessions.  Useful, but not the primary thing.
+over there") follows from the placement being stable across sessions;
+intents 1 and 2 rest on it.
 
 ---
 

@@ -14,7 +14,7 @@ See unplanned connections.
 ---
 
 A desktop app for organizing knowledge in 3D space. You place nodes by hand at explicit coordinates —
-and each node is a **handle onto a real file** (usually a markdown note, sometimes a PDF). Unlike Mermaid
+and a node can be a **handle onto a real file** (usually a markdown note, sometimes a PDF), named by its `file=` attribute. Unlike Mermaid
 or DOT, layout is **not computed**: you decide where things live, which makes the space spatially
 memorable and lets you *see* the shape of your relationships at a glance.
 

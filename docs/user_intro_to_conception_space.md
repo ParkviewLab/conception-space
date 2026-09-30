@@ -18,17 +18,17 @@ pretty hairball you glance at and close. The relationships between your ideas li
 your head — and heads forget.
 
 conception-space is a desktop app that turns your knowledge into a **place**: a 3D space
-you build by hand, where every point is one of your real notes, and **where you put it is
+you build by hand, where a point can be one of your real notes, and **where you put it is
 what it means**.
 
 ---
 
 ## Made of real notes, not a new format.
 
-Every node in the space is a **handle onto a real file** — a Markdown note or a PDF. Open a
+A node in the space can be a **handle onto a real file**: a Markdown note or a PDF. Open a
 node and you are reading and editing the actual note, in the plain, open formats you already
-write in. The space isn't a diagram *about* your notes; its points *are* your notes, arranged
-so you can fly through them and think.
+write in. The space isn't a diagram *about* your notes; the points that hold files *are* your notes,
+arranged so you can fly through them and think.
 
 ## You place it by hand — and the placing is the thinking.
 
@@ -78,21 +78,23 @@ don't give you.
 
 ## The honest specifics
 
-- **Free and open source** (AGPL-3.0). Your knowledge, your tool.
-- **macOS, Windows, and Linux.** The macOS build is Apple-signed and notarized, so it opens
-  without a fight.
+- **Free and open source** (AGPL-3.0-or-later). Your knowledge, your tool.
+- **macOS, Windows, and Linux.** The macOS build (Apple Silicon) is signed with an Apple
+  Developer ID and notarized, so it opens without a warning.
 - **Plain, open formats** — your notes are Markdown and PDF, the same kinds you already write.
 - **A real-time 3D space** (built on Three.js), not a static diagram: fly through it, save
   viewpoints, and return to them.
-- **Early, and moving quickly.** The spatial-thinking core is here today. Richer
-  point-and-place authoring and a room-scale version you can walk *through* (on Apple Vision
-  Pro) are on the way. And exactly how it meets the notes you already keep — its own library,
-  an Obsidian vault, a Joplin server — is an open design question we are working through now.
+- **Early.** The app draws a space you author by hand and lets you fly through it.
+  Point-and-place authoring, a room-scale version for Apple Vision Pro, and how the app
+  meets the notes you already keep are ideas under consideration, listed in
+  [the in-flight ideas](in-flight_ideas.md).
 
 ## Try it
 
 [Download the latest release](https://github.com/ParkviewLab/conception-space/releases) for
-your platform and open the bundled example space to feel what a thought-place is like. Then
+your platform, download the example space
+[`solar.cns`](../src/renderer/public/examples/solar.cns), and open it with File → Open… to feel
+what a thought-place is like. Then
 start shaping one around the notes that actually matter to you. Bring the ideas you already
 have — and begin to *see* them.
 
