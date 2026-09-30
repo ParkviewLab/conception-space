@@ -1,9 +1,19 @@
 <!DOCTYPE html>
+<!--
+SPDX-FileCopyrightText: 2026 Gary Frattarola <garyf@parkviewlab.ai>
+SPDX-License-Identifier: CC-BY-4.0
+
+Designed HTML presentation of northstar.md, its canonical source: if the two
+drift, the Markdown wins and this file is re-authored from it. Wording is
+faithful to northstar.md, sentence for sentence. Self-contained: inline style
+and inline SVG, no script, no web font, no network. The visual language is the
+project's hard-edge one, shared with The_CNS_Language.hard-edge.html.
+-->
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Northstar — conception-space</title>
+  <title>ParkviewLab · conception-space northstar</title>
   <style>
     /*
      * Palette — late-1950s Hard-Edge Painting / West Coast Abstract
@@ -15,6 +25,11 @@
      * Neutrals (scaffolding, not counted as accent colours):
      *   --cream       #f1ebda   page background — gallery wall
      *   --white       #ffffff   inset panels
+     *
+     * In the two figures the same three do the same work: charcoal draws
+     * nodes, edges and the symbolic descent; mustard fills group shells and
+     * the symbolic mode; persimmon marks the one thing each figure singles
+     * out (the item being read, the outlier, the move back up).
      *
      * Discipline: flat colour blocks only.  No gradients, no shadows,
      * no textures, no rounded corners on structural elements, no
@@ -68,13 +83,16 @@
     }
     .status-banner p { margin: 0; font-size: 0.95rem; line-height: 1.5; }
     .status-banner strong { color: var(--white); }
+    .status-banner .source { display: block; margin-top: 0.55rem; font-size: 0.86rem; }
+    .status-banner a { color: var(--white); font-weight: 700; }
 
     /* ─── Hero ─────────────────────────────────────────────────────── */
     .hero { display: grid; grid-template-columns: 1.05fr 1fr; gap: 3rem; align-items: stretch; margin: 1rem 0 4rem; }
     .hero-text .eyebrow { font-size: 0.85rem; letter-spacing: 0.32em; text-transform: uppercase; color: var(--persimmon); margin: 0 0 1rem; font-weight: 700; }
     .hero-rule { width: 7rem; height: 8px; background: var(--mustard); margin: 1.6rem 0 1.4rem; }
-    .tagline { font-size: clamp(1.15rem, 2.2vw, 1.5rem); font-weight: 700; line-height: 1.25; letter-spacing: -0.01em; max-width: 18em; margin: 0 0 1.2rem; }
-    .hero-text p { font-size: 1.05rem; max-width: 32em; }
+    /* The name plate is set half again as large as its three lines, as the source sets it. */
+    .product { font-size: 1.75rem; font-weight: 700; line-height: 1.15; letter-spacing: 0.01em; margin: 0 0 0.6rem; }
+    .tagline { font-size: 1.15rem; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em; max-width: 24em; margin: 0; }
     .hero-composition { display: grid; grid-template-columns: 1.4fr 1fr; grid-template-rows: 1fr 1.3fr 0.7fr; gap: 6px; min-height: 340px; }
     .hc-1 { grid-column: 1 / 2; grid-row: 1 / 3; background: var(--charcoal); }
     .hc-2 { grid-column: 2 / 3; grid-row: 1 / 2; background: var(--mustard); }
@@ -112,21 +130,50 @@
 
     /* ─── Deep blocks (per intent / per concept) ──────────────────── */
     .deep { display: grid; grid-template-columns: 96px 1fr; gap: 1.4rem; margin-bottom: 3rem; }
+    .deep.lead-in { margin-bottom: 1.4rem; }   /* its last line introduces the block below it */
     .deep .rail { background: var(--charcoal); color: var(--cream); padding: 1rem 0.8rem; text-align: center; font-weight: 700; font-size: 2.2rem; line-height: 1; }
     .deep .rail.mustard { background: var(--mustard); color: var(--charcoal); }
     .deep .rail.persimmon { background: var(--persimmon); color: var(--cream); }
+    .deep .rail.blank { background: transparent; }
     .deep h3 { font-size: 1.2rem; text-transform: none; letter-spacing: 0.01em; margin-bottom: 0.7rem; }
     .deep .lead { font-weight: 700; }
 
-    /* ─── Triad (number / weight / congruence) ────────────────────── */
-    .threads { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin: 1.2rem 0 1.4rem; }
+    /* ─── Triad (number / weight / congruence; the three modes) ───── */
+    .threads { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin: 0 0 2.4rem; }
     .thread { background: var(--mustard); color: var(--charcoal); padding: 1.2rem 1.2rem 1.3rem; }
     .thread h3 { font-size: 0.95rem; margin-bottom: 0.55rem; letter-spacing: 0.10em; }
     .thread p { font-size: 0.9rem; margin: 0; line-height: 1.5; }
     .thread .eg { display: block; margin-top: 0.6rem; font-style: italic; color: var(--charcoal); opacity: 0.85; }
 
+    /* ─── Figures: Concept 1's two channels, Concept 5's loop ─────── */
+    .contrast { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin: 0 0 2.4rem; }
+    .panel, .loop { background: var(--white); border: 4px solid var(--charcoal); padding: 1.2rem 1.3rem; }
+    .panel h4 { margin: 0 0 0.15rem; }
+    .panel .cap { font-style: italic; font-size: 0.93rem; line-height: 1.4; margin: 0 0 0.9rem; }
+    .panel svg, .loop svg { display: block; width: 100%; height: auto; }
+    .loop { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 1.8rem; align-items: center; margin: 0 0 2.4rem; }
+    .loop svg { max-width: 440px; margin: 0 auto; }
+    .loop ul { margin: 0; padding-left: 1.1rem; }
+    .loop li { margin-bottom: 0.9rem; }
+    .loop li:last-child { margin-bottom: 0; }
+    .loop li::marker { color: var(--persimmon); }
+    svg .ink { fill: var(--charcoal); }
+    svg .shell { fill: var(--mustard); }
+    svg .hot { fill: var(--persimmon); }
+    svg .cream { fill: var(--cream); }
+    svg .mus { fill: var(--mustard); }
+    svg .edge { stroke: var(--charcoal); stroke-width: 1.4; fill: none; }
+    svg .edge.heavy { stroke-width: 5; }
+    svg .unread { fill: none; stroke: var(--charcoal); stroke-opacity: 0.4; stroke-width: 1.2; }
+    svg .sig { font-size: 10px; font-weight: 700; letter-spacing: 0.14em; fill: var(--charcoal); }
+    svg .mode { font-size: 15px; font-weight: 700; letter-spacing: 0.16em; }
+    svg .role { font-size: 11px; }
+    svg .move { font-size: 11.5px; font-weight: 700; letter-spacing: 0.12em; }
+    svg .note { font-size: 10.5px; fill: var(--charcoal); }
+
     /* ─── Worked-example callout ──────────────────────────────────── */
     .example { background: var(--white); border-left: 8px solid var(--persimmon); padding: 1rem 1.3rem; margin: 0 0 1rem; font-style: italic; font-size: 0.96rem; line-height: 1.55; }
+    .example em { font-style: normal; }   /* the source's emphasis, inverted inside an italic block */
 
     /* ─── Axiom cards ─────────────────────────────────────────────── */
     .axiom-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin: 1rem 0 0; }
@@ -142,7 +189,6 @@
     .q-list li::before { counter-increment: q; content: counter(q, decimal-leading-zero); background: var(--charcoal); color: var(--cream); font-weight: 700; font-size: 0.85rem; letter-spacing: 0.04em; padding: 0.35rem 0; text-align: center; }
     .q-list p { margin: 0; font-size: 0.98rem; line-height: 1.5; }
     .q-close { background: var(--charcoal); color: var(--cream); padding: 1.1rem 1.4rem; margin-top: 1.6rem; font-size: 0.97rem; }
-    .q-close strong { color: var(--mustard); }
 
     /* ─── Divider ─────────────────────────────────────────────────── */
     .divider { display: flex; gap: 6px; margin: 4rem 0 0; }
@@ -154,17 +200,24 @@
     /* ─── Footer ──────────────────────────────────────────────────── */
     footer { margin-top: 6rem; padding-top: 1.4rem; border-top: 4px solid var(--charcoal); font-size: 0.86rem; color: var(--charcoal); display: grid; grid-template-columns: 1.4fr 1fr; gap: 2rem; align-items: start; }
     footer p { margin: 0; }
+    footer .copyright { grid-column: 1 / -1; margin-top: 1.2rem; padding-top: 1rem; border-top: 1px solid var(--rule); font-size: 0.8rem; }
 
     /* ─── Responsive collapse ─────────────────────────────────────── */
+    /* The hero, the intent cards, the three-part rows and the loop stack a
+       little before the rest: below 760px their columns grow too narrow to
+       read (the hero's eyebrow and title wrap). */
     @media (max-width: 760px) {
-      .hero { grid-template-columns: 1fr; }
+      .hero, .kw-grid, .threads, .loop { grid-template-columns: 1fr; }
       .hero-composition { min-height: 260px; }
-      .kw-grid, .axiom-grid, .threads { grid-template-columns: 1fr; }
+      .kw-card, .deep { grid-template-columns: 56px 1fr; }
+      .deep .rail { font-size: 1.6rem; padding: 0.5rem; }
+    }
+    /* Everything else collapses to a single column at the scaffold's breakpoint. */
+    @media (max-width: 680px) {
+      .contrast, .axiom-grid { grid-template-columns: 1fr; }
       .axiom-card.span2 { grid-column: auto; }
       .status-banner { grid-template-columns: 1fr; }
       .status-banner .marker { width: 100%; height: 40px; }
-      .kw-card, .deep { grid-template-columns: 56px 1fr; }
-      .deep .rail { font-size: 1.6rem; padding: 0.5rem; }
       footer { grid-template-columns: 1fr; }
     }
   </style>
@@ -172,32 +225,30 @@
 <body>
 <div class="page">
 
-  <!-- STATUS BANNER — what this document is -->
+  <!-- STATUS BANNER: what this document is -->
   <div class="status-banner">
     <div class="marker">WHY</div>
     <p>
-      The canonical statement of <strong>why</strong> conception-space exists —
-      the intent any feature, design decision, or refactor should serve.
-      Not a roadmap, not a feature list, not a how-to.
-      <strong><a href="northstar.md" style="color:var(--white);">northstar.md</a></strong>
-      is the source of truth; this is its hard-edge presentation.
+      This northstar is the canonical statement of <em>why</em> conception-space
+      exists and <em>what it is trying to do</em>. It is not a roadmap, not a
+      feature list, and not a how-to. It is the <strong>intent</strong> — the
+      underlying purpose that any specific feature, design decision, or
+      refactor should be in service of.
+      <span class="source"><a href="northstar.md">northstar.md</a> is the source of truth; this is its hard-edge presentation.</span>
     </p>
   </div>
 
-  <!-- HERO -->
+  <!-- HERO: the title, then the product's own three-line statement -->
   <header class="hero">
     <div class="hero-text">
       <div class="eyebrow">conception-space · intent</div>
       <h1>Northstar</h1>
       <div class="hero-rule"></div>
+      <p class="product">Conception-Space</p>
       <p class="tagline">
         Build and navigate 3D spaces for thinking.<br>
         Hand-place and sculpt ideas.<br>
         See unplanned connections.
-      </p>
-      <p>
-        It is the <strong>intent</strong> — the underlying purpose that any
-        specific feature, design decision, or refactor should be in service of.
       </p>
     </div>
     <div class="hero-composition" aria-hidden="true">
@@ -228,10 +279,6 @@
       <div class="section-marker">01</div>
       <h2>The intents</h2>
     </div>
-    <p class="section-lede">
-      Four complementary facets of the project's purpose. The <em>why</em>,
-      in broad strokes.
-    </p>
 
     <div class="kw-grid">
 
@@ -391,11 +438,77 @@
     </p>
 
     <!-- Concept 1 -->
-    <div class="deep">
+    <div class="deep lead-in">
       <div class="rail">1</div>
       <div>
         <h3>Parallel perception of relationships</h3>
         <p class="lead">conception-space is for parallel perception of relationships.</p>
+      </div>
+    </div>
+
+    <!-- The two channels, seen before they are read -->
+    <div class="contrast">
+      <div class="panel">
+        <h4>Linear perceptual channel</h4>
+        <p class="cap">one reads item by item</p>
+        <svg viewBox="0 0 320 196" role="img" aria-label="A list read item by item: the items already read fade, the current item is marked, and the rest are still unread.">
+          <rect class="ink" x="16" y="12" width="10" height="10" fill-opacity="0.10"/><rect class="ink" x="34" y="12" width="206" height="10" fill-opacity="0.10"/>
+          <rect class="ink" x="16" y="32" width="10" height="10" fill-opacity="0.16"/><rect class="ink" x="34" y="32" width="150" height="10" fill-opacity="0.16"/>
+          <rect class="ink" x="16" y="52" width="10" height="10" fill-opacity="0.24"/><rect class="ink" x="34" y="52" width="236" height="10" fill-opacity="0.24"/>
+          <rect class="ink" x="16" y="72" width="10" height="10" fill-opacity="0.36"/><rect class="ink" x="34" y="72" width="178" height="10" fill-opacity="0.36"/>
+          <rect class="ink" x="16" y="92" width="10" height="10" fill-opacity="0.55"/><rect class="ink" x="34" y="92" width="214" height="10" fill-opacity="0.55"/>
+          <polygon class="hot" points="2,111 10,117 2,123"/>
+          <rect class="hot" x="16" y="112" width="10" height="10"/><rect class="hot" x="34" y="112" width="162" height="10"/>
+          <rect class="unread" x="16.6" y="132.6" width="8.8" height="8.8"/><rect class="unread" x="34.6" y="132.6" width="196.8" height="8.8"/>
+          <rect class="unread" x="16.6" y="152.6" width="8.8" height="8.8"/><rect class="unread" x="34.6" y="152.6" width="136.8" height="8.8"/>
+          <rect class="unread" x="16.6" y="172.6" width="8.8" height="8.8"/><rect class="unread" x="34.6" y="172.6" width="222.8" height="8.8"/>
+        </svg>
+      </div>
+      <div class="panel">
+        <h4>Parallel perceptual channel</h4>
+        <p class="cap">three things become available at once</p>
+        <svg viewBox="0 0 320 196" role="img" aria-label="A visual space: a busy cluster and a sparse region, heavy and light edges, two clusters pointing at each other, and one outlier, all visible in one look.">
+          <rect class="shell" x="10" y="18" width="138" height="112"/>
+          <rect class="shell" x="204" y="30" width="104" height="84"/>
+          <line class="edge" x1="34" y1="42" x2="72" y2="36"/>
+          <line class="edge" x1="72" y1="36" x2="114" y2="46"/>
+          <line class="edge" x1="34" y1="42" x2="44" y2="80"/>
+          <line class="edge" x1="72" y1="36" x2="88" y2="74"/>
+          <line class="edge" x1="114" y1="46" x2="88" y2="74"/>
+          <line class="edge" x1="44" y1="80" x2="88" y2="74"/>
+          <line class="edge" x1="88" y1="74" x2="128" y2="92"/>
+          <line class="edge" x1="44" y1="80" x2="58" y2="110"/>
+          <line class="edge" x1="88" y1="74" x2="102" y2="110"/>
+          <line class="edge" x1="58" y1="110" x2="102" y2="110"/>
+          <line class="edge" x1="128" y1="92" x2="102" y2="110"/>
+          <line class="edge" x1="114" y1="46" x2="128" y2="92"/>
+          <line class="edge" x1="72" y1="36" x2="44" y2="80"/>
+          <line class="edge" x1="228" y1="52" x2="280" y2="50"/>
+          <line class="edge" x1="228" y1="52" x2="240" y2="94"/>
+          <line class="edge" x1="280" y1="50" x2="288" y2="94"/>
+          <line class="edge" x1="240" y1="94" x2="288" y2="94"/>
+          <line class="edge heavy" x1="114" y1="46" x2="228" y2="52"/>
+          <line class="edge heavy" x1="128" y1="92" x2="240" y2="94"/>
+          <line class="edge" x1="40" y1="170" x2="150" y2="178"/>
+          <circle class="ink" cx="34" cy="42" r="5"/><circle class="ink" cx="72" cy="36" r="5"/>
+          <circle class="ink" cx="114" cy="46" r="5"/><circle class="ink" cx="44" cy="80" r="5"/>
+          <circle class="ink" cx="88" cy="74" r="5"/><circle class="ink" cx="128" cy="92" r="5"/>
+          <circle class="ink" cx="58" cy="110" r="5"/><circle class="ink" cx="102" cy="110" r="5"/>
+          <circle class="ink" cx="228" cy="52" r="5"/><circle class="ink" cx="280" cy="50" r="5"/>
+          <circle class="ink" cx="240" cy="94" r="5"/><circle class="ink" cx="288" cy="94" r="5"/>
+          <circle class="ink" cx="40" cy="170" r="5"/><circle class="ink" cx="150" cy="178" r="5"/>
+          <circle class="ink" cx="236" cy="162" r="5"/>
+          <circle class="hot" cx="298" cy="178" r="6"/>
+          <text class="sig" x="10" y="12">NUMBER</text>
+          <text class="sig" x="176" y="73" text-anchor="middle">WEIGHT</text>
+          <text class="sig" x="256" y="128" text-anchor="middle">CONGRUENCE</text>
+        </svg>
+      </div>
+    </div>
+
+    <div class="deep lead-in">
+      <div class="rail blank"></div>
+      <div>
         <p>
           A list, an index, or an appendix forces relationships through a
           <em>linear</em> perceptual channel — one reads item by item, holding
@@ -425,25 +538,24 @@
       </div>
       <div class="thread">
         <h3>Congruence</h3>
-        <p>How relationships align, cluster, and point, read by spatial proximity, group shells, and shared direction.<span class="eg">"These belong together; those two clusters point at each other."</span></p>
+        <p>How relationships align, cluster, and point, read by spatial proximity, group shells, and shared direction.<span class="eg">"These things belong together; those two clusters point at each other; this is an outlier."</span></p>
       </div>
     </div>
 
     <div class="deep">
-      <div class="rail" style="background:transparent;"></div>
+      <div class="rail blank"></div>
       <div>
         <p>
           One does not <em>recall</em> the structure — one <em>sees</em> it.
           Reasoning is not sequential reconstruction; it is pattern recognition
           over a structure presented as a whole. That is a fundamentally
           higher-bandwidth way to grasp relational data than any linear medium
-          can be, and it is the reason this tool exists.
+          can be.
         </p>
         <p>
           Spatial memorability (Method-of-Loci–style "I remember the red book
-          because it's over there") is a <em>secondary</em> effect that follows
-          from the placement being stable across sessions. Useful, but not the
-          primary thing.
+          because it's over there") follows from the placement being stable
+          across sessions; intents 1 and 2 rest on it.
         </p>
       </div>
     </div>
@@ -469,9 +581,9 @@
         </p>
         <p>
           The use of layout algorithms is limited to the mass importation of
-          notes into a space, or the creation of new spatial views of
+          notes into a space or the creation of new spatial views of
           pre-existing spaces. But even then, the Author chooses from several
-          layout algorithms, choosing the one that best matches the Author's
+          layout algorithms, choosing that which best matches the Author's
           vision.
         </p>
       </div>
@@ -499,23 +611,24 @@
     </div>
 
     <!-- Concept 4 -->
-    <div class="deep">
+    <div class="deep lead-in">
       <div class="rail">4</div>
       <div>
         <h3>One space, many modes of representation</h3>
-        <p class="lead">
+        <p>
           The space the Author builds is a single canonical model — the
           <strong>Cognition Cache</strong>
           (see <a href="space_architecture_ideas.md">space_architecture_ideas.md</a>).
-        </p>
-        <p>
           It is deliberately <em>richer than any single read</em>: the whole point
           of intent #4 is that structure emerges only when <em>many</em>
           relationships are present at once, which is exactly what overwhelms a
-          linear medium. So the Author never confronts the whole Cache through one
-          channel. They engage it through <strong>projections</strong> — purposeful
-          lenses onto the one canonical model, each serving a particular task or
-          domain. Following Bruner's three modes of representation:
+          linear medium.
+        </p>
+        <p>
+          So the Author never confronts the whole Cache through one channel. They
+          engage it through <strong>projections</strong> — purposeful lenses onto
+          the one canonical model, each serving a particular task or domain.
+          Following Bruner's three modes of representation:
         </p>
       </div>
     </div>
@@ -523,11 +636,11 @@
     <div class="threads">
       <div class="thread">
         <h3>Symbolic</h3>
-        <p>A <strong>Notation</strong> — the text rendering. It must <em>reduce</em> to a domain subset, because symbolic cognition is capacity-bound: too much text is too much to hold in the mind.</p>
+        <p>A <strong>Notation</strong> (the text rendering). It must <em>reduce</em> to a domain subset, because symbolic cognition is capacity-bound: too much text is too much to hold in the mind.</p>
       </div>
       <div class="thread">
         <h3>Iconic</h3>
-        <p>The visual space and its <strong>Filters</strong>. It need not reduce <em>for capacity</em> — the eye takes the whole at once — so a Filter's job is to <em>shape for purpose</em>: emphasise, de-emphasise, scope to a domain.</p>
+        <p>The visual space and its <strong>Filters</strong>. It need not reduce <em>for capacity</em> — the eye takes the whole at once — so a Filter's job is to <em>shape for purpose</em>: emphasise, de-emphasise, scope to a domain. A different motive entirely from the Notation's: shape-for-the-task, not shrink-to-fit-the-mind.</p>
       </div>
       <div class="thread">
         <h3>Enactive</h3>
@@ -536,7 +649,7 @@
     </div>
 
     <div class="deep">
-      <div class="rail" style="background:transparent;"></div>
+      <div class="rail blank"></div>
       <div>
         <p>
           These are not three apps; they are three bandwidths onto one Cache. And
@@ -549,33 +662,62 @@
         </p>
         <p>
           The modes are <strong>complementary, not ranked</strong>. The full
-          <em>iconic</em> overview is not a hazard to reduce away but the home base
-          the eye is built for — you take in the whole space at once, then drill
-          into a domain to work. And the symbolic <strong>Notation</strong> is not
-          a fallback for when the visual fails: it does <em>different work</em>
-          (exact logic and measurement, which you cannot do with floating objects),
-          and its results feed <em>back</em> into the visual. That interplay is the
-          engine — the next concept.
+          <strong>iconic</strong> overview is not a hazard to reduce away but the
+          home base the eye is built for — you take in the whole space at once,
+          then drill into a domain to work. And the symbolic
+          <strong>Notation</strong> is not a fallback for when the visual fails: it
+          does <em>different work</em> (exact logic and measurement, which you
+          cannot do with floating objects), and its results feed <em>back</em> into
+          the visual. That interplay is the engine — the next concept.
         </p>
       </div>
     </div>
 
     <!-- Concept 5 -->
-    <div class="deep">
+    <div class="deep lead-in">
       <div class="rail mustard">5</div>
       <div>
         <h3>The discovery loop — visual ↔ symbolic</h3>
-        <p class="lead">
+        <p>
           The visual and symbolic modes are not just two views; together they form
           a loop, and the loop is where the tool earns its keep.
         </p>
-        <p>
-          <strong>Visual</strong> is for <em>interpretation, inference, insight</em>
-          — seeing what is related, what is missing, what to work on next.
-          <strong>Symbolic</strong> is for <em>exact logic and measurement</em> —
-          actually working it out. Symbols exist precisely because you cannot do
-          the laws of motion, or the calculus, with floating 3D objects.
-        </p>
+      </div>
+    </div>
+
+    <!-- The loop, seen beside the two modes it joins: the move back up is the one singled out -->
+    <div class="loop">
+      <svg viewBox="0 0 360 240" role="img" aria-label="The discovery loop: drill down from the visual to the symbolic to solve a problem exactly, then raise back up, the result becoming Commonalities on the node, human and AI together.">
+        <rect class="ink" x="70" y="6" width="220" height="56"/>
+        <text class="mode cream" x="180" y="31" text-anchor="middle">VISUAL</text>
+        <text class="role mus" x="180" y="50" text-anchor="middle">interpretation, inference, insight</text>
+        <rect class="shell" x="70" y="178" width="220" height="56"/>
+        <text class="mode ink" x="180" y="203" text-anchor="middle">SYMBOLIC</text>
+        <text class="role ink" x="180" y="222" text-anchor="middle">exact logic and measurement</text>
+        <line x1="112" y1="62" x2="112" y2="164" stroke="#2a2c2b" stroke-width="4"/>
+        <polygon class="ink" points="103,162 121,162 112,178"/>
+        <line x1="248" y1="178" x2="248" y2="78" stroke="#dc5532" stroke-width="6"/>
+        <polygon class="hot" points="236,80 260,80 248,62"/>
+        <text class="move ink" x="100" y="106" text-anchor="end">DRILL</text>
+        <text class="move ink" x="100" y="121" text-anchor="end">DOWN</text>
+        <text class="note" x="100" y="141" text-anchor="end">to solve a</text>
+        <text class="note" x="100" y="155" text-anchor="end">problem exactly</text>
+        <text class="move hot" x="262" y="92">RAISE</text>
+        <text class="move hot" x="262" y="107">BACK UP</text>
+        <text class="note" x="262" y="127">Commonalities</text>
+        <text class="note" x="262" y="141">on the node</text>
+        <text class="note" x="262" y="158">human and AI</text>
+        <text class="note" x="262" y="172">together</text>
+      </svg>
+      <ul>
+        <li><strong>Visual</strong> is for <strong>interpretation, inference, insight</strong> — seeing what is related, what is missing, what to work on next.</li>
+        <li><strong>Symbolic</strong> is for <strong>exact logic and measurement</strong> — actually working it out. Symbols exist precisely because you cannot do the laws of motion, or the calculus, with floating 3D objects.</li>
+      </ul>
+    </div>
+
+    <div class="deep">
+      <div class="rail blank"></div>
+      <div>
         <p>
           You <strong>drill down</strong> from the visual to the symbolic to solve
           a problem exactly. Then comes the move that is easy to miss and is the
@@ -585,13 +727,13 @@
           formation) on the node — and those reveal relationships that were not
           there before.
         </p>
-        <div class="example">
+        <blockquote class="example">
           A robotic wheel-control task, solved on paper, turns out to be a physics
           problem, then a calculus one. Its Commonalities gain <em>physics</em> and
           <em>calculus</em>; the overview now shows this task related to calculus,
           and to your other calculus problems, in a way invisible before the
           symbolic solution.
-        </div>
+        </blockquote>
         <p>
           So the symbolic descent pays out twice: the answer, <strong>plus new
           visible structure</strong>. The space therefore
@@ -639,10 +781,10 @@
           placement <strong>is</strong> the claim "A and B are related; C is
           not." The space is the Author's understanding of the relationships
           made directly perceptible. Anything that overwrites placement
-          (auto-layout, repositioning on resize) erases the Author's argument.
-          Hand-placement is non-negotiable. <em>(An algorithm may seed an
-          import or generate a derived view, but never overwrites the Author's
-          placement — see Concept 2.)</em>
+          (auto-layout, repositioning on resize, etc.) erases the Author's
+          argument. Hand-placement is non-negotiable. (An algorithm may
+          <em>seed</em> an import or generate a <em>derived view</em>, but never
+          overwrites the Author's placement — see Concept 2.)
         </p>
       </article>
 
@@ -667,8 +809,9 @@
           stops perceiving relationships and starts re-orienting from scratch.
           Smooth flight allows one to <strong>sweep</strong> across many
           relationships in a single continuous perceptual act, picking up
-          patterns the static view can't show. Camera transitions are part of
-          the medium, not decoration on top of it.
+          patterns the static view can't show ("the edges from this cluster all
+          bend toward that region"). Camera transitions are part of the medium,
+          not decoration on top of it.
         </p>
       </article>
 
@@ -763,7 +906,7 @@
 
     <div class="q-close">
       If a change scores well on these questions, it probably belongs.
-      If it scores poorly, it is probably the <strong>wrong design</strong>.
+      If it scores poorly, it is probably the wrong design.
     </div>
   </section>
 
@@ -792,10 +935,7 @@
           stubbed internals, tuned until you <em>love</em> it, and only then built
           for real beneath. The loved prototype becomes the guide for the real
           work. Get the experience right before committing to the machinery under
-          it.
-        </p>
-        <p>
-          (Fittingly, the holotable itself was a <em>faked</em> UX, built for a
+          it. (Fittingly, the holotable itself was a <em>faked</em> UX, built for a
           film, that went on to guide real spatial interfaces.)
         </p>
       </div>
@@ -812,15 +952,15 @@
     <p>
       Source of truth: <a href="northstar.md">northstar.md</a>. Markdown is
       canonical; this HTML is its presentation. When the substance changes, edit
-      the Markdown first, then regenerate this sibling from it.
+      the Markdown first, then re-author this sibling from it.
     </p>
     <p>
       Visual language: mid-century modern hard-edge minimalism (after
-      McLaughlin, Benjamin, Feitelson). Three accent colours — charcoal,
-      mustard, persimmon — chosen once and used consistently throughout.
+      McLaughlin, Benjamin, Feitelson). Three accent colours (charcoal,
+      mustard, persimmon), chosen once and used consistently throughout.
     </p>
-    <p style="grid-column: 1 / -1; margin-top: 1.2rem; padding-top: 1rem; border-top: 1px solid var(--rule); font-size: 0.8rem;">
-      © 2026 Gary Frattarola · Licensed under CC-BY-4.0 · part of conception-space
+    <p class="copyright">
+      © 2026 Gary Frattarola · Licensed under <a href="../LICENSES/CC-BY-4.0.txt">CC-BY-4.0</a> · part of conception-space
     </p>
   </footer>
 
