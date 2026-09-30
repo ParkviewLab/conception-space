@@ -27,8 +27,8 @@ what it means**.
 
 A node in the space can be a **handle onto a real file**: a Markdown note or a PDF. Open a
 node and you are reading and editing the actual note, in the plain, open formats you already
-write in. The space isn't a diagram *about* your notes; its points *are* your notes, arranged
-so you can fly through them and think.
+write in. The space isn't a diagram *about* your notes; the points that hold files *are* your notes,
+arranged so you can fly through them and think.
 
 ## You place it by hand — and the placing is the thinking.
 
@@ -84,7 +84,7 @@ don't give you.
 - **Plain, open formats** — your notes are Markdown and PDF, the same kinds you already write.
 - **A real-time 3D space** (built on Three.js), not a static diagram: fly through it, save
   viewpoints, and return to them.
-- **Early.** The app lays out, draws and flies through a space you author by hand.
+- **Early.** The app draws a space you author by hand and lets you fly through it.
   Point-and-place authoring, a room-scale version for Apple Vision Pro, and how the app
   meets the notes you already keep are ideas under consideration, listed in
   [the in-flight ideas](in-flight_ideas.md).

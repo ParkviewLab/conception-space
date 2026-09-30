@@ -3,22 +3,35 @@
 SPDX-FileCopyrightText: 2026 Gary Frattarola <garyf@parkviewlab.ai>
 SPDX-License-Identifier: CC-BY-4.0
 
-Presentation sibling of user_intro_to_conception_space.md. Styled to mirror the
-app's own UI (the in-app Open Source Licenses dialog): dark #090916 ground,
-#0d0d1f thin-bordered panels, cyan #4fc3f7 accent, system fonts. Self-contained,
-no scripts, no external fonts. If this drifts from the .md, the .md wins.
+Designed HTML presentation of user_intro_to_conception_space.md, the canonical
+source: the Markdown wins if the two drift, and this file is re-authored from it.
+Wording is faithful to the Markdown, sentence for sentence. Styled to mirror the
+app's own UI (the in-app Open Source Licenses dialog) rather than the ParkviewLab
+brand scaffold: dark #090916 ground, #0d0d1f thin-bordered panels, cyan #4fc3f7
+accent, system fonts. The draft marker (the stripe and the warning box) presents
+the Markdown's first heading. Self-contained: no script, no web font, no network.
 -->
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>conception-space — think with the notes you already have</title>
+<title>ParkviewLab · conception-space — a place to think with the notes you already have</title>
 <style>
+  /* Palette, chosen once and used throughout. This twin mirrors the app's own
+     UI rather than the ParkviewLab brand scaffold:
+     - the app's dark ground (--bg) and its two panel surfaces (--panel, --panel-2);
+     - one accent, the app's cyan (--accent): the numerals, the links, the
+       conception-space column of the comparison, and the figure's heavier edges;
+     - white at four strengths for text (--t1 strongest to --t4 faintest).
+     The draft marker's two reds stand outside the palette on purpose: they mark
+     the page as a draft and nothing else.
+     System faces only, as in the app: no web font, no script, no network. */
   :root{
     --bg:#090916; --panel:#0d0d1f; --panel-2:#070710; --line:rgba(255,255,255,.12);
     --accent:#4fc3f7;
     --t1:rgba(255,255,255,.92); --t2:rgba(255,255,255,.64);
     --t3:rgba(255,255,255,.46); --t4:rgba(255,255,255,.34);
+    --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,monospace;
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html,body{background:var(--bg);color:var(--t2);
@@ -29,8 +42,11 @@ no scripts, no external fonts. If this drifts from the .md, the .md wins.
   a:hover{text-decoration:underline}
   strong{color:var(--t1);font-weight:600}
   em{font-style:italic;color:var(--t1)}
+  code{font-family:var(--mono);font-size:.9em;color:var(--t1);background:rgba(255,255,255,.07);
+    border:1px solid var(--line);border-radius:4px;padding:.05em .35em}
+  a code{color:var(--accent)}
 
-  /* ── DRAFT WARNING (this is a throwaway A.I. first draft) ───────────── */
+  /* The draft marker: the Markdown's first heading, and a stripe down the left edge */
   body{padding-left:40px}
   .draft-stripe{position:fixed;top:0;left:0;width:36px;height:100vh;background:#6e000f;z-index:9999;
     overflow:hidden;border-right:1px solid rgba(0,0,0,.5)}
@@ -40,32 +56,37 @@ no scripts, no external fonts. If this drifts from the .md, the .md wins.
   .draft-warn{color:#ff3b30;font-weight:800;font-size:clamp(1.35rem,3.7vw,2.15rem);line-height:1.18;
     letter-spacing:.005em;border:2px solid #ff3b30;border-radius:6px;padding:14px 18px;margin:0 0 30px}
 
+  /* Hero: the title, the one-line claim, then the problem and the answer */
   .eyebrow{font-size:11px;font-weight:600;letter-spacing:.26em;text-transform:uppercase;color:var(--accent)}
   h1{font-size:clamp(2.1rem,6vw,3.5rem);line-height:1.04;color:var(--t1);font-weight:700;
      letter-spacing:-.022em;margin:18px 0 0;max-width:16ch}
   .lede{font-size:clamp(1.06rem,2.3vw,1.32rem);color:var(--t1);font-weight:500;margin:22px 0 0;max-width:30em}
   .sub{font-size:1.02rem;color:var(--t2);margin:16px 0 0;max-width:36em}
   .cta{display:inline-block;margin-top:30px;background:rgba(255,255,255,.08);
-       border:1px solid rgba(255,255,255,.18);color:var(--t1);padding:11px 22px;border-radius:6px;
-       font-size:.96rem;font-weight:600;letter-spacing:.01em}
+       border:1px solid rgba(255,255,255,.18);color:var(--t1);padding:13px 26px;border-radius:6px;
+       font-size:1rem;font-weight:600;letter-spacing:.01em}
   .cta:hover{background:var(--accent);color:#06121a;border-color:var(--accent);text-decoration:none}
-  .cta.lg{padding:13px 26px;font-size:1rem}
 
-  /* hero art — a hand-placed concept space, in the app's own palette */
+  /* The figure: an abstract hand-placed space in the app's palette, with nodes,
+     edges of two weights, and two cluster shells */
   .art{margin:42px 0 4px;border:1px solid var(--line);border-radius:8px;background:var(--panel-2);overflow:hidden;display:block;width:100%}
 
+  /* Section labels carry the Markdown's headings; hr.break is its bare thematic break */
   .st{font-size:10px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--t4);
       margin:74px 0 20px;display:flex;align-items:center;gap:14px}
   .st::after{content:"";flex:1;height:1px;background:var(--line)}
+  hr.break{border:0;height:1px;background:var(--line);margin:74px 0 20px}
 
+  /* The five claims: peers, numbered, as cards */
   .grid{display:grid;gap:12px}
-  @media(min-width:660px){.grid.two{grid-template-columns:1fr 1fr}}
+  .grid.two{grid-template-columns:1fr 1fr}
   .card{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:22px 24px}
   .card .n{font-size:11px;font-weight:700;letter-spacing:.1em;color:var(--accent)}
   .card h2{font-size:1.16rem;color:var(--t1);font-weight:600;letter-spacing:-.01em;margin:9px 0 8px}
   .card p{color:var(--t2);font-size:.97rem}
   .card.wide{grid-column:1 / -1}
 
+  /* The contrast: the note apps beside conception-space, row by row */
   table{width:100%;border-collapse:collapse;margin-top:4px;font-size:.95rem;
         border:1px solid var(--line);border-radius:8px;overflow:hidden}
   caption{caption-side:bottom;color:var(--t3);font-size:.86rem;text-align:left;padding:12px 2px 0}
@@ -78,16 +99,31 @@ no scripts, no external fonts. If this drifts from the .md, the .md wins.
   td.cs{color:var(--t1)}
   tr:last-child th,tr:last-child td{border-bottom:0}
 
+  /* The specifics */
   ul.specs{list-style:none}
   ul.specs li{padding:14px 0;border-bottom:1px solid var(--line);color:var(--t2)}
   ul.specs li:first-child{padding-top:2px}
   ul.specs li:last-child{border-bottom:0}
 
+  /* Try it: the three steps in their order, then the invitation */
   .closer{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:28px 26px;margin-top:8px}
   .closer p{color:var(--t2);max-width:42em}
+  ol.steps{list-style:none;display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:0 0 20px}
+  ol.steps li{background:var(--panel-2);border:1px solid var(--line);border-radius:6px;padding:14px 16px;
+              color:var(--t1);font-size:.97rem}
+  ol.steps .n{display:block;font-size:11px;font-weight:700;letter-spacing:.1em;color:var(--accent);margin:0 0 6px}
 
   footer{margin-top:84px;padding-top:22px;border-top:1px solid var(--line);font-size:.8rem;color:var(--t4)}
+  footer p + p{margin-top:8px}
   footer a{color:var(--t3)}
+
+  /* Single-column collapse, at the handbook scaffold's breakpoint */
+  @media (max-width:680px){
+    .wrap{padding-left:16px;padding-right:16px}
+    .grid.two,ol.steps{grid-template-columns:1fr}
+    th,td{padding:10px}
+    tbody th{width:30%}
+  }
 </style>
 </head>
 <body>
@@ -97,13 +133,17 @@ no scripts, no external fonts. If this drifts from the .md, the .md wins.
   <div class="draft-warn">First Draft from A.I. - Not Even Close - Needs Complete Revision</div>
 
   <p class="eyebrow">conception-space</p>
-  <h1>A place to think with the notes you already have.</h1>
-  <p class="lede">You don't need another notes app. You need somewhere to <em>think</em> with the notes you've got.</p>
-  <p class="sub">If you use Obsidian, Joplin, Notion, or just a folder of Markdown, you already have the hard
-     part: a corpus of your own ideas. What you don't have is a way to <em>see its shape</em>. conception-space
-     turns your knowledge into a <strong>place</strong>: a 3D space you build by hand, where every point is one
-     of your real notes, and <strong>where you put it is what it means</strong>.</p>
-  <a class="cta lg" href="https://github.com/ParkviewLab/conception-space/releases">Download for macOS · Windows · Linux</a>
+  <h1>A place to think <em>with</em> the notes you already have</h1>
+  <p class="lede">You don't need another notes app. You need somewhere to think with the notes you've got.</p>
+  <p class="sub">If you use Obsidian, Joplin, Notion, or just a folder of Markdown, you already have the
+     hard part: a corpus of your own ideas. What you don't have is a way to <em>see its shape</em>.
+     Folders flatten it. Search finds a note but not its neighbourhood. The graph view is a pretty
+     hairball you glance at and close. The relationships between your ideas live only in your head
+     — and heads forget.</p>
+  <p class="sub">conception-space is a desktop app that turns your knowledge into a <strong>place</strong>:
+     a 3D space you build by hand, where a point can be one of your real notes, and <strong>where you
+     put it is what it means</strong>.</p>
+  <a class="cta" href="#try-it">Try it</a>
 
   <svg class="art" viewBox="0 0 900 320" role="img"
        aria-label="An abstract concept-space: hand-placed nodes joined by relationships and gathered into clusters.">
@@ -138,82 +178,96 @@ no scripts, no external fonts. If this drifts from the .md, the .md wins.
     </g>
   </svg>
 
-  <p class="st">What it does</p>
+  <hr class="break">
   <div class="grid two">
     <div class="card wide">
       <div class="n">01</div>
       <h2>Made of real notes, not a new format.</h2>
-      <p>Every node is a <strong>handle onto a real file</strong> — a Markdown note or a PDF. Open one and
-         you're reading and editing the actual note, in the plain, open formats you already write in. Its
-         points <em>are</em> your notes, arranged so you can fly through them and think.</p>
+      <p>A node in the space can be a <strong>handle onto a real file</strong>: a Markdown note or a PDF.
+         Open a node and you are reading and editing the actual note, in the plain, open formats you
+         already write in. The space isn't a diagram <em>about</em> your notes; the points that hold files <em>are</em>
+         your notes, arranged so you can fly through them and think.</p>
     </div>
     <div class="card wide">
       <div class="n">02</div>
       <h2>You place it by hand — and the placing is the thinking.</h2>
-      <p>This is the opposite of an auto-generated graph. No layout algorithm decides where things go; <em>you</em>
-         do. Putting this note near that one and far from those is a claim: <em>these belong together; that one
-         doesn't.</em> By the time the space looks right, you've thought the relationships through. The arrangement
-         isn't a picture of your understanding — it <strong>is</strong> your understanding, made of where things sit.</p>
+      <p>This is the opposite of an auto-generated graph. No layout algorithm decides where things go;
+         <strong>you</strong> do. Putting this note near that one and far from those is a claim: <em>these
+         belong together; that one doesn't.</em> By the time the space looks right, you have thought the
+         relationships through. The arrangement isn't a picture of your understanding — it
+         <strong>is</strong> your understanding, made of where things sit.</p>
     </div>
     <div class="card">
       <div class="n">03</div>
       <h2>See the structure. Don't reconstruct it.</h2>
-      <p>A list makes you read relationships one at a time and rebuild the whole shape in your head. A space hands
-         the whole shape to your eyes at once: how dense a region is, which connections are heavy, what clusters
-         and what stands alone. A far higher-bandwidth way to grasp how a hundred ideas relate.</p>
+      <p>A list makes you read relationships one at a time and rebuild the whole shape in your head. A
+         space hands the whole shape to your eyes at once: how dense a region is, which connections are
+         heavy, what clusters and what stands alone. Your visual system was built for exactly this. It is
+         a far higher-bandwidth way to grasp how a hundred ideas relate than any list can ever be.</p>
     </div>
     <div class="card">
       <div class="n">04</div>
       <h2>A place you can come back to.</h2>
-      <p>Because <em>you</em> placed everything, it's spatially memorable, and it lasts across sessions. Leave it,
-         return months later, and the placement itself reminds you what you were thinking when you put that there.
-         A workshop you keep, not a chart you screenshot.</p>
+      <p>Because <em>you</em> placed everything, it is spatially memorable — "the dense cluster, upper
+         left, is my thesis material." And it lasts across sessions: leave it, return months later, and
+         the placement itself reminds you what you were thinking when you put that there. It is a
+         workshop you keep, not a chart you screenshot.</p>
     </div>
     <div class="card wide">
       <div class="n">05</div>
       <h2>Discover what you didn't know was there.</h2>
-      <p>Arrange enough, and structure you never typed begins to show: clusters you didn't plan, gaps where a
-         connection is missing, bridges between fields you thought were separate. The eye catches the pattern
-         before you can put it into words — and that noticing is often the insight you were missing.</p>
+      <p>Arrange enough, and structure you never typed begins to show: clusters you didn't plan, gaps where
+         a connection is missing, bridges between fields you thought were separate. The eye catches the
+         pattern before you can put it into words — and that noticing is often the insight you were
+         missing.</p>
     </div>
   </div>
 
-  <p class="st">How it differs from the tools you already use</p>
+  <h2 class="st">How it differs from the tools you already use</h2>
   <table>
     <thead>
-      <tr><th></th><th>Obsidian / Joplin / Notion</th><th class="cs">conception-space</th></tr>
+      <tr><th scope="col"></th><th scope="col">Obsidian / Joplin / Notion</th><th scope="col" class="cs">conception-space</th></tr>
     </thead>
     <tbody>
-      <tr><th>Core job</th><td>store, link, and search your notes</td><td class="cs">give you a <em>place to think</em> with them</td></tr>
-      <tr><th>The graph</th><td>auto-laid-out, decorative, glanced at</td><td class="cs">hand-built, meaningful, inhabited</td></tr>
-      <tr><th>Where meaning lives</th><td>in the text and the links</td><td class="cs"><em>also</em> in where things sit</td></tr>
-      <tr><th>The material</th><td>text notes and links</td><td class="cs">real Markdown &amp; PDF notes, placed in 3D space</td></tr>
+      <tr><th scope="row">Core job</th><td>store, link, and search your notes</td><td class="cs">give you a <em>place to think</em> with them</td></tr>
+      <tr><th scope="row">The graph</th><td>auto-laid-out, decorative, glanced at</td><td class="cs">hand-built, meaningful, inhabited</td></tr>
+      <tr><th scope="row">Where meaning lives</th><td>in the text and the links</td><td class="cs"><em>also</em> in where things sit</td></tr>
+      <tr><th scope="row">The material</th><td>text notes and links</td><td class="cs">real Markdown &amp; PDF notes, placed in 3D space</td></tr>
     </tbody>
-    <caption>Not a replacement for your note app — the spatial place to think those tools don't give you.</caption>
+    <caption>It is not a replacement for your note app. It is the spatial place to think that those tools don't give you.</caption>
   </table>
 
-  <p class="st">The honest specifics</p>
+  <h2 class="st">The honest specifics</h2>
   <ul class="specs">
-    <li><strong>Free and open source</strong> (AGPL-3.0). Your knowledge, your tool.</li>
-    <li><strong>macOS, Windows, and Linux.</strong> The macOS build is Apple-signed and notarized, so it opens without a fight.</li>
+    <li><strong>Free and open source</strong> (AGPL-3.0-or-later). Your knowledge, your tool.</li>
+    <li><strong>macOS, Windows, and Linux.</strong> The macOS build (Apple Silicon) is signed with an Apple
+        Developer ID and notarized, so it opens without a warning.</li>
     <li><strong>Plain, open formats</strong> — your notes are Markdown and PDF, the same kinds you already write.</li>
-    <li><strong>A real-time 3D space</strong> (built on Three.js), not a static diagram: fly through it, save viewpoints, return to them.</li>
-    <li><strong>Early, and moving quickly.</strong> The spatial-thinking core is here today. Richer point-and-place authoring,
-        and a room-scale version you can walk <em>through</em> on Apple Vision Pro, are on the way. And exactly how it meets the
-        notes you already keep — its own library, an Obsidian vault, a Joplin server — is an open design question we're working
-        through now.</li>
+    <li><strong>A real-time 3D space</strong> (built on Three.js), not a static diagram: fly through it, save
+        viewpoints, and return to them.</li>
+    <li><strong>Early.</strong> The app draws a space you author by hand and lets you fly through it.
+        Point-and-place authoring, a room-scale version for Apple Vision Pro, and how the app meets the
+        notes you already keep are ideas under consideration, listed in
+        <a href="in-flight_ideas.md">the in-flight ideas</a>.</li>
   </ul>
 
-  <p class="st">Try it</p>
+  <h2 class="st" id="try-it">Try it</h2>
   <div class="closer">
-    <p>Download conception-space and open the bundled example space to feel what a thought-place is like. Then start
-       shaping one around the notes that actually matter to you. Bring the ideas you already have — and begin to
-       <em>see</em> them.</p>
-    <a class="cta" href="https://github.com/ParkviewLab/conception-space/releases">Get the latest release</a>
+    <ol class="steps" role="list">
+      <li><span class="n">01</span><a href="https://github.com/ParkviewLab/conception-space/releases">Download the latest release</a> for your platform,</li>
+      <li><span class="n">02</span>download the example space <a href="../src/renderer/public/examples/solar.cns" download><code>solar.cns</code></a>,</li>
+      <li><span class="n">03</span>and open it with File → Open… to feel what a thought-place is like.</li>
+    </ol>
+    <p>Then start shaping one around the notes that actually matter to you. Bring the ideas you already
+       have — and begin to <em>see</em> them.</p>
   </div>
 
-  <footer>© 2026 Gary Frattarola · Licensed under CC-BY-4.0 · part of
-    <a href="https://github.com/ParkviewLab/conception-space">conception-space</a></footer>
+  <footer>
+    <p>Source of truth: <a href="user_intro_to_conception_space.md">user_intro_to_conception_space.md</a> ·
+       Markdown is canonical. This HTML is a presentation of it.</p>
+    <p>© 2026 Gary Frattarola · Licensed under CC-BY-4.0 · part of
+       <a href="https://github.com/ParkviewLab/conception-space">conception-space</a></p>
+  </footer>
 
 </div>
 </body>
