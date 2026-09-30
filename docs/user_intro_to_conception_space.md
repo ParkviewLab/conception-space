@@ -92,7 +92,9 @@ don't give you.
 ## Try it
 
 [Download the latest release](https://github.com/ParkviewLab/conception-space/releases) for
-your platform and open the bundled example space to feel what a thought-place is like. Then
+your platform, download the example space
+[`solar.cns`](../src/renderer/public/examples/solar.cns), and open it with File → Open… to feel
+what a thought-place is like. Then
 start shaping one around the notes that actually matter to you. Bring the ideas you already
 have — and begin to *see* them.
 
