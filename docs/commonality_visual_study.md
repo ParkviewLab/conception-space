@@ -63,15 +63,17 @@ depth reading.
 **Ring radius.**  Computed per host as
 
 ```
-ringR = host_body_radius + satellite_radius + ring_gap
-      = host.size × 0.6 + 0.10 + 0.20
+ringR = host.size × 0.5 + COMMONALITY_SAT_RADIUS × 0.5 + COMMONALITY_RING_GAP
+      = host.size × 0.5 + 0.05 + 0.20
 ```
 
-The gap between the host's surface and the satellite's surface is a
-constant 0.20 world units regardless of host size.  Same visual
-breathing room around every host: a moon's ring sits just outside
-the moon, the sun's ring just outside the sun, both with identical
-spacing margins.
+The gap between the host's surface and the satellite's surface
+therefore grows slightly with host size.  For the default sphere
+(radius 0.48 × host.size) and a sphere satellite (the 0.48 geometry
+scaled by COMMONALITY_SAT_RADIUS / 0.5, a radius of about 0.096) it
+is about 0.154 + 0.02 × host.size: about 0.17 for a size-1 host and
+0.25 for the size-5 sun.  Other shapes have other body radii, so
+their gaps differ.
 
 ## 4. Labels and visibility
 
@@ -80,6 +82,10 @@ commonality's `label=` attribute (defaulting to its id).  The
 label sits 0.12 units above the satellite's top.  Hidden together
 with the global labels toggle (`setLabelsVisible`), same as node
 and edge labels.
+
+**Commonalities toggle.**  The HUD's `commonalities` button shows or
+hides every satellite and its label.  Its state is saved per file
+with the view.
 
 **Visibility hooked to host.**  When a containing cluster goes
 solid, the host node hides — and its satellites hide with it.  This
@@ -99,7 +105,7 @@ These were considered during design and ruled out:
   on this node" exceeds the gain from "same clock position
   everywhere."
 - **Static (no orbit).**  Indistinguishable from regular small
-  nodes; reversed during Phase 2 review.  See §1.
+  nodes.  See §1.
 - **Soft-cap with warning at high N.**  Not needed under even
   distribution — N satellites with 360°/N spacing remain readable
   up into double digits.  Revisit if real scenes hit problems.
@@ -113,7 +119,6 @@ const COMMONALITY_RING_GAP        = 0.20  // absolute — gap between host surfa
 const COMMONALITY_SAT_RADIUS      = 0.10  // absolute — same on every host
 const COMMONALITY_RING_Y_FACTOR   = 0.0   // × host.size — ring plane y-offset
 const COMMONALITY_ORBIT_RAD_PER_S = 3.5   // ~1.8-second full orbit
-const NODE_BODY_RADIUS_FACTOR     = 0.6   // × host.size — node body "radius"
 ```
 
 The Y-factor is currently 0 (equatorial); the constant is kept so

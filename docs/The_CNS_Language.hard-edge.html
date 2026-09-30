@@ -1,957 +1,786 @@
 <!DOCTYPE html>
+<!--
+SPDX-FileCopyrightText: 2026 Gary Frattarola <garyf@parkviewlab.ai>
+SPDX-License-Identifier: CC-BY-4.0
+
+Designed HTML presentation of The_CNS_Language.md, in the project's hard-edge
+idiom (the idiom of northstar.html). The Markdown is canonical: if the two
+drift, the Markdown wins and this file is re-authored from it. The wording
+follows the Markdown sentence for sentence. Self-contained: one file, no
+build, no script, no network request. The sibling The_CNS_Language.html
+presents the same source in a dark idiom.
+-->
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>The CNS Language — conception-space</title>
-  <style>
-    /*
-     * Palette — late-1950s Hard-Edge Painting / West Coast Abstract
-     * Classicism (after John McLaughlin, Karl Benjamin, Lorser Feitelson).
-     * Three accent colours, used consistently throughout:
-     *   --charcoal    #2a2c2b   body, armatures, rules        (muted earth)
-     *   --mustard     #c69f3a   blocks, panels, structural     (muted earth)
-     *   --persimmon   #dc5532   highlights, status, tension    (vibrant)
-     * Neutrals (scaffolding, not counted as accent colours):
-     *   --cream       #f1ebda   page background — gallery wall
-     *   --white       #ffffff   inset panels
-     *
-     * Discipline: flat colour blocks only.  No gradients, no shadows,
-     * no textures, no rounded corners on structural elements, no
-     * decoration that isn't load-bearing.  Negative space is a
-     * compositional element, not the absence of one.
-     */
-    :root {
-      --charcoal:  #2a2c2b;
-      --mustard:   #c69f3a;
-      --persimmon: #dc5532;
-      --cream:     #f1ebda;
-      --white:     #ffffff;
-      --rule:      rgba(42, 44, 43, 0.18);
-    }
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ParkviewLab · The CNS Language</title>
+<style>
+/*
+ * Palette: late-1950s Hard-Edge Painting / West Coast Abstract Classicism
+ * (after John McLaughlin, Karl Benjamin, Lorser Feitelson), shared with
+ * northstar.html. Three accent colours, chosen once and used throughout:
+ *   --charcoal   #2a2c2b  text, rules, armatures; the node construct;
+ *                         the removed render in the version strip
+ *   --mustard    #c69f3a  blocks and panels; the edge construct; the name
+ *                         chosen among the naming candidates
+ *   --persimmon  #dc5532  highlights and status; the cluster construct;
+ *                         the value a stray comma breaks
+ * Neutrals (scaffolding, not counted as accents):
+ *   --cream      #f1ebda  page ground
+ *   --white      #ffffff  inset panels; the commonality construct
+ * Each construct keeps one colour on its keyword card and on its rail.
+ * The figures use the same three colours. In the worked example's figure
+ * the three commonalities are persimmon, mustard and white, near the
+ * example's own orange, brown and pale blue; in the satellites figure every
+ * satellite is charcoal, so that only shape tells them apart.
+ *
+ * Discipline: flat colour blocks only. No gradients, no shadows, no
+ * textures, no rounded corners, no ornament that carries no structure.
+ * Negative space is a compositional element. Faces: the system Helvetica
+ * stack for display and body, the system monospace stack for code; no web
+ * font, so the page makes no request of any kind.
+ *
+ * Responsive: a single column at 680px (the handbook scaffold's
+ * breakpoint). The worked example's figure also reflows its four clusters
+ * to two columns at 900px and to one at 420px.
+ */
+:root {
+  --charcoal:#2a2c2b;
+  --mustard:#c69f3a;
+  --persimmon:#dc5532;
+  --cream:#f1ebda;
+  --white:#ffffff;
+  --rule:rgba(42,44,43,0.18);
+  --sans:"Helvetica Neue","Helvetica","Arial",system-ui,sans-serif;
+  --mono:ui-monospace,"SF Mono","Menlo","Consolas","Monaco",monospace;
+}
+* { box-sizing:border-box; }
+html, body {
+  margin:0; padding:0;
+  background:var(--cream); color:var(--charcoal);
+  font-family:var(--sans); font-size:16px; line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+.page { max-width:1040px; margin:0 auto; padding:4vw 6vw 12vw; }
 
-    * { box-sizing: border-box; }
-    html, body {
-      margin: 0; padding: 0;
-      background: var(--cream);
-      color: var(--charcoal);
-      font-family: "Helvetica Neue", "Helvetica", "Arial", system-ui, sans-serif;
-      font-size: 16px;
-      line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
-    }
-    .page {
-      max-width: 1040px;
-      margin: 0 auto;
-      padding: 4vw 6vw 12vw;
-    }
+/* ---- Typography ---- */
+h1, h2, h3, h4 { font-weight:700; letter-spacing:0.01em; }
+h1 { font-size:clamp(2.6rem,6.5vw,4.6rem); line-height:0.95; margin:0; letter-spacing:-0.02em; }
+h2 { font-size:clamp(1.5rem,2.8vw,2.1rem); letter-spacing:0.04em; text-transform:uppercase; margin:0; line-height:1.1; }
+h3 { font-size:1.05rem; letter-spacing:0.10em; text-transform:uppercase; margin:0; }
+h4 { font-size:0.92rem; letter-spacing:0.16em; text-transform:uppercase; margin:0 0 0.5rem; color:var(--persimmon); }
+h1 code, h2 code, h3 code, h4 code, .keyword { text-transform:none; letter-spacing:0; }
+p { margin:0 0 1rem; }
+section p, section ul { max-width:46em; }
+ul { padding-left:1.2rem; margin:0 0 1rem; }
+li { margin-bottom:0.4rem; }
+li::marker { color:var(--persimmon); }
+code, pre { font-family:var(--mono); }
+code { font-size:0.92em; background:var(--cream); border:1px solid var(--rule); padding:0 0.3em; }
+pre {
+  background:var(--charcoal); color:var(--cream);
+  padding:1.2rem 1.4rem; line-height:1.5; overflow-x:auto;
+  font-size:0.88rem; margin:0 0 1.4rem;
+}
+pre code { background:transparent; border:none; color:inherit; padding:0; font-size:1em; }
+a { color:var(--charcoal); text-decoration:none; border-bottom:2px solid var(--persimmon); }
+a:hover { background:var(--mustard); color:var(--charcoal); border-bottom-color:var(--charcoal); }
+a code { color:inherit; }
 
-    /* ─── Typography ───────────────────────────────────────────────── */
-    h1, h2, h3, h4, .display, .label {
-      font-weight: 700;
-      letter-spacing: 0.01em;
-    }
-    h1 {
-      font-size: clamp(2.6rem, 6.5vw, 4.6rem);
-      line-height: 0.95;
-      margin: 0;
-      letter-spacing: -0.02em;
-    }
-    h2 {
-      font-size: clamp(1.5rem, 2.8vw, 2.1rem);
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      margin: 0;
-      line-height: 1.1;
-    }
-    h3 {
-      font-size: 1.05rem;
-      letter-spacing: 0.10em;
-      text-transform: uppercase;
-      margin: 0;
-    }
-    h4 {
-      font-size: 0.92rem;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      margin: 0 0 0.5rem;
-      color: var(--persimmon);
-    }
-    p { margin: 0 0 1rem; }
-    em { font-style: italic; }
-    strong { font-weight: 700; }
-    code, pre {
-      font-family: "SF Mono", "Menlo", "Consolas", "Monaco", monospace;
-    }
-    code {
-      font-size: 0.92em;
-      background: var(--cream);
-      border: 1px solid var(--rule);
-      padding: 0 0.3em;
-    }
-    pre {
-      background: var(--charcoal);
-      color: var(--cream);
-      padding: 1.2rem 1.4rem;
-      line-height: 1.5;
-      overflow-x: auto;
-      font-size: 0.88rem;
-      margin: 0 0 1.4rem;
-    }
-    pre code { background: transparent; border: none; color: inherit; padding: 0; }
-    a { color: var(--persimmon); text-decoration: none; border-bottom: 1px solid currentColor; }
-    a:hover { background: var(--mustard); color: var(--charcoal); border-bottom-color: var(--charcoal); }
+/* ---- Status banner: one persimmon band ---- */
+.status-banner {
+  background:var(--persimmon); color:var(--white);
+  padding:1rem 1.4rem; margin:0 0 3rem;
+  display:grid; grid-template-columns:56px 1fr; gap:1.1rem; align-items:start;
+}
+.status-banner .marker {
+  width:56px; height:56px; background:var(--charcoal); color:var(--cream);
+  display:grid; place-items:center; font-weight:700; font-size:0.95rem; letter-spacing:0.06em;
+}
+.status-banner p { margin:0; font-size:0.95rem; line-height:1.5; max-width:none; }
+.status-banner code { background:transparent; border:none; padding:0; color:var(--white); font-weight:700; }
+.status-banner a { color:var(--white); border-bottom-color:var(--white); }
+.status-banner a:hover { background:var(--charcoal); color:var(--cream); border-bottom-color:var(--cream); }
 
-    /* ─── Status banner — a single persimmon band ─────────────────── */
-    .status-banner {
-      background: var(--persimmon);
-      color: var(--cream);
-      padding: 1rem 1.4rem;
-      margin: 0 0 3rem;
-      display: grid;
-      grid-template-columns: 56px 1fr;
-      gap: 1.1rem;
-      align-items: start;
-    }
-    .status-banner .marker {
-      width: 56px; height: 56px;
-      background: var(--charcoal);
-      display: grid; place-items: center;
-      color: var(--cream);
-      font-weight: 700;
-      font-size: 0.95rem;
-      letter-spacing: 0.06em;
-    }
-    .status-banner p { margin: 0; font-size: 0.95rem; line-height: 1.5; }
-    .status-banner strong { color: var(--white); }
+/* ---- Hero: the title, and a McLaughlin-style composition ---- */
+.hero { display:grid; grid-template-columns:1.05fr 1fr; gap:3rem; align-items:stretch; margin:1rem 0 5rem; }
+.hero .eyebrow { font-size:0.85rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--persimmon); margin:0 0 1rem; font-weight:700; }
+.hero-rule { width:7rem; height:8px; background:var(--mustard); margin:1.6rem 0 1.4rem; }
+.hero-text p { font-size:1.1rem; max-width:32em; }
+.hero-composition {
+  display:grid; grid-template-columns:1.4fr 1fr; grid-template-rows:1fr 1.3fr 0.7fr;
+  gap:6px; min-height:360px;
+}
+.hc-1 { grid-column:1/2; grid-row:1/3; background:var(--charcoal); }
+.hc-2 { grid-column:2/3; grid-row:1/2; background:var(--mustard); }
+.hc-3 { grid-column:2/3; grid-row:2/3; background:var(--cream); border:6px solid var(--charcoal); }
+.hc-4 { grid-column:1/2; grid-row:3/4; background:var(--persimmon); }
+.hc-5 { grid-column:2/3; grid-row:3/4; background:var(--charcoal); }
 
-    /* ─── Hero ─────────────────────────────────────────────────────── */
-    .hero {
-      display: grid;
-      grid-template-columns: 1.05fr 1fr;
-      gap: 3rem;
-      align-items: stretch;
-      margin: 1rem 0 5rem;
-    }
-    .hero-text .eyebrow {
-      font-size: 0.85rem;
-      letter-spacing: 0.32em;
-      text-transform: uppercase;
-      color: var(--persimmon);
-      margin: 0 0 1rem;
-      font-weight: 700;
-    }
-    .hero-rule {
-      width: 7rem;
-      height: 8px;
-      background: var(--mustard);
-      margin: 1.6rem 0 1.4rem;
-    }
-    .hero-text p { font-size: 1.1rem; max-width: 32em; }
-    .hero-composition {
-      /* A McLaughlin-style composition: a few hard rectangles in
-         charcoal, mustard, and persimmon, balanced asymmetrically
-         with deliberate negative space. */
-      display: grid;
-      grid-template-columns: 1.4fr 1fr;
-      grid-template-rows: 1fr 1.3fr 0.7fr;
-      gap: 6px;
-      min-height: 360px;
-    }
-    .hero-composition > div { background: var(--mustard); }
-    .hc-block-1 { grid-column: 1 / 2; grid-row: 1 / 3; background: var(--charcoal) !important; }
-    .hc-block-2 { grid-column: 2 / 3; grid-row: 1 / 2; background: var(--mustard) !important; }
-    .hc-block-3 { grid-column: 2 / 3; grid-row: 2 / 3; background: var(--cream)   !important; border: 6px solid var(--charcoal); }
-    .hc-block-4 { grid-column: 1 / 2; grid-row: 3 / 4; background: var(--persimmon) !important; }
-    .hc-block-5 { grid-column: 2 / 3; grid-row: 3 / 4; background: var(--charcoal) !important; }
+/* ---- Section heads: a numbered block and an uppercase title ---- */
+.section { margin:5rem 0 0; padding:4rem 0 0; border-top:4px solid var(--charcoal); }
+.section-head { display:grid; grid-template-columns:96px 1fr; gap:1.4rem; margin-bottom:1.6rem; align-items:center; }
+.section-marker {
+  width:96px; height:56px; display:grid; place-items:center;
+  font-weight:700; font-size:1.05rem; letter-spacing:0.18em;
+  color:var(--cream); background:var(--charcoal);
+}
+.section-marker.mustard { background:var(--mustard); color:var(--charcoal); }
+.section-marker.persimmon { background:var(--persimmon); color:var(--white); }
+.section-lede { font-size:1.04rem; }
+.sub-h { margin:1.8rem 0 0.6rem; }
 
-    /* ─── Section heads — a sharp chevron + uppercase label ────────── */
-    .section { margin: 5rem 0 0; padding: 4rem 0 0; border-top: 4px solid var(--charcoal); }
-    .section-head {
-      display: grid;
-      grid-template-columns: 96px 1fr;
-      gap: 1.4rem;
-      margin-bottom: 1.6rem;
-      align-items: center;
-    }
-    .section-marker {
-      width: 96px; height: 56px;
-      display: grid; place-items: center;
-      font-weight: 700;
-      font-size: 1.05rem;
-      letter-spacing: 0.18em;
-      color: var(--cream);
-      background: var(--charcoal);
-    }
-    .section-marker.mustard { background: var(--mustard); color: var(--charcoal); }
-    .section-marker.persimmon { background: var(--persimmon); color: var(--cream); }
-    .section-lede {
-      max-width: 44em;
-      font-size: 1.04rem;
-      margin-bottom: 2rem;
-    }
+/* ---- Construct colours: one per construct, on its card and its rail ---- */
+.c-node { background:var(--charcoal); color:var(--cream); }
+.c-edge { background:var(--mustard); color:var(--charcoal); }
+.c-cluster { background:var(--persimmon); color:var(--white); }
+.c-comm { background:var(--white); color:var(--charcoal); }
 
-    /* ─── Keyword grid (at a glance) ──────────────────────────────── */
-    .kw-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 6px;
-      margin-bottom: 3rem;
-    }
-    .kw-card {
-      background: var(--white);
-      border: 4px solid var(--charcoal);
-      padding: 1.6rem 1.6rem 1.8rem;
-      display: grid;
-      grid-template-columns: 64px 1fr;
-      gap: 1.2rem;
-      align-items: start;
-    }
-    .kw-card .kw-mark { width: 64px; height: 64px; }
-    .kw-card h3 { font-size: 1.15rem; margin-bottom: 0.4rem; }
-    .kw-card p  { font-size: 0.96rem; line-height: 1.5; margin: 0; }
-    .kw-card.charcoal { background: var(--charcoal); color: var(--cream); border-color: var(--charcoal); }
-    .kw-card.charcoal h3, .kw-card.charcoal h4 { color: var(--cream); }
-    .kw-card.charcoal h4 { color: var(--mustard); }
-    .kw-card.mustard  { background: var(--mustard);  color: var(--charcoal); border-color: var(--charcoal); }
-    .kw-card.persimmon { background: var(--persimmon); color: var(--cream); border-color: var(--charcoal); }
-    .kw-card.persimmon h3, .kw-card.persimmon h4 { color: var(--cream); }
+/* ---- The four keywords, perceived at one glance ---- */
+.kw-grid { display:grid; grid-template-columns:1fr 1fr; gap:6px; margin:0 0 2rem; }
+.kw-card {
+  border:4px solid var(--charcoal); padding:1.6rem 1.6rem 1.8rem;
+  display:grid; grid-template-columns:64px 1fr; gap:1.2rem; align-items:start;
+}
+.kw-mark { width:64px; height:64px; display:block; }
+.kw-card h3 { margin:0 0 0.5rem; }
+.kw-card h3 code { font-size:1.35rem; font-weight:700; background:transparent; border:none; padding:0; color:inherit; }
+.kw-card p { font-size:0.96rem; line-height:1.5; margin:0; }
 
-    /* ─── Attribute tables ────────────────────────────────────────── */
-    .attr-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 0 0 1.4rem;
-      font-size: 0.94rem;
-    }
-    .attr-table thead th {
-      background: var(--charcoal);
-      color: var(--cream);
-      text-align: left;
-      padding: 0.55rem 0.8rem;
-      font-weight: 700;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      font-size: 0.78rem;
-    }
-    .attr-table tbody td {
-      padding: 0.55rem 0.8rem;
-      border-bottom: 1px solid var(--rule);
-      vertical-align: top;
-      background: var(--white);
-    }
-    .attr-table tbody tr:nth-child(even) td { background: var(--cream); }
-    .attr-table td code { background: transparent; border: none; padding: 0; font-size: 0.94em; color: var(--persimmon); }
+/* ---- The two attributes that appear everywhere ---- */
+.pair { display:grid; grid-template-columns:1fr 1fr; gap:6px; margin:0 0 1.4rem; }
+.pair-item { background:var(--white); border-left:8px solid var(--mustard); padding:1rem 1.2rem; }
+.pair-item h4 { color:var(--charcoal); font-size:1rem; letter-spacing:0; text-transform:none; margin:0 0 0.4rem; }
+.pair-item h4 code { background:transparent; border:none; padding:0; }
+.pair-item p { margin:0; font-size:0.96rem; }
 
-    /* ─── Keyword deep-dive blocks ────────────────────────────────── */
-    .kw-deep {
-      display: grid;
-      grid-template-columns: 96px 1fr;
-      gap: 1.4rem;
-      margin-bottom: 4rem;
-    }
-    .kw-deep .kw-rail {
-      background: var(--charcoal);
-      color: var(--cream);
-      padding: 1rem 0.8rem;
-      text-align: center;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      writing-mode: vertical-rl;
-      transform: rotate(180deg);
-      font-size: 0.86rem;
-    }
-    .kw-deep .kw-rail.mustard  { background: var(--mustard);  color: var(--charcoal); }
-    .kw-deep .kw-rail.persimmon { background: var(--persimmon); color: var(--cream); }
-    .kw-deep h2 { margin-bottom: 0.8rem; }
-    .kw-deep .keyword { color: var(--persimmon); font-family: "SF Mono", Menlo, Consolas, monospace; font-weight: 700; }
-    .sub-h { margin: 1.8rem 0 0.6rem; }
-    .status-line {
-      background: var(--mustard);
-      color: var(--charcoal);
-      padding: 0.7rem 1rem;
-      margin-top: 1.2rem;
-      font-size: 0.93rem;
-      font-weight: 600;
-    }
-    .status-line strong { letter-spacing: 0.05em; }
+/* ---- Divider: the break into the construct reference ---- */
+.divider { display:flex; gap:6px; margin:4rem 0; }
+.divider .bar { height:14px; }
+.divider .mustard { flex:2; background:var(--mustard); }
+.divider .persimmon { flex:1; background:var(--persimmon); }
+.divider .charcoal { flex:4; background:var(--charcoal); }
 
-    /* ─── Rationale block (callout-like, but flat) ────────────────── */
-    .rationale {
-      background: var(--white);
-      border-left: 8px solid var(--persimmon);
-      padding: 1rem 1.2rem;
-      margin: 1rem 0 1.4rem;
-    }
-    .rationale h4 { color: var(--persimmon); }
+/* ---- Construct deep dives: a rail in the construct's colour ---- */
+.kw-deep { display:grid; grid-template-columns:96px 1fr; gap:1.4rem; margin:0 0 4.5rem; }
+.kw-rail {
+  border:4px solid var(--charcoal);
+  font-family:var(--mono); font-weight:700; font-size:1rem; letter-spacing:0.08em;
+  text-align:center; padding:1rem 0.8rem;
+  writing-mode:vertical-rl; transform:rotate(180deg);
+}
+.kw-body { min-width:0; }
+.kw-deep h2 { margin-bottom:0.9rem; }
+.keyword { color:var(--persimmon); font-family:var(--mono); font-weight:700; }
+.status-line {
+  background:var(--mustard); color:var(--charcoal);
+  padding:0.7rem 1rem; margin:1.2rem 0 0; font-size:0.93rem; font-weight:600;
+}
+section p.status-line { max-width:none; }
+.status-line .sl { text-transform:uppercase; letter-spacing:0.12em; font-weight:800; font-style:normal; margin-right:0.3em; }
+.status-line code { background:transparent; border-color:rgba(42,44,43,0.35); }
+.status-line a { border-bottom-color:var(--charcoal); }
 
-    /* ─── Pull-card with a single fact (large display number) ─────── */
-    .display-card {
-      display: grid;
-      grid-template-columns: 1.4fr 1fr;
-      gap: 1.2rem;
-      background: var(--charcoal);
-      color: var(--cream);
-      padding: 1.4rem 1.6rem;
-      margin: 1.4rem 0;
-    }
-    .display-card .num {
-      font-size: 4.4rem;
-      line-height: 1;
-      color: var(--mustard);
-      font-weight: 800;
-      letter-spacing: -0.04em;
-    }
-    .display-card p { margin: 0; }
+/* ---- Rationale: a flat callout ---- */
+.rationale { background:var(--white); border-left:8px solid var(--persimmon); padding:1rem 1.2rem; margin:1.2rem 0 1.4rem; }
+.rationale p:last-child, .rationale ul:last-child { margin-bottom:0; }
+.choices { display:grid; grid-template-columns:1fr 1fr; gap:6px; margin:0 0 1rem; }
+.choice { background:var(--cream); padding:0.9rem 1rem; }
+.choice p { margin:0; font-size:0.96rem; }
 
-    /* ─── Naming-rationale grid (4 cards) ─────────────────────────── */
-    .naming-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 6px;
-      margin: 1rem 0 3rem;
-    }
-    .naming-card {
-      background: var(--white);
-      border: 4px solid var(--charcoal);
-      padding: 1.4rem 1.4rem 1.5rem;
-    }
-    .naming-card .nc-num {
-      display: inline-block;
-      background: var(--persimmon);
-      color: var(--cream);
-      padding: 0.15rem 0.55rem;
-      font-weight: 700;
-      letter-spacing: 0.06em;
-      font-size: 0.78rem;
-      margin-bottom: 0.7rem;
-    }
-    .naming-card h3 { margin-bottom: 0.6rem; }
-    .naming-card p  { font-size: 0.95rem; margin: 0 0 0.7rem; }
+/* ---- Tables ---- */
+.table-wrap { overflow-x:auto; margin:0 0 1.4rem; }
+.attr-table { width:100%; border-collapse:collapse; font-size:0.94rem; }
+.attr-table.cols4 { min-width:34rem; }
+.attr-table thead th {
+  background:var(--charcoal); color:var(--cream); text-align:left;
+  padding:0.55rem 0.8rem; font-weight:700; letter-spacing:0.06em;
+  text-transform:uppercase; font-size:0.78rem;
+}
+.attr-table tbody td { padding:0.55rem 0.8rem; border-bottom:1px solid var(--rule); vertical-align:top; background:var(--white); }
+.attr-table tbody tr:nth-child(even) td { background:var(--cream); }
+.attr-table td code { background:transparent; border:none; padding:0; font-size:0.94em; }
+.attr-table td:first-child code { color:var(--persimmon); font-weight:700; }
+.anti-table tbody td { background:var(--cream); }
+.anti-table tbody tr:nth-child(even) td { background:var(--white); }
+.anti-table td:first-child { width:30%; }
 
-    /* ─── Status grid (shipping vs removed) ───────────────────────── */
-    .status-grid {
-      display: grid;
-      grid-template-columns: 1.7fr 1fr;
-      gap: 6px;
-      margin: 1rem 0 0;
-    }
-    .status-col {
-      background: var(--white);
-      border: 4px solid var(--charcoal);
-      padding: 1.4rem 1.4rem 1.6rem;
-    }
-    .status-col.shipping { border-color: var(--charcoal); background: var(--white); }
-    .status-col.removed  { background: var(--charcoal); color: var(--cream); }
-    .status-col.removed h3 { color: var(--cream); }
-    .status-col.removed h4 { color: var(--persimmon); }
-    .status-col h3 { font-size: 0.95rem; letter-spacing: 0.16em; }
-    .status-col ul { margin: 1rem 0 0; padding-left: 1.1rem; }
-    .status-col li { margin-bottom: 0.55rem; font-size: 0.95rem; line-height: 1.55; }
-    .status-col li::marker { color: var(--persimmon); }
+/* ---- Figures ---- */
+figure { margin:0; }
+.fig { background:var(--white); border:4px solid var(--charcoal); padding:1.2rem 1.2rem 1rem; margin:1.4rem 0 1.6rem; }
+.fig figcaption { font-size:0.88rem; margin-top:0.9rem; padding-top:0.6rem; border-top:1px solid var(--rule); max-width:46em; }
+.fig figcaption code { background:transparent; }
+svg .s-char { fill:var(--charcoal); }
+svg .s-must { fill:var(--mustard); }
+svg .s-pers { fill:var(--persimmon); }
+svg .s-wht { fill:var(--white); stroke:var(--charcoal); stroke-width:1.5; }
+svg .s-ring { fill:none; stroke:var(--charcoal); stroke-opacity:0.4; stroke-width:1; }
+svg .s-frame { fill:none; stroke:var(--charcoal); stroke-width:3; }
 
-    /* ─── Cog-sci threads list ────────────────────────────────────── */
-    .threads {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 6px;
-      margin: 1rem 0 1.4rem;
-    }
-    .thread {
-      background: var(--mustard);
-      color: var(--charcoal);
-      padding: 1.2rem 1.2rem 1.3rem;
-    }
-    .thread .t-num {
-      font-size: 2.6rem;
-      font-weight: 800;
-      line-height: 1;
-      letter-spacing: -0.04em;
-      color: var(--persimmon);
-      margin-bottom: 0.4rem;
-    }
-    .thread h3 { font-size: 0.95rem; margin-bottom: 0.55rem; }
-    .thread p { font-size: 0.92rem; margin: 0; line-height: 1.5; }
+/* Satellites rule: one host per count of commonalities */
+.sats { display:grid; grid-template-columns:repeat(4,1fr); gap:6px; }
+.sat-host { background:var(--cream); padding:0.8rem 0.6rem 0.6rem; text-align:center; }
+.sat-host svg { width:96px; height:96px; display:block; margin:0 auto 0.3rem; }
+.sat-host span { font-family:var(--mono); font-size:0.8rem; font-weight:700; }
+.sat-key { display:flex; flex-wrap:wrap; gap:0.4rem 1.2rem; align-items:center; margin-top:0.8rem; font-family:var(--mono); font-size:0.8rem; }
+.sat-key svg { width:14px; height:14px; vertical-align:-2px; margin-right:0.3rem; }
+.sat-key .k-lead { font-weight:700; }
 
-    /* ─── Anti-features table (deliberately doesn't have) ─────────── */
-    .anti-table tbody td { background: var(--cream); }
-    .anti-table tbody tr:nth-child(even) td { background: var(--white); }
+/* The worked example's groupings: clusters as nested blocks */
+.gx-cluster { border:3px solid var(--charcoal); background:var(--white); }
+.gx-cluster .gx-cluster { border-width:2px; background:var(--cream); }
+.gx-band { background:var(--charcoal); color:var(--cream); font-family:var(--mono); font-size:0.78rem; font-weight:700; padding:0.2rem 0.6rem; }
+.gx-body { display:grid; grid-template-columns:8.5rem 1fr; gap:10px; padding:10px; align-items:start; }
+.gx-subs { display:grid; grid-template-columns:repeat(4,1fr); gap:10px; align-items:start; }
+.gx-nodes { display:grid; gap:0; padding:4px 6px; }
+.gx-node { display:flex; align-items:center; gap:4px; font-family:var(--mono); font-size:0.82rem; min-height:40px; }
+.gx-node svg { width:40px; height:40px; flex:none; }
+.gx-key { display:flex; flex-wrap:wrap; gap:0.4rem 1.2rem; align-items:center; margin-top:0.8rem; font-family:var(--mono); font-size:0.8rem; }
+.gx-key svg { width:14px; height:14px; vertical-align:-2px; margin-right:0.3rem; }
+.gx-key .k-lead { font-weight:700; }
 
-    /* ─── Section divider chevron ─────────────────────────────────── */
-    .divider {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      margin: 0 0 0;
-    }
-    .divider .bar {
-      height: 14px;
-      flex: 1;
-    }
-    .divider .bar.mustard   { background: var(--mustard); }
-    .divider .bar.persimmon { background: var(--persimmon); }
-    .divider .bar.charcoal  { background: var(--charcoal); }
+/* ---- Contrast: two unequal panels ---- */
+.contrast { display:grid; grid-template-columns:1fr 1.8fr; gap:6px; margin:0 0 1.4rem; }
+.panel { padding:1.2rem 1.3rem; }
+.panel p { margin:0; }
+.panel-label { font-family:var(--mono); font-size:0.75rem; letter-spacing:0.14em; text-transform:uppercase; font-weight:700; margin:0 0 0.6rem; }
+.panel.before { background:var(--white); border:4px solid var(--charcoal); }
+.panel.after { background:var(--charcoal); color:var(--cream); }
+.panel.after .panel-label { color:var(--mustard); }
+.panel.after code { background:transparent; border-color:rgba(241,235,218,0.35); color:var(--mustard); }
+.panel.after strong { color:var(--white); }
 
-    /* ─── Footer ──────────────────────────────────────────────────── */
-    footer {
-      margin-top: 6rem;
-      padding-top: 1.4rem;
-      border-top: 4px solid var(--charcoal);
-      font-size: 0.86rem;
-      color: var(--charcoal);
-      display: grid;
-      grid-template-columns: 1.4fr 1fr;
-      gap: 2rem;
-      align-items: start;
-    }
-    footer p { margin: 0; }
+/* ---- The comma pitfall ---- */
+.pitfall { background:var(--white); border:4px solid var(--charcoal); padding:1.1rem 1.2rem 1rem; margin:0 0 1.4rem; }
+.pitfall p { max-width:46em; }
+.pitfall-line { font-family:var(--mono); font-size:0.95rem; white-space:pre; overflow-x:auto; background:var(--cream); padding:0.8rem 1rem 1rem; margin:0 0 0.8rem; }
+.pitfall-line code { background:transparent; border:none; padding:0; font-size:1em; }
+.pitfall-line .v { border-bottom:6px solid var(--mustard); padding-bottom:1px; }
+.pitfall-line .v.bad { border-bottom-color:var(--persimmon); }
+.pitfall-key { display:grid; grid-template-columns:2.2rem 1fr; gap:0.35rem 0.8rem; align-items:center; font-size:0.9rem; }
+.pitfall-key .sw { height:6px; background:var(--mustard); }
+.pitfall-key .sw.bad { background:var(--persimmon); }
+.pitfall-key code { background:transparent; }
 
-    /* ─── Responsive collapse ─────────────────────────────────────── */
-    @media (max-width: 760px) {
-      .hero { grid-template-columns: 1fr; }
-      .hero-composition { min-height: 280px; }
-      .kw-grid, .naming-grid, .status-grid, .threads { grid-template-columns: 1fr; }
-      .status-banner { grid-template-columns: 1fr; }
-      .status-banner .marker { width: 100%; height: 40px; }
-      .kw-card, .kw-deep { grid-template-columns: 56px 1fr; }
-      .kw-deep .kw-rail { writing-mode: horizontal-tb; transform: none; padding: 0.5rem; }
-      .display-card { grid-template-columns: 1fr; }
-      .display-card .num { font-size: 3rem; }
-      footer { grid-template-columns: 1fr; }
-    }
-  </style>
+/* ---- Value types ---- */
+.types { display:grid; grid-template-columns:10rem 1fr; gap:4px; margin:0.6rem 0 0.4rem; max-width:46em; }
+.types dt { background:var(--mustard); color:var(--charcoal); font-weight:700; padding:0.5rem 0.8rem; }
+.types dt .dt-note { display:block; font-weight:400; font-size:0.85rem; }
+.types dt code { background:transparent; border-color:rgba(42,44,43,0.35); }
+.types dd { margin:0; background:var(--white); padding:0.5rem 0.8rem; }
+
+/* ---- Naming decisions ---- */
+.decision { background:var(--white); border:4px solid var(--charcoal); padding:1.4rem 1.4rem 1.2rem; margin:0 0 6px; }
+.decision > p:last-child, .decision > ul:last-child { margin-bottom:0; }
+.nc-num { display:inline-block; background:var(--persimmon); color:var(--white); padding:0.15rem 0.55rem; font-weight:700; letter-spacing:0.06em; font-size:0.78rem; margin-bottom:0.7rem; }
+.decision h3 { margin-bottom:0.8rem; }
+.keyset { display:grid; gap:6px; margin:0 0 1rem; }
+.keyrow { display:flex; flex-wrap:wrap; gap:6px; align-items:center; }
+.keyrow-label { font-family:var(--mono); font-size:0.72rem; letter-spacing:0.14em; text-transform:uppercase; font-weight:700; width:5.5rem; }
+.kchip { font-family:var(--mono); font-weight:700; font-size:0.9rem; padding:0.25rem 0.7rem; border:2px solid var(--charcoal); }
+.kchip.old { background:var(--white); }
+.kchip.old .pfx { color:var(--persimmon); }
+.kchip.now { background:var(--charcoal); color:var(--cream); }
+.candidates { display:grid; grid-template-columns:repeat(auto-fit,minmax(9.5rem,1fr)); gap:6px; margin:0.4rem 0 6px; }
+.cand { background:var(--cream); border:2px solid var(--charcoal); padding:0.9rem 1rem 1rem; }
+.cand .tag { font-family:var(--mono); font-size:0.7rem; letter-spacing:0.14em; text-transform:uppercase; font-weight:700; margin:0 0 0.35rem; }
+.cand h4 { color:var(--charcoal); font-size:1rem; letter-spacing:0; text-transform:none; margin:0 0 0.4rem; }
+.cand h4 code { background:transparent; border:none; padding:0; font-size:1.05em; }
+.cand p { font-size:0.9rem; line-height:1.5; margin:0; }
+.cand.won { background:var(--mustard); border-width:4px; margin:0 0 1.2rem; }
+.cand.won code { border-color:rgba(42,44,43,0.35); background:transparent; }
+.also-label { font-weight:700; margin:0 0 0.4rem; }
+.rejected { display:grid; grid-template-columns:max-content 1fr; gap:4px; margin:0 0 0.4rem; }
+.rejected dt, .rejected dd { background:var(--cream); border:2px solid var(--rule); padding:0.4rem 0.8rem; font-size:0.88rem; line-height:1.45; }
+.rejected dd { margin:0; }
+.rejected code { background:transparent; border:none; padding:0; font-weight:700; }
+
+/* ---- Cog-sci threads: each thread lands in a keyword ---- */
+.threads { display:grid; grid-template-columns:repeat(3,1fr); column-gap:6px; row-gap:0; margin:1rem 0 1.4rem; }
+.thread { background:var(--mustard); color:var(--charcoal); padding:1.2rem 1.2rem 1.3rem; display:grid; grid-row:span 4; grid-template-rows:subgrid; align-content:start; }
+.thread .t-num { font-size:2.6rem; font-weight:800; line-height:1; letter-spacing:-0.04em; color:var(--persimmon); margin-bottom:0.4rem; }
+.thread h3 { font-size:0.95rem; margin-bottom:0.55rem; }
+.thread p { font-size:0.92rem; margin:0; line-height:1.5; }
+.thread .t-map { background:var(--charcoal); color:var(--cream); margin:0.7rem -1.2rem 0.8rem; padding:0.45rem 1.2rem; font-weight:700; align-self:start; }
+.thread .t-map code { background:transparent; border:none; padding:0; color:var(--mustard); font-size:1em; }
+
+/* ---- Status: what ships, and the versions that brought it ---- */
+.shipping { background:var(--white); border:4px solid var(--charcoal); padding:1.3rem 1.4rem 0.8rem; margin:0 0 6px; }
+.shipping p, .shipping ul { max-width:none; }
+.versions { display:grid; gap:6px; margin:0 0 1.4rem; }
+.ver { display:grid; grid-template-columns:8.5rem 1fr; background:var(--white); }
+.ver-num { background:var(--mustard); color:var(--charcoal); font-weight:800; font-size:1.2rem; padding:0.8rem 1rem; letter-spacing:0.02em; }
+.ver-num small { display:block; font-family:var(--mono); font-size:0.68rem; letter-spacing:0.12em; text-transform:uppercase; font-weight:700; margin-top:0.2rem; }
+.ver p { margin:0; padding:0.8rem 1.2rem; font-size:0.95rem; max-width:none; }
+.ver.removed .ver-num { background:var(--charcoal); color:var(--cream); }
+.ver.removed .ver-num small { color:var(--mustard); }
+.mapping { display:grid; gap:6px; margin:0 0 1.4rem; max-width:46em; }
+.map-row { display:grid; grid-template-columns:11rem 1fr 11rem; gap:6px; }
+.map-row.none { grid-template-columns:11rem 1fr; }
+.map-row > span { padding:0.55rem 0.9rem; }
+.map-row .old { background:var(--charcoal); color:var(--cream); font-weight:700; }
+.map-row .old code { background:transparent; border:none; padding:0; color:var(--cream); }
+.map-row .via { background:var(--white); font-size:0.92rem; }
+.map-row .new { background:var(--mustard); color:var(--charcoal); font-weight:700; }
+.map-row .new code { background:transparent; border:none; padding:0; }
+
+/* ---- Footer ---- */
+footer {
+  margin-top:6rem; padding-top:1.4rem; border-top:4px solid var(--charcoal);
+  font-size:0.86rem; display:grid; grid-template-columns:1.4fr 1fr; gap:2rem; align-items:start;
+}
+footer p { margin:0; }
+footer .copyright { grid-column:1/-1; margin-top:1.2rem; padding-top:1rem; border-top:1px solid var(--rule); font-size:0.8rem; }
+
+/* ---- Responsive ---- */
+@media (max-width:900px) {
+  .gx-subs { grid-template-columns:1fr 1fr; }
+}
+@media (max-width:680px) {
+  .page { padding:6vw 5vw 16vw; }
+  .hero, .kw-grid, .pair, .choices, .contrast,
+  .threads, .kw-deep, .ver, .map-row, .map-row.none, .gx-body, footer { grid-template-columns:1fr; }
+  .threads { row-gap:6px; }
+  .hero { gap:1.8rem; margin-bottom:3rem; }
+  .hero-composition { min-height:200px; }
+  .status-banner { grid-template-columns:1fr; }
+  .status-banner .marker { width:100%; height:40px; }
+  .section { margin-top:3.5rem; padding-top:2.8rem; }
+  .section-head { grid-template-columns:64px 1fr; gap:1rem; }
+  .section-marker { width:64px; height:44px; font-size:0.95rem; letter-spacing:0.12em; }
+  .kw-card { grid-template-columns:48px 1fr; padding:1.2rem; gap:1rem; }
+  .kw-mark { width:48px; height:48px; }
+  .kw-deep { gap:1rem; }
+  .kw-rail { writing-mode:horizontal-tb; transform:none; text-align:left; padding:0.5rem 0.9rem; }
+  .sats { grid-template-columns:1fr 1fr; }
+  .types { grid-template-columns:1fr; gap:0; }
+  .types dd { margin-bottom:4px; }
+  .rejected { grid-template-columns:1fr; gap:0; }
+  .rejected dt { border-bottom:none; }
+  .rejected dd { margin-bottom:4px; }
+  .keyrow-label { width:100%; }
+  /* Four-column tables: one block per row, the meaning beneath its attribute */
+  .attr-table.cols4 { min-width:0; }
+  .attr-table.cols4 thead { display:none; }
+  .attr-table.cols4 tbody tr { display:grid; grid-template-columns:auto auto 1fr; column-gap:0.9rem; padding:0.55rem 0.8rem 0.65rem; border-bottom:1px solid var(--rule); background:var(--white); }
+  .attr-table.cols4 tbody tr:nth-child(even) { background:var(--cream); }
+  .attr-table.cols4 tbody tr td { padding:0; border:none; background:transparent; }
+  .attr-table.cols4 td:nth-child(2)::before { content:"type "; }
+  .attr-table.cols4 td:nth-child(3)::before { content:"default "; }
+  .attr-table.cols4 td:nth-child(2)::before, .attr-table.cols4 td:nth-child(3)::before {
+    font-family:var(--mono); font-size:0.66rem; letter-spacing:0.1em; text-transform:uppercase; color:rgba(42,44,43,0.62);
+  }
+  .attr-table.cols4 td:nth-child(4) { grid-column:1 / -1; padding-top:0.3rem; }
+  footer { gap:1.2rem; }
+}
+@media (max-width:420px) {
+  .gx-subs { grid-template-columns:1fr; }
+}
+</style>
 </head>
 <body>
 <div class="page">
 
-  <!-- ════════════════════════════════════════════════════════════════
-       STATUS BANNER
-       Single solid persimmon band.  The "marker" left rail is a small
-       charcoal block — the only square in the composition, signalling
-       version status without decoration.
-       ════════════════════════════════════════════════════════════════ -->
+  <!-- Status note: the Markdown's opening blockquote, as one persimmon band -->
   <div class="status-banner">
     <div class="marker">v0.7.4</div>
-    <p>
-      As of v0.7.4 every construct described here ships.
-      <strong><code style="color:var(--white);background:transparent;border:none;">commonality</code></strong>
-      renders as orbiting satellites, with an optional
-      <strong><code style="color:var(--white);background:transparent;border:none;">shape=</code></strong>
-      attribute selecting the satellite geometry.  An earlier opt-in
-      <code style="color:var(--white);background:transparent;border:none;">style=lines</code> (v0.7.2)
-      was removed in v0.7.3 — the lines were visually indistinguishable from
-      <code style="color:var(--white);background:transparent;border:none;">edge</code> tubes.
-      The <strong>Status / Migration</strong> block at the bottom is authoritative.
-    </p>
+    <p><strong>Status note.</strong> As of v0.7.4 every construct described here ships. <code>commonality</code> renders as orbiting satellites, with an optional <code>shape=</code> attribute selecting the satellite geometry. An earlier opt-in <code>style=lines</code> (v0.7.2) was removed in v0.7.3 — the lines were visually indistinguishable from <code>edge</code> tubes. The <a href="#status-migration"><strong>Status / Migration</strong></a> section at the bottom is authoritative.</p>
   </div>
 
-  <!-- ════════════════════════════════════════════════════════════════
-       HERO
-       A McLaughlin-style hard-edge composition on the right —
-       five flat rectangles in three colours, balanced asymmetrically
-       with deliberate negative space.  The title sits on the left,
-       a single mustard rule beneath it.
-       ════════════════════════════════════════════════════════════════ -->
+  <!-- Hero: title and introduction; the composition is the idiom's mark -->
   <header class="hero">
     <div class="hero-text">
       <div class="eyebrow">conception-space · language reference</div>
       <h1>The CNS<br>Language</h1>
       <div class="hero-rule"></div>
-      <p>
-        A hand-authored description language for 3D conceptual graphs.
-        File extension <code>.cns</code>; viewer + editor is
-        conception-space.  This document covers the language itself —
-        syntax, semantics, and the rationale behind each design choice.
-      </p>
-      <p>
-        For the broader project intent that drives these choices, see
-        <a href="northstar.md">northstar.md</a>.
-      </p>
+      <p>A hand-authored description language for 3D conceptual graphs. The file extension is <code>.cns</code>; the viewer/editor is conception-space.</p>
+      <p>This document covers the language itself — syntax, semantics, and the rationale behind each design choice — at the level of detail someone designing a new feature, writing a parser, or trying to understand <em>why the language is shaped this way</em> would need. For the broader project intent that drives these choices, see <a href="northstar.html"><code>northstar.md</code></a>.</p>
     </div>
     <div class="hero-composition" aria-hidden="true">
-      <div class="hc-block-1"></div>
-      <div class="hc-block-2"></div>
-      <div class="hc-block-3"></div>
-      <div class="hc-block-4"></div>
-      <div class="hc-block-5"></div>
+      <div class="hc-1"></div>
+      <div class="hc-2"></div>
+      <div class="hc-3"></div>
+      <div class="hc-4"></div>
+      <div class="hc-5"></div>
     </div>
   </header>
 
-  <!-- ════════════════════════════════════════════════════════════════
-       SECTION 01 — At a glance
-       ════════════════════════════════════════════════════════════════ -->
-  <section class="section">
+  <!-- 01 At a glance: the four keywords as peers -->
+  <section class="section" id="keywords">
     <div class="section-head">
       <div class="section-marker">01</div>
       <h2>At a glance — the keyword space</h2>
     </div>
-    <p class="section-lede">
-      The language has <strong>four top-level keywords</strong>.  Every
-      <code>.cns</code> file is some combination of declarations using
-      these four.  All four are single-word, un-prefixed.  Reading a
-      file, the keyword tells you immediately what kind of declaration
-      you're looking at.
-    </p>
+    <p class="section-lede">The language has <strong>four top-level keywords</strong>. Every <code>.cns</code> file is some combination of declarations using these four.</p>
 
     <div class="kw-grid">
-
-      <article class="kw-card charcoal">
+      <article class="kw-card c-node">
         <svg class="kw-mark" viewBox="0 0 64 64" aria-hidden="true">
-          <rect x="2" y="2" width="60" height="60" fill="#2a2c2b"/>
-          <circle cx="32" cy="32" r="20" fill="#c69f3a"/>
+          <rect class="s-char" x="2" y="2" width="60" height="60"/>
+          <circle class="s-must" cx="32" cy="32" r="20"/>
         </svg>
         <div>
-          <h4>node</h4>
-          <h3>An individual 3D object</h3>
-          <p>A sphere, cube, octahedron, etc. — at a defined position.</p>
+          <h3><code>node</code></h3>
+          <p>An individual 3D object — a sphere, cube, octahedron, etc. — at a defined position.</p>
         </div>
       </article>
-
-      <article class="kw-card mustard">
+      <article class="kw-card c-edge">
         <svg class="kw-mark" viewBox="0 0 64 64" aria-hidden="true">
-          <rect x="2" y="2" width="60" height="60" fill="#c69f3a"/>
-          <circle cx="16" cy="32" r="6"  fill="#2a2c2b"/>
-          <circle cx="48" cy="32" r="6"  fill="#2a2c2b"/>
-          <rect x="20" y="29" width="24" height="6" fill="#2a2c2b"/>
+          <rect class="s-must" x="2" y="2" width="60" height="60"/>
+          <circle class="s-char" cx="14" cy="32" r="7"/>
+          <circle class="s-char" cx="50" cy="32" r="7"/>
+          <rect class="s-char" x="20" y="29" width="24" height="6"/>
         </svg>
         <div>
-          <h4>edge</h4>
-          <h3>A relationship between two nodes</h3>
-          <p>With optional label, colour, and thickness.</p>
+          <h3><code>edge</code></h3>
+          <p>A relationship between two nodes (with optional label, colour, thickness).</p>
         </div>
       </article>
-
-      <article class="kw-card persimmon">
+      <article class="kw-card c-cluster">
         <svg class="kw-mark" viewBox="0 0 64 64" aria-hidden="true">
-          <rect x="2" y="2" width="60" height="60" fill="#dc5532"/>
-          <rect x="10" y="10" width="44" height="44" fill="none" stroke="#f1ebda" stroke-width="3"/>
-          <circle cx="22" cy="22" r="4" fill="#f1ebda"/>
-          <circle cx="42" cy="22" r="4" fill="#f1ebda"/>
-          <circle cx="22" cy="42" r="4" fill="#f1ebda"/>
-          <circle cx="42" cy="42" r="4" fill="#f1ebda"/>
+          <rect class="s-pers" x="2" y="2" width="60" height="60"/>
+          <rect x="10" y="10" width="44" height="44" fill="none" stroke="#ffffff" stroke-width="3"/>
+          <circle cx="23" cy="23" r="4" fill="#ffffff"/>
+          <circle cx="41" cy="23" r="4" fill="#ffffff"/>
+          <circle cx="23" cy="41" r="4" fill="#ffffff"/>
+          <circle cx="41" cy="41" r="4" fill="#ffffff"/>
         </svg>
         <div>
-          <h4>cluster</h4>
-          <h3>A spatial container with its own origin</h3>
-          <p>Children's positions are relative to the cluster.  Hierarchical.</p>
+          <h3><code>cluster</code></h3>
+          <p>A spatial container with its own origin / reference frame. Children's positions are relative to the cluster. Hierarchical: clusters can nest inside other clusters.</p>
         </div>
       </article>
-
-      <article class="kw-card">
+      <article class="kw-card c-comm">
         <svg class="kw-mark" viewBox="0 0 64 64" aria-hidden="true">
-          <rect x="2" y="2" width="60" height="60" fill="none" stroke="#2a2c2b" stroke-width="2"/>
-          <circle cx="32" cy="32" r="9" fill="#2a2c2b"/>
-          <circle cx="32" cy="12" r="4" fill="#dc5532"/>
-          <circle cx="52" cy="32" r="4" fill="#c69f3a"/>
-          <circle cx="32" cy="52" r="4" fill="#dc5532"/>
-          <circle cx="12" cy="32" r="4" fill="#c69f3a"/>
+          <rect x="3" y="3" width="58" height="58" fill="none" stroke="#2a2c2b" stroke-width="2"/>
+          <circle class="s-ring" cx="32" cy="32" r="18"/>
+          <circle class="s-char" cx="32" cy="32" r="9"/>
+          <circle class="s-pers" cx="32" cy="14" r="4.5"/>
+          <circle class="s-must" cx="50" cy="32" r="4.5"/>
+          <circle class="s-pers" cx="32" cy="50" r="4.5"/>
+          <circle class="s-must" cx="14" cy="32" r="4.5"/>
         </svg>
         <div>
-          <h4>commonality</h4>
-          <h3>A flat, multi-membership grouping</h3>
-          <p>By shared property.  Any node can belong to many commonalities.</p>
+          <h3><code>commonality</code></h3>
+          <p>A flat, non-spatial grouping of nodes that share some property. Multi-membership: any node can belong to many commonalities.</p>
         </div>
       </article>
-
     </div>
 
-    <p>
-      Two attributes deserve early mention because they appear everywhere:
-    </p>
-    <ul>
-      <li><strong><code>locus=[x,y,z]</code></strong> — every <code>node</code> and every <code>cluster</code> has a locus, the defined position it occupies (relative to its parent cluster if it has one, or to the world origin if not).</li>
-      <li><strong><code>label="..."</code></strong> — every declaration but <code>edge</code> has a human-readable label as a <code>label=</code> attribute; an <code>edge</code>'s label is a bare quoted string instead (see <code>edge</code> below).</li>
-    </ul>
-    <p>
-      The rest of the attributes (colour, shape, size, brightness, file
-      pointer, edge thickness, …) are construct-specific and covered in
-      each construct's deep-dive below.
-    </p>
+    <p>All four are <strong>single-word, un-prefixed keywords</strong>. Reading a <code>.cns</code> file, the keyword tells you immediately what kind of declaration you're looking at.</p>
+
+    <p>Two attributes deserve early mention because they appear everywhere:</p>
+    <div class="pair">
+      <div class="pair-item">
+        <h4><code>locus=[x,y,z]</code></h4>
+        <p>every <code>node</code> and every <code>cluster</code> has a locus, the defined position it occupies (relative to its parent cluster if it has one, or to the world origin if not).</p>
+      </div>
+      <div class="pair-item">
+        <h4><code>label="..."</code></h4>
+        <p>every declaration but <code>edge</code> has a human-readable label as a <code>label=</code> attribute; an <code>edge</code>'s label is a bare quoted string instead (see <a href="#edge"><code>edge</code></a> below).</p>
+      </div>
+    </div>
+    <p>The rest of the attributes (colour, shape, size, brightness, file pointer, edge thickness, ...) are construct-specific and covered in each construct's section below.</p>
   </section>
 
-  <div class="divider" style="margin-top: 4rem;">
-    <div class="bar mustard"   style="flex: 2;"></div>
-    <div class="bar persimmon" style="flex: 1;"></div>
-    <div class="bar charcoal"  style="flex: 4;"></div>
-  </div>
+  <div class="divider" aria-hidden="true"><div class="bar mustard"></div><div class="bar persimmon"></div><div class="bar charcoal"></div></div>
 
-  <!-- ════════════════════════════════════════════════════════════════
-       SECTION 02 — node
-       ════════════════════════════════════════════════════════════════ -->
-  <section class="kw-deep" style="margin-top: 4rem;">
-    <div class="kw-rail">node</div>
-    <div>
+  <!-- node -->
+  <section class="kw-deep" id="node">
+    <div class="kw-rail c-node">node</div>
+    <div class="kw-body">
       <h2><span class="keyword">node</span> — an individual 3D object</h2>
-      <p>The simplest declaration.  A <code>node</code> is a 3D object in space.</p>
+      <p>The simplest declaration. A <code>node</code> is a 3D object in space.</p>
 
       <h3 class="sub-h">Syntax</h3>
       <pre>node &lt;id&gt; ( &lt;attributes&gt; )</pre>
-      <p>
-        The <code>&lt;id&gt;</code> is a unique identifier (used by
-        <code>edge</code> and <code>commonality</code> to reference the
-        node).  Attributes are whitespace-separated <code>key=value</code>
-        pairs inside parentheses; order doesn't matter — see
-        <em>Attribute syntax in general</em> below for the comma pitfall.
-      </p>
+      <p>The <code>&lt;id&gt;</code> is a unique identifier (used by <code>edge</code> and <code>commonality</code> to reference the node). Attributes are whitespace-separated <code>key=value</code> pairs inside parentheses; order doesn't matter — see <a href="#attribute-syntax"><em>Attribute syntax in general</em></a> below for the comma pitfall.</p>
 
       <h3 class="sub-h">Attributes</h3>
-      <table class="attr-table">
-        <thead><tr><th>Attribute</th><th>Type</th><th>Default</th><th>Meaning</th></tr></thead>
-        <tbody>
-          <tr><td><code>locus</code></td>      <td>[x,y,z]</td> <td><code>[0,0,0]</code></td> <td>Position in 3D space (relative to parent cluster, or world if none).</td></tr>
-          <tr><td><code>label</code></td>      <td>string</td>  <td>id</td>             <td>Human-readable label drawn near the node.</td></tr>
-          <tr><td><code>shape</code></td>      <td>enum</td>    <td><code>sphere</code></td> <td><code>sphere</code>, <code>cube</code>, <code>tetrahedron</code>, <code>octahedron</code>, <code>dodecahedron</code>, <code>icosahedron</code>, <code>cylinder</code>.</td></tr>
-          <tr><td><code>color</code></td>      <td>hex</td>     <td><code>#BFBFBF</code></td> <td>Fill colour for the mesh; see <em>Attribute syntax in general</em> for the accepted forms.</td></tr>
-          <tr><td><code>size</code></td>       <td>float</td>   <td>1.0</td>            <td>Scale factor.</td></tr>
-          <tr><td><code>file</code></td>       <td>string</td>  <td>none</td>           <td>Path to an attached file (<code>.md</code>, <code>.pdf</code>, etc.); shown in a modal card when the node is opened.</td></tr>
-        </tbody>
-      </table>
+      <div class="table-wrap">
+        <table class="attr-table cols4">
+          <thead><tr><th>Attribute</th><th>Type</th><th>Default</th><th>Meaning</th></tr></thead>
+          <tbody>
+            <tr><td><code>locus</code></td><td>[x,y,z]</td><td><code>[0,0,0]</code></td><td>Position in 3D space (relative to parent cluster, or world if none).</td></tr>
+            <tr><td><code>label</code></td><td>string</td><td>id</td><td>Human-readable label drawn near the node.</td></tr>
+            <tr><td><code>shape</code></td><td>enum</td><td><code>sphere</code></td><td><code>sphere</code>, <code>cube</code>, <code>tetrahedron</code>, <code>octahedron</code>, <code>dodecahedron</code>, <code>icosahedron</code>, <code>cylinder</code>.</td></tr>
+            <tr><td><code>color</code></td><td>hex</td><td><code>#BFBFBF</code></td><td>Fill colour for the mesh; see <a href="#attribute-syntax"><em>Attribute syntax in general</em></a> for the accepted forms.</td></tr>
+            <tr><td><code>size</code></td><td>float</td><td>1.0</td><td>Scale factor.</td></tr>
+            <tr><td><code>file</code></td><td>string</td><td>none</td><td>Path to an attached file (<code>.md</code>, <code>.pdf</code>, etc.); shown in a modal card when the node is opened.</td></tr>
+          </tbody>
+        </table>
+      </div>
 
       <h3 class="sub-h">Example</h3>
       <pre>node mars ( locus=[16,-13,6] shape=dodecahedron color=#cc4422 label="Mars" file="mars_notes.md" )</pre>
-      <p>
-        A red dodecahedron at position <code>[16,-13,6]</code>, with a
-        markdown file attached that opens in the panel when the user
-        double-clicks.
-      </p>
+      <p>A red dodecahedron at position <code>[16,-13,6]</code>, with a markdown file attached that opens in a modal card when the user double-clicks.</p>
 
       <div class="rationale">
         <h4>Rationale</h4>
-        <p>
-          Why hand-place the node's <code>locus=</code>?  Because
-          <strong>placement is argument</strong> — see northstar
-          Axiom 1.  When the author writes <code>locus=[16,-13,6]</code>,
-          they are making the claim "Mars belongs <em>here</em>."  That
-          claim is the author's reasoning about how Mars relates to
-          everything else in the file.  An auto-layout would erase the
-          claim.  The language refuses to provide one.
-        </p>
+        <p>Why hand-place the node's <code>locus=</code>? Because <strong>placement is argument</strong> — see northstar Axiom 1. When the author writes <code>locus=[16,-13,6]</code>, they are making the claim "Mars belongs <em>here</em>." That claim is the author's reasoning about how Mars relates to everything else in the file. An auto-layout would erase the claim. The language refuses to provide one.</p>
       </div>
 
-      <div class="status-line"><strong>STATUS</strong> — shipping today (as of v0.7.0, with <code>locus=</code>).</div>
+      <p class="status-line"><em class="sl">Status:</em> shipping today (as of v0.7.0, with <code>locus=</code>).</p>
     </div>
   </section>
 
-  <!-- ════════════════════════════════════════════════════════════════
-       SECTION 03 — edge
-       ════════════════════════════════════════════════════════════════ -->
-  <section class="kw-deep">
-    <div class="kw-rail mustard">edge</div>
-    <div>
+  <!-- edge -->
+  <section class="kw-deep" id="edge">
+    <div class="kw-rail c-edge">edge</div>
+    <div class="kw-body">
       <h2><span class="keyword">edge</span> — a relationship between two nodes</h2>
 
       <h3 class="sub-h">Syntax</h3>
       <pre>edge &lt;from-id&gt; -&gt; &lt;to-id&gt; ( "&lt;label&gt;" &lt;attributes&gt; )</pre>
-      <p>
-        The <code>-&gt;</code> is the syntactic separator.  Every edge
-        is drawn as a plain tube with no arrowhead, whichever way the
-        declaration reads.
-      </p>
+      <p>The <code>-&gt;</code> is the syntactic separator. Every edge is drawn as a plain tube with no arrowhead, whichever way the declaration reads.</p>
 
       <h3 class="sub-h">Attributes</h3>
-      <table class="attr-table">
-        <thead><tr><th>Attribute</th><th>Type</th><th>Default</th><th>Meaning</th></tr></thead>
-        <tbody>
-          <tr><td><em>(bare string)</em></td> <td>string</td> <td>none</td> <td>A double-quoted label, not a <code>label=</code> attribute; may appear anywhere inside the parentheses and is drawn near the edge midpoint.</td></tr>
-          <tr><td><code>color</code></td>     <td>hex</td>    <td><code>#BFBFBF</code></td> <td>Colour for the line; see <em>Attribute syntax in general</em> for the accepted forms.</td></tr>
-          <tr><td><code>thickness</code></td> <td>float</td>  <td>0.04</td> <td>Tube radius for the edge geometry.</td></tr>
-        </tbody>
-      </table>
+      <div class="table-wrap">
+        <table class="attr-table cols4">
+          <thead><tr><th>Attribute</th><th>Type</th><th>Default</th><th>Meaning</th></tr></thead>
+          <tbody>
+            <tr><td><em>(bare string)</em></td><td>string</td><td>none</td><td>A double-quoted label, not a <code>label=</code> attribute; may appear anywhere inside the parentheses and is drawn near the edge midpoint.</td></tr>
+            <tr><td><code>color</code></td><td>hex</td><td><code>#BFBFBF</code></td><td>Colour for the line; see <a href="#attribute-syntax"><em>Attribute syntax in general</em></a> for the accepted forms.</td></tr>
+            <tr><td><code>thickness</code></td><td>float</td><td>0.04</td><td>Tube radius for the edge geometry.</td></tr>
+          </tbody>
+        </table>
+      </div>
 
       <h3 class="sub-h">Example</h3>
       <pre>edge sun -&gt; earth ( "orbits" color=#aeb014 thickness=0.08 )</pre>
 
       <div class="rationale">
         <h4>Rationale</h4>
-        <p>
-          Edges are first-class structural information.  See northstar
-          Axiom 5: <em>"Edges carry as much reasoning as nodes."</em>
-          The thickness, colour, and label of an edge are visual
-          channels the author uses to encode the <em>weight</em> and
-          <em>kind</em> of the relationship.  A thick gold edge says
-          something different than a thin grey one; the language
-          exposes both.
-        </p>
-        <p>
-          The language deliberately does <strong>not</strong>
-          auto-infer edges from node proximity or content similarity
-          (see <em>Anti-features</em> below).  The author declares
-          every edge explicitly because each one is a claim.
-        </p>
+        <p>Edges are first-class structural information. See northstar Axiom 5: <em>"Edges carry as much reasoning as nodes."</em> The thickness, colour, and label of an edge are visual channels the author uses to encode the <em>weight</em> and <em>kind</em> of the relationship. A thick gold edge says something different than a thin grey one; the language exposes both.</p>
+        <p>The language deliberately does <strong>not</strong> auto-infer edges from node proximity or content similarity (see <a href="#anti-features"><em>Anti-features</em></a> below). The author declares every edge explicitly because each one is a claim.</p>
       </div>
 
-      <div class="status-line"><strong>STATUS</strong> — shipping today.</div>
+      <p class="status-line"><em class="sl">Status:</em> shipping today.</p>
     </div>
   </section>
 
-  <!-- ════════════════════════════════════════════════════════════════
-       SECTION 04 — cluster
-       ════════════════════════════════════════════════════════════════ -->
-  <section class="kw-deep">
-    <div class="kw-rail persimmon">cluster</div>
-    <div>
+  <!-- cluster -->
+  <section class="kw-deep" id="cluster">
+    <div class="kw-rail c-cluster">cluster</div>
+    <div class="kw-body">
       <h2><span class="keyword">cluster</span> — a spatial container with its own origin</h2>
 
       <h3 class="sub-h">Syntax</h3>
       <pre>cluster &lt;id&gt; ( &lt;attributes&gt; ) {
     &lt;child node, edge, or cluster declarations&gt;
 }</pre>
-      <p>
-        Cluster declarations are hierarchical: a cluster can contain
-        <code>node</code>s, <code>edge</code>s (whose endpoints are
-        inside the cluster), and other <code>cluster</code>s.  Every
-        node inside a cluster is positioned <strong>relative to the
-        cluster's <code>locus</code></strong> — the cluster sets the
-        reference frame for its children.
-      </p>
+      <p>Cluster declarations are hierarchical: a cluster can contain <code>node</code>s, <code>edge</code>s (an edge may appear in any block and join any two declared nodes), and other <code>cluster</code>s. Every node inside a cluster is positioned <strong>relative to the cluster's <code>locus</code></strong> — the cluster sets the reference frame for its children.</p>
 
       <h3 class="sub-h">Attributes</h3>
-      <table class="attr-table">
-        <thead><tr><th>Attribute</th><th>Type</th><th>Default</th><th>Meaning</th></tr></thead>
-        <tbody>
-          <tr><td><code>locus</code></td>           <td>[x,y,z]</td> <td><code>[0,0,0]</code></td>  <td>The cluster's origin in its parent frame (or world if top-level).</td></tr>
-          <tr><td><code>label</code></td>           <td>string</td>  <td>id</td>        <td>Cluster label; drawn only at the shell's centre once the cluster is toggled solid.</td></tr>
-          <tr><td><code>color</code></td>           <td>hex</td>     <td><code>#BFBFBF</code></td>      <td>Colour of the cluster's own shell; child nodes do not inherit it.</td></tr>
-          <tr><td><code>brightness</code></td>      <td>float</td>   <td>1</td> <td>Multiplies the shell's colour.</td></tr>
-          <tr><td><code>N</code></td>               <td>int</td>     <td>2</td>      <td>Wireframe detail for the shell; the solid frame follows the same mesh's triangle edges (geodesic).</td></tr>
-          <tr><td><code>tube_color</code></td>     <td>hex</td>     <td>the complement of <code>color</code></td>      <td>Tube frame edge colour.</td></tr>
-          <tr><td><code>tube_thickness</code></td>  <td>float</td>   <td>1.0</td>      <td>Tube frame edge thickness, relative.</td></tr>
-        </tbody>
-      </table>
+      <div class="table-wrap">
+        <table class="attr-table cols4">
+          <thead><tr><th>Attribute</th><th>Type</th><th>Default</th><th>Meaning</th></tr></thead>
+          <tbody>
+            <tr><td><code>locus</code></td><td>[x,y,z]</td><td><code>[0,0,0]</code></td><td>The cluster's origin in its parent frame (or world if top-level).</td></tr>
+            <tr><td><code>label</code></td><td>string</td><td>id</td><td>Cluster label; drawn only at the shell's centre once the cluster is toggled solid.</td></tr>
+            <tr><td><code>color</code></td><td>hex</td><td><code>#BFBFBF</code></td><td>Colour of the cluster's own shell; child nodes do not inherit it.</td></tr>
+            <tr><td><code>brightness</code></td><td>float</td><td>1</td><td>Multiplies the shell's colour.</td></tr>
+            <tr><td><code>N</code></td><td>int</td><td>2</td><td>Wireframe detail for the shell; the solid frame follows the same mesh's triangle edges (geodesic).</td></tr>
+            <tr><td><code>tube_color</code></td><td>hex</td><td>the complement of <code>color</code></td><td>Tube frame edge colour.</td></tr>
+            <tr><td><code>tube_thickness</code></td><td>float</td><td>1.0</td><td>Tube frame edge thickness, relative.</td></tr>
+          </tbody>
+        </table>
+      </div>
 
       <h3 class="sub-h">Example</h3>
       <pre>cluster jupiter_system ( locus=[20,4,-8] color=#1a3a6a N=5 tube_color=#44FFFF tube_thickness=3 ) {
-    node jupiter  ( locus=[0,0,0]    shape=sphere       color=#c8944a label="Jupiter" )
-    node io       ( locus=[-2,2,2]   shape=sphere       color=#ffee44 label="Io"      size=0.5 )
-    node europa   ( locus=[2,2,2]    shape=octahedron   color=#c0d8f0 label="Europa"  size=0.5 )
+    node jupiter  ( locus=[0,0,0]    shape=sphere     color=#c8944a label="Jupiter" )
+    node io       ( locus=[-2,2,2]   shape=sphere     color=#ffee44 label="Io"      size=0.5 )
+    node europa   ( locus=[2,2,2]    shape=octahedron color=#c0d8f0 label="Europa"  size=0.5 )
     node ganymede ( locus=[-2,-2,-2] shape=dodecahedron color=#9098a0 label="Ganymede" size=0.5 )
     node callisto ( locus=[2,-2,-2]  shape=icosahedron  color=#606870 label="Callisto" size=0.5 )
 }</pre>
-      <p>
-        Jupiter's system as a unit.  The cluster has its origin at
-        <code>[20,4,-8]</code> (relative to the world).  Inside, each
-        moon has its own locus <em>relative to Jupiter</em> — so io's
-        <code>[-2,2,2]</code> is two units left, two up, two forward
-        from Jupiter, not from the world origin.
-      </p>
+      <p>Jupiter's system as a unit. The cluster has its origin at <code>[20,4,-8]</code> (relative to the world). Inside, each moon has its own locus <em>relative to Jupiter</em> — so io's <code>[-2,2,2]</code> is two units left, two up, two forward from Jupiter, not from the world origin.</p>
 
       <h3 class="sub-h">Nesting</h3>
-      <p>
-        Clusters can contain other clusters.  Example: a top-level
-        <code>solar_system</code> cluster contains
-        <code>jupiter_system</code>, <code>saturn_system</code>, etc.,
-        each with their own moons.  Each level adds its own reference
-        frame.
-      </p>
+      <p>Clusters can contain other clusters. Example: a top-level <code>solar_system</code> cluster contains <code>jupiter_system</code>, <code>saturn_system</code>, etc., each with their own moons. Each level adds its own reference frame.</p>
 
       <div class="rationale">
-        <h4>Rationale — why a cluster sets a reference frame</h4>
-        <p>
-          Real-world conceptual hierarchies have <em>natural</em>
-          origins — Jupiter's moons are positioned relative to Jupiter,
-          not relative to some abstract world point.  Allowing the
-          cluster to carry its origin means the author can declare
-          moons in <em>Jupiter-relative</em> coordinates, which is how
-          they actually think about them.  The author's reasoning
-          matches the syntax.
-        </p>
+        <h4>Rationale</h4>
+        <p>Two design choices here, both load-bearing.</p>
+        <div class="choices">
+          <div class="choice">
+            <p><strong>Why a cluster sets a reference frame.</strong> Real-world conceptual hierarchies have <em>natural</em> origins — Jupiter's moons are positioned relative to Jupiter, not relative to some abstract world point. Allowing the cluster to carry its origin means the author can declare moons in <em>Jupiter-relative</em> coordinates, which is how they actually think about them. The author's reasoning matches the syntax.</p>
+          </div>
+          <div class="choice">
+            <p><strong>Why single-parent (hierarchical, not tag-like).</strong> A node can only be relative to one origin at a time — the spatial frame is intrinsically tree-shaped. Multi-parent membership would be geometrically incoherent: which origin would a node like <code>earth</code> be positioned relative to if it were in both <code>solar_system</code> and <code>inhabited_planets</code>? The language doesn't ask the author to answer impossible questions.</p>
+          </div>
+        </div>
+        <p>For <em>non-spatial</em> multi-membership (earth IS in both solar_system AND the set of inhabited planets, in the conceptual sense), <code>commonality</code> exists. See <a href="#commonality">next section</a>.</p>
       </div>
 
-      <div class="rationale">
-        <h4>Rationale — why single-parent (hierarchical, not tag-like)</h4>
-        <p>
-          A node can only be relative to one origin at a time — the
-          spatial frame is intrinsically tree-shaped.  Multi-parent
-          membership would be geometrically incoherent: which origin
-          would a node like <code>earth</code> be positioned relative
-          to if it were in both <code>solar_system</code> and
-          <code>inhabited_planets</code>?  The language doesn't ask
-          the author to answer impossible questions.
-        </p>
-        <p>
-          For <em>non-spatial</em> multi-membership (earth IS in both
-          solar_system AND the set of inhabited planets, in the
-          conceptual sense), <code>commonality</code> exists.  See
-          next section.
-        </p>
-      </div>
-
-      <div class="status-line"><strong>STATUS</strong> — shipping today as <code>cluster</code> (with <code>locus=</code>, since v0.7.0).  Aligns with northstar Axiom 2: <em>"Hierarchical grouping carries meta-relationships."</em></div>
+      <p class="status-line"><em class="sl">Status:</em> shipping today as <code>cluster</code> (with <code>locus=</code>, since v0.7.0). Aligns with northstar Axiom 2: <em>"Hierarchical grouping carries meta-relationships."</em></p>
     </div>
   </section>
 
-  <!-- ════════════════════════════════════════════════════════════════
-       SECTION 05 — commonality
-       ════════════════════════════════════════════════════════════════ -->
-  <section class="kw-deep">
-    <div class="kw-rail">commonality</div>
-    <div>
+  <!-- commonality -->
+  <section class="kw-deep" id="commonality">
+    <div class="kw-rail c-comm">commonality</div>
+    <div class="kw-body">
       <h2><span class="keyword">commonality</span> — a flat, multi-membership grouping by shared property</h2>
-      <p>
-        A second kind of grouping construct, used for relationships
-        that <em>aren't</em> spatial.  Any node can belong to any
-        number of commonalities.
-      </p>
+      <p>A second kind of grouping construct, used for relationships that <em>aren't</em> spatial. Any node can belong to any number of commonalities.</p>
 
       <h3 class="sub-h">Syntax</h3>
       <pre>commonality &lt;id&gt; ( &lt;attributes&gt; ) { &lt;member id&gt;, &lt;member id&gt;, ... }</pre>
-      <p>
-        The members list is a comma-separated set of node ids
-        (referencing nodes declared elsewhere in the file).  Member
-        order doesn't matter — commonality is set-like, not list-like.
-      </p>
+      <p>The members list is a comma-separated set of node ids (referencing nodes declared elsewhere in the file). Member order doesn't matter — commonality is set-like, not list-like.</p>
 
       <h3 class="sub-h">Attributes</h3>
-      <table class="attr-table">
-        <thead><tr><th>Attribute</th><th>Type</th><th>Default</th><th>Meaning</th></tr></thead>
-        <tbody>
-          <tr><td><code>label</code></td> <td>string</td> <td>id</td>     <td>Human-readable label.</td></tr>
-          <tr><td><code>color</code></td> <td>hex</td>    <td>grey</td>   <td>Colour for the per-host satellite marker.</td></tr>
-          <tr><td><code>shape</code></td> <td>enum</td>   <td><code>sphere</code></td> <td>Geometry of the satellite marker (same set as <code>node</code>).</td></tr>
-        </tbody>
-      </table>
+      <div class="table-wrap">
+        <table class="attr-table cols4">
+          <thead><tr><th>Attribute</th><th>Type</th><th>Default</th><th>Meaning</th></tr></thead>
+          <tbody>
+            <tr><td><code>label</code></td><td>string</td><td>id</td><td>Human-readable label for the commonality.</td></tr>
+            <tr><td><code>color</code></td><td>hex</td><td>grey</td><td>Colour for the per-host satellite marker.</td></tr>
+            <tr><td><code>shape</code></td><td>enum</td><td><code>sphere</code></td><td>Geometry of the satellite marker. Same set as <code>node</code>: <code>sphere</code>, <code>cube</code>, <code>tetrahedron</code>, <code>octahedron</code>, <code>dodecahedron</code>, <code>icosahedron</code>, <code>cylinder</code>.</td></tr>
+          </tbody>
+        </table>
+      </div>
 
       <h3 class="sub-h">Examples</h3>
       <pre>commonality inhabited       ( color=#ff8844 )  { earth }
 commonality ice_moons       ( color=#88ccff )  { europa, enceladus, callisto }
 commonality rocky_planets   ( color=#a08070 )  { mercury, venus, earth, mars }</pre>
-      <p>
-        <code>earth</code> belongs to <code>inhabited</code> AND
-        <code>rocky_planets</code> simultaneously.  That's not
-        contradictory — the two commonalities encode different shared
-        properties.  Visually, earth gets two satellites on its ring,
-        one per commonality, each in the relevant colour.
-      </p>
+      <p><code>earth</code> belongs to <code>inhabited</code> AND <code>rocky_planets</code> simultaneously. That's not contradictory — the two commonalities encode different shared properties. Visually, earth gets two satellites on its ring, one per commonality, each in the relevant colour.</p>
 
       <h3 class="sub-h">Rendering — orbiting satellites</h3>
-      <p>
-        A <code>commonality</code> renders as a ring of
-        <strong>satellites</strong>: each member node gets a small
-        orbiting marker in the construct's colour and (optionally) its
-        declared <code>shape</code>.  Multi-membership <em>stacks</em>:
-        a node in two commonalities gets two satellites in two colours,
-        evenly spaced around the host's ring.  The author can perceive
-        multi-membership at a glance — and varying <code>shape=</code>
-        between commonalities lets the eye disambiguate without
-        consulting colour-to-meaning mappings.
-      </p>
-      <p>
-        Full geometry is locked in
-        <a href="commonality_visual_study.md">commonality_visual_study.md</a>.
-      </p>
+      <p>A <code>commonality</code> renders as a ring of <strong>satellites</strong>: each member node gets a small orbiting marker in the construct's colour and (optionally) its declared <code>shape</code>. Multi-membership <em>stacks</em>: a node in two commonalities gets two satellites in two colours, evenly spaced around the host's ring. The author can perceive multi-membership at a glance — and varying <code>shape=</code> between commonalities lets the eye disambiguate without consulting colour-to-meaning mappings.</p>
+
+      <figure class="fig" aria-labelledby="fig-sats-cap">
+        <div class="sats">
+          <div class="sat-host">
+            <svg viewBox="-48 -48 96 96" role="img" aria-label="a host in one commonality: one satellite on its ring">
+              <circle class="s-ring" r="30"/>
+              <circle class="s-must" r="14"/>
+              <circle class="s-char" cx="0" cy="-30" r="6"/>
+            </svg>
+            <span>1 commonality</span>
+          </div>
+          <div class="sat-host">
+            <svg viewBox="-48 -48 96 96" role="img" aria-label="a host in two commonalities: two satellites, 180 degrees apart">
+              <circle class="s-ring" r="30"/>
+              <circle class="s-must" r="14"/>
+              <circle class="s-char" cx="0" cy="-30" r="6"/>
+              <rect class="s-char" x="-5.5" y="24.5" width="11" height="11"/>
+            </svg>
+            <span>2 commonalities</span>
+          </div>
+          <div class="sat-host">
+            <svg viewBox="-48 -48 96 96" role="img" aria-label="a host in three commonalities: three satellites, 120 degrees apart">
+              <circle class="s-ring" r="30"/>
+              <circle class="s-must" r="14"/>
+              <circle class="s-char" cx="0" cy="-30" r="6"/>
+              <rect class="s-char" x="20.48" y="9.5" width="11" height="11"/>
+              <polygon class="s-char" points="-25.98,8 -19.48,19.5 -32.48,19.5"/>
+            </svg>
+            <span>3 commonalities</span>
+          </div>
+          <div class="sat-host">
+            <svg viewBox="-48 -48 96 96" role="img" aria-label="a host in four commonalities: four satellites, 90 degrees apart">
+              <circle class="s-ring" r="30"/>
+              <circle class="s-must" r="14"/>
+              <circle class="s-char" cx="0" cy="-30" r="6"/>
+              <rect class="s-char" x="24.5" y="-5.5" width="11" height="11"/>
+              <polygon class="s-char" points="0,23 6.5,34.5 -6.5,34.5"/>
+              <polygon class="s-char" points="-30,-7.5 -22.5,0 -30,7.5 -37.5,0"/>
+            </svg>
+            <span>4 commonalities</span>
+          </div>
+        </div>
+        <div class="sat-key">
+          <span class="k-lead">shape=</span>
+          <span><svg viewBox="-8 -8 16 16" aria-hidden="true"><circle class="s-char" r="6"/></svg>sphere</span>
+          <span><svg viewBox="-8 -8 16 16" aria-hidden="true"><rect class="s-char" x="-5.5" y="-5.5" width="11" height="11"/></svg>cube</span>
+          <span><svg viewBox="-8 -8 16 16" aria-hidden="true"><polygon class="s-char" points="0,-7 6.5,4.5 -6.5,4.5"/></svg>tetrahedron</span>
+          <span><svg viewBox="-8 -8 16 16" aria-hidden="true"><polygon class="s-char" points="0,-7.5 7.5,0 0,7.5 -7.5,0"/></svg>octahedron</span>
+        </div>
+        <figcaption id="fig-sats-cap">Each member node gets one satellite per commonality, evenly spaced 360°/N around the host's ring. Here the satellites share one colour and differ only in <code>shape=</code>, which lets the eye tell them apart even without colour.</figcaption>
+      </figure>
+
+      <p>Full geometry is locked in <a href="commonality_visual_study.md"><code>commonality_visual_study.md</code></a>.</p>
 
       <h3 class="sub-h">Grammar — file scope</h3>
-      <p>
-        Commonality declarations live <strong>at file scope</strong>,
-        alongside <code>edge</code> declarations.  They are
-        <em>not</em> nested inside a <code>cluster</code>.  A
-        commonality is non-spatial; it doesn't belong to a particular
-        spatial container.
-      </p>
+      <p>Commonality declarations live <strong>at file scope</strong>, alongside <code>edge</code> declarations. They are <em>not</em> nested inside a <code>cluster</code>. A commonality is non-spatial; it doesn't belong to a particular spatial container.</p>
 
       <div class="rationale">
-        <h4>Rationale — the name "commonality"</h4>
-        <p>
-          The name <strong>commonality</strong> was chosen
-          deliberately, after a long brainstorm (see "The thought
-          behind the naming" below for the full story).  The short
-          version:
-        </p>
+        <h4>Rationale</h4>
+        <p>The name <strong><code>commonality</code></strong> was chosen deliberately, after a long brainstorm. See <a href="#naming">"The thought behind the naming"</a> below for the full story. The short version:</p>
         <ul>
-          <li><code>commonality</code> names the <em>reason for grouping</em> (a shared characteristic) rather than the <em>thing</em> (a set / group / collection).  Other words name the container; this one names what makes the container cohere.</li>
-          <li>It <em>intrinsically</em> requires multi-membership — a commonality of one is nonsensical.</li>
-          <li>It lands cleanly in <strong>concept formation and category theory</strong> in cognitive science (Rosch, Wittgenstein, Gentner).</li>
-          <li>It has zero overload with programming concepts (no OO baggage like <code>class</code>; no key-value overload like <code>attribute</code> or <code>property</code>; no data-structure overload like <code>set</code>).</li>
+          <li><code>commonality</code> names the <em>reason for grouping</em> (a shared characteristic) rather than the <em>thing</em> (a set / group / collection). Other words name the container; this one names what makes the container cohere.</li>
+          <li>As a word it implies multi-membership: a shared characteristic needs more than one sharer. The language nonetheless accepts a commonality with one member.</li>
+          <li>It lands cleanly in <strong>concept formation and category theory</strong> in cognitive science (Rosch, Wittgenstein, Gentner). The cognitive operation the construct enables — <em>abstracting across examples to find a shared property</em> — is exactly what these theorists call "extracting commonalities." The keyword matches the cognitive act.</li>
+          <li>It has zero overload with programming concepts (no OO baggage like <code>class</code>; no key-value overload like <code>attribute</code> or <code>property</code>; no data-structure overload like <code>set</code> in JavaScript).</li>
         </ul>
-        <p>
-          The cost is length — 11 characters, 5 syllables — but a
-          <code>.cns</code> file is read far more often than it is
-          typed, so verbosity is acceptable for a construct declared
-          this rarely.
-        </p>
+        <p>The cost is length — 11 characters, 5 syllables — but a <code>.cns</code> file is read far more often than it is typed, so verbosity is acceptable for a construct declared this rarely.</p>
       </div>
 
-      <div class="status-line"><strong>STATUS</strong> — shipping today (v0.7.1) with the satellites halo render.  An earlier <code>style=lines</code> constellation render shipped in v0.7.2 was removed in v0.7.3.  Current halo geometry in <a href="commonality_visual_study.md">commonality_visual_study.md</a>.</div>
+      <p class="status-line"><em class="sl">Status:</em> shipping today (v0.7.1) with the satellites halo render. An earlier <code>style=lines</code> constellation render shipped in v0.7.2 was removed in v0.7.3 — the lines were visually indistinguishable from <code>edge</code> tubes. See <a href="commonality_visual_study.md"><code>commonality_visual_study.md</code></a> for the current halo geometry.</p>
     </div>
   </section>
 
-  <!-- ════════════════════════════════════════════════════════════════
-       SECTION 06 — locus= attribute
-       ════════════════════════════════════════════════════════════════ -->
-  <section class="section">
+  <!-- 02 The locus= attribute -->
+  <section class="section" id="locus">
     <div class="section-head">
       <div class="section-marker mustard">02</div>
       <h2>The <span class="keyword">locus=</span> attribute</h2>
     </div>
-    <p class="section-lede">
-      Both <code>node</code> and <code>cluster</code> carry a
-      <code>locus=</code> attribute specifying their position.  It's
-      the same attribute meaning the same thing in both contexts:
-      <em>the defined place this thing sits in space</em>.  Format:
-      <code>locus=[x, y, z]</code> with floats.  Right-hand 3D
-      coordinate system.
-    </p>
+    <p class="section-lede">Both <code>node</code> and <code>cluster</code> carry a <code>locus=</code> attribute specifying their position. It's the same attribute meaning the same thing in both contexts: <em>the defined place this thing sits in space</em>.</p>
+    <p>Format: <code>locus=[x, y, z]</code> where x, y, z are floats. Right-hand 3D coordinate system.</p>
 
-    <div class="display-card">
-      <div>
-        <h4 style="color: var(--mustard);">Why this name</h4>
-        <p>
-          <code style="background:transparent;border:none;color:var(--cream);">xyz=</code>
-          (the pre-0.7 attribute name) was generic and technical — it
-          just said "here are coordinates."
-        </p>
-        <p>
-          <code style="background:transparent;border:none;color:var(--mustard);">locus=</code>
-          is semantic.  It says "this is the defined place of this
-          thing."  The word <em>locus</em> (Latin for "place") is the
-          root of the <strong>method of loci</strong> — the ancient
-          memory technique of associating information with specific
-          spatial locations.  Method of loci is arguably the original
-          instance of the cognitive trick that conception-space
-          mechanises at scale: anchoring information in space so it
-          can be perceived and recalled spatially.
-        </p>
-        <p>
-          Putting <code style="background:transparent;border:none;color:var(--mustard);">locus=</code>
-          on every node and every cluster places that cognitive-science
-          wink in the most-frequent attribute in the language.  Every
-          coordinate in every <code>.cns</code> file becomes a small
-          nod to the lineage of using space for thought.
-        </p>
+    <h3 class="sub-h">Why this name</h3>
+    <div class="contrast">
+      <div class="panel before">
+        <div class="panel-label">pre-0.7</div>
+        <p><code>xyz=</code> (the pre-0.7 attribute name) was generic and technical — it just said "here are coordinates."</p>
       </div>
-      <div class="num">L<br>O<br>C<br>U<br>S</div>
+      <div class="panel after">
+        <div class="panel-label">since v0.7.0</div>
+        <p><code>locus=</code> is semantic. It says "this is the defined place of this thing." The word <em>locus</em> (Latin for "place") is the root of the <strong>method of loci</strong> — the ancient memory technique of associating information with specific spatial locations. Method of loci is arguably the original instance of the cognitive trick that conception-space mechanises at scale: anchoring information in space so it can be perceived and recalled spatially.</p>
+      </div>
     </div>
+    <p>Putting <code>locus=</code> on every node and every cluster places that cognitive-science wink in the most-frequent attribute in the language. Every coordinate in every <code>.cns</code> file becomes a small nod to the lineage of using space for thought.</p>
 
-    <div class="status-line"><strong>STATUS</strong> — shipping today (as of v0.7.0).  Aligns with the <em>secondary</em> effect described in the northstar (spatial memorability) and complements the primary thesis (parallel perception of relationships).</div>
+    <p class="status-line"><em class="sl">Status:</em> shipping today (as of v0.7.0). Aligns with the <em>secondary</em> effect described in the northstar (spatial memorability) and complements the primary thesis (parallel perception of relationships).</p>
   </section>
 
-  <!-- ════════════════════════════════════════════════════════════════
-       SECTION 07 — attribute syntax in general
-       ════════════════════════════════════════════════════════════════ -->
-  <section class="section">
+  <!-- 03 Attribute syntax in general -->
+  <section class="section" id="attribute-syntax">
     <div class="section-head">
       <div class="section-marker">03</div>
       <h2>Attribute syntax in general</h2>
     </div>
-    <p class="section-lede">
-      All declarations use the same attribute pattern.
-    </p>
+    <p class="section-lede">All declarations use the same attribute pattern:</p>
     <pre>&lt;keyword&gt; &lt;id&gt; ( key=value  key=value  key=value )</pre>
+
+    <figure class="pitfall" id="comma-pitfall" aria-labelledby="pitfall-title">
+      <h4 id="pitfall-title">The comma pitfall</h4>
+      <p>Whitespace between attributes is the separator. A comma is not: written right after an unquoted value (<code>shape=cube,</code>) it becomes part of that value, so <code>cube,</code> is not a recognised shape. A comma after a quoted string or a bracketed array is harmless, since the closing quote or bracket already ends the value.</p>
+      <div class="pitfall-line"><code>node a ( label=<span class="v">"Mars"</span>, locus=<span class="v">[16,-13,6]</span>, shape=<span class="v bad">cube,</span> size=2 )</code></div>
+      <figcaption class="pitfall-key">
+        <span class="sw" aria-hidden="true"></span><span>the value, ended by its closing quote or bracket; the comma after it is harmless</span>
+        <span class="sw bad" aria-hidden="true"></span><span>the value with the comma in it: <code>cube,</code> is not a recognised shape</span>
+      </figcaption>
+    </figure>
+
     <ul>
-      <li>Whitespace between attributes is the separator.  A comma is not: written right after an unquoted value (<code>shape=cube,</code>) it becomes part of that value, so <code>cube,</code> is not a recognised shape.  A comma after a quoted string or a bracketed array is harmless, since the closing quote or bracket already ends the value.</li>
       <li><code>key</code> is a bare identifier.</li>
       <li><code>value</code> types:
-        <ul>
-          <li><strong>number</strong>: <code>1</code>, <code>0.5</code>, <code>-3.7</code></li>
-          <li><strong>integer</strong>: <code>5</code>, <code>12</code> (used for things like <code>N=5</code>).</li>
-          <li><strong>string</strong>: <code>"Mars"</code>, <code>"orbits"</code> (always double-quoted).</li>
-          <li><strong>color</strong>: <code>#RGB</code>, <code>#RGBA</code>, <code>#RRGGBB</code>, or <code>#RRGGBBAA</code> hex, or the function forms <code>rgb[r,g,b]</code> / <code>rgba[r,g,b,a]</code> (r/g/b/a as 0.0–1.0 floats).  An alpha channel sets a node's material opacity; edges, clusters, and commonalities accept alpha but ignore it, taking only the hex.</li>
-          <li><strong>array</strong> (3-vector for <code>locus=</code>): <code>[16, -13, 6]</code>.</li>
-          <li><strong>enum</strong>: bare identifier matching one of the allowed values (e.g. <code>shape=sphere</code>).</li>
-        </ul>
+        <dl class="types">
+          <dt>number</dt><dd><code>1</code>, <code>0.5</code>, <code>-3.7</code></dd>
+          <dt>integer</dt><dd><code>5</code>, <code>12</code> (used for things like <code>N=5</code>).</dd>
+          <dt>string</dt><dd><code>"Mars"</code>, <code>"orbits"</code> (always double-quoted).</dd>
+          <dt>color</dt><dd><code>#RGB</code>, <code>#RGBA</code>, <code>#RRGGBB</code>, or <code>#RRGGBBAA</code> hex, or the function forms <code>rgb[r,g,b]</code> / <code>rgba[r,g,b,a]</code> (r/g/b/a as 0.0–1.0 floats, written without spaces inside the brackets). An alpha channel sets a node's material opacity; edges, clusters, and commonalities accept alpha but ignore it, taking only the hex.</dd>
+          <dt>array <span class="dt-note">(3-vector for <code>locus=</code>)</span></dt><dd><code>[16, -13, 6]</code>.</dd>
+          <dt>enum</dt><dd>bare identifier matching one of the allowed values (e.g. <code>shape=sphere</code>).</dd>
+        </dl>
       </li>
     </ul>
+
     <h3 class="sub-h">Comments</h3>
     <p>Lines beginning with <code>#</code> are comments and are ignored by the parser.</p>
     <pre># This is the inner planets cluster.
@@ -960,21 +789,13 @@ cluster inner_planets ( locus=[0,0,0] ) {
 }</pre>
   </section>
 
-  <!-- ════════════════════════════════════════════════════════════════
-       SECTION 08 — worked example
-       ════════════════════════════════════════════════════════════════ -->
-  <section class="section">
+  <!-- 04 A worked example -->
+  <section class="section" id="worked-example">
     <div class="section-head">
       <div class="section-marker persimmon">04</div>
       <h2>A worked example</h2>
     </div>
-    <p class="section-lede">
-      Close to the bundled <code>examples/solar.cns</code> but trimmed
-      for exposition — every construct shown here is supported as of
-      v0.7.4.  Earth lives in <code>earth_system</code> (its spatial
-      home — a cluster) but also belongs to <code>inhabited</code> AND
-      <code>rocky_planets</code> (two commonalities).  No conflict.
-    </p>
+    <p class="section-lede">A worked example in the shipping syntax, close to the bundled <a href="../src/renderer/public/examples/solar.cns"><code>examples/solar.cns</code></a> but trimmed for exposition — every construct shown here is supported as of v0.7.4.</p>
     <pre># Solar system — conception-space example.
 # Node locus values are relative to their parent cluster's locus.
 
@@ -1030,255 +851,276 @@ edge saturn  -&gt; enceladus ( "orbits" color=#666633 )
 commonality inhabited      ( color=#ff8844 )               { earth }
 commonality rocky_planets  ( color=#a08070 )               { mercury, venus, earth, mars }
 commonality ice_moons      ( color=#88ccff )               { europa, ganymede, callisto, enceladus }</pre>
+
+    <figure class="fig" aria-labelledby="fig-groups-cap">
+      <div class="gx-cluster" role="img" aria-label="solar_system holds sun, mercury and venus and four clusters: jupiter_system (jupiter, io, europa, ganymede, callisto), saturn_system (saturn, enceladus), earth_system (earth, moon) and mars_system (mars, phobos, deimos). Satellites: earth carries inhabited and rocky_planets; mercury, venus and mars carry rocky_planets; europa, ganymede, callisto and enceladus carry ice_moons.">
+        <div class="gx-band">solar_system</div>
+        <div class="gx-body">
+          <div class="gx-nodes">
+            <div class="gx-node"><svg viewBox="-20 -20 40 40" aria-hidden="true"><circle class="s-char" r="5"/></svg>sun</div>
+            <div class="gx-node"><svg viewBox="-20 -20 40 40" aria-hidden="true"><circle class="s-ring" r="12"/><circle class="s-char" r="5"/><circle class="s-must" cy="-12" r="4"/></svg>mercury</div>
+            <div class="gx-node"><svg viewBox="-20 -20 40 40" aria-hidden="true"><circle class="s-ring" r="12"/><circle class="s-char" r="5"/><circle class="s-must" cy="-12" r="4"/></svg>venus</div>
+          </div>
+          <div class="gx-subs">
+            <div class="gx-cluster">
+              <div class="gx-band">jupiter_system</div>
+              <div class="gx-nodes">
+                <div class="gx-node"><svg viewBox="-20 -20 40 40" aria-hidden="true"><circle class="s-char" r="5"/></svg>jupiter</div>
+                <div class="gx-node"><svg viewBox="-20 -20 40 40" aria-hidden="true"><circle class="s-char" r="5"/></svg>io</div>
+                <div class="gx-node"><svg viewBox="-20 -20 40 40" aria-hidden="true"><circle class="s-ring" r="12"/><circle class="s-char" r="5"/><circle class="s-wht" cy="-12" r="4"/></svg>europa</div>
+                <div class="gx-node"><svg viewBox="-20 -20 40 40" aria-hidden="true"><circle class="s-ring" r="12"/><circle class="s-char" r="5"/><circle class="s-wht" cy="-12" r="4"/></svg>ganymede</div>
+                <div class="gx-node"><svg viewBox="-20 -20 40 40" aria-hidden="true"><circle class="s-ring" r="12"/><circle class="s-char" r="5"/><circle class="s-wht" cy="-12" r="4"/></svg>callisto</div>
+              </div>
+            </div>
+            <div class="gx-cluster">
+              <div class="gx-band">saturn_system</div>
+              <div class="gx-nodes">
+                <div class="gx-node"><svg viewBox="-20 -20 40 40" aria-hidden="true"><circle class="s-char" r="5"/></svg>saturn</div>
+                <div class="gx-node"><svg viewBox="-20 -20 40 40" aria-hidden="true"><circle class="s-ring" r="12"/><circle class="s-char" r="5"/><circle class="s-wht" cy="-12" r="4"/></svg>enceladus</div>
+              </div>
+            </div>
+            <div class="gx-cluster">
+              <div class="gx-band">earth_system</div>
+              <div class="gx-nodes">
+                <div class="gx-node"><svg viewBox="-20 -20 40 40" aria-hidden="true"><circle class="s-ring" r="12"/><circle class="s-char" r="5"/><circle class="s-pers" cy="-12" r="4"/><circle class="s-must" cy="12" r="4"/></svg>earth</div>
+                <div class="gx-node"><svg viewBox="-20 -20 40 40" aria-hidden="true"><circle class="s-char" r="5"/></svg>moon</div>
+              </div>
+            </div>
+            <div class="gx-cluster">
+              <div class="gx-band">mars_system</div>
+              <div class="gx-nodes">
+                <div class="gx-node"><svg viewBox="-20 -20 40 40" aria-hidden="true"><circle class="s-ring" r="12"/><circle class="s-char" r="5"/><circle class="s-must" cy="-12" r="4"/></svg>mars</div>
+                <div class="gx-node"><svg viewBox="-20 -20 40 40" aria-hidden="true"><circle class="s-char" r="5"/></svg>phobos</div>
+                <div class="gx-node"><svg viewBox="-20 -20 40 40" aria-hidden="true"><circle class="s-char" r="5"/></svg>deimos</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="gx-key">
+        <span class="k-lead">satellites:</span>
+        <span><svg viewBox="-8 -8 16 16" aria-hidden="true"><circle class="s-pers" r="5.5"/></svg>inhabited</span>
+        <span><svg viewBox="-8 -8 16 16" aria-hidden="true"><circle class="s-must" r="5.5"/></svg>rocky_planets</span>
+        <span><svg viewBox="-8 -8 16 16" aria-hidden="true"><circle class="s-wht" r="5"/></svg>ice_moons</span>
+      </div>
+      <figcaption id="fig-groups-cap">The example's two kinds of grouping. Each node has one parent cluster, its spatial home; the satellites mark commonality membership, which crosses cluster boundaries freely. Edges are left out.</figcaption>
+    </figure>
+
+    <p>Notice:</p>
     <ul>
-      <li><code>earth</code> lives in <code>earth_system</code> (its spatial home — a cluster) but also belongs to <code>inhabited</code> AND <code>rocky_planets</code> (two commonalities — non-spatial groupings).  No conflict.</li>
+      <li><code>earth</code> lives in <code>earth_system</code> (its spatial home — a cluster) but also belongs to <code>inhabited</code> AND <code>rocky_planets</code> (two commonalities — non-spatial groupings). No conflict.</li>
       <li><code>mars</code> lives in <code>mars_system</code> but also belongs to <code>rocky_planets</code> alongside the others.</li>
       <li><code>ice_moons</code> includes <code>enceladus</code>, which lives in <code>saturn_system</code> — demonstrating that commonality membership crosses cluster boundaries freely.</li>
     </ul>
   </section>
 
-  <!-- ════════════════════════════════════════════════════════════════
-       SECTION 09 — the thought behind the naming
-       Four cards, McLaughlin-grid: each card a single decision.
-       ════════════════════════════════════════════════════════════════ -->
-  <section class="section">
+  <!-- 05 The thought behind the naming -->
+  <section class="section" id="naming">
     <div class="section-head">
       <div class="section-marker mustard">05</div>
       <h2>The thought behind the naming</h2>
     </div>
-    <p class="section-lede">
-      The language has been through several rounds of naming.  This
-      section captures the thinking — the choices weren't arbitrary
-      and the <em>why</em> matters as much as the <em>what</em>.
-    </p>
+    <p class="section-lede">The language has been through several rounds of naming. This section captures the thinking, because the choices weren't arbitrary and the <em>why</em> matters as much as the <em>what</em>.</p>
 
-    <div class="naming-grid">
+    <article class="decision">
+      <div class="nc-num">01</div>
+      <h3>Why drop the <code>node_</code> prefix</h3>
+      <div class="keyset" aria-hidden="true">
+        <div class="keyrow"><span class="keyrow-label">original</span><span class="kchip old">node</span><span class="kchip old"><span class="pfx">node_</span>group</span><span class="kchip old">edge</span></div>
+        <div class="keyrow"><span class="keyrow-label">now</span><span class="kchip now">node</span><span class="kchip now">edge</span><span class="kchip now">cluster</span><span class="kchip now">commonality</span></div>
+      </div>
+      <p>The original language had <code>node</code>, <code>node_group</code>, and <code>edge</code> — mixing prefixed and un-prefixed keywords inconsistently. <code>edge</code> wasn't <code>node_edge</code>; there was no real reason <code>node_group</code> had to be prefixed either.</p>
+      <p>The rename to <code>cluster</code> was already going to break files. That was the right moment to rationalize the whole keyword space: single-word, un-prefixed throughout. The four top-level keywords now sit as peers — <code>node</code>, <code>edge</code>, <code>cluster</code>, <code>commonality</code> — and the reader sees each one as a <em>structural concept</em> in the language, not as a prefix family.</p>
+    </article>
 
-      <article class="naming-card">
-        <div class="nc-num">01</div>
-        <h3>Why drop the <code>node_</code> prefix</h3>
-        <p>
-          The original language had <code>node</code>,
-          <code>node_group</code>, and <code>edge</code> — mixing
-          prefixed and un-prefixed keywords inconsistently.
-          <code>edge</code> wasn't <code>node_edge</code>; there was
-          no real reason <code>node_group</code> had to be prefixed.
-        </p>
-        <p>
-          The rename to <code>cluster</code> was already going to break
-          files.  That was the right moment to rationalize the whole
-          keyword space: single-word, un-prefixed throughout.  The four
-          top-level keywords now sit as <em>peers</em> — the reader
-          sees each one as a structural concept, not as a prefix family.
-        </p>
-      </article>
+    <article class="decision">
+      <div class="nc-num">02</div>
+      <h3>Why <code>cluster</code> for the spatial container</h3>
+      <p>The original name <code>node_group</code> did <em>two jobs</em> — it was both a spatial reference frame (xyz origin) and a visual association (coloured shell, tube frame). We split it because we wanted multi-membership for the <em>association</em> role (a node can belong to many flat groupings) without breaking the <em>spatial</em> role (a node has exactly one position, anchored relative to one origin).</p>
+      <p>The spatial half kept the bundle; we just needed a name for it. Candidates considered and discarded:</p>
+      <div class="candidates">
+        <div class="cand">
+          <div class="tag">considered</div>
+          <h4><code>node_neighborhood</code></h4>
+          <p>warm, intuitive; "where you live." The first proposal. Lost out because:</p>
+        </div>
+      </div>
+      <div class="cand won">
+        <div class="tag">chosen</div>
+        <h4><code>cluster</code></h4>
+        <p>shorter (7 chars vs 12); intrinsically collective in English (cluster of stars, of buildings); already carries spatial-co-location. Combined with the explicit <code>locus=</code> attribute, the keyword doesn't need to spell out "this is the spatial one" — the attribute does.</p>
+      </div>
+      <p class="also-label">Other rejected options:</p>
+      <dl class="rejected">
+        <dt><code>node_region</code></dt><dd>(clinical)</dd>
+        <dt><code>node_realm</code></dt><dd>(mystical)</dd>
+        <dt><code>node_locus</code></dt><dd>(singular-feeling)</dd>
+        <dt><code>nodes_locus</code></dt><dd>(ambiguous — singular possessive vs plural vs plural possessive once the apostrophe is dropped by DSL parsing)</dd>
+        <dt><code>node_cluster_locus</code></dt><dd>(maximally explicit but long; the locus information moved to the attribute name instead, freeing the keyword to be shorter)</dd>
+      </dl>
+    </article>
 
-      <article class="naming-card">
-        <div class="nc-num">02</div>
-        <h3>Why <code>cluster</code> for the spatial container</h3>
-        <p>
-          The original <code>node_group</code> did <em>two jobs</em> —
-          it was both a spatial reference frame and a visual
-          association.  We split it because we wanted multi-membership
-          for the <em>association</em> role without breaking the
-          <em>spatial</em> role.
-        </p>
-        <p>
-          The spatial half kept the bundle; we just needed a name.
-          <code>node_neighborhood</code> was the first proposal —
-          warm, intuitive.  <code>cluster</code> won: shorter (7 chars
-          vs 12), intrinsically collective in English, already carries
-          spatial-co-location.  The keyword doesn't need to spell out
-          "this is the spatial one" — the explicit <code>locus=</code>
-          attribute does.
-        </p>
-      </article>
+    <article class="decision">
+      <div class="nc-num">03</div>
+      <h3>Why <code>commonality</code> for the flat construct</h3>
+      <p>The flat construct names sets of nodes that share some property — <code>inhabited</code>, <code>ice_moons</code>, <code>rocky_planets</code>. Candidates considered:</p>
+      <div class="candidates">
+        <div class="cand">
+          <div class="tag">considered</div>
+          <h4><code>set</code></h4>
+          <p>mathematically precise; multi-membership exact. Cold. Sharp contrast with cluster but no semantic warmth.</p>
+        </div>
+        <div class="cand">
+          <div class="tag">considered</div>
+          <h4><code>group</code></h4>
+          <p>generic, familiar. Near-synonym with cluster; weak contrast.</p>
+        </div>
+        <div class="cand">
+          <div class="tag">considered</div>
+          <h4><code>collection</code></h4>
+          <p>implies <em>deliberate gathering</em>; mismatches with property-based grouping ("inhabited" isn't curated, it's observed).</p>
+        </div>
+        <div class="cand">
+          <div class="tag">considered</div>
+          <h4><code>category</code></h4>
+          <p>taxonomic; defaults to <em>single</em>-membership in everyday English ("what category is this in?").</p>
+        </div>
+        <div class="cand">
+          <div class="tag">considered</div>
+          <h4><code>trait</code></h4>
+          <p>short, common-English. Multi-friendly but doesn't <em>intrinsically</em> require multi (a trait can be unique to one individual). Also lives in personality psychology more than concept-formation in cog-sci.</p>
+        </div>
+      </div>
+      <div class="cand won">
+        <div class="tag">chosen</div>
+        <h4><code>commonality</code></h4>
+        <p>names the <em>reason for grouping</em> (a shared characteristic), not the <em>thing</em>. As a word it implies multi (the language still accepts one member). Lands squarely in concept formation and category theory in cog-sci (Rosch's prototype theory; Wittgenstein's family resemblance; Gentner's structure-mapping). Long (11 chars, 5 syllables) but the construct is declared rarely in a file — verbosity is acceptable for a low-frequency declaration.</p>
+      </div>
+      <p><code>commonality</code> won on the strength of being <em>semantically the right word</em>: it names exactly what the construct does (groups things by what they have in common), it intrinsically carries the multi-membership constraint, and it situates the construct in the right intellectual neighborhood.</p>
+    </article>
 
-      <article class="naming-card">
-        <div class="nc-num">03</div>
-        <h3>Why <code>commonality</code> for the flat construct</h3>
-        <p>
-          Candidates considered: <code>set</code> (cold),
-          <code>group</code> (near-synonym with cluster),
-          <code>collection</code> (implies deliberate gathering),
-          <code>category</code> (defaults to single-membership in
-          everyday English), <code>trait</code> (doesn't intrinsically
-          require multi).
-        </p>
-        <p>
-          <code>commonality</code> won on the strength of being
-          <em>semantically the right word</em>: it names exactly what
-          the construct does (groups things by what they have in
-          common), intrinsically carries the multi-membership
-          constraint, and situates the construct in the right
-          intellectual neighborhood (Rosch's prototype theory;
-          Wittgenstein's family resemblance; Gentner's
-          structure-mapping).
-        </p>
-      </article>
+    <article class="decision">
+      <div class="nc-num">04</div>
+      <h3>Why move <code>locus</code> to an attribute name</h3>
+      <p><code>locus</code> is a beautiful word: precise, Latin-rooted, evocative of "method of loci" (the cognitive technique of using spatial locations as memory anchors). We wanted it in the language somewhere.</p>
+      <p>Initially we considered it as part of a keyword (<code>node_locus</code>, <code>cluster_locus</code>). Both proposals had problems — <code>node_locus</code> sounded singular ("the locus of one node"); compound forms got long.</p>
+      <p>The realisation: <code>locus</code> is not a <em>kind of thing</em> — it's a <em>property</em>. A node <em>has</em> a locus. A cluster <em>has</em> a locus. That's exactly what an attribute is for.</p>
+      <p>Putting <code>locus=</code> in place of the previously-generic <code>xyz=</code>:</p>
+      <ul>
+        <li>Replaces a technical attribute name with a semantic one ("here is a defined place" vs "here are coordinates").</li>
+        <li>Places the cog-sci wink in the most-frequent attribute in the language — every node has one, every cluster has one.</li>
+        <li>The same word means the same thing in both contexts (a node's locus is its position; a cluster's locus is its origin / reference frame). Consistency across constructs.</li>
+        <li>The keyword space stays clean and single-token.</li>
+      </ul>
+      <p>This was the move that unlocked the rest: with <code>locus</code> carried by the attribute, the keyword could be simply <code>cluster</code> instead of some compound, and the keyword space became maximally clean.</p>
+    </article>
 
-      <article class="naming-card">
-        <div class="nc-num">04</div>
-        <h3>Why move <code>locus</code> to an attribute name</h3>
-        <p>
-          <code>locus</code> is a beautiful word: precise,
-          Latin-rooted, evocative of "method of loci."  We wanted it
-          in the language somewhere.  Initially we considered it as
-          part of a keyword (<code>node_locus</code>,
-          <code>cluster_locus</code>); both proposals had problems.
-        </p>
-        <p>
-          The realisation: <code>locus</code> is not a <em>kind of
-          thing</em> — it's a <em>property</em>.  A node <em>has</em>
-          a locus.  A cluster <em>has</em> a locus.  That's exactly
-          what an attribute is for.  This was the move that unlocked
-          the rest: with <code>locus</code> carried by the attribute,
-          the keyword could be simply <code>cluster</code>, and the
-          keyword space became maximally clean.
-        </p>
-      </article>
-
-    </div>
-
-    <h3 class="sub-h" style="margin-top: 3rem;">The cog-sci threads</h3>
-    <p>
-      Three threads from cognitive science run through the design.
-      These aren't decoration.  They're the project's intellectual
-      heritage — the keywords gesture at the corners of cog-sci that
-      inform what conception-space is trying to do.
-    </p>
-
+    <h3 class="sub-h">The cog-sci threads</h3>
+    <p>Three threads from cognitive science run through the design:</p>
     <div class="threads">
       <div class="thread">
-        <div class="t-num">01</div>
+        <div class="t-num">1</div>
         <h3>Method of loci</h3>
-        <p>
-          → <code>locus=</code>.  Every coordinate is a spatial anchor
-          for memory and reasoning.
-        </p>
+        <p class="t-map">→ <code>locus=</code>.</p>
+        <p>Every coordinate is a spatial anchor for memory and reasoning.</p>
       </div>
       <div class="thread">
-        <div class="t-num">02</div>
+        <div class="t-num">2</div>
         <h3>Concept formation / category theory</h3>
-        <p>
-          → <code>commonality</code>.  The construct enables the
-          cognitive act of abstracting across examples to find shared
-          features (Rosch, Wittgenstein, Gentner).
-        </p>
+        <p class="t-map">→ <code>commonality</code>.</p>
+        <p>The construct enables the cognitive act of abstracting across examples to find shared features (Rosch, Wittgenstein, Gentner).</p>
       </div>
       <div class="thread">
-        <div class="t-num">03</div>
+        <div class="t-num">3</div>
         <h3>Spatial cognition</h3>
-        <p>
-          → the whole language.  Hand-placing nodes in 3D engages the
-          visual system's parallel-perception machinery — see the
-          northstar for the full thesis.
-        </p>
+        <p class="t-map">→ the whole language.</p>
+        <p>Hand-placing nodes in 3D engages the visual system's parallel-perception machinery — see the northstar for the full thesis.</p>
       </div>
     </div>
+    <p>These aren't decoration. They're the project's intellectual heritage. The keywords gesture at the corners of cog-sci that inform what conception-space is trying to do.</p>
   </section>
 
-  <!-- ════════════════════════════════════════════════════════════════
-       SECTION 10 — what the language deliberately doesn't have
-       ════════════════════════════════════════════════════════════════ -->
-  <section class="section">
+  <!-- 06 Anti-features -->
+  <section class="section" id="anti-features">
     <div class="section-head">
       <div class="section-marker persimmon">06</div>
       <h2>What the language deliberately doesn't have</h2>
     </div>
-    <p class="section-lede">
-      These are anti-features.  Their absence is <em>part of the
-      design</em>.  Each missing feature is a deliberate choice not to
-      do something that would weaken the author's argument-making.
-    </p>
-
-    <table class="attr-table anti-table">
-      <thead><tr><th>Missing thing</th><th>Why</th></tr></thead>
-      <tbody>
-        <tr><td><strong>Auto-layout</strong> of any kind</td>   <td>Violates northstar Axiom 1 (<em>placement is argument</em>).  An algorithm placing nodes erases the author's claim.</td></tr>
-        <tr><td><strong>Auto-edge-inference</strong></td>        <td>Violates Axiom 5 (<em>edges carry as much reasoning as nodes</em>).  The author decides which relationships exist.</td></tr>
-        <tr><td><strong>Inheritance / classes</strong></td>      <td>Wrong vocabulary for the domain.  A <code>.cns</code> file isn't an object hierarchy; it's a spatial argument.</td></tr>
-        <tr><td><strong>Macros / generation</strong></td>        <td>The whole point is hand-authoring as sense-making.  Programmatic generation removes the reasoning.</td></tr>
-        <tr><td><strong>Auto-snap on coordinates</strong></td>   <td>If the author types <code>locus=[10.0327, ...]</code>, that exact value is what they meant.  No silent rounding.</td></tr>
-        <tr><td><strong>Default styling</strong></td>            <td>Beyond very safe minimums (grey edges, default sphere shape), every visual choice is the author's.</td></tr>
-        <tr><td><strong>A separate "edit mode" syntax</strong></td><td>The viewer's transform gizmo moves a mesh only until the next reload and writes nothing back; editing the space means editing the <code>.cns</code> text, which is both the canonical representation and the editing surface.</td></tr>
-      </tbody>
-    </table>
+    <p class="section-lede">These are anti-features. Their absence is <em>part of the design</em>.</p>
+    <div class="table-wrap">
+      <table class="attr-table anti-table">
+        <thead><tr><th>Missing thing</th><th>Why</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Auto-layout</strong> of any kind</td><td>The language places nothing itself; under northstar Axiom 1 (<em>placement is argument</em>) an algorithm may seed an import or generate a derived view, but never overwrites the author's placement.</td></tr>
+          <tr><td><strong>Auto-edge-inference</strong></td><td>Violates Axiom 5 (<em>edges carry as much reasoning as nodes</em>). The author decides which relationships exist.</td></tr>
+          <tr><td><strong>Inheritance / classes</strong></td><td>Wrong vocabulary for the domain. A <code>.cns</code> file isn't an object hierarchy; it's a spatial argument.</td></tr>
+          <tr><td><strong>Macros / generation</strong></td><td>The whole point is hand-authoring as sense-making. Programmatic generation removes the reasoning.</td></tr>
+          <tr><td><strong>Auto-snap on coordinates</strong></td><td>If the author types <code>locus=[10.0327, ...]</code>, that exact value is what they meant. No silent rounding.</td></tr>
+          <tr><td><strong>Default styling</strong></td><td>Beyond very safe minimums (grey edges, default sphere shape), every visual choice is the author's.</td></tr>
+          <tr><td><strong>A separate "edit mode" syntax</strong></td><td>The viewer's transform gizmo moves a mesh only until the next reload and writes nothing back (see <code>hand-authoring_ideas.md</code> for tooling ideas); editing the space means editing the <code>.cns</code> text, which is both the canonical representation and the editing surface.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>Each missing feature is a deliberate choice not to do something that would weaken the author's argument-making.</p>
   </section>
 
-  <!-- ════════════════════════════════════════════════════════════════
-       SECTION 11 — status / migration
-       Two columns: shipping (white) vs removed/historic (charcoal).
-       ════════════════════════════════════════════════════════════════ -->
-  <section class="section">
+  <!-- 07 Status / migration -->
+  <section class="section" id="status-migration">
     <div class="section-head">
       <div class="section-marker">07</div>
-      <h2>Status &amp; migration</h2>
-    </div>
-    <p class="section-lede">
-      The language is in a transition.  This page presents the
-      <em>post-rename</em> syntax as primary.  Here is what's actually
-      shipping vs what was removed.
-    </p>
-
-    <div class="status-grid">
-      <div class="status-col shipping">
-        <h3>Shipping today (v0.7.4)</h3>
-        <ul>
-          <li><code>node</code> declarations (with <code>locus=</code>).</li>
-          <li><code>edge</code> declarations.</li>
-          <li><code>cluster</code> declarations (hierarchical, spatial; carries <code>locus=</code> for its reference-frame origin).</li>
-          <li><code>commonality</code> declarations (flat, file-scope, multi-membership) rendered as orbiting satellites — one marker per commonality, evenly spaced 360°/N around the host, with an optional <code>shape=</code> selecting the satellite geometry.  Geometry in <a href="commonality_visual_study.md">commonality_visual_study.md</a>.</li>
-          <li>Nested clusters.</li>
-          <li>Comments via <code>#</code>.</li>
-          <li>All listed attribute value types (number, string, hex colour, array, enum).</li>
-          <li>Phase 1 of the Keyword Rationalization + Flat Multi-membership work (v0.7.0): <code>node_group</code> → <code>cluster</code> and <code>xyz=</code> → <code>locus=</code> across parser, renderer, examples, generators, and docs.  Northstar Axiom 2 updated in lockstep.</li>
-          <li>Phase 2 (v0.7.1): <code>commonality</code> keyword + satellites render.</li>
-          <li>v0.7.4: <code>commonality shape=</code> attribute — pick the satellite geometry per commonality.</li>
-        </ul>
-      </div>
-      <div class="status-col removed">
-        <h3>Removed</h3>
-        <ul>
-          <li>Phase 3 (<code>style=lines</code> constellation render) shipped in v0.7.2 and was removed in v0.7.3 — the lines were visually indistinguishable from <code>edge</code> tubes.  Carryover items live in <a href="in-flight_ideas.md">in-flight_ideas.md</a>.</li>
-        </ul>
-      </div>
+      <h2>Status / migration</h2>
     </div>
 
-    <h3 class="sub-h" style="margin-top: 2.4rem;">For readers of older <code>.cns</code> files</h3>
-    <p>
-      Files written before v0.7.0 use <code>node_group</code> where this
-      document says <code>cluster</code>, <code>xyz=</code> where this
-      document says <code>locus=</code>, and no <code>commonality</code>
-      construct (the use case was previously approximated with
-      edge-based or repeated <code>node_group</code> workarounds).
-    </p>
-    <p>
-      The two are mechanically interchangeable — a search-and-replace
-      between the old and new names is sufficient for the keyword and
-      attribute renames.  The <code>commonality</code> construct has
-      no pre-0.7 equivalent and must be added freshly when desired.
-    </p>
+    <h3 class="sub-h">What's shipping today</h3>
+    <div class="shipping">
+      <p>The parser and renderer currently support:</p>
+      <ul>
+        <li><code>node</code> declarations (with the <code>locus=</code> attribute).</li>
+        <li><code>edge</code> declarations.</li>
+        <li><code>cluster</code> declarations (hierarchical, spatial; carries <code>locus=</code> for its reference-frame origin).</li>
+        <li><code>commonality</code> declarations (flat, file-scope, multi-membership) rendered as orbiting satellites — one marker per commonality, evenly spaced 360°/N around the host, with an optional <code>shape=</code> selecting the satellite geometry.</li>
+        <li>Comments via <code>#</code>.</li>
+        <li>Nested clusters.</li>
+        <li>All listed attribute types (number, string, hex colour, array, enum).</li>
+      </ul>
+    </div>
+    <div class="versions">
+      <div class="ver">
+        <div class="ver-num">v0.7.0<small>Phase 1</small></div>
+        <p>As of v0.7.0 the keyword and attribute renames shipped (Phase 1 of the Keyword Rationalization + Flat Multi-membership work): <code>node_group</code> → <code>cluster</code> and <code>xyz=</code> → <code>locus=</code> across the parser, renderer, examples, generators, and docs. Northstar Axiom 2 now references <code>cluster</code>.</p>
+      </div>
+      <div class="ver">
+        <div class="ver-num">v0.7.1<small>Phase 2</small></div>
+        <p>As of v0.7.1 the <code>commonality</code> keyword (Phase 2) ships with the satellites halo render. Design decisions in <a href="commonality_visual_study.md"><code>commonality_visual_study.md</code></a>.</p>
+      </div>
+      <div class="ver removed">
+        <div class="ver-num">v0.7.3<small>Phase 3 removed</small></div>
+        <p>As of v0.7.3 the <code>style=lines</code> opt-in shipped in v0.7.2 (Phase 3) is <strong>removed</strong>. The lines were visually indistinguishable from <code>edge</code> tubes. <code>commonality</code> now has only the satellites render and no <code>style=</code> attribute at all.</p>
+      </div>
+      <div class="ver">
+        <div class="ver-num">v0.7.4<small>shape=</small></div>
+        <p>As of v0.7.4 <code>commonality</code> supports an optional <code>shape=</code> attribute (same value set as <code>node shape=</code>). Each commonality's satellites take that shape; default is <code>sphere</code>. Varying shape between commonalities lets a node carrying multiple satellites disambiguate them at a glance even without colour.</p>
+      </div>
+    </div>
+
+    <h3 class="sub-h">What's in-flight</h3>
+    <p>All three phases of the Keyword Rationalization + Flat Multi-membership work have landed (Phase 3 was reverted post-experiment). See <a href="in-flight_ideas.md"><code>in-flight_ideas.md</code></a> for design directions still considered but explicitly punted (bookmark × commonality interactions, additional render styles beyond satellites).</p>
+    <p>This document presents the full target syntax — every construct described here ships as of v0.7.4.</p>
+
+    <h3 class="sub-h">For readers of older <code>.cns</code> files</h3>
+    <p>Files written before v0.7.0 use:</p>
+    <div class="mapping">
+      <div class="map-row"><span class="old"><code>node_group</code></span><span class="via">where this document says</span><span class="new"><code>cluster</code></span></div>
+      <div class="map-row"><span class="old"><code>xyz=</code></span><span class="via">where this document says</span><span class="new"><code>locus=</code></span></div>
+      <div class="map-row none"><span class="old">No <code>commonality</code> construct</span><span class="via">(the use case was previously approximated with edge-based or repeated <code>node_group</code> workarounds)</span></div>
+    </div>
+    <p>The two are mechanically interchangeable — a search-and-replace between the old and new names is sufficient for the keyword and attribute renames. The <code>commonality</code> construct has no pre-0.7 equivalent and must be added freshly when desired.</p>
   </section>
 
   <footer>
-    <p>
-      Source of truth: <a href="The_CNS_Language.md">The_CNS_Language.md</a>.
-      Markdown is canonical.  This HTML is one of two presentations
-      (the other is <a href="The_CNS_Language.html">The_CNS_Language.html</a>,
-      in a dark-field "perception instrument" idiom).
-      When the substance changes, edit MD first; both HTML siblings are
-      regenerated from it.
-    </p>
-    <p>
-      Visual language: mid-century modern hard-edge minimalism
-      (after McLaughlin, Benjamin, Feitelson).  Three accent colours
-      — charcoal, mustard, persimmon — chosen once and used
-      consistently throughout.
-    </p>
-    <p style="grid-column: 1 / -1; margin-top: 1.2rem; padding-top: 1rem; border-top: 1px solid var(--rule); font-size: 0.8rem;">
-      © 2026 Gary Frattarola · Licensed under CC-BY-4.0 · part of conception-space
-    </p>
+    <p>Source of truth: <a href="The_CNS_Language.md">The_CNS_Language.md</a>. The Markdown is canonical. This HTML is one of two presentations of it; the other is <a href="The_CNS_Language.html">The_CNS_Language.html</a>, in a dark idiom. When the substance changes, the Markdown is edited first and both presentations are re-authored from it.</p>
+    <p>Visual language: mid-century modern hard-edge minimalism (after McLaughlin, Benjamin, Feitelson), shared with <a href="northstar.html">northstar.html</a>. Three accent colours (charcoal, mustard, persimmon), chosen once and used consistently throughout.</p>
+    <p class="copyright">© 2026 Gary Frattarola · Licensed under <a href="../LICENSES/CC-BY-4.0.txt">CC-BY-4.0</a> · part of conception-space</p>
   </footer>
 
 </div>

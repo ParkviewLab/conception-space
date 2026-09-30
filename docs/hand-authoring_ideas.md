@@ -12,8 +12,8 @@ referenced by `in-flight_ideas.md` — and it serves Concept 2 of the
 [northstar](northstar.md): *hand-authoring as sense-making*.
 
 Status: brainstorm only.  Nothing here has been promoted to a plan.
-Items marked with **★** are my (Claude's) current favourites for
-where to start; the user has not yet ratified that order.
+Items marked with **★** are the current favourites for where to
+start; that order is not decided.
 
 ---
 
